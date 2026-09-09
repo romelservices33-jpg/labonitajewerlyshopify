@@ -1,1 +1,158 @@
-{"sections":{"slideshow_LeJEXR":{"type":"slideshow","blocks":{"slide_3Qw3QK":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/jewelry-natural-2-bottom.jpg","image_overlay_opacity":0,"heading":"Radiate Elegance","heading_size":"h1","subheading":"Our 10k jewelry combines sophistication with everyday wearability, perfect for any occasion.","button_label":"Shop now","link":"shopify:\/\/collections\/all","button_style_secondary":false,"show_text_box":true,"box_align":"bottom-left","text_alignment":"left","text_alignment_mobile":"center","color_scheme":"accent-1"}}},"block_order":["slide_3Qw3QK"],"settings":{"layout":"full_bleed","slide_height":"large","slider_visual":"counter","auto_rotate":false,"change_slides_speed":5,"image_behavior":"none","show_text_below":true,"accessibility_info":"Slideshow about our brand"}},"multicolumn_cNQVgy":{"type":"multicolumn","blocks":{"column_ztmnLY":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/jewelry-natural-3-middle.jpg","title":"Whispers of light dance upon the skin, where golden dreams and timeless elegance begin.","text":"","link_label":"Explore","link":"shopify:\/\/collections\/all"}},"column_9fWRqw":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/jewelry-natural-5-middle.jpg","title":"We are passionate about bringing you exquisite 10k jewelry that captures the essence of style and individuality.","text":"","link_label":"Get in touch","link":"shopify:\/\/pages\/contact"}}},"block_order":["column_ztmnLY","column_9fWRqw"],"settings":{"title":"Trending now","heading_size":"h1","image_width":"full","image_ratio":"adapt","button_label":"","button_link":"","columns_desktop":2,"column_alignment":"left","background_style":"primary","color_scheme":"background-1","columns_mobile":"1","swipe_on_mobile":false,"padding_top":72,"padding_bottom":36}},"featured_collection":{"type":"featured-collection","custom_css":[],"settings":{"collection":"all","products_to_show":15,"title":"Featured collection","heading_size":"h1","description":"","show_description":false,"description_style":"body","columns_desktop":3,"enable_desktop_slider":true,"full_width":false,"show_view_all":false,"view_all_style":"solid","color_scheme":"background-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"1","swipe_on_mobile":false,"padding_top":56,"padding_bottom":0}},"rich_text_MTeLtk":{"type":"rich-text","blocks":{"heading_TChPCC":{"type":"heading","settings":{"heading":"We craft stunning 10k jewelry that embodies elegance, quality, and the spirit of sophistication.","heading_size":"h1"}},"button_aFhHzf":{"type":"button","settings":{"button_label":"","button_link":"shopify:\/\/pages\/contact","button_style_secondary":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading_TChPCC","button_aFhHzf"],"settings":{"desktop_content_position":"center","content_alignment":"left","color_scheme":"background-1","full_width":true,"padding_top":68,"padding_bottom":100}}},"order":["slideshow_LeJEXR","multicolumn_cNQVgy","featured_collection","rich_text_MTeLtk"]}
+{
+  "sections": {
+    "bonita_hero": {
+      "type": "bonita-hero-luxe",
+      "settings": {
+        "badge_text": "Alta Joyería • Oro 10k y 14k Garantizado",
+        "title_prefix": "EL LUJO DEL ORO ",
+        "title_highlight": "AUTÉNTICO",
+        "title_suffix": " A TU ALCANCE",
+        "subtitle": "Cadenas Cubanas Miami de eslabón sólido, dijes exclusivos y piezas personalizadas en oro real 10k y 14k. Estrena hoy con financiamiento flexible sin afectar tu crédito.",
+        "btn_1_text": "Ver Cadenas Cubanas",
+        "btn_1_url": "/collections/all",
+        "btn_2_text": "Piezas Personalizadas",
+        "btn_2_url": "/pages/contact",
+        "card_title": "Miami Cuban Link 10K",
+        "card_subtitle": "Eslabón Sólido • Calidad Miami",
+        "card_price": "Desde $499"
+      }
+    },
+    "bonita_ticker": {
+      "type": "bonita-ticker",
+      "blocks": {
+        "item_1": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "ORO 10K & 14K 100% REAL GARANTIZADO"
+          }
+        },
+        "item_2": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "ENVÍOS ASEGURADOS CON FIRMA A TODO USA"
+          }
+        },
+        "item_3": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "FINANCIAMIENTO DESDE $0 DOWN DISPONIBLE"
+          }
+        },
+        "item_4": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "CADENAS CUBANAS MIAMI & DIJES EXCLUSIVOS"
+          }
+        },
+        "item_5": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "FABRICACIÓN PERSONALIZADA EN ORO SÓLIDO"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ],
+      "settings": {}
+    },
+    "bonita_categories": {
+      "type": "bonita-categories-grid",
+      "settings": {
+        "subtitle": "COLECCIONES EXCLUSIVAS",
+        "title_prefix": "EXPLORA NUESTRO ",
+        "title_highlight": "CATÁLOGO DE ORO",
+        "description": "Cada pieza está fabricada con oro sólido y certificada en pureza, garantizando el brillo, peso y durabilidad que mereces.",
+        "cat_1_tag": "La Especialidad de Miami",
+        "cat_1_title": "Cadenas Cubanas (Cuban Link)",
+        "cat_1_link": "/collections/all",
+        "cat_2_tag": "Oro Sólido 10k & 14k",
+        "cat_2_title": "Pulseras & Manillas",
+        "cat_2_link": "/collections/all",
+        "cat_3_tag": "Religiosos & Exclusivos",
+        "cat_3_title": "Dijes & Medallas",
+        "cat_3_link": "/collections/all",
+        "cat_4_tag": "Sellos, Coronas & Circones",
+        "cat_4_title": "Anillos de Caballero & Dama",
+        "cat_4_link": "/collections/all"
+      }
+    },
+    "bonita_cuban": {
+      "type": "bonita-cuban-spotlight",
+      "settings": {
+        "badge": "Especialistas en Cuban Link",
+        "title_prefix": "LA CADENA CUBANA ",
+        "title_highlight": "DEFINITIVA",
+        "description": "Fabricada siguiendo la tradición orfebre de Miami: eslabones apretados, corte plano perfecto y pulido a espejo. No vendemos hueco ni laminado; garantizamos el peso en gramos y la pureza exacta del oro 10k y 14k.",
+        "button_text": "Ver Cadenas Disponibles",
+        "button_url": "/collections/all"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Joyas Más Vendidas",
+        "heading_size": "h1",
+        "description": "Nuestras piezas más populares en oro 10k y 14k para entrega inmediata.",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "background-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "hover",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 72,
+        "padding_bottom": 56
+      }
+    },
+    "bonita_financing": {
+      "type": "bonita-financing-card",
+      "settings": {
+        "badge": "0% Inicial • Sin Crédito Requerido",
+        "title": "ESTRENA TU JOYA HOY, PAGA POCO A POCO",
+        "description": "No dejes tu joya favorita para después. Ofrecemos las mejores alternativas de financiamiento en Estados Unidos. Aprobación instantánea en minutos sin afectar tu puntaje de crédito.",
+        "cta_text": "Aplicar a Financiamiento",
+        "cta_url": "/pages/contact"
+      }
+    },
+    "bonita_custom": {
+      "type": "bonita-custom-concierge",
+      "settings": {
+        "badge": "Servicio VIP Concierge",
+        "title_prefix": "¿TIENES UNA IDEA? ",
+        "title_highlight": "LA FABRICAMOS EN ORO",
+        "description": "Desde dijes personalizados con tu nombre, santos o iniciales, hasta piezas complejas con diamantes naturales o moissanita. Nuestro taller orfebre convierte cualquier concepto en una joya sólida de alta precisión.",
+        "whatsapp_number": "15020000000"
+      }
+    },
+    "bonita_trust": {
+      "type": "bonita-trust-pillars",
+      "settings": {}
+    }
+  },
+  "order": [
+    "bonita_hero",
+    "bonita_ticker",
+    "bonita_categories",
+    "bonita_cuban",
+    "featured_collection",
+    "bonita_financing",
+    "bonita_custom",
+    "bonita_trust"
+  ]
+}

@@ -1,0 +1,112 @@
+{{ 'luxury-bonita.css' | asset_url | stylesheet_tag }}
+
+<section class="bonita-financing-section" id="Financing-{{ section.id }}">
+  <div class="bonita-financing-card">
+    <!-- Left Column: Copy & Partners -->
+    <div>
+      <div class="bonita-financing-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+        <span>{{ section.settings.badge | default: '0% Inicial • Sin Crédito Requerido' }}</span>
+      </div>
+
+      <h2 class="bonita-financing-title">
+        {{ section.settings.title | default: 'ESTRENA TU JOYA HOY, PAGA POCO A POCO' }}
+      </h2>
+
+      <p class="bonita-financing-desc">
+        {{ section.settings.description | default: 'No dejes tu joya favorita para después. Ofrecemos las mejores alternativas de financiamiento en Estados Unidos. Aprobación instantánea en minutos sin afectar tu puntaje de crédito.' }}
+      </p>
+
+      <div style="margin-bottom: 28px;">
+        <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="bonita-shimmer-btn">
+          <span>{{ section.settings.cta_text | default: 'Aplicar a Financiamiento' }}</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Partner Badges -->
+      <div class="bonita-financing-partners">
+        <span class="bonita-partner-pill">Klarna.</span>
+        <span class="bonita-partner-pill">Affirm</span>
+        <span class="bonita-partner-pill">acima</span>
+        <span class="bonita-partner-pill">snap! finance</span>
+        <span class="bonita-partner-pill">afterpay✦</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Express Calculator Box -->
+    <div>
+      <div class="bonita-calc-box">
+        <span class="bonita-calc-title">Ejemplo de Pago Flexible</span>
+        <div class="bonita-calc-number">$29<span style="font-size: 1.8rem; font-family: var(--font-body-luxury); font-weight: 600; color: var(--bonita-text-muted);">/semana</span></div>
+        <p class="bonita-calc-sub">Para joyas desde $500 • Opciones de 90 a 100 días sin intereses</p>
+
+        <div style="text-align: left; padding: 18px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.2rem; color: var(--bonita-text-muted);">
+            <span>Respuesta:</span>
+            <span style="color: var(--bonita-gold-light); font-weight: 700;">Inmediata (en 2 min)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.2rem; color: var(--bonita-text-muted);">
+            <span>Requisitos:</span>
+            <span style="color: var(--bonita-text-ivory); font-weight: 600;">Cuenta de banco & ID</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.2rem; color: var(--bonita-text-muted);">
+            <span>Envío de tu joya:</span>
+            <span style="color: var(--bonita-gold-primary); font-weight: 700;">Al aprobarse</span>
+          </div>
+        </div>
+
+        <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="bonita-outline-btn" style="width: 100%; font-size: 1.2rem; padding: 12px 20px;">
+          Consultar con un Asesor
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Financiamiento Bonita",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Insignia",
+      "default": "0% Inicial • Sin Crédito Requerido"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "ESTRENA TU JOYA HOY, PAGA POCO A POCO"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "No dejes tu joya favorita para después. Ofrecemos las mejores alternativas de financiamiento en Estados Unidos. Aprobación instantánea en minutos sin afectar tu puntaje de crédito."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del Botón",
+      "default": "Aplicar a Financiamiento"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Enlace del Botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Financiamiento Bonita"
+    }
+  ]
+}
+{% endschema %}

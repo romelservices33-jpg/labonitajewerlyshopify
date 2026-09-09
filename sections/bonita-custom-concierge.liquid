@@ -1,0 +1,125 @@
+{{ 'luxury-bonita.css' | asset_url | stylesheet_tag }}
+
+<section class="bonita-custom-section" id="Concierge-{{ section.id }}">
+  <div class="bonita-custom-container">
+    <!-- Left Column: Content -->
+    <div class="bonita-custom-content">
+      <div class="bonita-badge-inline">
+        <span>💎 {{ section.settings.badge | default: 'Servicio VIP Concierge' }}</span>
+      </div>
+
+      <h2 class="bonita-cuban-title">
+        {{ section.settings.title_prefix | default: '¿TIENES UNA IDEA?' }}
+        <span class="bonita-gold-text">{{ section.settings.title_highlight | default: 'LA FABRICAMOS EN ORO' }}</span>
+      </h2>
+
+      <p class="bonita-cuban-desc">
+        {{ section.settings.description | default: 'Desde dijes personalizados con tu nombre, santos o iniciales, hasta piezas complejas con diamantes naturales o moissanita. Nuestro taller orfebre convierte cualquier concepto en una joya sólida de alta precisión.' }}
+      </p>
+
+      <!-- 3 Steps -->
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--bonita-gold-gradient); color: #07090e; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0;">1</span>
+          <span style="color: var(--bonita-text-ivory); font-size: 1.4rem;">Envíanos tu idea, foto o boceto por WhatsApp</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--bonita-gold-gradient); color: #07090e; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0;">2</span>
+          <span style="color: var(--bonita-text-ivory); font-size: 1.4rem;">Recibe render 3D digital y cotización según peso en oro</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--bonita-gold-gradient); color: #07090e; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0;">3</span>
+          <span style="color: var(--bonita-text-ivory); font-size: 1.4rem;">Fabricación artesanal y entrega con certificado de autenticidad</span>
+        </div>
+      </div>
+
+      <!-- WhatsApp VIP Action -->
+      <div>
+        <a
+          href="https://wa.me/{{ section.settings.whatsapp_number | default: '13050000000' }}?text=Hola%2C%20quisiera%20cotizar%20una%20joya%20personalizada%20en%20La%20Bonita%20Joyer%C3%ADa"
+          target="_blank"
+          rel="noopener"
+          class="bonita-whatsapp-btn"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          <span>Hablar con un Joyero VIP</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Staggered Visual Images -->
+    <div class="bonita-custom-visual">
+      <div class="bonita-custom-grid-imgs">
+        <div class="bonita-custom-img-card">
+          {%- if section.settings.image_1 != blank -%}
+            <img src="{{ section.settings.image_1 | image_url: width: 600 }}" alt="Joya Personalizada 1" loading="lazy" width="600" height="600">
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Dije Personalizado" loading="lazy" width="600" height="600">
+          {%- endif -%}
+        </div>
+        <div class="bonita-custom-img-card">
+          {%- if section.settings.image_2 != blank -%}
+            <img src="{{ section.settings.image_2 | image_url: width: 600 }}" alt="Joya Personalizada 2" loading="lazy" width="600" height="600">
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Anillo a la Medida" loading="lazy" width="600" height="600">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Jewelry VIP",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Insignia",
+      "default": "Servicio VIP Concierge"
+    },
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "label": "Título Prefijo",
+      "default": "¿TIENES UNA IDEA?"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Título Resaltado",
+      "default": "LA FABRICAMOS EN ORO"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Desde dijes personalizados con tu nombre, santos o iniciales, hasta piezas complejas con diamantes naturales o moissanita. Nuestro taller orfebre convierte cualquier concepto en una joya sólida de alta precisión."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "Número de WhatsApp (con código de país sin +)",
+      "default": "15020000000"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Foto 1 (Dije/Pieza)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Foto 2 (Anillo/Cadena)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Jewelry VIP"
+    }
+  ]
+}
+{% endschema %}
