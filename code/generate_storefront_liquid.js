@@ -187,13 +187,25 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
 
   <!-- 2. MACRO LUXURY HERO SECTION -->
   <section class="macro-hero-section" id="hero">
-    <video class="hero-bg-media" autoplay loop muted playsinline poster="{{ 'luxury-hero-poster.jpg' | asset_url }}">
-      {%- if section.settings.hero_video_url != blank -%}
-        <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
-      {%- endif -%}
-      <source src="{{ 'luxury-jewelry-hero-film.mp4' | asset_url }}" type="video/mp4">
-      <img src="{{ 'luxury-hero-poster.jpg' | asset_url }}" alt="14K Gold Cuban chain on Carrara marble sculpture">
-    </video>
+    {%- assign hero_url = section.settings.hero_video_url | strip -%}
+    {%- assign is_image_url = false -%}
+    {%- if hero_url contains '.jpg' or hero_url contains '.jpeg' or hero_url contains '.png' or hero_url contains '.webp' or hero_url contains '.avif' -%}
+      {%- assign is_image_url = true -%}
+    {%- endif -%}
+
+    {%- if section.settings.hero_image != blank -%}
+      <img src="{{ section.settings.hero_image | image_url: width: 2500 }}" alt="La Bonita Jewelry Hero" class="hero-bg-media" loading="eager">
+    {%- elsif is_image_url -%}
+      <img src="{{ hero_url }}" alt="La Bonita Jewelry Hero" class="hero-bg-media" loading="eager">
+    {%- else -%}
+      <video class="hero-bg-media" autoplay loop muted playsinline {% if hero_url != blank %}poster=""{% else %}poster="{{ 'luxury-hero-poster.jpg' | asset_url }}"{% endif %}>
+        {%- if hero_url != blank -%}
+          <source src="{{ hero_url }}" type="video/mp4">
+        {%- endif -%}
+        <source src="{{ 'luxury-jewelry-hero-film.mp4' | asset_url }}" type="video/mp4">
+        <img src="{{ 'luxury-hero-poster.jpg' | asset_url }}" alt="14K Gold Cuban chain on Carrara marble sculpture">
+      </video>
+    {%- endif -%}
     <div class="hero-gradient-overlay"></div>
 
     <div class="hero-content-wrap">
@@ -1613,10 +1625,16 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
   "class": "section-bonita-luxury",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen de Fondo del Hero",
+      "info": "Selecciona o sube directamente una foto de portada desde tu computadora o biblioteca."
+    },
+    {
       "type": "text",
       "id": "hero_video_url",
-      "label": "Enlace del Video 4K del Hero",
-      "info": "Pega aquí el enlace de tu video subido en Shopify Admin > Contenido > Archivos"
+      "label": "O Enlace de Video / Imagen (URL)",
+      "info": "Pega aquí el enlace .mp4 o .jpg subido en Shopify Admin > Contenido > Archivos."
     },
     {
       "type": "collection",
