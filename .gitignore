@@ -21,3 +21,7 @@ code/sync_report.json
 code/size_report.txt
 *.mp4
 
+# Encoding fix backup and staging
+.encoding-backup/
+_theme_zip_staging/
+code/encoding_fix_report.json
