@@ -1,5 +1,58 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* Direct Royal Sapphire Blue Hero Tint Overlay */
+  .macro-hero-section {
+    position: relative !important;
+    background-color: #08195B !important;
+  }
+  .macro-hero-section video,
+  .macro-hero-section .hero-bg-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 20% !important;
+    z-index: 1 !important;
+    opacity: 0.70 !important;
+  }
+  .macro-hero-section .hero-gradient-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 25, 91, 0.88) 0%,
+      rgba(14, 30, 95, 0.72) 35%,
+      rgba(8, 25, 91, 0.78) 65%,
+      rgba(8, 25, 91, 0.96) 100%
+    ) !important;
+    backdrop-filter: blur(1px) !important;
+    -webkit-backdrop-filter: blur(1px) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    display: block !important;
+  }
+  .hero-content-wrap {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .hero-main-headline {
+    color: #FFFFFF !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+  }
+  .hero-main-headline span.gold-highlight {
+    color: #D1B054 !important;
+    text-shadow: 0 2px 14px rgba(209, 176, 84, 0.4) !important;
+  }
+  .hero-supporting-copy {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+  }
+</style>
+
 <div class="bonita-luxury-wrapper">
 
   <!-- LUXURY INTRO SPLASH SCREEN (Solo en tienda real, oculto en modo diseño/personalizador) -->
