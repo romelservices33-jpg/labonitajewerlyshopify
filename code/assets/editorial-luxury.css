@@ -4721,19 +4721,22 @@ html {
   display: flex !important;
   flex-direction: column !important;
   gap: 16px !important;
+  box-sizing: border-box !important;
 }
 
 .filter-dropdowns-row {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
   gap: 16px !important;
   width: 100% !important;
+  box-sizing: border-box !important;
+  align-items: flex-start !important;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 680px) {
   .filter-dropdowns-row {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 8px !important;
   }
 }
 
@@ -4742,15 +4745,168 @@ html {
   flex-direction: column !important;
   gap: 6px !important;
   width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .filter-label {
   font-family: 'Plus Jakarta Sans', sans-serif !important;
-  font-size: 0.76rem !important;
+  font-size: 0.74rem !important;
   font-weight: 700 !important;
   color: #08195B !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
+  display: block !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+@media (max-width: 680px) {
+  .filter-label {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.02em !important;
+  }
+}
+
+/* Override Dawn / Default select styling completely */
+.select.uiverse-select,
+.uiverse-select {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+  display: block !important;
+  cursor: pointer !important;
+}
+
+.select.uiverse-select::after,
+.select.uiverse-select::before {
+  display: none !important;
+}
+
+.select.uiverse-select .selected,
+.uiverse-select .selected {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  background: #08195B !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid #D1B054 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  min-height: 42px !important;
+  box-shadow: 0 4px 12px rgba(8, 25, 91, 0.12) !important;
+  transition: all 0.22s ease !important;
+}
+
+@media (max-width: 680px) {
+  .select.uiverse-select .selected,
+  .uiverse-select .selected {
+    padding: 8px 8px !important;
+    min-height: 36px !important;
+    border-radius: 8px !important;
+  }
+}
+
+.select.uiverse-select:hover .selected,
+.select.uiverse-select.is-open .selected {
+  background: #05103B !important;
+  border-color: #E8D394 !important;
+  box-shadow: 0 6px 18px rgba(209, 176, 84, 0.25) !important;
+}
+
+.select.uiverse-select .selected-text,
+.uiverse-select .selected-text {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  text-align: left !important;
+}
+
+@media (max-width: 680px) {
+  .select.uiverse-select .selected-text,
+  .uiverse-select .selected-text {
+    font-size: 0.68rem !important;
+  }
+}
+
+.select.uiverse-select .arrow,
+.uiverse-select .arrow {
+  width: 12px !important;
+  height: 12px !important;
+  fill: #D1B054 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.22s ease !important;
+}
+
+.select.uiverse-select.is-open .arrow {
+  transform: rotate(180deg) !important;
+}
+
+.select.uiverse-select .options,
+.uiverse-select .options {
+  position: absolute !important;
+  top: calc(100% + 6px) !important;
+  left: 0 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  box-sizing: border-box !important;
+  background: #08195B !important;
+  border: 1px solid #D1B054 !important;
+  border-radius: 10px !important;
+  padding: 6px !important;
+  box-shadow: 0 14px 34px rgba(4, 12, 45, 0.5), 0 0 18px rgba(209, 176, 84, 0.15) !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-6px) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.select.uiverse-select.is-open .options,
+.select.uiverse-select:focus-within .options {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+.select.uiverse-select .option,
+.uiverse-select .option {
+  padding: 8px 10px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: #FAF9F6 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: background 0.18s ease !important;
+}
+
+.select.uiverse-select .option:hover {
+  background: rgba(209, 176, 84, 0.2) !important;
+  color: #D1B054 !important;
 }
 
 .filter-range-fullwidth {
@@ -4971,12 +5127,14 @@ html {
 
 /* ==========================================================================
    EDITORIAL CURATED SECTIONS: MÁS VENDIDOS & NUEVAS COLECCIONES
+   (SAME EXACT SIZE AND PROPORTIONS AS CATALOG CARDS)
    ========================================================================== */
 .editorial-vitrine-section {
   padding: 60px 24px !important;
   max-width: 1380px !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
+  width: 100% !important;
 }
 
 .editorial-vitrine-header {
@@ -5008,10 +5166,33 @@ html {
   line-height: 1.15 !important;
 }
 
+/* Match catalog-products-grid 1:1 */
 .editorial-vitrine-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 1200px) {
+  .editorial-vitrine-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .editorial-vitrine-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .editorial-vitrine-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
 }
 
 .badge-gold-bestseller {
