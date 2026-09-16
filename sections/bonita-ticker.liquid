@@ -1,0 +1,95 @@
+{{ 'luxury-bonita.css' | asset_url | stylesheet_tag }}
+
+<div class="bonita-ticker-wrap" id="Ticker-{{ section.id }}">
+  <div class="bonita-ticker-content">
+    {%- for i in (1..3) -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="bonita-ticker-item" {{ block.shopify_attributes }}>
+            <span class="gold-star">✦</span>
+            <span>{{ block.settings.text }}</span>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="bonita-ticker-item">
+          <span class="gold-star">✦</span>
+          <span>ORO 10K & 14K 100% REAL GARANTIZADO</span>
+        </div>
+        <div class="bonita-ticker-item">
+          <span class="gold-star">✦</span>
+          <span>ENVÍOS ASEGURADOS CON FIRMA A TODO USA</span>
+        </div>
+        <div class="bonita-ticker-item">
+          <span class="gold-star">✦</span>
+          <span>FINANCIAMIENTO DESDE $0 DOWN DISPONIBLE</span>
+        </div>
+        <div class="bonita-ticker-item">
+          <span class="gold-star">✦</span>
+          <span>CADENAS CUBANAS MIAMI & DIJES EXCLUSIVOS</span>
+        </div>
+        <div class="bonita-ticker-item">
+          <span class="gold-star">✦</span>
+          <span>FABRICACIÓN PERSONALIZADA EN ORO SÓLIDO</span>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ticker de Lujo Bonita",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "ticker_item",
+      "name": "Frase Destacada",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto del Ticker",
+          "default": "ORO 10K & 14K 100% REAL GARANTIZADO"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker de Lujo Bonita",
+      "blocks": [
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "ORO 10K & 14K 100% REAL GARANTIZADO"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "ENVÍOS ASEGURADOS CON FIRMA A TODO USA"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "FINANCIAMIENTO DESDE $0 DOWN DISPONIBLE"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "CADENAS CUBANAS MIAMI & DIJES EXCLUSIVOS"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "FABRICACIÓN PERSONALIZADA EN ORO SÓLIDO"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

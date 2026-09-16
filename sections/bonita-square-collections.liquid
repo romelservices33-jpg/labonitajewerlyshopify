@@ -1,0 +1,252 @@
+{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+
+<section class="bonita-square-collections-section" id="SquareCollections-{{ section.id }}">
+  <div class="hero-overlapping-cards-wrap">
+    <div class="cat-slider-container">
+      <!-- Previous Button -->
+      <button type="button" class="cat-slider-arrow prev is-hidden" id="catSliderPrev-{{ section.id }}" aria-label="Colección anterior">
+        <svg viewBox="0 0 28 24" width="28" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="26" y1="12" x2="2" y2="12"></line>
+          <polyline points="9 5 2 12 9 19"></polyline>
+        </svg>
+      </button>
+
+      <!-- Slider Track: Square 1:1 Cards -->
+      <div class="cat-slider-track" id="catSliderTrack-{{ section.id }}">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <a href="{{ block.settings.link | default: '/collections/all' }}" class="cat-square-card" {{ block.shopify_attributes }}>
+              <div class="cat-card-header">
+                <span class="cat-card-label">{{ block.settings.label | default: 'Categorías' }}</span>
+                <h3 class="cat-card-title">{{ block.settings.title }}</h3>
+              </div>
+              <div class="cat-card-img-wrap">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.title | escape }}"
+                    class="cat-square-img"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                  >
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'cat-square-img' }}
+                {%- endif -%}
+              </div>
+              <div class="cat-card-footer">
+                <span class="cat-pill-btn">
+                  <span>{{ block.settings.btn_label | default: 'Ver Colección' }}</span>
+                  <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default Fallback Cards -->
+          <a href="/collections/cadenas" class="cat-square-card">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Categorías</span>
+              <h3 class="cat-card-title">Cadenas</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="Cadenas de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="/collections/anillos" class="cat-square-card">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Categorías</span>
+              <h3 class="cat-card-title">Anillos</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="{{ 'collection-anillos.jpg' | asset_url }}" alt="Anillos de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="/collections/aretes" class="cat-square-card">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Categorías</span>
+              <h3 class="cat-card-title">Aretes</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="{{ 'collection-aretes.jpg' | asset_url }}" alt="Aretes de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="/collections/pulseras" class="cat-square-card">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Categorías</span>
+              <h3 class="cat-card-title">Pulseras</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="{{ 'collection-pulseras.jpg' | asset_url }}" alt="Pulseras de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Next Button -->
+      <button type="button" class="cat-slider-arrow next" id="catSliderNext-{{ section.id }}" aria-label="Colección siguiente">
+        <svg viewBox="0 0 28 24" width="28" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="2" y1="12" x2="26" y2="12"></line>
+          <polyline points="19 5 26 12 19 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function initSectionSlider() {
+    const track = document.getElementById('catSliderTrack-{{ section.id }}');
+    const btnPrev = document.getElementById('catSliderPrev-{{ section.id }}');
+    const btnNext = document.getElementById('catSliderNext-{{ section.id }}');
+    if (!track || !btnNext) return;
+
+    function updateArrows() {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft <= 10) {
+        btnPrev.classList.add('is-hidden');
+      } else {
+        btnPrev.classList.remove('is-hidden');
+      }
+
+      if (track.scrollLeft >= maxScroll - 10) {
+        btnNext.classList.add('is-hidden');
+      } else {
+        btnNext.classList.remove('is-hidden');
+      }
+    }
+
+    function getScrollStep() {
+      const firstCard = track.querySelector('.cat-square-card');
+      if (firstCard) {
+        const cardWidth = firstCard.getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).gap) || 24;
+        return cardWidth + gap;
+      }
+      return 380;
+    }
+
+    btnNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    });
+
+    btnPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    setTimeout(updateArrows, 150);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Square Collections Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Square Collection Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top Label",
+          "default": "Categorías"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Cadenas"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "1:1 Square Jewelry Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Pill Button Label",
+          "default": "Ver Colección"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Square Collections Slider",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Cadenas",
+            "label": "Categorías"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Anillos",
+            "label": "Categorías"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Aretes",
+            "label": "Categorías"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Pulseras",
+            "label": "Categorías"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
