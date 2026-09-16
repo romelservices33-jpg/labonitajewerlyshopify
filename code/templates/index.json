@@ -1,8 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "bonita_luxury_storefront": {
       "type": "bonita-luxury-storefront",
-      "settings": {}
+      "settings": {
+        "hero_video_file": "shopify://files/videos/Luxury_jewelry_video_loop_1080p_20260916185544.mp4",
+        "hero_video_url": "",
+        "collection": ""
+      }
     }
   },
   "order": [

@@ -127,7 +127,8 @@ function validateDir(dir) {
 
       if (ext === '.json') {
         try {
-          JSON.parse(content);
+          const cleanJson = content.replace(/\/\*[\s\S]*?\*\//g, '').trim();
+          JSON.parse(cleanJson);
         } catch (e) {
           console.error(`  [ERROR JSON] en ${item}: ${e.message}`);
           errorCount++;

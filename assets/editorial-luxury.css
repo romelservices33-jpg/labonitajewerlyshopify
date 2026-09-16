@@ -462,11 +462,13 @@ html {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(8, 25, 91, 0.72) 0%,
-    rgba(8, 25, 91, 0.35) 25%,
-    rgba(8, 25, 91, 0.75) 65%,
-    var(--color-royal-navy, #08195B) 100%
+    rgba(8, 25, 91, 0.88) 0%,
+    rgba(14, 30, 95, 0.72) 35%,
+    rgba(8, 25, 91, 0.78) 65%,
+    rgba(8, 25, 91, 0.96) 100%
   );
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
   z-index: 2;
   pointer-events: none;
 }

@@ -19,7 +19,9 @@ function scanDir(dir) {
 
       if (ext === '.json') {
         try {
-          JSON.parse(content);
+          // Strip Shopify comment banners if present
+          const cleanJson = content.replace(/\/\*[\s\S]*?\*\//g, '').trim();
+          JSON.parse(cleanJson);
         } catch (e) {
           console.error(`[JSON ERROR] in ${full}: ${e.message}`);
           hasError = true;
