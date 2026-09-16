@@ -41,9 +41,155 @@
   @media (max-width: 860px) {
     .pdp-unified-card {
       grid-template-columns: 1fr;
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(4, 12, 45, 0.35);
     }
     .pdp-floating-page-backdrop {
-      padding: 30px 14px 60px;
+      padding: 16px 12px 36px;
+      min-height: auto;
+    }
+    .pdp-card-media-col {
+      min-height: unset !important;
+      height: 250px !important;
+      max-height: 250px !important;
+      border-right: none !important;
+      border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
+    }
+    .pdp-card-main-img {
+      min-height: unset !important;
+      height: 250px !important;
+      max-height: 250px !important;
+      object-fit: contain !important;
+      padding: 12px !important;
+    }
+    .pdp-floating-badge {
+      top: 10px !important;
+      left: 10px !important;
+      font-size: 0.62rem !important;
+      padding: 4px 10px !important;
+    }
+    .pdp-thumbs-row {
+      bottom: 6px !important;
+      left: 8px !important;
+      right: 8px !important;
+      gap: 6px !important;
+    }
+    .pdp-thumb-item {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 6px !important;
+    }
+    .pdp-card-details-col {
+      padding: 16px 16px 18px !important;
+    }
+    .pdp-header-meta-row {
+      margin-bottom: 4px !important;
+    }
+    .pdp-category-kicker {
+      font-size: 0.68rem !important;
+    }
+    .pdp-stock-status {
+      font-size: 0.68rem !important;
+    }
+    .pdp-title-main {
+      font-size: 1.35rem !important;
+      line-height: 1.2 !important;
+      margin: 0 0 8px 0 !important;
+    }
+    .pdp-pricing-row-single {
+      gap: 8px !important;
+      margin-bottom: 8px !important;
+    }
+    .pdp-price-now {
+      font-size: 1.35rem !important;
+    }
+    .pdp-price-was {
+      font-size: 0.92rem !important;
+    }
+    .pdp-green-pill-badge {
+      font-size: 0.68rem !important;
+      padding: 2px 8px !important;
+    }
+    .pdp-affirm-banner {
+      font-size: 0.72rem !important;
+      padding: 6px 10px !important;
+      margin-bottom: 12px !important;
+      gap: 6px !important;
+      border-radius: 6px !important;
+    }
+    .pdp-selector-group {
+      margin-bottom: 10px !important;
+    }
+    .pdp-selector-label {
+      font-size: 0.72rem !important;
+      margin-bottom: 4px !important;
+    }
+    .pdp-pill-button {
+      padding: 5px 12px !important;
+      font-size: 0.78rem !important;
+      border-radius: 8px !important;
+    }
+    .pdp-specs-table-compact {
+      margin: 10px 0 12px !important;
+      font-size: 0.75rem !important;
+    }
+    .pdp-specs-table-compact td {
+      padding: 4px 0 !important;
+    }
+    .pdp-actions-row-unified {
+      margin-bottom: 12px !important;
+      gap: 8px !important;
+    }
+    .pdp-qty-control {
+      height: 40px !important;
+      border-radius: 6px !important;
+    }
+    .pdp-qty-btn-action {
+      width: 28px !important;
+      font-size: 1rem !important;
+    }
+    .pdp-qty-input-box {
+      width: 26px !important;
+      font-size: 0.85rem !important;
+    }
+    .pdp-btn-submit-cart {
+      height: 40px !important;
+      font-size: 0.82rem !important;
+      border-radius: 6px !important;
+    }
+    .pdp-trust-icons-strip {
+      padding-top: 10px !important;
+      font-size: 0.68rem !important;
+      gap: 6px !important;
+      justify-content: space-around !important;
+    }
+    .pdp-trust-unit svg {
+      width: 14px !important;
+      height: 14px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pdp-floating-page-backdrop {
+      padding: 10px 8px 24px !important;
+    }
+    .pdp-card-media-col {
+      height: 220px !important;
+      max-height: 220px !important;
+    }
+    .pdp-card-main-img {
+      height: 220px !important;
+      max-height: 220px !important;
+      padding: 8px !important;
+    }
+    .pdp-card-details-col {
+      padding: 12px 12px 14px !important;
+    }
+    .pdp-title-main {
+      font-size: 1.2rem !important;
+    }
+    .pdp-price-now {
+      font-size: 1.25rem !important;
     }
   }
 
