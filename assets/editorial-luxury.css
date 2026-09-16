@@ -3510,32 +3510,37 @@ html {
     border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
     border-radius: 21px 21px 0 0 !important;
     width: 100% !important;
-    height: 180px !important;
-    min-height: 180px !important;
-    max-height: 180px !important;
-    aspect-ratio: unset !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    aspect-ratio: 1 / 1 !important;
     flex-shrink: 0 !important;
     position: relative !important;
     overflow: hidden !important;
+    background: #FFFFFF !important;
   }
 
   .modal-main-img {
     width: 100% !important;
-    height: 180px !important;
-    min-height: 180px !important;
-    max-height: 180px !important;
-    object-fit: cover !important;
+    height: 100% !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    object-fit: contain !important;
+    padding: 16px !important;
     border-radius: 21px 21px 0 0 !important;
     display: block !important;
+    background: #FFFFFF !important;
   }
 
   .modal-mock-placeholder {
     width: 100% !important;
-    height: 180px !important;
-    min-height: 180px !important;
-    max-height: 180px !important;
+    height: 100% !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    aspect-ratio: 1 / 1 !important;
     padding: 16px !important;
     border-radius: 21px 21px 0 0 !important;
+    background: #FFFFFF !important;
   }
 
   .modal-floating-gold-badge {
