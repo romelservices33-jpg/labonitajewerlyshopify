@@ -360,29 +360,34 @@
     {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
     <style>
-      /* Clean reset for index page so Dawn theme containers do not distort luxury design */
-      {% if template.name == 'index' %}
-        main#MainContent {
-          padding: 0 !important;
-          margin: 0 !important;
-          max-width: 100% !important;
-          width: 100% !important;
-        }
-        body {
-          background-color: #FAF9F6 !important;
-        }
-        /* Cleanly hide Dawn default announcement bar, header and footer on homepage */
-        .section-header,
-        .header-wrapper,
-        .announcement-bar-section,
-        .announcement-bar,
-        header.header,
-        .footer-section,
-        footer.footer,
-        .section-footer {
-          display: none !important;
-        }
-      {% endif %}
+      /* Global reset for luxury editorial design */
+      main#MainContent {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      body {
+        background-color: #FAF9F6 !important;
+      }
+      /* Cleanly prevent duplicate header/footer inside storefront wrapper since header-group & footer-group handle it */
+      .bonita-luxury-wrapper > .desktop-floating-header,
+      .bonita-luxury-wrapper > .top-announcement-bar,
+      .bonita-luxury-wrapper > .notch-mobile-island,
+      .bonita-luxury-wrapper > .site-white-footer {
+        display: none !important;
+      }
+      /* Cleanly hide any remaining legacy Dawn announcement/header/footer elements if present */
+      .section-header:not(.desktop-floating-header),
+      .header-wrapper:not(.desktop-floating-header),
+      .announcement-bar-section:not(.top-announcement-bar),
+      .announcement-bar:not(.top-announcement-bar),
+      header.header:not(.desktop-floating-header),
+      .footer-section:not(.site-white-footer),
+      footer.footer:not(.site-white-footer),
+      .section-footer:not(.site-white-footer) {
+        display: none !important;
+      }
     </style>
 
     <script>

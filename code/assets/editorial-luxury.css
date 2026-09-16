@@ -3943,3 +3943,512 @@ html {
 .pdp-quick-modal-overlay.active {
   display: flex !important;
 }
+
+/* ========================================================================= */
+/* LUXURY PRODUCT DETAIL PAGE (PDP) - EDITORIAL 2-COLUMN EXPERIENCE          */
+/* ========================================================================= */
+.luxury-product-detail-section {
+  background-color: #FAF9F6;
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-detail-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* Breadcrumbs */
+.product-luxury-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #64748B;
+  margin-bottom: 30px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.product-luxury-breadcrumb a {
+  color: #08195B;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.product-luxury-breadcrumb a:hover {
+  color: #D1B054;
+}
+
+.breadcrumb-sep {
+  color: #CBD5E1;
+}
+
+.breadcrumb-current {
+  color: #94A3B8;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+/* 2-Column Grid */
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Left Column: Media */
+.product-media-column {
+  position: sticky;
+  top: 100px;
+}
+
+.product-main-media-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(8, 25, 91, 0.06);
+  border: 1px solid rgba(209, 176, 84, 0.25);
+  overflow: hidden;
+}
+
+.product-media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #FAF9F6;
+}
+
+.product-featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-featured-img:hover {
+  transform: scale(1.04);
+}
+
+.product-thumbnails-track {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.product-thumb-btn {
+  width: 76px;
+  height: 76px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  padding: 0;
+  background: #FFFFFF;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(8, 25, 91, 0.05);
+  transition: all 0.2s ease;
+}
+
+.product-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-thumb-btn.active,
+.product-thumb-btn:hover {
+  border-color: #08195B;
+  transform: translateY(-2px);
+}
+
+/* Right Column: Info Card */
+.product-info-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(8, 25, 91, 0.06);
+  border: 1px solid rgba(209, 176, 84, 0.25);
+}
+
+@media (max-width: 768px) {
+  .product-info-card {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+}
+
+.product-brand-kicker {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #D1B054;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.product-detail-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  color: #08195B;
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+
+/* Pricing Box */
+.product-detail-pricing-box {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(8, 25, 91, 0.08);
+  margin-bottom: 24px;
+}
+
+.price-row-main {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.price-current {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #08195B;
+}
+
+.price-original {
+  font-size: 1.25rem;
+  color: #94A3B8;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.price-discount-tag {
+  background: rgba(209, 176, 84, 0.15);
+  color: #937116;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.affirm-monthly-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FAF9F6;
+  border: 1px solid rgba(209, 176, 84, 0.35);
+  padding: 8px 14px;
+  border-radius: 10px;
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: #334155;
+}
+
+.affirm-monthly-pill strong {
+  color: #08195B;
+  font-weight: 700;
+}
+
+/* Assurance Strip */
+.product-assurance-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  font-size: 0.86rem;
+}
+
+.assurance-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+}
+
+.assurance-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Options & Variants */
+.product-options-container {
+  margin-bottom: 24px;
+}
+
+.product-option-group {
+  margin-bottom: 18px;
+}
+
+.product-option-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #08195B;
+  margin-bottom: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.selected-option-val {
+  color: #D1B054;
+  font-weight: 700;
+}
+
+.product-option-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-variant-pill {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1E293B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-variant-pill:hover {
+  border-color: #08195B;
+  color: #08195B;
+}
+
+.btn-variant-pill.active {
+  background: #08195B;
+  border-color: #08195B;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(8, 25, 91, 0.2);
+}
+
+/* Actions Row */
+.product-actions-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.product-qty-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 30px;
+  background: #FFFFFF;
+  height: 52px;
+  padding: 0 6px;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #08195B;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.qty-btn:hover {
+  background: #F1F5F9;
+}
+
+.qty-input {
+  width: 36px;
+  text-align: center;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #08195B;
+  background: transparent;
+}
+
+.btn-product-add-cart {
+  flex: 1;
+  height: 52px;
+  background: linear-gradient(135deg, #08195B 0%, #0d278c 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(209, 176, 84, 0.6);
+  border-radius: 30px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(8, 25, 91, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-product-add-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(8, 25, 91, 0.35);
+  border-color: #D1B054;
+}
+
+.btn-product-add-cart:disabled {
+  background: #94A3B8;
+  border-color: transparent;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-product-whatsapp-inquiry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 46px;
+  border-radius: 30px;
+  background: #FFFFFF;
+  border: 1.5px solid #25D366;
+  color: #128C7E;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  margin-bottom: 30px;
+}
+
+.btn-product-whatsapp-inquiry:hover {
+  background: #25D366;
+  color: #FFFFFF;
+}
+
+/* Accordion Tabs */
+.product-editorial-tabs {
+  border-top: 1px solid rgba(8, 25, 91, 0.08);
+  margin-top: 10px;
+}
+
+.luxury-tab {
+  border-bottom: 1px solid rgba(8, 25, 91, 0.08);
+}
+
+.luxury-tab-header {
+  padding: 18px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #08195B;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.luxury-tab-header::-webkit-details-marker {
+  display: none;
+}
+
+.tab-chevron {
+  transition: transform 0.25s ease;
+  color: #D1B054;
+}
+
+.luxury-tab[open] .tab-chevron {
+  transform: rotate(180deg);
+}
+
+.luxury-tab-content {
+  padding: 0 0 20px 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.specs-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specs-bullet-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.specs-bullet-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: #D1B054;
+  font-size: 0.8rem;
+}
+
+/* Related Products Section */
+.product-related-section {
+  max-width: 1380px;
+  margin: 60px auto 0;
+  padding: 0 24px;
+}
+
+.related-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.related-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #D1B054;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.related-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: #08195B;
+  margin: 0;
+}
+
