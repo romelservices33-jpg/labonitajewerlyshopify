@@ -1,0 +1,124 @@
+{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+
+<section class="{% if section.settings.theme_mode == 'dark' %}editorial-dark-contrast{% else %}editorial-split-feature{% endif %}" id="Statement-{{ section.id }}">
+  <div class="{% if section.settings.theme_mode == 'dark' %}dark-contrast-inner{% else %}split-feature-inner{% endif %}">
+    
+    {%- if section.settings.theme_mode == 'dark' -%}
+      <!-- Dark Layout: Image Left, Copy Right -->
+      <div class="dark-media-wrapper light-sweep-container">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.headline | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'editorial-dark-cuban.jpg' | asset_url }}" alt="Male marble sculpture with solid Miami Cuban chain" loading="lazy">
+        {%- endif -%}
+      </div>
+
+      <div class="dark-copy-block">
+        {%- if section.settings.kicker != blank -%}
+          <span class="editorial-kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        <h2 class="editorial-headline-medium">{{ section.settings.headline }}</h2>
+        <p>{{ section.settings.text }}</p>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="btn-editorial-primary" style="background: #ffffff; color: #121316; border-color: #ffffff;">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    {%- else -%}
+      <!-- Light Layout: Copy Left, Image Right -->
+      <div class="split-copy">
+        {%- if section.settings.kicker != blank -%}
+          <span class="editorial-kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        <h2 class="editorial-headline-medium">{{ section.settings.headline }}</h2>
+        {%- if section.settings.quote != blank -%}
+          <div class="split-quote">“{{ section.settings.quote }}”</div>
+        {%- endif -%}
+        <p style="color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 32px; font-weight: 300;">
+          {{ section.settings.text }}
+        </p>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="btn-editorial-primary">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="split-media-frame light-sweep-container">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.headline | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'editorial-diamonds.jpg' | asset_url }}" alt="Sculpted marble hand wearing diamond tennis bracelet" loading="lazy">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Statement",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "theme_mode",
+      "label": "Theme Mode",
+      "options": [
+        { "value": "light", "label": "Light Ivory (Asymmetrical)" },
+        { "value": "dark", "label": "Dark Charcoal (Contrast)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker / Category",
+      "default": "HAUTE ORFÈVRERIE"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Diamonds,\ncrafted for forever."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote (Light mode only)",
+      "default": "A jewel does not merely adorn; it catches the light of your lived moments and renders it immortal."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Editorial Paragraph",
+      "default": "Every diamond in our atelier is hand-selected for exceptional fire, brilliance and precision cut. Set exclusively in solid 10k and 14k gold, our creations honor the human silhouette with quiet architectural balance."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Campaign Image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "CTA Label",
+      "default": "Discover The Atelier"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Statement"
+    }
+  ]
+}
+{% endschema %}

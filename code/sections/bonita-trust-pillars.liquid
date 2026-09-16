@@ -1,0 +1,66 @@
+{{ 'luxury-bonita.css' | asset_url | stylesheet_tag }}
+
+<section class="bonita-trust-section" id="Trust-{{ section.id }}">
+  <div class="bonita-trust-grid">
+    <!-- Pillar 1 -->
+    <div class="bonita-trust-item">
+      <div class="bonita-trust-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="7"></circle>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+        </svg>
+      </div>
+      <h3 class="bonita-trust-title">ORO 100% REAL</h3>
+      <p class="bonita-trust-desc">Pureza garantizada en 10k y 14k. Certificado de autenticidad y pesaje exacto en cada compra.</p>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="bonita-trust-item">
+      <div class="bonita-trust-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+      </div>
+      <h3 class="bonita-trust-title">ENVÍO ASEGURADO</h3>
+      <p class="bonita-trust-desc">Despacho protegido a todo Estados Unidos con rastreo y firma requerida al recibir.</p>
+    </div>
+
+    <!-- Pillar 3 -->
+    <div class="bonita-trust-item">
+      <div class="bonita-trust-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+      </div>
+      <h3 class="bonita-trust-title">FINANCIAMIENTO $0</h3>
+      <p class="bonita-trust-desc">Planes de pago flexibles con Klarna, Affirm, Acima y Snap. Aprobación en 2 minutos.</p>
+    </div>
+
+    <!-- Pillar 4 -->
+    <div class="bonita-trust-item">
+      <div class="bonita-trust-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <h3 class="bonita-trust-title">GARANTÍA TOTAL</h3>
+      <p class="bonita-trust-desc">Respaldamos cada eslabón, broche y acabado artesanal. Tu satisfacción es nuestra prioridad.</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pilares de Confianza",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pilares de Confianza"
+    }
+  ]
+}
+{% endschema %}

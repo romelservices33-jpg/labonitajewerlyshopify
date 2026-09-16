@@ -1,0 +1,41 @@
+{% comment %}
+  Renders a dynamic Free Shipping progress bar for Cart Drawer / Cart Page.
+  Accepts:
+  - threshold: {Number} Amount required for free shipping in cents (default: 15000 = $150 USD)
+{% endcomment %}
+
+{%- liquid
+  assign free_shipping_threshold = threshold | default: 15000
+  assign cart_total = cart.total_price | default: 0
+  assign remaining = free_shipping_threshold | minus: cart_total
+  if cart_total >= free_shipping_threshold
+    assign progress_pct = 100
+  else
+    assign progress_pct = cart_total | times: 100 | divided_by: free_shipping_threshold
+    if progress_pct < 8
+      assign progress_pct = 8
+    endif
+  endif
+-%}
+
+<div class="free-shipping-progress-wrap" id="freeShippingWrap" style="margin: 14px 20px 8px;">
+  <div class="free-shipping-msg" id="freeShippingMsg">
+    <span style="display:inline-flex; align-items:center; gap:6px;">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      Envío Asegurado:
+    </span>
+    <strong id="freeShippingStatus">
+      {%- if cart_total >= free_shipping_threshold -%}
+        <span style="color:#059669; display:inline-flex; align-items:center; gap:5px;">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          ¡Felicidades! Tienes Envío Gratis
+        </span>
+      {%- else -%}
+        ¡Te faltan <strong>{{ remaining | money }}</strong> para Envío Gratis!
+      {%- endif -%}
+    </strong>
+  </div>
+  <div class="free-shipping-bar-track">
+    <div class="free-shipping-bar-fill" id="freeShippingFill" style="width: {{ progress_pct }}%;{% if cart_total >= free_shipping_threshold %} background: linear-gradient(90deg, #10B981 0%, #059669 100%);{% endif %}"></div>
+  </div>
+</div>

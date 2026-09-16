@@ -1,12 +1,23 @@
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-.shopify
-node_modules
+# Ignore large photo archives and zip files
 *.zip
+*.log
+fotos/
+Nueva carpeta/
+iCloud Photos*/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Dependencies and temp
+node_modules/
+.shopify/
+code/*.log
+code/get_ip.js
+code/ip.txt
+code/my_ip.txt
+code/git_info.json
+code/sync_report.json
+code/size_report.txt
+*.mp4
+

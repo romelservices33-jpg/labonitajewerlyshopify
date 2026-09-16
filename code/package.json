@@ -1,0 +1,17 @@
+{
+  "name": "la-bonita-jewelry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "La Bonita Jewelry E-Commerce & Shopify Experience",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@eva-design/eva": "^5.1.2",
+    "@ui-kitten/components": "^5.1.2",
+    "@ui-kitten/eva-icons": "^5.1.2",
+    "react-native-svg": "^15.11.1",
+    "@rneui/base": "^4.0.0-rc.8",
+    "@rneui/themed": "^4.0.0-rc.8"
+  }
+}

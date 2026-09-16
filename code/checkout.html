@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Seguro — La Bonita Jewelry</title>
+  <meta name="description" content="Finaliza tu compra protegida en La Bonita Jewelry. Oro 100% auténtico 10K y 14K con envío asegurado a todo EE. UU. y financiamiento Affirm.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/editorial-luxury.css">
+
+  <style>
+    :root {
+      --color-royal-navy: #08195B;
+      --color-royal-navy-dark: #05103B;
+      --color-gold: #D1B054;
+      --color-gold-light: #F4E8C1;
+      --color-pure-white: #FFFFFF;
+      --color-surface-cream: #FAF9F6;
+      --color-border-subtle: rgba(8, 25, 91, 0.12);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #F8F7F4;
+      color: var(--color-royal-navy);
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .checkout-layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    /* Left Side: Form Flow */
+    .checkout-main-col {
+      background: #FFFFFF;
+      padding: 40px 60px 80px;
+      border-right: 1px solid var(--color-border-subtle);
+      max-width: 720px;
+      margin-left: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Right Side: Order Summary */
+    .checkout-summary-col {
+      background: #FAF8F2;
+      padding: 40px 60px 80px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      max-width: 540px;
+      margin-right: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .checkout-brand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .checkout-logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--color-royal-navy);
+    }
+
+    .checkout-logo-svg {
+      height: 42px;
+      width: auto;
+    }
+
+    .checkout-security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #059669;
+      background: #ECFDF5;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+
+    /* Express Checkout Cluster */
+    .express-checkout-wrap {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #FAF9F6;
+      border-radius: 14px;
+      border: 1px solid var(--color-border-subtle);
+      text-align: center;
+    }
+
+    .express-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #64748B;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .express-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-express {
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid #D1D5DB;
+      background: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-express.shoppay {
+      background: #5A31F4;
+      color: #FFFFFF;
+      border-color: #5A31F4;
+      grid-column: span 2;
+    }
+
+    .btn-express.affirm {
+      background: #004BFF;
+      color: #FFFFFF;
+      border-color: #004BFF;
+    }
+
+    .btn-express.paypal {
+      background: #FFC439;
+      color: #003087;
+      border-color: #FFC439;
+    }
+
+    .btn-express:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .checkout-divider {
+      display: flex;
+      align-items: center;
+      margin: 28px 0;
+      color: #94A3B8;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .checkout-divider::before, .checkout-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border-subtle);
+    }
+
+    .checkout-divider span {
+      padding: 0 16px;
+    }
+
+    /* Section Headings */
+    .checkout-step-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-royal-navy);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkout-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-royal-navy);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Input Fields */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.2fr;
+      gap: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-royal-navy);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: var(--font-sans);
+      color: var(--color-royal-navy);
+      background: #FFFFFF;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--color-royal-navy);
+      box-shadow: 0 0 0 3px rgba(8, 25, 91, 0.1);
+    }
+
+    /* Shipping Method Options */
+    .shipping-option-card {
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .shipping-option-card.selected {
+      border-color: var(--color-royal-navy);
+      background: rgba(8, 25, 91, 0.03);
+      box-shadow: 0 0 0 1px var(--color-royal-navy);
+    }
+
+    /* Payment Option Tabs */
+    .payment-tabs-wrap {
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .payment-tab-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAF9F6;
+      border-bottom: 1px solid #E2E8F0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .payment-tab-header.active {
+      background: #FFFFFF;
+      color: var(--color-royal-navy);
+      font-weight: 700;
+    }
+
+    .payment-tab-body {
+      padding: 20px 18px;
+      background: #FFFFFF;
+      display: none;
+    }
+
+    .payment-tab-body.active {
+      display: block;
+    }
+
+    /* Affirm Installment Selector in Checkout */
+    .affirm-plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0 10px;
+    }
+
+    .affirm-plan-card {
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .affirm-plan-card.selected {
+      border-color: var(--color-royal-navy);
+      background: rgba(8, 25, 91, 0.04);
+      box-shadow: 0 0 0 1px var(--color-royal-navy);
+    }
+
+    .affirm-plan-mo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-royal-navy);
+    }
+
+    .affirm-plan-desc {
+      font-size: 0.7rem;
+      color: #64748B;
+      margin-top: 2px;
+    }
+
+    /* Main CTA Button */
+    .btn-pay-now {
+      width: 100%;
+      height: 54px;
+      background: var(--color-royal-navy);
+      color: #FFFFFF;
+      border: 1px solid var(--color-gold);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 24px rgba(8, 25, 91, 0.2);
+    }
+
+    .btn-pay-now:hover {
+      background: linear-gradient(135deg, #08195B 0%, #0d2a99 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(8, 25, 91, 0.3);
+    }
+
+    /* Order Summary Column */
+    .summary-product-item {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(8, 25, 91, 0.08);
+    }
+
+    .summary-product-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #FFFFFF;
+      border: 1px solid rgba(209, 176, 84, 0.25);
+    }
+
+    .summary-totals-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: #64748B;
+    }
+
+    .summary-totals-row.final-total {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(8, 25, 91, 0.12);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-royal-navy);
+    }
+
+    .coupon-wrap {
+      display: flex;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+      .checkout-main-col {
+        padding: 30px 20px 50px;
+        max-width: 100%;
+        order: 2;
+      }
+      .checkout-summary-col {
+        height: auto;
+        position: static;
+        padding: 24px 20px;
+        max-width: 100%;
+        order: 1;
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+      .form-row-2, .form-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .checkout-main-col {
+        padding: 20px 16px 40px;
+      }
+      .checkout-summary-col {
+        padding: 20px 16px;
+      }
+      .checkout-brand-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+      }
+      .checkout-logo-svg {
+        height: 32px;
+      }
+      .express-checkout-wrap {
+        padding: 14px;
+        margin-bottom: 20px;
+      }
+      .express-buttons-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .btn-express.shoppay {
+        grid-column: span 1;
+      }
+      .btn-express {
+        font-size: 0.78rem;
+        height: 42px;
+      }
+      .checkout-divider {
+        margin: 20px 0;
+        font-size: 0.7rem;
+      }
+      .checkout-step-title {
+        font-size: 1.15rem;
+      }
+      .form-label {
+        font-size: 0.72rem;
+      }
+      .form-input, .form-select {
+        height: 42px;
+        font-size: 0.85rem;
+        padding: 0 12px;
+      }
+      .shipping-option-card {
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .affirm-plan-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .btn-pay-now {
+        height: 50px;
+        font-size: 0.88rem;
+      }
+      .summary-product-item {
+        gap: 10px;
+      }
+      .summary-product-img {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+      }
+      .coupon-wrap {
+        flex-direction: column;
+      }
+      .coupon-wrap .btn-black-pill {
+        width: 100% !important;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-layout">
+    
+    <!-- LEFT COLUMN: CHECKOUT FLOW -->
+    <main class="checkout-main-col">
+      <header class="checkout-brand-header">
+        <a href="index.html" class="checkout-logo-link" title="Volver a la tienda">
+          <svg class="checkout-logo-svg" viewBox="0 0 5540 4305" fill="var(--color-royal-navy)">
+            <path d="M2770 1200 C2400 1200 2100 1500 2100 1870 C2100 2240 2400 2540 2770 2540 C3140 2540 3440 2240 3440 1870 C3440 1500 3140 1200 2770 1200 Z" fill="#D1B054"/>
+            <text x="2770" y="3200" font-family="'Cormorant Garamond', serif" font-size="340" font-weight="700" text-anchor="middle" fill="#08195B" letter-spacing="40">LA BONITA</text>
+            <text x="2770" y="3600" font-family="'Plus Jakarta Sans', sans-serif" font-size="140" font-weight="600" text-anchor="middle" fill="#D1B054" letter-spacing="80">JEWELRY</text>
+          </svg>
+        </a>
+
+        <div class="checkout-security-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>SSL 256-Bit Protegido</span>
+        </div>
+      </header>
+
+      <!-- Express Checkout -->
+      <div class="express-checkout-wrap">
+        <div class="express-title">Pago Exprés Acelerado</div>
+        <div class="express-buttons-grid">
+          <button type="button" class="btn-express shoppay" onclick="simulatePayment('Shop Pay')">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
+            Pagar con Shop Pay (1-Click)
+          </button>
+          <button type="button" class="btn-express affirm" onclick="selectPaymentTab('affirm')">
+            Pagar con Affirm
+          </button>
+          <button type="button" class="btn-express paypal" onclick="simulatePayment('PayPal')">
+            PayPal Checkout
+          </button>
+        </div>
+      </div>
+
+      <div class="checkout-divider">
+        <span>O completa tu entrega asegurada</span>
+      </div>
+
+      <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+        
+        <!-- STEP 1: CONTACT INFO -->
+        <section style="margin-bottom: 30px;">
+          <h2 class="checkout-step-title">
+            <span class="checkout-step-num">1</span>
+            Contacto y Notificaciones de Envío
+          </h2>
+          <div class="form-group">
+            <label class="form-label" for="email">Correo Electrónico</label>
+            <input type="email" id="email" class="form-input" placeholder="ejemplo@correo.com" required value="cliente.vip@labonita.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Teléfono Móvil (Para Rastreo FedEx/USPS por SMS)</label>
+            <input type="tel" id="phone" class="form-input" placeholder="(502) 599-4250" required value="(502) 599-4250">
+          </div>
+        </section>
+
+        <!-- STEP 2: SHIPPING ADDRESS -->
+        <section style="margin-bottom: 30px;">
+          <h2 class="checkout-step-title">
+            <span class="checkout-step-num">2</span>
+            Dirección de Entrega Asegurada
+          </h2>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="firstName">Nombre</label>
+              <input type="text" id="firstName" class="form-input" placeholder="Nombre" required value="Miguel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Apellidos</label>
+              <input type="text" id="lastName" class="form-input" placeholder="Apellidos" required value="Rodríguez">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="address">Dirección de Envío</label>
+            <input type="text" id="address" class="form-input" placeholder="Calle, Avenida, Número" required value="742 Evergreen Terrace">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="suite">Apartamento, Suite o Unidad (Opcional)</label>
+            <input type="text" id="suite" class="form-input" placeholder="Apt 4B">
+          </div>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label class="form-label" for="city">Ciudad</label>
+              <input type="text" id="city" class="form-input" placeholder="Ciudad" required value="Miami">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="state">Estado</label>
+              <select id="state" class="form-select" required>
+                <option value="FL" selected>Florida (FL)</option>
+                <option value="TX">Texas (TX)</option>
+                <option value="CA">California (CA)</option>
+                <option value="NY">New York (NY)</option>
+                <option value="PR">Puerto Rico (PR)</option>
+                <option value="KY">Kentucky (KY)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="zip">Código Postal</label>
+              <input type="text" id="zip" class="form-input" placeholder="33101" required value="33101">
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 3: SHIPPING METHOD -->
+        <section style="margin-bottom: 30px;">
+          <h2 class="checkout-step-title">
+            <span class="checkout-step-num">3</span>
+            Método de Entrega Asegurada
+          </h2>
+          <label class="shipping-option-card selected">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <input type="radio" name="shippingMethod" checked style="accent-color: var(--color-royal-navy);">
+              <div>
+                <div style="font-weight:700; color:var(--color-royal-navy); font-size:0.92rem;">FedEx Express Asegurado con Firma</div>
+                <div style="font-size:0.78rem; color:#64748B;">Entrega en 2 a 3 días hábiles · Rastreo en vivo</div>
+              </div>
+            </div>
+            <span style="font-weight:800; color:#059669; font-size:0.92rem;">GRATIS</span>
+          </label>
+          <label class="shipping-option-card">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <input type="radio" name="shippingMethod" style="accent-color: var(--color-royal-navy);">
+              <div>
+                <div style="font-weight:700; color:var(--color-royal-navy); font-size:0.92rem;">USPS Priority Mail Asegurado</div>
+                <div style="font-size:0.78rem; color:#64748B;">Ideal para apartados postales y Puerto Rico</div>
+              </div>
+            </div>
+            <span style="font-weight:800; color:#059669; font-size:0.92rem;">GRATIS</span>
+          </label>
+        </section>
+
+        <!-- STEP 4: PAYMENT -->
+        <section style="margin-bottom: 35px;">
+          <h2 class="checkout-step-title">
+            <span class="checkout-step-num">4</span>
+            Método de Pago Seguro
+          </h2>
+
+          <div class="payment-tabs-wrap">
+            
+            <!-- Tab 1: Credit Card -->
+            <div class="payment-tab-header active" onclick="selectPaymentTab('card')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <input type="radio" name="paymentTabRadio" checked id="radioCard" style="accent-color: var(--color-royal-navy);">
+                <span>Tarjeta de Crédito o Débito</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <span class="pay-badge" style="font-size:0.65rem; padding:2px 6px; border:1px solid #CBD5E1; border-radius:4px;">VISA</span>
+                <span class="pay-badge" style="font-size:0.65rem; padding:2px 6px; border:1px solid #CBD5E1; border-radius:4px;">MC</span>
+                <span class="pay-badge" style="font-size:0.65rem; padding:2px 6px; border:1px solid #CBD5E1; border-radius:4px;">AMEX</span>
+              </div>
+            </div>
+            <div class="payment-tab-body active" id="tabBodyCard">
+              <div class="form-group">
+                <label class="form-label" for="ccNum">Número de Tarjeta</label>
+                <input type="text" id="ccNum" class="form-input" placeholder="4242 •••• •••• 4242" value="4242 •••• •••• 4242" required>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="ccExp">Expiración (MM/AA)</label>
+                  <input type="text" id="ccExp" class="form-input" placeholder="12/28" value="12/28" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ccCvc">Código de Seguridad (CVV)</label>
+                  <input type="text" id="ccCvc" class="form-input" placeholder="123" value="789" required>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="ccName">Nombre en la Tarjeta</label>
+                <input type="text" id="ccName" class="form-input" placeholder="Nombre como aparece en la tarjeta" value="MIGUEL RODRIGUEZ" required>
+              </div>
+            </div>
+
+            <!-- Tab 2: Affirm Financing -->
+            <div class="payment-tab-header" onclick="selectPaymentTab('affirm')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <input type="radio" name="paymentTabRadio" id="radioAffirm" style="accent-color: var(--color-royal-navy);">
+                <span>Financiamiento con <strong>Affirm</strong> (0% APR)</span>
+              </div>
+              <span style="font-size:0.75rem; color:#004BFF; font-weight:700;">Sin intereses</span>
+            </div>
+            <div class="payment-tab-body" id="tabBodyAffirm">
+              <p style="font-size:0.82rem; color:#475569; margin:0 0 10px;">
+                Elige tu plan en cuotas fijas mensuales sin comisiones ocultas ni penalizaciones por pago anticipado:
+              </p>
+              <div class="affirm-plan-grid">
+                <div class="affirm-plan-card selected" onclick="selectAffirmPlan(this, 12)">
+                  <div class="affirm-plan-mo" id="plan12Mo">$115/mes</div>
+                  <div class="affirm-plan-desc">12 Cuotas (0% APR)</div>
+                </div>
+                <div class="affirm-plan-card" onclick="selectAffirmPlan(this, 6)">
+                  <div class="affirm-plan-mo" id="plan6Mo">$230/mes</div>
+                  <div class="affirm-plan-desc">6 Cuotas (0% APR)</div>
+                </div>
+                <div class="affirm-plan-card" onclick="selectAffirmPlan(this, 3)">
+                  <div class="affirm-plan-mo" id="plan3Mo">$460/mes</div>
+                  <div class="affirm-plan-desc">3 Cuotas (0% APR)</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Final Submit Button -->
+        <button type="submit" class="btn-pay-now" id="btnSubmitOrder">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span id="btnPayText">Pagar Pedido Seguro ($1,380 USD)</span>
+        </button>
+
+        <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px 20px; margin-top:20px; font-size:0.72rem; color:#64748B; font-weight:600;">
+          <span style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Oro 100% Auténtico
+          </span>
+          <span style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--color-gold)" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            Envío Asegurado FedEx
+          </span>
+          <span style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--color-gold)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Cifrado Bancario Seguro
+          </span>
+        </div>
+
+      </form>
+    </main>
+
+    <!-- RIGHT COLUMN: ORDER SUMMARY -->
+    <aside class="checkout-summary-col">
+      <h3 style="font-family:var(--font-serif); font-size:1.45rem; font-weight:600; color:var(--color-royal-navy); margin:0 0 20px;">
+        Resumen del Pedido (<span id="summaryCount">1</span>)
+      </h3>
+
+      <div id="summaryItemsList">
+        <div class="summary-product-item">
+          <img src="assets/collection-cadenas.jpg" class="summary-product-img" alt="Cadena Italian Curb 10K">
+          <div style="flex:1;">
+            <h4 style="font-size:0.92rem; font-weight:700; margin:0 0 4px; color:var(--color-royal-navy);">Cadena Sólido 10K Italian Curb</h4>
+            <div style="font-size:0.78rem; color:#64748B;">24" · 4.7 mm · 12.06 g</div>
+            <div style="font-size:0.75rem; color:var(--color-gold); font-weight:700; margin-top:2px;">Oro 10K Sólido Certificado</div>
+          </div>
+          <div style="font-weight:700; font-size:0.95rem; color:var(--color-royal-navy);">$1,380 USD</div>
+        </div>
+      </div>
+
+      <!-- Coupon Code -->
+      <div class="coupon-wrap">
+        <input type="text" id="couponCode" class="form-input" placeholder="Código de descuento o regalo" style="height:42px; font-size:0.85rem;">
+        <button type="button" class="btn-black-pill" style="height:42px; padding:0 18px; font-size:0.82rem;" onclick="applyDiscount()">Aplicar</button>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(8, 25, 91, 0.08);">
+        <div class="summary-totals-row">
+          <span>Subtotal</span>
+          <strong id="summarySubtotal" style="color:var(--color-royal-navy);">$1,380 USD</strong>
+        </div>
+        <div class="summary-totals-row">
+          <span>Envío Asegurado FedEx</span>
+          <strong style="color:#059669;">GRATIS</strong>
+        </div>
+        <div class="summary-totals-row">
+          <span>Impuestos Estimados (Florida 0% / Tax Included)</span>
+          <span style="color:#64748B;">$0.00 USD</span>
+        </div>
+        <div class="summary-totals-row final-total">
+          <span>Total a Pagar</span>
+          <span id="summaryTotal">$1,380 USD</span>
+        </div>
+      </div>
+
+      <!-- Certificate Box -->
+      <div style="margin-top:24px; padding:16px; background:#FFFFFF; border-radius:12px; border:1px solid rgba(209,176,84,0.3);">
+        <div style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:0.85rem; color:var(--color-royal-navy); margin-bottom:6px;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--color-gold)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          Garantía Oficial La Bonita
+        </div>
+        <p style="font-size:0.75rem; color:#64748B; margin:0; line-height:1.4;">
+          Cada pieza incluye su certificado físico foliado de autenticidad y pureza de oro con garantía de recompra y mantenimiento vitalicio.
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script>
+    let checkoutSubtotal = 1380;
+
+    function selectPaymentTab(tab) {
+      document.querySelectorAll('.payment-tab-header').forEach(h => h.classList.remove('active'));
+      document.querySelectorAll('.payment-tab-body').forEach(b => b.classList.remove('active'));
+
+      if (tab === 'card') {
+        document.querySelector('.payment-tab-header:nth-child(1)').classList.add('active');
+        document.getElementById('tabBodyCard').classList.add('active');
+        document.getElementById('radioCard').checked = true;
+      } else if (tab === 'affirm') {
+        document.querySelector('.payment-tab-header:nth-child(3)').classList.add('active');
+        document.getElementById('tabBodyAffirm').classList.add('active');
+        document.getElementById('radioAffirm').checked = true;
+      }
+    }
+
+    function selectAffirmPlan(el, months) {
+      document.querySelectorAll('.affirm-plan-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      const monthly = Math.round(checkoutSubtotal / months);
+      document.getElementById('btnPayText').textContent = `Completar Pedido con Affirm (${months} cuotas de $${monthly}/mes)`;
+    }
+
+    function applyDiscount() {
+      const code = document.getElementById('couponCode').value.trim();
+      if (!code) return;
+      alert(`Código "${code}" aplicado correctamente. Descuento activado.`);
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitOrder');
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg> <span>Procesando pago seguro...</span>`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        window.location.href = 'order-status.html';
+      }, 1200);
+    }
+
+    function simulatePayment(method) {
+      alert(`Iniciando autenticación protegida con ${method}...`);
+      setTimeout(() => {
+        window.location.href = 'order-status.html';
+      }, 800);
+    }
+  </script>
+</body>
+</html>
