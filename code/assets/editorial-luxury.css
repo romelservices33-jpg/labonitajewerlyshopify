@@ -3487,15 +3487,13 @@ html {
     flex-direction: column !important;
     grid-template-columns: 1fr !important;
     width: 100% !important;
-    max-width: 390px !important;
-    max-height: 86vh !important;
-    height: auto !important;
+    max-width: 360px !important;
+    aspect-ratio: 1 / 2 !important;
+    max-height: 88vh !important;
     border-radius: 22px !important;
     border: 1px solid rgba(209, 176, 84, 0.45) !important;
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 20px rgba(209, 176, 84, 0.2) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
+    overflow: hidden !important;
     position: relative !important;
     margin: auto !important;
   }
@@ -3510,9 +3508,7 @@ html {
     border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
     border-radius: 21px 21px 0 0 !important;
     width: 100% !important;
-    height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
+    height: 50% !important;
     aspect-ratio: 1 / 1 !important;
     flex-shrink: 0 !important;
     position: relative !important;
@@ -3563,11 +3559,20 @@ html {
   }
 
   .modal-details-col {
-    padding: 12px 14px 10px !important;
+    padding: 14px 16px 12px !important;
     display: flex !important;
     flex-direction: column !important;
-    flex: 1 1 auto !important;
-    overflow-y: visible !important;
+    justify-content: space-between !important;
+    height: 50% !important;
+    flex: 1 1 50% !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    background: #FFFFFF !important;
+  }
+
+  .modal-details-col::-webkit-scrollbar {
+    display: none !important;
   }
 
   .modal-header-meta {

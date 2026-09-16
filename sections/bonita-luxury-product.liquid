@@ -395,7 +395,7 @@
   }
 
   /* ==========================================================================
-     MOBILE SPECIFIC RULES (< 860px) - CONSTRAINED CARD & 1:1 MEDIA
+     MOBILE SPECIFIC RULES (< 860px) - 1:2 LUXURY CARD PROPORTION (1 ANCHO : 2 ALTO)
      ========================================================================== */
   @media (max-width: 860px) {
     .pdp-floating-page-backdrop {
@@ -403,28 +403,40 @@
       min-height: auto !important;
     }
 
-    /* Constrained max width - never stretches wide */
+    /* 1:2 Proportion Luxury Mobile Card */
     .pdp-unified-card-wrap {
-      max-width: 380px !important;
+      max-width: 360px !important;
+      width: 100% !important;
       margin: 0 auto !important;
     }
 
     .pdp-unified-card {
-      grid-template-columns: 1fr !important;
-      border-radius: 20px !important;
-      box-shadow: 0 12px 36px rgba(4, 12, 45, 0.35) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      aspect-ratio: 1 / 2 !important;
+      border-radius: 22px !important;
+      box-shadow: 0 16px 48px rgba(4, 12, 45, 0.4) !important;
+      overflow: hidden !important;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(209, 176, 84, 0.35) !important;
     }
 
-    /* 1:1 PERFECT SQUARE MEDIA CONTAINER */
+    /* Top Half: 1:1 Square Media (50% of card) */
     .pdp-card-media-col {
       width: 100% !important;
+      height: 50% !important;
       aspect-ratio: 1 / 1 !important;
-      height: auto !important;
-      min-height: unset !important;
-      max-height: unset !important;
+      flex-shrink: 0 !important;
+      background: #FFFFFF !important;
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
       border-right: none !important;
       border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
-      border-radius: 20px 20px 0 0 !important;
+      border-radius: 22px 22px 0 0 !important;
+      overflow: hidden !important;
     }
 
     .pdp-card-main-img {
@@ -449,13 +461,28 @@
     }
 
     .pdp-thumb-item {
-      width: 34px !important;
-      height: 34px !important;
+      width: 32px !important;
+      height: 32px !important;
       border-radius: 6px !important;
     }
 
+    /* Bottom Half: Details Section (50% of card) */
     .pdp-card-details-col {
-      padding: 14px 16px 16px !important;
+      width: 100% !important;
+      height: 50% !important;
+      flex: 1 1 50% !important;
+      padding: 14px 16px 14px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+      background: #FFFFFF !important;
+    }
+
+    .pdp-card-details-col::-webkit-scrollbar {
+      display: none !important;
     }
 
     .pdp-title-main {
@@ -472,15 +499,15 @@
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 380px) {
     .pdp-unified-card-wrap {
-      max-width: 340px !important;
+      max-width: 330px !important;
     }
     .pdp-card-main-img {
       padding: 12px !important;
     }
     .pdp-card-details-col {
-      padding: 12px 14px 14px !important;
+      padding: 10px 12px 12px !important;
     }
   }
 </style>
