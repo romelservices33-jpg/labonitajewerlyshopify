@@ -1889,7 +1889,7 @@ html {
   border-radius: 20px;
   padding: 0;
   box-shadow: 0 8px 24px -6px rgba(8, 25, 91, 0.08), 0 2px 6px -1px rgba(8, 25, 91, 0.04);
-  border: 1px solid rgba(8, 25, 91, 0.09);
+  border: 1.5px solid rgba(209, 176, 84, 0.45);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1900,7 +1900,7 @@ html {
 .product-shop-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 38px -10px rgba(8, 25, 91, 0.16), 0 0 0 1px rgba(209, 176, 84, 0.4);
-  border-color: rgba(209, 176, 84, 0.45);
+  border-color: rgba(209, 176, 84, 0.75);
 }
 
 /* 1. Media Container */
@@ -2090,15 +2090,18 @@ html {
 
 .cutout-title-row {
   margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(8, 25, 91, 0.07);
 }
 
 .cutout-product-title {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 1.02rem;
-  font-weight: 700;
-  color: var(--color-royal-navy);
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--color-royal-navy) !important;
   line-height: 1.35;
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
   letter-spacing: -0.01em;
 }
 
@@ -5197,35 +5200,50 @@ html {
 
 .badge-gold-bestseller {
   position: absolute !important;
-  top: 14px !important;
-  left: 14px !important;
-  background: #D1B054 !important;
-  color: #08195B !important;
+  top: 12px !important;
+  left: 12px !important;
+  background: transparent !important;
+  border: 1.5px solid #D1B054 !important;
+  color: #D1B054 !important;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
-  font-size: 0.68rem !important;
+  font-size: 0.65rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  padding: 4px 10px !important;
+  padding: 3px 10px !important;
   border-radius: 9999px !important;
-  box-shadow: 0 4px 12px rgba(209, 176, 84, 0.35) !important;
-  z-index: 3 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  line-height: 1.3 !important;
 }
 
 .badge-emerald-new {
   position: absolute !important;
-  top: 14px !important;
-  left: 14px !important;
-  background: #059669 !important;
-  color: #FFFFFF !important;
+  top: 12px !important;
+  left: 12px !important;
+  background: transparent !important;
+  border: 1.5px solid #059669 !important;
+  color: #059669 !important;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
-  font-size: 0.68rem !important;
+  font-size: 0.65rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  padding: 4px 10px !important;
+  padding: 3px 10px !important;
   border-radius: 9999px !important;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35) !important;
-  z-index: 3 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  line-height: 1.3 !important;
 }
+
 
