@@ -646,11 +646,12 @@
           <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
         </nav>
 
-        <!-- Ultra-Minimalist Filter Bar (Pureza, Medida, Rango de Peso, Ordenar) -->
+        <!-- Ultra-Minimalist Filter Bar (Pureza, Medida, Ordenar arriba - Gramaje abajo a todo el ancho) -->
         <div class="catalog-filter-bar" id="catalogFilterBar">
-          <div class="filter-group-cluster">
-            
-            <!-- Pureza / Quilataje (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+          
+          <!-- TOP ROW: 3 DROPDOWNS -->
+          <div class="filter-dropdowns-row">
+            <!-- 1. Pureza / Quilataje (Uiverse.io Dropdown by 3bdel3ziz-T) -->
             <div class="filter-item-wrap">
               <span class="filter-label">Pureza de Oro</span>
               <div class="select uiverse-select" id="selectKarat" tabindex="0">
@@ -677,7 +678,7 @@
               </div>
             </div>
 
-            <!-- Medida / Longitud / Talla (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+            <!-- 2. Medida / Longitud / Talla (Uiverse.io Dropdown by 3bdel3ziz-T) -->
             <div class="filter-item-wrap">
               <span class="filter-label">Medida / Talla</span>
               <div class="select uiverse-select" id="selectSize" tabindex="0">
@@ -736,16 +737,7 @@
               </div>
             </div>
 
-            <!-- Gramaje / Peso Slider -->
-            <div class="filter-item-wrap filter-range-wrap">
-              <div class="filter-range-header">
-                <label for="filterWeight" class="filter-label">Peso Máximo</label>
-                <span class="filter-range-val" id="filterWeightVal">Hasta: 70.0 g</span>
-              </div>
-              <input type="range" id="filterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateWeightDisplay(this.value)" onchange="applyCatalogFilters()" aria-label="Filtrar por peso máximo en gramos">
-            </div>
-
-            <!-- Ordenar Por (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+            <!-- 3. Ordenar Por (Uiverse.io Dropdown by 3bdel3ziz-T) -->
             <div class="filter-item-wrap">
               <span class="filter-label">Ordenar Por</span>
               <div class="select uiverse-select" id="selectSort" tabindex="0">
@@ -780,6 +772,15 @@
               </div>
             </div>
 
+          </div>
+
+          <!-- BOTTOM ROW: GRAMAJE / PESO SLIDER A TODO EL ANCHO -->
+          <div class="filter-range-fullwidth">
+            <div class="filter-range-header">
+              <label for="filterWeight" class="filter-label">Peso Máximo</label>
+              <span class="filter-range-val" id="filterWeightVal">Hasta: 70.0 g</span>
+            </div>
+            <input type="range" id="filterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateWeightDisplay(this.value)" onchange="applyCatalogFilters()" aria-label="Filtrar por peso máximo en gramos">
           </div>
 
           <!-- Bottom Meta Bar: Results counter & Reset button -->
