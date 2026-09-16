@@ -352,8 +352,27 @@
       >
     {%- endif -%}
 
-    {{ 'luxury-bonita.css' | asset_url | stylesheet_tag }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Open+Sans:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+
+    <style>
+      /* Clean reset for index page so Dawn theme containers do not distort luxury design */
+      {% if template.name == 'index' %}
+        main#MainContent {
+          padding: 0 !important;
+          margin: 0 !important;
+          max-width: 100% !important;
+          width: 100% !important;
+        }
+        body {
+          background-color: #FAF9F6 !important;
+        }
+      {% endif %}
+    </style>
 
     <script>
       if (Shopify.designMode) {

@@ -1,5 +1,267 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* 1. Affirm Badge & Specs */
+  .affirm-monthly-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.74rem !important;
+    color: #4B5563 !important;
+    margin-top: 4px !important;
+    font-weight: 500 !important;
+  }
+  .affirm-monthly-badge strong {
+    color: #08195B !important;
+    font-weight: 700 !important;
+  }
+
+  .spec-weight-tag {
+    display: block !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.74rem !important;
+    font-weight: 500 !important;
+    color: #6B7280 !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    margin-top: 4px !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.4 !important;
+  }
+  .cutout-card-action {
+    display: none !important;
+  }
+
+  /* 2. Trust Pillars Grid - Clean Editorial */
+  .trust-pillars-section {
+    background: #FAF9F6 !important;
+    padding: 56px 40px !important;
+    border-top: 1px solid rgba(209, 176, 84, 0.18) !important;
+    border-bottom: 1px solid rgba(209, 176, 84, 0.18) !important;
+    display: block !important;
+    width: 100% !important;
+  }
+  .trust-pillars-inner {
+    max-width: 1380px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 36px !important;
+  }
+  .pillar-card {
+    display: flex !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: transform 0.25s ease !important;
+  }
+  .pillar-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: none !important;
+  }
+  .pillar-icon-box {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+    color: #D1B054 !important;
+  }
+  .pillar-icon-box svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: currentColor !important;
+    transition: transform 0.25s ease, fill 0.25s ease !important;
+  }
+  .pillar-card:hover .pillar-icon-box {
+    color: #08195B !important;
+  }
+  .pillar-card:hover .pillar-icon-box svg {
+    transform: scale(1.08) !important;
+  }
+  .pillar-info h4 {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #08195B !important;
+    margin-bottom: 6px !important;
+    letter-spacing: -0.01em !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    transition: color 0.2s ease !important;
+  }
+  .pillar-card:hover .pillar-info h4 {
+    color: #D1B054 !important;
+  }
+  .pillar-info p {
+    font-size: 0.83rem !important;
+    color: #64748B !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+  }
+
+  /* 3. Full Footer Luxury Layout */
+  .site-white-footer {
+    background: #FAF9F6 !important;
+    border-top: 1px solid rgba(209, 176, 84, 0.25) !important;
+    padding: 80px 40px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    display: block !important;
+  }
+  .footer-main-grid {
+    max-width: 1380px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr !important;
+    gap: 48px !important;
+    margin-bottom: 60px !important;
+  }
+  @media (max-width: 1024px) {
+    .footer-main-grid {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 36px !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .site-white-footer {
+      padding: 45px 18px 30px !important;
+    }
+    .footer-main-grid {
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+      margin-bottom: 35px !important;
+    }
+  }
+  .footer-col-brand h3 {
+    font-family: 'Fonda', 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 1.8rem !important;
+    color: #08195B !important;
+    margin: 16px 0 12px !important;
+  }
+  .footer-col-brand p {
+    font-size: 0.88rem !important;
+    color: #6B7280 !important;
+    line-height: 1.6 !important;
+    max-width: 360px !important;
+    margin: 0 !important;
+  }
+  .footer-contact-list,
+  .footer-col-nav ul {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 18px 0 0 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .footer-contact-list li,
+  .footer-col-nav ul li {
+    list-style: none !important;
+    list-style-type: none !important;
+    font-size: 0.86rem !important;
+    color: #08195B !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .footer-contact-list li::before,
+  .footer-col-nav ul li::before,
+  .footer-contact-list li::after,
+  .footer-col-nav ul li::after {
+    display: none !important;
+    content: none !important;
+  }
+  .footer-contact-list a {
+    color: #08195B !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: color 0.2s !important;
+  }
+  .footer-contact-list a:hover,
+  .footer-col-nav ul a:hover {
+    color: #D1B054 !important;
+  }
+  .footer-col-nav h4 {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #08195B !important;
+    margin-bottom: 20px !important;
+  }
+  .footer-col-nav ul a {
+    color: #6B7280 !important;
+    text-decoration: none !important;
+    font-size: 0.88rem !important;
+    transition: color 0.2s !important;
+  }
+  .footer-bottom-bar {
+    max-width: 1380px !important;
+    margin: 0 auto !important;
+    padding-top: 30px !important;
+    border-top: 1px solid #E5E7EB !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    font-size: 0.82rem !important;
+    color: #9CA3AF !important;
+  }
+  .payment-methods-pills {
+    display: flex !important;
+    gap: 6px 14px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    margin-top: 10px !important;
+  }
+  .pay-badge {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 0.73rem !important;
+    font-weight: 600 !important;
+    color: #64748B !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+  .pay-badge:hover {
+    color: #08195B !important;
+  }
+
+  /* 4. Hero Gradient Solid Blue */
+  .macro-hero-section {
+    position: relative !important;
+    background-color: #08195B !important;
+  }
+  .hero-gradient-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 25, 91, 0.88) 0%,
+      rgba(8, 25, 91, 0.65) 30%,
+      rgba(8, 25, 91, 0.88) 75%,
+      #08195B 100%
+    ) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+  }
+</style>
+
 <div class="bonita-luxury-wrapper">
 
 
