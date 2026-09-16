@@ -1,73 +1,61 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
-<!-- SITE WHITE FOOTER (Luxury Editorial Layout) -->
+<!-- SITE WHITE FOOTER (Compact Luxury Layout) -->
 <footer class="site-white-footer" role="contentinfo" aria-label="Pie de página">
   <div class="footer-main-grid">
-    <!-- Col 1: Brand & Craftsmanship -->
+    <!-- Col 1: Brand & Contact -->
     <div class="footer-col-brand">
-      <a href="{{ routes.root_url }}" title="La Bonita Jewelry" style="display:inline-block; margin-bottom:8px;">
-        <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry" style="height:38px; width:auto; display:block;">
+      <a href="{{ routes.root_url }}" title="La Bonita Jewelry" style="display:inline-block; margin-bottom:6px;">
+        <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry" style="height:32px; width:auto; display:block;">
       </a>
-      <h3>La Bonita Jewelry</h3>
-      <p>Artesanía y distinción en piezas genuinas de Oro 10K y 14K. Diseños que perduran y transmiten legado con respaldo de autenticidad de por vida.</p>
+      <p style="font-size:0.78rem; line-height:1.4; color:#64748B; margin:0 0 10px;">Artesanía de lujo en Oro 10K y 14K con certificado de autenticidad de por vida.</p>
       
-      <div style="margin-top:20px;">
-        <a href="https://wa.me/15025994250" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#08195B; color:#FFFFFF; padding:10px 18px; border-radius:30px; font-size:0.84rem; font-weight:600; text-decoration:none;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.31a8.13 8.13 0 01-1.25-4.28c0-4.51 3.67-8.17 8.18-8.17 2.18 0 4.24.85 5.78 2.39 1.54 1.54 2.39 3.6 2.39 5.78 0 4.51-3.67 8.16-8.18 8.16zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
-          </svg>
-          <span>Asesoría Personalizada</span>
-        </a>
-      </div>
+      <a href="https://wa.me/15025994250" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; background:#08195B; color:#FFFFFF; padding:7px 14px; border-radius:20px; font-size:0.75rem; font-weight:700; text-decoration:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.31a8.13 8.13 0 01-1.25-4.28c0-4.51 3.67-8.17 8.18-8.17 2.18 0 4.24.85 5.78 2.39 1.54 1.54 2.39 3.6 2.39 5.78 0 4.51-3.67 8.16-8.18 8.16zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+        </svg>
+        <span>(502) 599-4250 · WhatsApp</span>
+      </a>
     </div>
 
     <!-- Col 2: Colecciones -->
     <div class="footer-col-nav">
       <h4>Colecciones</h4>
       <ul>
-        <li><a href="{{ routes.root_url }}#cadenas">Cadenas Cubanas</a></li>
-        <li><a href="{{ routes.root_url }}#anillos">Anillos y Sortijas</a></li>
-        <li><a href="{{ routes.root_url }}#aretes">Aretes y Broqueles</a></li>
-        <li><a href="{{ routes.root_url }}#pulseras">Pulseras & Esclavas</a></li>
-        <li><a href="{{ routes.root_url }}#dijes">Dijes y Medallas</a></li>
+        <li><a href="/collections/cadenas">Cadenas de Oro</a></li>
+        <li><a href="/collections/anillos">Anillos y Sortijas</a></li>
+        <li><a href="/collections/aretes">Aretes y Broqueles</a></li>
+        <li><a href="/collections/pulseras">Pulseras & Esclavas</a></li>
+        <li><a href="/collections/dijes">Dijes & Medallas</a></li>
       </ul>
     </div>
 
     <!-- Col 3: Servicio y Confianza -->
     <div class="footer-col-nav">
-      <h4>Garantía & Confianza</h4>
+      <h4>Garantía & Envíos</h4>
       <ul>
-        <li><a href="{{ routes.root_url }}#financiamiento">Financiamiento Affirm</a></li>
-        <li><a href="{{ routes.root_url }}#financiamiento">Envío Asegurado Gratis</a></li>
-        <li><a href="{{ routes.root_url }}#financiamiento">Certificado de Autenticidad</a></li>
-        <li><a href="{{ routes.root_url }}#contacto">Contacto Directo</a></li>
+        <li><a href="#financiamiento">Financiamiento con Affirm</a></li>
+        <li><a href="#financiamiento">Envíos a EE. UU. y PR</a></li>
+        <li><a href="#financiamiento">Certificado de Autenticidad</a></li>
+        <li><a href="tel:5025994250">Atención Especializada</a></li>
       </ul>
     </div>
 
     <!-- Col 4: Atención & Ubicación -->
     <div class="footer-col-nav">
-      <h4>Atención al Cliente</h4>
+      <h4>Contacto</h4>
       <ul class="footer-contact-list">
-        <li>
-          <strong>Teléfono:</strong> <a href="tel:5025994250">(502) 599-4250</a>
-        </li>
-        <li>
-          <strong>WhatsApp:</strong> <a href="https://wa.me/15025994250" target="_blank" rel="noopener">Chat Directo 24/7</a>
-        </li>
-        <li>
-          <strong>Ubicación:</strong> Louisville, Kentucky, USA
-        </li>
-        <li>
-          <strong>Cobertura:</strong> Envíos a todo EE. UU. y Puerto Rico
-        </li>
+        <li><strong>Tel:</strong> <a href="tel:5025994250">(502) 599-4250</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/15025994250" target="_blank" rel="noopener">Chat Directo</a></li>
+        <li><strong>Sede:</strong> Louisville, Kentucky, USA</li>
       </ul>
     </div>
   </div>
 
   <!-- Bottom Bar: Payments & Copyright -->
   <div class="footer-bottom-bar">
-    <div>
-      © {{ 'now' | date: '%Y' }} <strong>La Bonita Jewelry LLC</strong>. Todos los derechos reservados. Oro 10K & 14K Auténtico.
+    <div style="font-size:0.74rem; color:#64748B;">
+      © {{ 'now' | date: '%Y' }} <strong>La Bonita Jewelry LLC</strong>. Todos los derechos reservados.
     </div>
     
     <div class="payment-methods-pills">
@@ -75,10 +63,7 @@
       <span class="pay-badge">MASTERCARD</span>
       <span class="pay-badge">AMEX</span>
       <span class="pay-badge">APPLE PAY</span>
-      <span class="pay-badge">GOOGLE PAY</span>
       <span class="pay-badge">AFFIRM</span>
-      <span class="pay-badge">KLARNA</span>
-      <span class="pay-badge">ACIMA</span>
     </div>
   </div>
 </footer>

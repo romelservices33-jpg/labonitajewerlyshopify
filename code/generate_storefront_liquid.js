@@ -1,4 +1,10 @@
-{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+const fs = require('fs');
+const path = require('path');
+
+const rootDir = path.resolve(__dirname, '..');
+const storefrontLiquidPath = path.join(rootDir, 'sections', 'bonita-luxury-storefront.liquid');
+
+const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
 <div class="bonita-luxury-wrapper">
 
@@ -1367,3 +1373,7 @@
   ]
 }
 {% endschema %}
+`;
+
+fs.writeFileSync(storefrontLiquidPath, storefrontLiquidContent, 'utf8');
+console.log('Successfully generated bonita-luxury-storefront.liquid at:', storefrontLiquidPath);

@@ -1,0 +1,319 @@
+{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+
+{%- paginate collection.products by 50 -%}
+<div class="bonita-collection-page-wrap" style="background:#FAF9F6; min-height:100vh; padding: 20px 20px 60px;">
+  <div style="max-width:1240px; margin:0 auto;">
+    
+    <!-- Breadcrumbs -->
+    <nav class="product-luxury-breadcrumb" style="margin-bottom:16px;" aria-label="Ruta de navegación">
+      <a href="{{ routes.root_url }}">Inicio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/collections/all">Colecciones</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">{{ collection.title }}</span>
+    </nav>
+
+    <!-- Collection Header Banner -->
+    <header class="collection-editorial-hero" style="text-align:center; margin-bottom:28px;">
+      <span class="hero-kicker" style="font-family:'Plus Jakarta Sans', sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; color:#D1B054; text-transform:uppercase;">Colección de Oro Auténtico 10K & 14K</span>
+      <h1 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(2rem, 4vw, 3rem); font-weight:600; color:#08195B; margin:6px 0 10px; line-height:1.15;">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p style="font-size:0.88rem; color:#64748B; max-width:640px; margin:0 auto 10px; line-height:1.5;">{{ collection.description }}</p>
+      {%- else -%}
+        <p style="font-size:0.88rem; color:#64748B; max-width:640px; margin:0 auto 10px; line-height:1.5;">Explora piezas exclusivas garantizadas de por vida con especificación exacta de quilataje y peso en gramos.</p>
+      {%- endif -%}
+      <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; color:#059669; font-weight:700;">
+        <span style="width:6px; height:6px; background:#059669; border-radius:50%;"></span>
+        <span>{{ collection.products_count | default: collection.products.size }} Joyas Disponibles · Envío Inmediato</span>
+      </div>
+    </header>
+
+    <!-- Seamless Filter Bar -->
+    <div class="catalog-filter-bar" id="collectionFilterBar" style="max-width:960px; margin:0 auto 28px;">
+      <div class="filter-dropdowns-row">
+        <!-- Pureza -->
+        <div class="filter-item-wrap">
+          <span class="filter-label">Pureza de Oro</span>
+          <div class="select uiverse-select" id="selectCollectionKarat" tabindex="0">
+            <div class="selected">
+              <span class="selected-text" id="selectedCollectionKaratText">Todas las purezas</span>
+              <svg class="arrow" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+            </div>
+            <div class="options">
+              <div title="all">
+                <input id="ckarat-all" name="cfilter-karat" type="radio" value="all" checked onchange="filterCollectionProducts('karat', 'all', 'Todas las purezas')">
+                <label class="option" for="ckarat-all" data-txt="Todas las purezas"></label>
+              </div>
+              <div title="14k">
+                <input id="ckarat-14k" name="cfilter-karat" type="radio" value="14k" onchange="filterCollectionProducts('karat', '14k', 'Oro 14K Auténtico')">
+                <label class="option" for="ckarat-14k" data-txt="Oro 14K Auténtico"></label>
+              </div>
+              <div title="10k">
+                <input id="ckarat-10k" name="cfilter-karat" type="radio" value="10k" onchange="filterCollectionProducts('karat', '10k', 'Oro 10K Auténtico')">
+                <label class="option" for="ckarat-10k" data-txt="Oro 10K Auténtico"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ordenar -->
+        <div class="filter-item-wrap">
+          <span class="filter-label">Ordenar Por</span>
+          <div class="select uiverse-select" id="selectCollectionSort" tabindex="0">
+            <div class="selected">
+              <span class="selected-text" id="selectedCollectionSortText">Destacados</span>
+              <svg class="arrow" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+            </div>
+            <div class="options">
+              <div title="default">
+                <input id="csort-default" name="cfilter-sort" type="radio" value="default" checked onchange="filterCollectionProducts('sort', 'default', 'Destacados')">
+                <label class="option" for="csort-default" data-txt="Destacados"></label>
+              </div>
+              <div title="price-asc">
+                <input id="csort-price-asc" name="cfilter-sort" type="radio" value="price-asc" onchange="filterCollectionProducts('sort', 'price-asc', 'Precio: Menor a Mayor')">
+                <label class="option" for="csort-price-asc" data-txt="Precio: Menor a Mayor"></label>
+              </div>
+              <div title="price-desc">
+                <input id="csort-price-desc" name="cfilter-sort" type="radio" value="price-desc" onchange="filterCollectionProducts('sort', 'price-desc', 'Precio: Mayor a Menor')">
+                <label class="option" for="csort-price-desc" data-txt="Precio: Mayor a Menor"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gramaje -->
+        <div class="filter-item-wrap" style="grid-column: span 1;">
+          <span class="filter-label">Gramaje</span>
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:10px; padding:6px 12px; display:flex; align-items:center; justify-content:space-between; min-height:38px;">
+            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">Hasta:</span>
+            <span style="font-size:0.75rem; color:#08195B; font-weight:700;" id="collectionWeightVal">70.0 g</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Full Width -->
+      <div class="filter-range-fullwidth">
+        <input type="range" id="collectionFilterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateCollectionWeight(this.value)" aria-label="Filtrar por peso en gramos">
+      </div>
+
+      <!-- Status Line -->
+      <div class="filter-meta-bar">
+        <span class="filter-results-count" id="collectionCountText">Mostrando joyas disponibles</span>
+        <button class="btn-filter-reset" onclick="resetCollectionFilters()" type="button">Limpiar filtros</button>
+      </div>
+    </div>
+
+    <!-- Products Grid (Paginated 6 per page) -->
+    <div class="catalog-products-grid" id="collectionProductsGrid">
+      {%- for product in collection.products -%}
+        {%- assign cat_tag = product.type | default: collection.title | downcase -%}
+        {%- assign karat_tag = '14k' -%}
+        {%- if product.tags contains '10k' or product.title contains '10K' or product.title contains '10k' -%}
+          {%- assign karat_tag = '10k' -%}
+        {%- endif -%}
+        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="15.0" data-size="24" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
+          <div class="cutout-card-media">
+            <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+              {%- endif -%}
+            </a>
+            <div class="cutout-card-pin">
+              <span>{{ karat_tag | upcase }} ORO</span>
+              <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
+            </div>
+            <div class="cutout-card-inset-label">
+              <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
+              <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
+            </div>
+          </div>
+          <div class="cutout-card-content">
+            <div class="cutout-title-row">
+              <h4 class="cutout-product-title"><a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));" style="color:inherit; text-decoration:none;">{{ product.title }}</a></h4>
+            </div>
+            <div class="product-card-pricing-row">
+              <div class="pricing-amounts">
+                <div class="pricing-numbers-row">
+                  <span class="price-now">{{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="price-was">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="affirm-monthly-badge">Oro 100% Auténtico Garantizado</div>
+              </div>
+              <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      {%- else -%}
+        <div style="grid-column: 1 / -1; text-align:center; padding:60px 20px; color:#64748B;">
+          <p style="font-size:1.1rem; color:#08195B; font-weight:700;">Pronto añadiremos nuevas joyas a esta colección.</p>
+          <p style="font-size:0.85rem;">Explora mientras tanto nuestras <a href="/collections/all" style="color:#D1B054; font-weight:700;">demás colecciones</a> de oro.</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Pagination Controls (6 products per page) -->
+    <div class="catalog-pagination-bar" id="collectionPaginationBar"></div>
+
+    <!-- Trust Strip Horizontal -->
+    <div style="margin-top:40px;">
+      {%- render 'quick-view-modal' -%}
+    </div>
+  </div>
+</div>
+{%- endpaginate -%}
+
+<!-- JavaScript for Collection Filtering & 6-Product Pagination -->
+<script>
+  var collectionPage = 1;
+  var COLLECTION_PER_PAGE = 6;
+  var activeCollectionKarat = 'all';
+  var activeCollectionSort = 'default';
+  var activeCollectionWeight = 70;
+
+  function initCollectionPagination() {
+    paginateCollectionGrid();
+  }
+
+  function getActiveCollectionCards() {
+    var cards = Array.from(document.querySelectorAll('#collectionProductsGrid .product-shop-card'));
+    return cards.filter(function(card) {
+      var karat = (card.getAttribute('data-karat') || '').toLowerCase();
+      var price = parseFloat(card.getAttribute('data-price')) || 0;
+      var weight = parseFloat(card.getAttribute('data-weight')) || 10;
+
+      if (activeCollectionKarat !== 'all' && karat !== activeCollectionKarat) return false;
+      if (weight > activeCollectionWeight) return false;
+      return true;
+    });
+  }
+
+  function paginateCollectionGrid() {
+    var activeCards = getActiveCollectionCards();
+    var allCards = document.querySelectorAll('#collectionProductsGrid .product-shop-card');
+    allCards.forEach(function(c) { c.style.display = 'none'; });
+
+    var total = activeCards.length;
+    var totalPages = Math.max(1, Math.ceil(total / COLLECTION_PER_PAGE));
+    if (collectionPage > totalPages) collectionPage = 1;
+
+    var start = (collectionPage - 1) * COLLECTION_PER_PAGE;
+    var end = start + COLLECTION_PER_PAGE;
+    var pageCards = activeCards.slice(start, end);
+
+    pageCards.forEach(function(c) { c.style.display = 'flex'; });
+
+    var countText = document.getElementById('collectionCountText');
+    if (countText) {
+      if (total === 0) {
+        countText.textContent = 'No se encontraron joyas con los filtros seleccionados.';
+      } else {
+        countText.textContent = 'Mostrando ' + (start + 1) + '-' + Math.min(end, total) + ' de ' + total + ' joyas de oro';
+      }
+    }
+
+    renderCollectionPaginationButtons(totalPages);
+  }
+
+  function renderCollectionPaginationButtons(totalPages) {
+    var bar = document.getElementById('collectionPaginationBar');
+    if (!bar) return;
+    bar.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    // Prev Button
+    var prevBtn = document.createElement('button');
+    prevBtn.className = 'catalog-page-btn nav-btn';
+    prevBtn.innerHTML = '← Anterior';
+    prevBtn.disabled = (collectionPage === 1);
+    prevBtn.onclick = function() {
+      if (collectionPage > 1) {
+        collectionPage--;
+        paginateCollectionGrid();
+        window.scrollTo({ top: 180, behavior: 'smooth' });
+      }
+    };
+    bar.appendChild(prevBtn);
+
+    // Page number buttons
+    for (var i = 1; i <= totalPages; i++) {
+      (function(pageNum) {
+        var numBtn = document.createElement('button');
+        numBtn.className = 'catalog-page-btn' + (pageNum === collectionPage ? ' active' : '');
+        numBtn.textContent = pageNum;
+        numBtn.onclick = function() {
+          collectionPage = pageNum;
+          paginateCollectionGrid();
+          window.scrollTo({ top: 180, behavior: 'smooth' });
+        };
+        bar.appendChild(numBtn);
+      })(i);
+    }
+
+    // Next Button
+    var nextBtn = document.createElement('button');
+    nextBtn.className = 'catalog-page-btn nav-btn';
+    nextBtn.innerHTML = 'Siguiente →';
+    nextBtn.disabled = (collectionPage === totalPages);
+    nextBtn.onclick = function() {
+      if (collectionPage < totalPages) {
+        collectionPage++;
+        paginateCollectionGrid();
+        window.scrollTo({ top: 180, behavior: 'smooth' });
+      }
+    };
+    bar.appendChild(nextBtn);
+  }
+
+  function filterCollectionProducts(type, val, text) {
+    if (type === 'karat') {
+      activeCollectionKarat = val;
+      var t = document.getElementById('selectedCollectionKaratText');
+      if (t) t.textContent = text;
+    }
+    collectionPage = 1;
+    paginateCollectionGrid();
+  }
+
+  function updateCollectionWeight(val) {
+    activeCollectionWeight = parseFloat(val);
+    var label = document.getElementById('collectionWeightVal');
+    if (label) label.textContent = parseFloat(val).toFixed(1) + ' g';
+    collectionPage = 1;
+    paginateCollectionGrid();
+  }
+
+  function resetCollectionFilters() {
+    activeCollectionKarat = 'all';
+    activeCollectionWeight = 70;
+    var k = document.getElementById('selectedCollectionKaratText');
+    if (k) k.textContent = 'Todas las purezas';
+    var w = document.getElementById('collectionFilterWeight');
+    if (w) w.value = '70';
+    var wv = document.getElementById('collectionWeightVal');
+    if (wv) wv.textContent = '70.0 g';
+    collectionPage = 1;
+    paginateCollectionGrid();
+  }
+
+  document.addEventListener('DOMContentLoaded', initCollectionPagination);
+  if (document.readyState !== 'loading') initCollectionPagination();
+</script>
+
+{% schema %}
+{
+  "name": "Colección de Lujo",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Colección de Lujo"
+    }
+  ]
+}
+{% endschema %}
