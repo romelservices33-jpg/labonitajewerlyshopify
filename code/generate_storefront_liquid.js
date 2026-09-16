@@ -8,7 +8,8 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
 
 <div class="bonita-luxury-wrapper">
 
-  <!-- LUXURY INTRO SPLASH SCREEN -->
+  <!-- LUXURY INTRO SPLASH SCREEN (Solo en tienda real, oculto en modo diseño/personalizador) -->
+  {%- unless request.design_mode -%}
   <aside class="luxury-splash-screen" id="luxurySplashScreen" aria-label="Bienvenido a La Bonita Jewelry" onclick="dismissSplashScreen()">
     <div class="splash-inner">
       <div class="splash-logo-wrap">
@@ -62,6 +63,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
       })();
     </script>
   </aside>
+  {%- endunless -%}
 
   <!-- 1. Desktop Floating Header -->
   <header class="desktop-floating-header" role="banner" aria-label="Navegación principal">

@@ -2827,9 +2827,13 @@ html {
   }
 }
 
-/* ==========================================================================
-   LUXURY SPLASH / INTRO SCREEN (SELF-DRAWING GOLD LOGO ASSEMBLY)
-   ========================================================================== */
+.shopify-design-mode .luxury-splash-screen,
+body.design-mode .luxury-splash-screen {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .luxury-splash-screen {
   position: fixed;
   inset: 0;
