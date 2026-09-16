@@ -181,21 +181,17 @@
 
   <!-- 2. MACRO LUXURY HERO SECTION -->
   <section class="macro-hero-section" id="hero">
-    {%- assign hero_url = section.settings.hero_video_url | strip -%}
-    {%- assign is_image_url = false -%}
-    {%- if hero_url contains '.jpg' or hero_url contains '.jpeg' or hero_url contains '.png' or hero_url contains '.webp' or hero_url contains '.avif' -%}
-      {%- assign is_image_url = true -%}
-    {%- endif -%}
+    {%- assign hero_video_file = section.settings.hero_video_file -%}
+    {%- assign hero_video_url = section.settings.hero_video_url | strip -%}
 
-    {%- if section.settings.hero_image != blank -%}
-      <img src="{{ section.settings.hero_image | image_url: width: 2500 }}" alt="La Bonita Jewelry Hero" class="hero-bg-media" loading="eager">
-    {%- elsif is_image_url -%}
-      <img src="{{ hero_url }}" alt="La Bonita Jewelry Hero" class="hero-bg-media" loading="eager">
+    {%- if hero_video_file != blank -%}
+      {{ hero_video_file | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'hero-bg-media', image_size: '2000x' }}
+    {%- elsif hero_video_url != blank -%}
+      <video class="hero-bg-media" src="{{ hero_video_url }}" autoplay loop muted playsinline webkit-playsinline preload="auto">
+        <source src="{{ hero_video_url }}" type="video/mp4">
+      </video>
     {%- else -%}
-      <video class="hero-bg-media" autoplay loop muted playsinline {% if hero_url != blank %}poster=""{% else %}poster="{{ 'luxury-hero-poster.jpg' | asset_url }}"{% endif %}>
-        {%- if hero_url != blank -%}
-          <source src="{{ hero_url }}" type="video/mp4">
-        {%- endif -%}
+      <video class="hero-bg-media" src="{{ 'luxury-jewelry-hero-film.mp4' | asset_url }}" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="{{ 'luxury-hero-poster.jpg' | asset_url }}">
         <source src="{{ 'luxury-jewelry-hero-film.mp4' | asset_url }}" type="video/mp4">
         <img src="{{ 'luxury-hero-poster.jpg' | asset_url }}" alt="14K Gold Cuban chain on Carrara marble sculpture">
       </video>
@@ -1619,16 +1615,16 @@
   "class": "section-bonita-luxury",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Imagen de Fondo del Hero",
-      "info": "Selecciona o sube directamente una foto de portada desde tu computadora o biblioteca."
+      "type": "video",
+      "id": "hero_video_file",
+      "label": "Video de Portada (Selector Oficial)",
+      "info": "Haz clic aquí para seleccionar o subir tu video directamente desde Shopify."
     },
     {
       "type": "text",
       "id": "hero_video_url",
-      "label": "O Enlace de Video / Imagen (URL)",
-      "info": "Pega aquí el enlace .mp4 o .jpg subido en Shopify Admin > Contenido > Archivos."
+      "label": "O Enlace de Video CDN (.mp4 URL)",
+      "info": "Si subiste el video en Contenido > Archivos, pega aquí el enlace .mp4."
     },
     {
       "type": "collection",
