@@ -807,9 +807,9 @@
             {%- if product.tags contains '10k' or product.title contains '10K' or product.title contains '10k' -%}
               {%- assign karat_tag = '10k' -%}
             {%- endif -%}
-            <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100 }}" data-weight="15.0" data-size="24">
+            <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="15.0" data-size="24" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
               <div class="cutout-card-media">
-                <a href="{{ product.url }}">
+                <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
                   {%- if product.featured_image != blank -%}
                     <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
                   {%- else -%}
@@ -827,7 +827,7 @@
               </div>
               <div class="cutout-card-content">
                 <div class="cutout-title-row">
-                  <h4 class="cutout-product-title"><a href="{{ product.url }}" style="color:inherit; text-decoration:none;">{{ product.title }}</a></h4>
+                  <h4 class="cutout-product-title"><a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));" style="color:inherit; text-decoration:none;">{{ product.title }}</a></h4>
                 </div>
                 <div class="product-card-pricing-row">
                   <div class="pricing-amounts">
@@ -839,12 +839,9 @@
                     </div>
                     <div class="affirm-monthly-badge">Oro 100% Auténtico Garantizado</div>
                   </div>
-                  <form method="post" action="/cart/add">
-                    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                    <button type="submit" class="btn-add-cart-pill" title="Agregar al carrito">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
-                    </button>
-                  </form>
+                  <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+                  </button>
                 </div>
               </div>
             </div>

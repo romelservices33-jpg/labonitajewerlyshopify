@@ -1,8 +1,5 @@
 {% comment %}
   Renders a luxury Quick View PDP Modal for La Bonita Joyeria.
-  Accepts:
-  - section: {Object} Section object with settings
-  - product: {Object} Optional product context
 {% endcomment %}
 
 <div class="product-modal-backdrop" id="productModal" onclick="handleModalBackdropClick(event)">
@@ -25,7 +22,7 @@
             <circle cx="18" cy="10" r="1" fill="currentColor"/>
           </svg>
         </div>
-        <span class="mock-camera-label" style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-royal-navy);">Oro Sólido Certificado</span>
+        <span class="mock-camera-label" style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-royal-navy, #08195B);">Oro Sólido Certificado</span>
       </div>
       <span class="modal-floating-gold-badge" id="modalBadge">Oro 100% Auténtico</span>
     </div>
@@ -39,17 +36,17 @@
         </span>
       </div>
 
-      <h2 class="modal-product-title" id="modalProductTitle">Cadena Miami Cuban Link Solid 14K</h2>
+      <h2 class="modal-product-title" id="modalProductTitle">Joya de Oro La Bonita</h2>
 
       <div class="modal-price-row">
-        <span class="modal-price-current" id="modalPriceCurrent">$1,620 USD</span>
-        <span class="modal-price-old" id="modalPriceOld">$1,850 USD</span>
+        <span class="modal-price-current" id="modalPriceCurrent">$575.00 USD</span>
+        <span class="modal-price-old" id="modalPriceOld"></span>
         <span class="modal-gram-rate" id="modalGramRate">Oro Macizo</span>
       </div>
 
       <div class="modal-affirm-calc" id="modalAffirm">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-        <span>O paga desde <strong id="modalAffirmMo">$145/mes</strong> en cuotas con <strong>Affirm</strong></span>
+        <span>O paga desde <strong id="modalAffirmMo">$47/mes</strong> en cuotas con <strong>Affirm</strong></span>
       </div>
 
       <!-- Variant Selector: Pureza / Metal -->
@@ -65,10 +62,10 @@
       </div>
 
       <!-- Variant Selector: Medida / Longitud -->
-      <div class="pdp-option-group">
+      <div class="pdp-option-group" id="modalSizeGroup">
         <div class="pdp-option-label">
           <span>Medida / Longitud</span>
-          <span class="opt-selected-val" id="modalSelectedSizeText">24 Pulgadas</span>
+          <span class="opt-selected-val" id="modalSelectedSizeText">Estándar</span>
         </div>
         <div class="pdp-pills-row" id="modalSizePills"></div>
       </div>
@@ -82,11 +79,11 @@
           </tr>
           <tr>
             <td class="spec-name">Peso Estimado</td>
-            <td class="spec-val" id="modalSpecWeight">14.80 g (Aprox.)</td>
+            <td class="spec-val" id="modalSpecWeight">Oro Genuino Certificado</td>
           </tr>
           <tr>
             <td class="spec-name">Medida / Dimensión</td>
-            <td class="spec-val" id="modalSpecSize">24" (Pulgadas)</td>
+            <td class="spec-val" id="modalSpecSize">Estándar</td>
           </tr>
           <tr>
             <td class="spec-name">Cierre / Acabado</td>
@@ -118,28 +115,212 @@
 
       <div class="modal-trust-row">
         <span class="modal-trust-item">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <span>Oro 100% Genuino</span>
         </span>
         <span class="modal-trust-item">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="15" height="13"></rect>
-            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-            <circle cx="5.5" cy="18.5" r="2.5"></circle>
-            <circle cx="18.5" cy="18.5" r="2.5"></circle>
-          </svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
           <span>Envío Asegurado Gratis</span>
         </span>
         <span class="modal-trust-item">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           <span>Pago Seguro Cifrado</span>
         </span>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  var currentModalProduct = null;
+
+  function openProductModalFromCard(card) {
+    if (!card) return;
+    var titleEl = card.querySelector('.cutout-product-title');
+    var imgEl = card.querySelector('.cutout-card-img') || card.querySelector('img');
+    var badgeEl = card.querySelector('.cutout-card-pin span');
+    var priceEl = card.querySelector('.price-now');
+
+    var title = titleEl ? titleEl.textContent.trim() : 'Joya de Oro La Bonita';
+    var category = (card.getAttribute('data-category') || 'joyas').toLowerCase();
+    var karat = (card.getAttribute('data-karat') || '14k').toLowerCase();
+    var price = parseFloat(card.getAttribute('data-price')) || (priceEl ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) : 500);
+    var weight = parseFloat(card.getAttribute('data-weight')) || 10.0;
+    var size = card.getAttribute('data-size') || '20';
+    var variantId = card.getAttribute('data-variant-id') || null;
+    var imgSrc = imgEl ? imgEl.getAttribute('src') : null;
+    var badge = badgeEl ? badgeEl.textContent.trim() : ('Oro ' + karat.toUpperCase() + ' Sólido');
+
+    currentModalProduct = {
+      title: title,
+      category: category,
+      baseKarat: karat,
+      selectedKarat: karat,
+      basePrice: price,
+      baseWeight: weight,
+      baseSize: size,
+      selectedSize: size,
+      qty: 1,
+      imgSrc: imgSrc,
+      badge: badge,
+      variantId: variantId
+    };
+
+    populateProductModalUI();
+
+    var modal = document.getElementById('productModal');
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeProductModal() {
+    var modal = document.getElementById('productModal');
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function handleModalBackdropClick(e) {
+    if (e.target.id === 'productModal') {
+      closeProductModal();
+    }
+  }
+
+  function populateProductModalUI() {
+    if (!currentModalProduct) return;
+    var p = currentModalProduct;
+
+    // Image
+    var imgEl = document.getElementById('modalMainImg');
+    var placeholderEl = document.getElementById('modalMockPlaceholder');
+    var badgeEl = document.getElementById('modalBadge');
+
+    if (p.imgSrc && !p.imgSrc.includes('mock')) {
+      if (imgEl) {
+        imgEl.src = p.imgSrc;
+        imgEl.alt = p.title;
+        imgEl.style.display = 'block';
+      }
+      if (placeholderEl) placeholderEl.style.display = 'none';
+    } else {
+      if (imgEl) imgEl.style.display = 'none';
+      if (placeholderEl) placeholderEl.style.display = 'flex';
+    }
+
+    if (badgeEl) badgeEl.textContent = p.badge || ('Oro ' + p.selectedKarat.toUpperCase() + ' Sólido');
+
+    // Title & Meta
+    var catTag = document.getElementById('modalCategoryTag');
+    if (catTag) catTag.textContent = 'COLECCIÓN ' + p.category.toUpperCase() + ' · LA BONITA';
+
+    var titleEl = document.getElementById('modalProductTitle');
+    if (titleEl) titleEl.textContent = p.title;
+
+    // Pricing
+    var priceCurrentEl = document.getElementById('modalPriceCurrent');
+    if (priceCurrentEl) {
+      priceCurrentEl.textContent = '$' + p.basePrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD';
+    }
+
+    var affirmMoEl = document.getElementById('modalAffirmMo');
+    if (affirmMoEl) {
+      var mo = Math.max(35, Math.round(p.basePrice / 12));
+      affirmMoEl.textContent = '$' + mo + '/mes';
+    }
+
+    // Karat Pills
+    var pill10 = document.getElementById('pillKarat10k');
+    var pill14 = document.getElementById('pillKarat14k');
+    if (pill10) pill10.classList.toggle('active', p.selectedKarat === '10k');
+    if (pill14) pill14.classList.toggle('active', p.selectedKarat === '14k');
+
+    var karatText = document.getElementById('modalSelectedKaratText');
+    if (karatText) karatText.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido';
+
+    // Specs
+    var specKarat = document.getElementById('modalSpecKarat');
+    if (specKarat) specKarat.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado';
+
+    var specWeight = document.getElementById('modalSpecWeight');
+    if (specWeight) specWeight.textContent = p.baseWeight ? (p.baseWeight + ' g (Aprox.)') : 'Oro Genuino Certificado';
+
+    var specSize = document.getElementById('modalSpecSize');
+    if (specSize) specSize.textContent = p.selectedSize || 'Estándar';
+
+    // Quantity reset
+    var qtyInput = document.getElementById('modalQtyInput');
+    if (qtyInput) qtyInput.value = '1';
+  }
+
+  function selectModalKarat(k) {
+    if (!currentModalProduct) return;
+    currentModalProduct.selectedKarat = k;
+    populateProductModalUI();
+  }
+
+  function changeModalQty(delta) {
+    var input = document.getElementById('modalQtyInput');
+    if (!input) return;
+    var val = parseInt(input.value) || 1;
+    var next = Math.max(1, Math.min(10, val + delta));
+    input.value = next;
+    if (currentModalProduct) currentModalProduct.qty = next;
+  }
+
+  function addModalProductToCart() {
+    if (!currentModalProduct) return;
+    var p = currentModalProduct;
+    var btn = document.getElementById('modalAddToCartBtn');
+    var qtyInput = document.getElementById('modalQtyInput');
+    var qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+    var variantId = p.variantId;
+
+    if (btn) {
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Agregando...';
+    }
+
+    if (variantId) {
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: qty })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (btn) {
+          btn.querySelector('span').textContent = '¡Agregado!';
+          setTimeout(function() {
+            btn.disabled = false;
+            btn.querySelector('span').textContent = 'Agregar al Carrito';
+            closeProductModal();
+            window.location.href = '/cart';
+          }, 600);
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        if (btn) {
+          btn.disabled = false;
+          btn.querySelector('span').textContent = 'Agregar al Carrito';
+        }
+      });
+    } else {
+      setTimeout(function() {
+        if (btn) {
+          btn.disabled = false;
+          btn.querySelector('span').textContent = 'Agregar al Carrito';
+        }
+        closeProductModal();
+        window.location.href = '/cart';
+      }, 600);
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeProductModal();
+  });
+</script>
