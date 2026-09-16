@@ -2426,11 +2426,6 @@ html {
   .cat-square-card {
     flex: 0 0 calc((100% - 2 * var(--card-gap)) / 3);
   }
-  @media (max-width: 860px) {
-    .cat-square-card {
-      flex: 0 0 calc((100% - var(--card-gap)) / 2);
-    }
-  }
   .cat-slider-arrow.prev { left: -10px; }
   .cat-slider-arrow.next { right: -10px; }
   .middle-split-inner {
@@ -2827,10 +2822,34 @@ html {
   }
 }
 
+@keyframes autoDismissSplash {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  70% {
+    opacity: 1;
+    visibility: visible;
+  }
+  92% {
+    opacity: 0;
+    visibility: visible;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: none !important;
+  }
+}
+
 .shopify-design-mode .luxury-splash-screen,
-body.design-mode .luxury-splash-screen {
+body.design-mode .luxury-splash-screen,
+html.shopify-design-mode .luxury-splash-screen {
   display: none !important;
   visibility: hidden !important;
+  opacity: 0 !important;
   pointer-events: none !important;
 }
 
@@ -2848,9 +2867,10 @@ body.design-mode .luxury-splash-screen {
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: autoDismissSplash 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, visibility, transform;
   cursor: pointer;
   user-select: none;
@@ -2858,15 +2878,15 @@ body.design-mode .luxury-splash-screen {
 }
 
 .luxury-splash-screen.splash-fading {
-  opacity: 0;
+  opacity: 0 !important;
   transform: scale(1.02);
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .luxury-splash-screen.splash-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
   display: none !important;
 }
 

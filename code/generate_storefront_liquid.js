@@ -1569,21 +1569,30 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
       }
     }
 
-    // Dismiss splash screen
+    // Dismiss splash screen reliably on all devices & editors
     function dismissSplashScreen() {
       var s = document.getElementById('luxurySplashScreen');
       if (s) {
         s.classList.add('splash-fading');
-        setTimeout(function() { s.classList.add('splash-hidden'); }, 400);
+        setTimeout(function() {
+          s.classList.add('splash-hidden');
+          s.style.display = 'none';
+        }, 350);
       }
     }
 
+    // Auto-dismiss timers (failsafe for mobile, simulators and fast loads)
+    setTimeout(dismissSplashScreen, 1200);
+    window.addEventListener('load', function() {
+      setTimeout(dismissSplashScreen, 300);
+    });
     document.addEventListener('DOMContentLoaded', function() {
       paginateCatalogGrid();
-      setTimeout(dismissSplashScreen, 2000);
+      setTimeout(dismissSplashScreen, 800);
     });
     if (document.readyState !== 'loading') {
       paginateCatalogGrid();
+      setTimeout(dismissSplashScreen, 500);
     }
   </script>
 
