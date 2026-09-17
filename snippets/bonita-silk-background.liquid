@@ -96,44 +96,132 @@
     text-shadow: 0 2px 12px rgba(4, 9, 36, 0.8) !important;
   }
 
-  /* Floating luxury cards with crisp white surface & clean subtle shadow */
+  /* =========================================================================
+     LUXURY FROSTED GLASSMORPHISM DESIGN SYSTEM
+     ========================================================================= */
+
+  /* 1. Category Square Cards (Hero Slider) */
   .cat-square-card {
-    background: #FFFFFF !important;
-    box-shadow: 0 6px 20px rgba(4, 9, 36, 0.16), 0 1px 4px rgba(209, 176, 84, 0.12) !important;
-    border: 1px solid rgba(209, 176, 84, 0.32) !important;
+    background: rgba(255, 255, 255, 0.80) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 
+      0 12px 34px rgba(4, 9, 36, 0.20),
+      0 2px 8px rgba(209, 176, 84, 0.15),
+      inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease !important;
+  }
+  .cat-square-card:hover {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: rgba(209, 176, 84, 0.85) !important;
+    box-shadow: 
+      0 18px 46px rgba(4, 9, 36, 0.28),
+      0 0 16px rgba(209, 176, 84, 0.4),
+      inset 0 1px 2px #FFFFFF !important;
+    transform: translateY(-6px) !important;
   }
   @media (max-width: 768px) {
     .cat-square-card {
-      box-shadow: 0 3px 10px rgba(4, 9, 36, 0.14), 0 1px 3px rgba(209, 176, 84, 0.1) !important;
+      background: rgba(255, 255, 255, 0.82) !important;
+      backdrop-filter: blur(14px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+      box-shadow: 0 4px 14px rgba(4, 9, 36, 0.16), 0 1px 3px rgba(209, 176, 84, 0.1) !important;
     }
   }
 
-  .product-shop-card {
-    background: #FFFFFF !important;
-    box-shadow: 0 8px 24px rgba(4, 9, 36, 0.18), 0 2px 6px rgba(209, 176, 84, 0.14) !important;
-    border: 1px solid rgba(209, 176, 84, 0.3) !important;
+  /* 2. Product Shop Cards (Vitrina & Catalog) */
+  .product-shop-card,
+  .cutout-product-card {
+    background: rgba(255, 255, 255, 0.84) !important;
+    backdrop-filter: blur(18px) saturate(175%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(175%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.80) !important;
+    box-shadow: 
+      0 10px 32px rgba(4, 9, 36, 0.18),
+      0 1px 4px rgba(209, 176, 84, 0.12),
+      inset 0 1px 1px #FFFFFF !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease !important;
+  }
+  .product-shop-card:hover,
+  .cutout-product-card:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(209, 176, 84, 0.85) !important;
+    box-shadow: 
+      0 18px 46px rgba(4, 9, 36, 0.26),
+      0 0 14px rgba(209, 176, 84, 0.35),
+      inset 0 1px 2px #FFFFFF !important;
+    transform: translateY(-5px) !important;
   }
 
+  /* 3. Catalog Filter & Search Bar */
   .catalog-filter-bar {
-    background: #FFFFFF !important;
-    box-shadow: 0 8px 24px rgba(4, 9, 36, 0.18) !important;
-    border: 1px solid rgba(209, 176, 84, 0.35) !important;
+    background: rgba(255, 255, 255, 0.80) !important;
+    backdrop-filter: blur(18px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(170%) !important;
+    border: 1.5px solid rgba(209, 176, 84, 0.35) !important;
+    box-shadow: 
+      0 12px 36px rgba(4, 9, 36, 0.20),
+      inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
   }
 
-  /* Category tabs on royal blue silk */
+  /* 4. Category Tabs & Pills */
   .catalog-category-tabs .cat-tab-btn {
-    color: #CBD5E1 !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #E2E8F0 !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
   }
   .catalog-category-tabs .cat-tab-btn.active,
   .catalog-category-tabs .cat-tab-btn:hover {
     background: #D1B054 !important;
     color: #040924 !important;
     border-color: #D1B054 !important;
+    box-shadow: 0 4px 18px rgba(209, 176, 84, 0.45) !important;
   }
 
-  /* Trust pillars strip on royal blue silk */
+  /* 5. Review / Testimonial Cards */
+  .review-card-luxe,
+  .reviews-track .review-card,
+  .review-card {
+    background: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(18px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(170%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 
+      0 10px 32px rgba(4, 9, 36, 0.18),
+      0 1px 4px rgba(209, 176, 84, 0.14),
+      inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* 6. Video Showcase Glass Frame */
+  .video-showcase-section .video-showcase-wrap,
+  .video-showcase-container {
+    background: rgba(4, 9, 36, 0.65) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border: 1.5px solid rgba(209, 176, 84, 0.45) !important;
+    box-shadow: 0 16px 48px rgba(4, 9, 36, 0.55), 0 0 20px rgba(209, 176, 84, 0.25) !important;
+    border-radius: 24px !important;
+  }
+
+  /* 7. Action Pills (Ver Colección, Agregar) */
+  .cat-pill-btn {
+    background: rgba(4, 9, 36, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(209, 176, 84, 0.5) !important;
+    color: #FFFFFF !important;
+  }
+  .cat-square-card:hover .cat-pill-btn {
+    background: #D1B054 !important;
+    color: #040924 !important;
+    border-color: #D1B054 !important;
+    box-shadow: 0 4px 14px rgba(209, 176, 84, 0.5) !important;
+  }
+
+  /* 8. Trust pillars strip on royal blue silk */
   .trust-pillars-horizontal-strip {
     background: rgba(4, 9, 36, 0.75) !important;
     backdrop-filter: blur(14px) !important;
