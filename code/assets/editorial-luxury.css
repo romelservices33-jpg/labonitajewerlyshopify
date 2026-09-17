@@ -31,9 +31,50 @@
 
 @font-face {
   font-family: 'Fonda';
-  src: local('FONDA'),
+  src: url('fonda.ttf') format('truetype'),
+       local('FONDA'),
        local('FONDARegular');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fonda';
+  src: url('fonda.ttf') format('truetype'),
+       local('FONDA'),
+       local('FONDARegular');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fonda';
+  src: url('fonda.ttf') format('truetype'),
+       local('FONDA'),
+       local('FONDARegular');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fonda';
+  src: url('fonda.ttf') format('truetype'),
+       local('FONDA'),
+       local('FONDARegular');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fonda';
+  src: url('fonda.ttf') format('truetype'),
+       local('FONDA'),
+       local('FONDARegular');
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }

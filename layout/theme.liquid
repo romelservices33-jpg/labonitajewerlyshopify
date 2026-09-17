@@ -94,6 +94,34 @@
         font-display: swap;
       }
       @font-face {
+        font-family: 'Fonda';
+        src: url('{{ "fonda.ttf" | asset_url }}') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Fonda';
+        src: url('{{ "fonda.ttf" | asset_url }}') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Fonda';
+        src: url('{{ "fonda.ttf" | asset_url }}') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Fonda';
+        src: url('{{ "fonda.ttf" | asset_url }}') format('truetype');
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
         font-family: 'Royal Fortune';
         src: url('{{ "royal-fortune-serif.ttf" | asset_url }}') format('truetype');
         font-weight: normal;
@@ -364,6 +392,29 @@
         margin: 0 !important;
         max-width: 100% !important;
         width: 100% !important;
+      }
+      /* Enforce FONDA typography across all headings, titles, and editorial elements */
+      :root {
+        --font-serif: 'Fonda', 'Cormorant Garamond', Georgia, serif;
+        --font-heading: 'Fonda', 'Cormorant Garamond', Georgia, serif;
+      }
+      h1, h2, h3, h4,
+      .macro-hero-title,
+      .hero-editorial-title,
+      .section-heading-luxe,
+      .luxury-heading,
+      .collection-card-title,
+      .product-shop-title,
+      .product-card-title,
+      .silk-card-title,
+      .quick-view-title,
+      .editorial-title,
+      .footer-col-title,
+      .newsletter-headline,
+      .modal-title,
+      .font-serif,
+      .font-heading {
+        font-family: 'Fonda', 'Cormorant Garamond', Georgia, serif !important;
       }
       body {
         background-color: #FAF9F6 !important;
