@@ -1330,122 +1330,108 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 7.5 SECCIÓN: NUESTRA BOUTIQUE, MAPA & HORARIOS                             -->
+  <!-- 7.5 SECCIÓN: NUESTRA BOUTIQUE, MAPA & HORARIOS (MINIMALISTA Y EDITORIAL)   -->
   <!-- ========================================================================= -->
-  <section class="boutique-location-section" id="ubicacion-mapa" style="padding: 70px 20px 60px; background: transparent; position: relative; z-index: 10;">
+  <section class="boutique-location-section" id="ubicacion-mapa" style="padding: 60px 20px 50px; background: transparent; position: relative; z-index: 10;">
     <div style="max-width: 1240px; margin: 0 auto;">
       
       <!-- Section Header -->
-      <div style="text-align: center; margin-bottom: 36px;">
-        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em; color: #D1B054; text-transform: uppercase;">✦ Sede Exclusiva & Atención VIP ✦</span>
-        <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 600; color: #08195B; margin: 6px 0 10px; line-height: 1.15;">
-          Visítanos en Nuestra <span style="color: #D1B054; font-style: italic;">Boutique & Horarios</span>
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; color: #D1B054; text-transform: uppercase;">Sede Exclusiva & Atención VIP</span>
+        <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 600; color: #08195B; margin: 6px 0 8px; line-height: 1.15;">
+          Visítanos en Nuestra <span style="color: #D1B054; font-style: italic;">Boutique</span>
         </h2>
-        <p style="font-size: 0.9rem; color: #64748B; max-width: 620px; margin: 0 auto; line-height: 1.55;">
-          Ven y conoce nuestras piezas en persona, solicita asesoría personalizada en quilataje y peso en gramos, y adquiere tu joya con total garantía.
+        <p style="font-size: 0.88rem; color: #64748B; max-width: 600px; margin: 0 auto; line-height: 1.5;">
+          Atención personalizada en selección de quilataje, pesaje de oro certificado en balanza de precisión y financiamiento inmediato.
         </p>
       </div>
 
       <!-- 2-Column Grid: Info & Schedule (Left) + Interactive Map (Right) -->
-      <div class="boutique-grid-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch;">
+      <div class="boutique-grid-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch;">
         
-        <!-- LEFT: Information & Schedule Card -->
-        <div style="background: #FFFFFF; border-radius: 24px; padding: 32px; box-shadow: 0 10px 30px rgba(8, 25, 91, 0.06); border: 1.5px solid rgba(209, 176, 84, 0.35); display: flex; flex-direction: column; justify-content: space-between;">
+        <!-- LEFT: Minimalist Information & Schedule -->
+        <div style="background: #FFFFFF; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(8, 25, 91, 0.04); border: 1px solid rgba(8, 25, 91, 0.07); display: flex; flex-direction: column; justify-content: space-between;">
           
           <div>
-            <!-- Boutique Title & Badge -->
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(209, 176, 84, 0.12); display: flex; align-items: center; justify-content: center; color: #D1B054;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <div>
-                  <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #08195B; margin: 0;">La Bonita Jewelry Sede</h3>
-                  <span style="font-size: 0.78rem; color: #64748B;">Louisville, Kentucky, USA</span>
-                </div>
+            <!-- Boutique Brand Logo & Live Status -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid rgba(8, 25, 91, 0.06);">
+              <div>
+                <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry" style="height: 32px; width: auto; display: block; margin-bottom: 4px;">
+                <span style="font-size: 0.80rem; color: #64748B; font-weight: 500;">Louisville, Kentucky, USA</span>
               </div>
-              <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(5, 150, 105, 0.10); color: #059669; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid rgba(5, 150, 105, 0.25);">
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(5, 150, 105, 0.08); color: #059669; font-size: 0.74rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px;">
                 <span style="width: 6px; height: 6px; background: #059669; border-radius: 50%;"></span>
                 Abierto Hoy
               </span>
             </div>
 
-            <!-- Schedule Highlight Box -->
-            <div style="background: rgba(209, 176, 84, 0.07); border: 1px solid rgba(209, 176, 84, 0.25); border-radius: 18px; padding: 20px; margin-bottom: 24px;">
-              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: #08195B; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.08em;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <!-- Clean Minimal Schedule (No nested box container) -->
+            <div style="margin-bottom: 24px;">
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #08195B; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 <span>Horarios de Atención</span>
               </div>
               
-              <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(209, 176, 84, 0.25); padding-bottom: 8px;">
-                  <span style="color: #475569; font-weight: 600;">Lunes a Viernes</span>
-                  <span style="font-weight: 800; color: #08195B;">10:00 AM – 8:00 PM EST</span>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
+                  <span style="color: #64748B; font-weight: 500;">Lunes a Viernes</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 8:00 PM EST</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(209, 176, 84, 0.25); padding-bottom: 8px;">
-                  <span style="color: #475569; font-weight: 600;">Sábados</span>
-                  <span style="font-weight: 800; color: #08195B;">10:00 AM – 7:00 PM EST</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
+                  <span style="color: #64748B; font-weight: 500;">Sábados</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 7:00 PM EST</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span style="color: #475569; font-weight: 600;">Domingos</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2px;">
+                  <span style="color: #64748B; font-weight: 500;">Domingos</span>
                   <span style="font-weight: 700; color: #D1B054;">Citas VIP Privadas / Online 24/7</span>
                 </div>
               </div>
             </div>
 
-            <!-- Key Boutique Benefits -->
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
-              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3v18M3 7l4 8h-8l4-8zm14 0l4 8h-8l4-8zM6 3h12"></path></svg>
+            <!-- Key Boutique Benefits (Uncontained Minimal List) -->
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; padding-top: 14px; border-top: 1px solid rgba(8, 25, 91, 0.06);">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; color: #475569;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3v18M3 7l4 8h-8l4-8zm14 0l4 8h-8l4-8zM6 3h12"></path></svg>
                 <span>Pesaje de oro certificado en balanza de precisión frente al cliente.</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; color: #475569;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                 <span>Aceptamos financiamiento en tienda con Affirm, tarjetas y efectivo.</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; color: #475569;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 <span>Instalaciones seguras y estacionamiento exclusivo para clientes.</span>
               </div>
             </div>
           </div>
 
           <!-- Bottom Action Buttons -->
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="https://maps.app.goo.gl/LrkoMg3VCp33C9QUA" target="_blank" rel="noopener" style="flex: 1; min-width: 180px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #08195B; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 0.86rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(8, 25, 91, 0.2); transition: all 0.25s ease;" onmouseover="this.style.background='#05103B'" onmouseout="this.style.background='#08195B'">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid rgba(8, 25, 91, 0.06);">
+            <a href="https://maps.app.goo.gl/LrkoMg3VCp33C9QUA" target="_blank" rel="noopener" style="flex: 1; min-width: 170px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #08195B; color: #FFFFFF; padding: 12px 20px; border-radius: 10px; font-size: 0.84rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 12px rgba(8, 25, 91, 0.18); transition: all 0.25s ease;" onmouseover="this.style.background='#05103B'" onmouseout="this.style.background='#08195B'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
               <span>Abrir en Google Maps</span>
             </a>
             
-            <a href="tel:5025994250" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(209, 176, 84, 0.15); color: #08195B; border: 1.5px solid rgba(209, 176, 84, 0.4); padding: 13px 20px; border-radius: 12px; font-size: 0.86rem; font-weight: 700; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.background='rgba(209, 176, 84, 0.28)'" onmouseout="this.style.background='rgba(209, 176, 84, 0.15)'">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <span>Llamar: (502) 599-4250</span>
+            <a href="tel:5025994250" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #FAF9F6; color: #08195B; border: 1px solid rgba(8, 25, 91, 0.12); padding: 12px 18px; border-radius: 10px; font-size: 0.84rem; font-weight: 700; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.background='#F1EFE9'" onmouseout="this.style.background='#FAF9F6'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <span>(502) 599-4250</span>
             </a>
           </div>
 
         </div>
 
-        <!-- RIGHT: Google Maps Luxury Embed (Centered at exact coords: 38.1627957, -85.5973989) -->
-        <div style="background: #FFFFFF; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(8, 25, 91, 0.06); border: 1.5px solid rgba(209, 176, 84, 0.35); position: relative; min-height: 440px; display: flex;">
+        <!-- RIGHT: Clean Google Maps Embed (No golden border, minimalist frame) -->
+        <div style="background: #FFFFFF; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(8, 25, 91, 0.04); border: 1px solid rgba(8, 25, 91, 0.07); position: relative; min-height: 420px; display: flex;">
           <iframe 
             src="https://maps.google.com/maps?q=38.1627957,-85.5973989&hl=es&z=17&output=embed" 
             width="100%" 
             height="100%" 
-            style="border:0; width:100%; height:100%; min-height:440px; display:block;" 
+            style="border:0; width:100%; height:100%; min-height:420px; display:block;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
             title="Ubicación exacta de La Bonita Jewelry en Google Maps"
           ></iframe>
-          
-          <!-- Floating Map Badge Overlay -->
-          <div style="position: absolute; top: 16px; left: 16px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(209, 176, 84, 0.4); padding: 8px 14px; border-radius: 12px; box-shadow: 0 4px 16px rgba(8, 25, 91, 0.12); display: flex; align-items: center; gap: 8px; pointer-events: none;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="#D1B054"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 700; color: #08195B;">La Bonita Jewelry • Louisville, KY</span>
-          </div>
         </div>
 
       </div>
