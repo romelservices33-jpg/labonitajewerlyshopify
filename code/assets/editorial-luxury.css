@@ -5878,5 +5878,58 @@ html.shopify-design-mode .luxury-splash-screen {
   }
 }
 
+/* ==========================================================================
+   VERTICAL MARQUEE TESTIMONIALS (21ST.DEV / SHADCN STYLE)
+   ========================================================================== */
+@keyframes v-marquee-scroll-up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
 
+@keyframes v-marquee-scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
 
+.v-marquee-track-up {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: v-marquee-scroll-up 26s linear infinite;
+  will-change: transform;
+}
+
+.v-marquee-track-down {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: v-marquee-scroll-down 26s linear infinite;
+  will-change: transform;
+}
+
+.v-marquee-track-up:hover,
+.v-marquee-track-down:hover,
+.v-marquee-col:hover .v-marquee-track {
+  animation-play-state: paused !important;
+}
+
+.v-review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(8, 25, 91, 0.08) !important;
+  border-color: rgba(209, 176, 84, 0.35) !important;
+}
+
+@media (max-width: 1024px) {
+  .v-marquee-col-3 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .v-marquee-col-2 {
+    display: none !important;
+  }
+  .v-marquee-container {
+    height: 440px !important;
+  }
+}
