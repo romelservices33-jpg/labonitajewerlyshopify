@@ -309,7 +309,7 @@
 
         <div class="cat-slider-track" id="catSliderTrack">
           <!-- Card 1: Cadenas -->
-          <a href="/collections/cadenas" class="cat-square-card" id="cadenas" aria-label="Ver Colección de Cadenas">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'cadenas')" class="cat-square-card" data-cat-link="cadenas" aria-label="Ver Colección de Cadenas">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Cadenas</h3>
@@ -328,7 +328,7 @@
           </a>
 
           <!-- Card 2: Anillos -->
-          <a href="/collections/anillos" class="cat-square-card" id="anillos" aria-label="Ver Colección de Anillos">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'anillos')" class="cat-square-card" data-cat-link="anillos" aria-label="Ver Colección de Anillos">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Anillos</h3>
@@ -347,7 +347,7 @@
           </a>
 
           <!-- Card 3: Aretes -->
-          <a href="/collections/aretes" class="cat-square-card" id="aretes" aria-label="Ver Colección de Aretes">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'aretes')" class="cat-square-card" data-cat-link="aretes" aria-label="Ver Colección de Aretes">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Aretes</h3>
@@ -366,7 +366,7 @@
           </a>
 
           <!-- Card 4: Pulseras -->
-          <a href="/collections/pulseras" class="cat-square-card" id="pulseras" aria-label="Ver Colección de Pulseras">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'pulseras')" class="cat-square-card" data-cat-link="pulseras" aria-label="Ver Colección de Pulseras">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Pulseras</h3>
@@ -385,7 +385,7 @@
           </a>
 
           <!-- Card 5: Cuban Links -->
-          <a href="/collections/cuban" class="cat-square-card" id="cuban" aria-label="Ver Colección Cuban Links">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'cuban')" class="cat-square-card" data-cat-link="cuban" aria-label="Ver Colección Cuban Links">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Cuban Links</h3>
@@ -404,7 +404,7 @@
           </a>
 
           <!-- Card 6: Dijes & Medallas -->
-          <a href="/collections/dijes" class="cat-square-card" id="dijes" aria-label="Ver Colección de Dijes">
+          <a href="#catalogo" onclick="handleNavCategory(event, 'dijes')" class="cat-square-card" data-cat-link="dijes" aria-label="Ver Colección de Dijes">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Dijes & Medallas</h3>
@@ -1609,13 +1609,16 @@
 
     function filterCatalog(category, tabBtn) {
       currentCatalogCategory = category;
-      if (tabBtn) {
-        document.querySelectorAll('.cat-tab-btn').forEach(function(b) { b.classList.remove('active'); });
-        tabBtn.classList.add('active');
+      var targetBtn = tabBtn || document.querySelector('.cat-tab-btn[data-cat="' + category + '"]');
+      document.querySelectorAll('.cat-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (targetBtn) {
+        targetBtn.classList.add('active');
       }
       catalogPage = 1;
       paginateCatalogGrid();
     }
+    window.filterCatalog = filterCatalog;
+
 
     // Dropdowns click behavior
     document.addEventListener('click', function(e) {

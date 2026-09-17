@@ -68,12 +68,12 @@
   <nav class="hero-floating-nav" aria-label="Navegación de colecciones">
     <ul class="hero-nav-track">
       <li><a href="{{ routes.root_url }}" class="hero-nav-link {% if template.name == 'index' %}active{% endif %}">Inicio</a></li>
-      <li><a href="{{ routes.root_url }}#cadenas" class="hero-nav-link">Cadenas</a></li>
-      <li><a href="{{ routes.root_url }}#anillos" class="hero-nav-link">Anillos</a></li>
-      <li><a href="{{ routes.root_url }}#aretes" class="hero-nav-link">Aretes</a></li>
-      <li><a href="{{ routes.root_url }}#pulseras" class="hero-nav-link">Pulseras</a></li>
-      <li><a href="{{ routes.root_url }}#dijes" class="hero-nav-link">Dijes</a></li>
-      <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link">Contacto</a></li>
+      <li><a href="{{ routes.root_url }}#cadenas" class="hero-nav-link" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
+      <li><a href="{{ routes.root_url }}#anillos" class="hero-nav-link" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
+      <li><a href="{{ routes.root_url }}#aretes" class="hero-nav-link" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
+      <li><a href="{{ routes.root_url }}#pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
+      <li><a href="{{ routes.root_url }}#dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+      <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
     </ul>
   </nav>
 
@@ -119,13 +119,13 @@
     </a>
   </div>
   <div class="notch-mobile-dropdown" id="notchMobileDropdown">
-    <a href="{{ routes.root_url }}">Inicio</a>
-    <a href="{{ routes.root_url }}#cadenas">Cadenas</a>
-    <a href="{{ routes.root_url }}#anillos">Anillos</a>
-    <a href="{{ routes.root_url }}#aretes">Aretes</a>
-    <a href="{{ routes.root_url }}#pulseras">Pulseras</a>
-    <a href="{{ routes.root_url }}#dijes">Dijes</a>
-    <a href="{{ routes.root_url }}#contacto">Contacto</a>
+    <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio')">Inicio</a>
+    <a href="{{ routes.root_url }}#cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
+    <a href="{{ routes.root_url }}#anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
+    <a href="{{ routes.root_url }}#aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
+    <a href="{{ routes.root_url }}#pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
+    <a href="{{ routes.root_url }}#dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes</a>
+    <a href="{{ routes.root_url }}#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">
     <path d="M 20 0 C 8.954 0 0 8.954 0 20 H -1 V -1 H 20 Z" fill="currentColor"></path>
@@ -139,6 +139,92 @@
     if (!dd) return;
     var isOpen = dd.classList.toggle('show');
     if (ch) ch.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  function handleNavCategory(e, category) {
+    var catalog = document.getElementById('catalogo');
+    if (catalog) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (history.pushState) {
+        history.pushState(null, null, '#' + category);
+      } else {
+        window.location.hash = category;
+      }
+      if (typeof window.filterCatalog === 'function') {
+        window.filterCatalog(category);
+      }
+      document.querySelectorAll('.hero-nav-link').forEach(function(link) {
+        if (link.getAttribute('data-cat-nav') === category) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      var headerOffset = 90;
+      var elementPosition = catalog.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  function handleNavContact(e) {
+    var contact = document.getElementById('contacto') || document.querySelector('.site-luxury-royal-footer') || document.querySelector('.site-white-footer');
+    if (contact) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (history.pushState) {
+        history.pushState(null, null, '#contacto');
+      }
+      contact.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function checkHashNavigation() {
+    var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
+    if (!hash) return;
+    
+    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'todos'];
+    if (validCategories.indexOf(hash) !== -1) {
+      if (typeof window.filterCatalog === 'function') {
+        window.filterCatalog(hash);
+      }
+      document.querySelectorAll('.hero-nav-link').forEach(function(link) {
+        if (link.getAttribute('data-cat-nav') === hash) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      var catalog = document.getElementById('catalogo');
+      if (catalog) {
+        setTimeout(function() {
+          var headerOffset = 90;
+          var elementPosition = catalog.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 120);
+      }
+    } else if (hash === 'contacto') {
+      var contact = document.getElementById('contacto') || document.querySelector('.site-luxury-royal-footer') || document.querySelector('.site-white-footer');
+      if (contact) {
+        setTimeout(function() {
+          contact.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', checkHashNavigation);
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(checkHashNavigation, 250);
+  });
+  if (document.readyState !== 'loading') {
+    setTimeout(checkHashNavigation, 250);
   }
 
   (function() {
