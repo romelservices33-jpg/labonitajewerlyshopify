@@ -3582,7 +3582,7 @@ html.shopify-design-mode .luxury-splash-screen {
 }
 
 .modal-product-title {
-  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-family: var(--font-serif, 'Sentient', Georgia, serif);
   font-size: 1.85rem;
   font-weight: 600;
   color: var(--color-royal-navy, #08195B);
@@ -4334,7 +4334,7 @@ html.shopify-design-mode .luxury-splash-screen {
 
 .newsletter-headline {
   color: #FFFFFF !important;
-  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif) !important;
+  font-family: var(--font-heading, 'Sentient', Georgia, serif) !important;
   font-size: 1.55rem !important;
   font-weight: 600 !important;
   line-height: 1.2 !important;
@@ -4503,7 +4503,7 @@ html.shopify-design-mode .luxury-splash-screen {
   align-items: center !important;
   gap: 6px !important;
   color: #FFFFFF !important;
-  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif) !important;
+  font-family: var(--font-heading, 'Sentient', Georgia, serif) !important;
   font-size: 1.15rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.02em !important;
@@ -4999,7 +4999,7 @@ html.shopify-design-mode .luxury-splash-screen {
 }
 
 .product-detail-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-heading, 'Sentient', Georgia, serif);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 600;
   color: #08195B;
@@ -5335,7 +5335,7 @@ html.shopify-design-mode .luxury-splash-screen {
 }
 
 .related-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-heading, 'Sentient', Georgia, serif);
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 600;
   color: #08195B;
@@ -5795,7 +5795,7 @@ html.shopify-design-mode .luxury-splash-screen {
 }
 
 .editorial-vitrine-title {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-heading, 'Sentient', Georgia, serif) !important;
   font-size: clamp(1.8rem, 3.5vw, 2.5rem) !important;
   font-weight: 600 !important;
   color: #08195B !important;
