@@ -255,20 +255,28 @@
     <div class="hero-gradient-overlay"></div>
 
     <div class="hero-content-wrap">
-      <div class="mobile-top-brand">
-        <a href="{{ routes.root_url }}" title="La Bonita Jewelry">
-          <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry">
-        </a>
-      </div>
-      <h1 class="hero-main-headline">
-        Brilla con Estilo, <span class="gold-highlight">Brilla con Oro</span>
-      </h1>
-      <p class="hero-supporting-copy">
-        Descubre joyas auténticas en oro de 10K y 14K con financiamiento y envío asegurado a todos los Estados Unidos y Puerto Rico.
-      </p>
-      <div class="hero-cta-group">
-        <a href="/collections/all" class="btn-pill-white">Ver Colecciones</a>
-        <a href="#financiamiento" class="btn-pill-glass">Financiamiento Affirm</a>
+      <div class="hero-content-split">
+        <div class="hero-text-col">
+          <div class="mobile-top-brand">
+            <a href="{{ routes.root_url }}" title="La Bonita Jewelry">
+              <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry">
+            </a>
+          </div>
+          <h1 class="hero-main-headline">
+            Brilla con Estilo, <span class="gold-highlight">Brilla con Oro</span>
+          </h1>
+          <p class="hero-supporting-copy">
+            Descubre joyas auténticas en oro de 10K y 14K con financiamiento y envío asegurado a todos los Estados Unidos y Puerto Rico.
+          </p>
+          <div class="hero-cta-group">
+            <a href="/collections/all" class="btn-pill-white">Ver Colecciones</a>
+            <a href="#financiamiento" class="btn-pill-glass">Financiamiento Affirm</a>
+          </div>
+        </div>
+
+        <div class="hero-desktop-brand-showcase">
+          <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry" class="hero-large-desktop-logo" loading="eager">
+        </div>
       </div>
     </div>
 
