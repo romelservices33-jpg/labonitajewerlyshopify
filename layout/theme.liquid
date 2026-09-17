@@ -450,7 +450,7 @@
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        object-position: center 38% !important;
+        object-position: center 48% !important;
         z-index: 1 !important;
         opacity: 0.88 !important;
         -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0) 100%) !important;
@@ -715,11 +715,11 @@
       @media (min-width: 1025px) {
         .macro-hero-section {
           padding-top: 135px !important;
-          padding-bottom: 35px !important;
+          padding-bottom: 40px !important;
         }
 
         .hero-overlapping-cards-wrap {
-          margin-top: 25px !important;
+          margin-top: 55px !important;
           margin-bottom: 0 !important;
           padding: 0 45px !important;
         }
@@ -732,6 +732,17 @@
           padding: 85px 36px 80px !important;
           position: relative !important;
           z-index: 10 !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .macro-hero-section video,
+        .macro-hero-section .hero-bg-media {
+          object-position: center 42% !important;
+        }
+        .hero-overlapping-cards-wrap {
+          margin-top: 30px !important;
+          margin-bottom: 24px !important;
         }
       }
 

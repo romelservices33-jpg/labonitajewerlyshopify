@@ -211,20 +211,20 @@
         '}',
         '',
         'void main() {',
-        '  vec2 uv = gl_FragCoord.xy / u_resolution.xy;',
-        '  vec2 p = uv * 2.4;',
+        '  vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);',
+        '  vec2 p = uv * 2.2;',
         '  ',
-        '  float t = u_time * 0.32;',
-        '  vec2 mouseOffset = (u_mouse - 0.5) * 0.4;',
+        '  float t = u_time * 0.30;',
+        '  vec2 mouseOffset = (u_mouse - 0.5) * 0.35;',
         '  ',
-        '  // Undulating fluid silk coordinates',
-        '  vec2 q = vec2(fbm(p + t * 0.10 + mouseOffset), fbm(p + vec2(5.2, 1.3) - t * 0.08));',
-        '  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + 0.10 * t), fbm(p + 3.0 * q + vec2(8.3, 2.8) + 0.09 * t));',
+        '  // Undulating fluid silk coordinates (isotropic across mobile and desktop)',
+        '  vec2 q = vec2(fbm(p + t * 0.08 + mouseOffset), fbm(p + vec2(5.2, 1.3) - t * 0.07));',
+        '  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + 0.08 * t), fbm(p + 3.0 * q + vec2(8.3, 2.8) + 0.07 * t));',
         '  ',
-        '  float f = fbm(p + 3.8 * r + mouseOffset * 1.4);',
+        '  float f = fbm(p + 3.8 * r + mouseOffset * 1.2);',
         '  ',
         '  // Silk ridge highlights and soft satin shading',
-        '  float fold = sin(f * 7.0 + t);',
+        '  float fold = sin(f * 6.5 + t);',
         '  float sheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 3.0);',
         '  float goldSheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 6.5) * 0.45;',
         '  ',
@@ -232,8 +232,8 @@
         '  vec3 cDeepNavy   = vec3(0.015, 0.038, 0.14);   // #040924 Midnight Navy',
         '  vec3 cRoyalBlue  = vec3(0.031, 0.098, 0.357);  // #08195B Royal Navy',
         '  vec3 cSapphire   = vec3(0.055, 0.176, 0.55);   // #0E2D8C Sapphire Blue',
-        '  vec3 cLightLuxe  = vec3(0.18, 0.34, 0.78);    // Shimmer highlight',
-        '  vec3 cGold       = vec3(0.82, 0.69, 0.33);    // #D1B054 Gold Accent',
+        '  vec3 cLightLuxe  = vec3(0.18, 0.34, 0.78);     // Shimmer highlight',
+        '  vec3 cGold       = vec3(0.82, 0.69, 0.33);     // #D1B054 Gold Accent',
         '  ',
         '  vec3 color = mix(cDeepNavy, cRoyalBlue, clamp(f * f * 2.2, 0.0, 1.0));',
         '  color = mix(color, cSapphire, clamp(length(q), 0.0, 1.0) * 0.85);',
@@ -335,12 +335,14 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+        var baseDim = Math.min(canvas.width, canvas.height);
+        var waveFreq = 2.5 / Math.max(baseDim, 300);
         for (var i = 0; i < 4; i++) {
           ctx.beginPath();
           ctx.moveTo(0, canvas.height * (0.3 + i * 0.18));
-          for (var x = 0; x < canvas.width; x += 30) {
-            var y = Math.sin(x * 0.0025 + time + i * 0.8) * 45 +
-                    Math.cos(x * 0.005 - time * 0.6 + i) * 30 +
+          for (var x = 0; x <= canvas.width; x += 20) {
+            var y = Math.sin(x * waveFreq + time + i * 0.8) * (baseDim * 0.05) +
+                    Math.cos(x * waveFreq * 1.8 - time * 0.6 + i) * (baseDim * 0.035) +
                     canvas.height * (0.3 + i * 0.18);
             ctx.lineTo(x, y);
           }
