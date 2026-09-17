@@ -2117,82 +2117,71 @@ html {
   transition: transform 0.2s ease;
 }
 
-/* 4. Top-Right Cutout Pin Badge (White Text, 100% Continuous Seamless Curve) */
+/* 4. Top-Right Karat Pin Badge (Solid Unified Royal Navy Corner Badge) */
 .cutout-card-pin {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 32px;
-  background: var(--color-royal-navy);
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  height: 28px !important;
+  background: var(--color-royal-navy) !important;
   color: #FFFFFF !important;
-  border-radius: 0;
-  padding: 0 16px 0 4px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  z-index: 4;
-  filter: drop-shadow(0 4px 12px rgba(8, 25, 91, 0.22));
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  border-radius: 0 0 0 12px !important;
+  padding: 0 14px !important;
+  font-size: 0.70rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  z-index: 4 !important;
+  box-shadow: 0 4px 12px rgba(8, 25, 91, 0.2) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
 }
 
 .cutout-card-pin span {
   color: #FFFFFF !important;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
 }
 
-.cutout-card-pin svg.cutout-corner {
-  position: absolute;
-  color: var(--color-royal-navy);
-  pointer-events: none;
+.cutout-corner,
+svg.cutout-corner,
+.cutout-corner-pin-left,
+.cutout-corner-label-right {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
-.cutout-corner-pin-left {
-  top: 0;
-  right: calc(100% - 0.5px);
-  width: 24px;
-  height: 32px;
-}
-
-/* 5. Bottom-Left Inset Label (100% Continuous Seamless Curve) */
+/* 5. Bottom-Left Category Label (Clean Floating Luxury Pill) */
 .cutout-card-inset-label {
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  height: 32px;
-  background: #FFFFFF;
-  border-radius: 0;
-  padding: 0 4px 0 16px;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
+  position: absolute !important;
+  bottom: 8px !important;
+  left: 8px !important;
+  height: auto !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-radius: 6px !important;
+  padding: 3px 9px !important;
+  z-index: 4 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 8px rgba(8, 25, 91, 0.08) !important;
+  border: 1px solid rgba(8, 25, 91, 0.06) !important;
 }
 
 .cutout-label-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #64748B;
-}
-
-.cutout-card-inset-label svg.cutout-corner {
-  position: absolute;
-  color: #FFFFFF;
-  pointer-events: none;
-}
-
-.cutout-corner-label-right {
-  bottom: 0;
-  left: calc(100% - 0.5px);
-  width: 24px;
-  height: 32px;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: #08195B !important;
 }
 
 /* 6. Reveal Action Button on Media - Eliminado porque ya existe el botón inferior */
@@ -2712,24 +2701,28 @@ html {
   }
 
   /* ============================================================
-     MOBILE COLLECTION CARDS: Full-bleed image, straddling hero/catalog
+     MOBILE COLLECTION CARDS: Full-bleed image, shorter vertical proportion
      ============================================================ */
   .hero-overlapping-cards-wrap {
     padding: 0 12px !important;
-    margin-top: 30px !important;
-    margin-bottom: 24px !important;
+    margin-top: 18px !important;
+    margin-bottom: 16px !important;
     width: 100% !important;
     --card-gap: 8px !important;
     position: relative !important;
     z-index: 100 !important;
     overflow: visible !important;
     isolation: isolate !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .cat-slider-container {
     width: 100%;
     position: relative;
     overflow: visible !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .cat-slider-track {
@@ -2744,33 +2737,36 @@ html {
     padding: 4px 4px 8px 4px !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .cat-slider-track::-webkit-scrollbar {
     display: none !important;
   }
 
-  /* Square cards with full-bleed images, same design as desktop */
+  /* Compact collection cards: shorter vertically, wider proportion */
   .cat-square-card {
-    flex: 0 0 clamp(110px, 30vw, 125px) !important;
-    width: clamp(110px, 30vw, 125px) !important;
-    min-width: 110px !important;
-    max-width: 125px !important;
-    height: clamp(110px, 30vw, 125px) !important;
-    min-height: 110px !important;
-    max-height: 125px !important;
-    aspect-ratio: 1 / 1 !important;
+    flex: 0 0 clamp(118px, 32vw, 138px) !important;
+    width: clamp(118px, 32vw, 138px) !important;
+    min-width: 118px !important;
+    max-width: 138px !important;
+    height: clamp(92px, 24vw, 106px) !important;
+    min-height: 90px !important;
+    max-height: 108px !important;
+    aspect-ratio: 1.25 / 1 !important;
     scroll-snap-align: start !important;
-    padding: 8px !important;
+    padding: 7px 9px 7px !important;
     border-radius: 14px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(8, 25, 91, 0.08) !important;
-    border: 1px solid rgba(229, 231, 235, 0.85) !important;
+    box-shadow: 0 4px 14px rgba(8, 25, 91, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid rgba(209, 176, 84, 0.3) !important;
     box-sizing: border-box !important;
     position: relative !important;
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    background: #FFFFFF !important;
   }
 
   /* Keep image absolute full-bleed on mobile too */
@@ -2795,16 +2791,16 @@ html {
   }
 
   .cat-card-label {
-    font-size: 0.56rem !important;
+    font-size: 0.52rem !important;
     letter-spacing: 0.04em !important;
     color: #6B7280 !important;
     line-height: 1 !important;
   }
 
   .cat-card-title {
-    font-size: 0.80rem !important;
+    font-size: 0.78rem !important;
     font-weight: 700 !important;
-    line-height: 1.15 !important;
+    line-height: 1.1 !important;
     color: #08195B !important;
     margin-top: 0 !important;
     white-space: nowrap !important;
@@ -2825,7 +2821,7 @@ html {
     gap: 3px !important;
     border-width: 1px !important;
     border-radius: 999px !important;
-    background: rgba(255, 255, 255, 0.88) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
     backdrop-filter: blur(4px) !important;
     -webkit-backdrop-filter: blur(4px) !important;
     color: #08195B !important;

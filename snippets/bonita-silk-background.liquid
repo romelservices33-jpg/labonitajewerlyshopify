@@ -238,17 +238,126 @@
     box-shadow: 0 6px 18px rgba(8, 25, 91, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05) !important;
     display: flex !important;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Solid Unified Product Card Badges (No cut SVG seams) */
+  .cutout-card-pin {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 28px !important;
+    background: #08195B !important;
+    color: #FFFFFF !important;
+    border-radius: 0 0 0 12px !important;
+    padding: 0 14px !important;
+    font-size: 0.70rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    z-index: 4 !important;
+    box-shadow: 0 4px 10px rgba(8, 25, 91, 0.18) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
-  .cat-slider-arrow:hover {
-    background: #D1B054 !important;
-    color: #040924 !important;
-    border-color: #D1B054 !important;
-    transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 8px 22px rgba(209, 176, 84, 0.45) !important;
+  .cutout-card-pin span {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+  }
+
+  .cutout-corner,
+  svg.cutout-corner,
+  .cutout-corner-pin-left,
+  .cutout-corner-label-right {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .cutout-card-inset-label {
+    position: absolute !important;
+    bottom: 8px !important;
+    left: 8px !important;
+    height: auto !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 6px !important;
+    padding: 3px 9px !important;
+    z-index: 4 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-shadow: 0 2px 8px rgba(8, 25, 91, 0.08) !important;
+    border: 1px solid rgba(8, 25, 91, 0.06) !important;
+  }
+  .cutout-label-text {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #08195B !important;
+  }
+
+  .product-shop-card,
+  .cutout-product-card {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+  .cutout-card-media {
+    border-radius: 20px 20px 0 0 !important;
+    overflow: hidden !important;
+  }
+
+  @media (max-width: 768px) {
+    .macro-hero-section video,
+    .macro-hero-section .hero-bg-media {
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 46%, rgba(0,0,0,0) 56%) !important;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 46%, rgba(0,0,0,0) 56%) !important;
+    }
+    .macro-hero-section .hero-gradient-overlay {
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 56%) !important;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 56%) !important;
+    }
+    .hero-overlapping-cards-wrap {
+      margin-top: 18px !important;
+      margin-bottom: 16px !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    .cat-slider-track {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    .cat-square-card {
+      flex: 0 0 clamp(118px, 32vw, 138px) !important;
+      width: clamp(118px, 32vw, 138px) !important;
+      min-width: 118px !important;
+      max-width: 138px !important;
+      height: clamp(92px, 24vw, 106px) !important;
+      min-height: 90px !important;
+      max-height: 108px !important;
+      aspect-ratio: 1.25 / 1 !important;
+      border-radius: 14px !important;
+      padding: 7px 9px 7px !important;
+      box-shadow: 0 4px 14px rgba(8, 25, 91, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02) !important;
+      border: 1px solid rgba(209, 176, 84, 0.3) !important;
+    }
+    .cat-card-header {
+      gap: 1px !important;
+    }
+    .cat-card-label {
+      font-size: 0.52rem !important;
+      line-height: 1 !important;
+    }
+    .cat-card-title {
+      font-size: 0.78rem !important;
+      line-height: 1.1 !important;
+    }
+    .cat-pill-btn {
+      padding: 3px 8px !important;
+      font-size: 0.58rem !important;
+      line-height: 1 !important;
+    }
   }
 </style>
 

@@ -23,6 +23,12 @@
     .macro-hero-section video,
     .macro-hero-section .hero-bg-media {
       object-position: center 42% !important;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 46%, rgba(0,0,0,0) 56%) !important;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 46%, rgba(0,0,0,0) 56%) !important;
+    }
+    .macro-hero-section .hero-gradient-overlay {
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 56%) !important;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 56%) !important;
     }
   }
   .macro-hero-section .hero-gradient-overlay {
