@@ -2775,8 +2775,8 @@ svg.cutout-corner,
     overflow-y: visible !important;
     scroll-snap-type: x mandatory !important;
     -webkit-overflow-scrolling: touch !important;
-    gap: 8px !important;
-    padding: 4px 4px 8px 4px !important;
+    gap: 12px !important;
+    padding: 4px 16px 14px 16px !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     background: transparent !important;
@@ -2787,21 +2787,21 @@ svg.cutout-corner,
     display: none !important;
   }
 
-  /* Square cards with full-bleed images (original balanced square) */
+  /* 2.5 Collection Cards Visible in Mobile View with clear horizontal swipe hint */
   .cat-square-card {
-    flex: 0 0 clamp(110px, 30vw, 125px) !important;
-    width: clamp(110px, 30vw, 125px) !important;
-    min-width: 110px !important;
-    max-width: 125px !important;
-    height: clamp(110px, 30vw, 125px) !important;
-    min-height: 110px !important;
-    max-height: 125px !important;
+    flex: 0 0 clamp(135px, calc((100vw - 32px - 24px) / 2.35), 180px) !important;
+    width: clamp(135px, calc((100vw - 32px - 24px) / 2.35), 180px) !important;
+    min-width: 135px !important;
+    max-width: 180px !important;
+    height: clamp(135px, calc((100vw - 32px - 24px) / 2.35), 180px) !important;
+    min-height: 135px !important;
+    max-height: 180px !important;
     aspect-ratio: 1 / 1 !important;
     scroll-snap-align: start !important;
-    padding: 8px !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 14px rgba(8, 25, 91, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02) !important;
-    border: 1px solid rgba(229, 231, 235, 0.85) !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+    box-shadow: 0 4px 16px rgba(8, 25, 91, 0.08), 0 1px 4px rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(209, 176, 84, 0.35) !important;
     box-sizing: border-box !important;
     position: relative !important;
     overflow: hidden !important;
@@ -2827,24 +2827,25 @@ svg.cutout-corner,
   }
 
   .cat-card-header {
-    gap: 1px !important;
+    gap: 2px !important;
     position: relative !important;
     z-index: 3 !important;
   }
 
   .cat-card-label {
-    font-size: 0.52rem !important;
-    letter-spacing: 0.04em !important;
-    color: #6B7280 !important;
+    font-size: 0.60rem !important;
+    letter-spacing: 0.05em !important;
+    color: rgba(8, 25, 91, 0.7) !important;
     line-height: 1 !important;
+    font-weight: 600 !important;
   }
 
   .cat-card-title {
-    font-size: 0.78rem !important;
+    font-size: 0.90rem !important;
     font-weight: 700 !important;
-    line-height: 1.1 !important;
+    line-height: 1.15 !important;
     color: #08195B !important;
-    margin-top: 0 !important;
+    margin-top: 2px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -2858,9 +2859,9 @@ svg.cutout-corner,
   }
 
   .cat-pill-btn {
-    padding: 3px 8px !important;
-    font-size: 0.58rem !important;
-    gap: 3px !important;
+    padding: 4px 10px !important;
+    font-size: 0.64rem !important;
+    gap: 4px !important;
     border-width: 1px !important;
     border-radius: 999px !important;
     background: rgba(255, 255, 255, 0.92) !important;
@@ -2869,11 +2870,12 @@ svg.cutout-corner,
     color: #08195B !important;
     border-color: #08195B !important;
     white-space: nowrap !important;
+    font-weight: 600 !important;
   }
 
   .cat-pill-arrow {
-    width: 9px !important;
-    height: 9px !important;
+    width: 10px !important;
+    height: 10px !important;
   }
 
   .cat-slider-arrow {
@@ -3874,10 +3876,11 @@ html.shopify-design-mode .luxury-splash-screen {
     display: flex !important;
     flex-direction: column !important;
     grid-template-columns: 1fr !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    aspect-ratio: 1 / 2 !important;
-    max-height: 88vh !important;
+    width: 92% !important;
+    max-width: 380px !important;
+    max-height: 84vh !important;
+    height: auto !important;
+    aspect-ratio: unset !important;
     border-radius: 22px !important;
     border: 1px solid rgba(209, 176, 84, 0.45) !important;
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 20px rgba(209, 176, 84, 0.2) !important;
@@ -3896,21 +3899,26 @@ html.shopify-design-mode .luxury-splash-screen {
     border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
     border-radius: 21px 21px 0 0 !important;
     width: 100% !important;
-    height: 50% !important;
-    aspect-ratio: 1 / 1 !important;
+    height: 185px !important;
+    max-height: 185px !important;
+    min-height: unset !important;
+    aspect-ratio: unset !important;
     flex-shrink: 0 !important;
     position: relative !important;
     overflow: hidden !important;
     background: #FFFFFF !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .modal-main-img {
     width: 100% !important;
-    height: 100% !important;
+    height: 185px !important;
     min-height: unset !important;
-    max-height: unset !important;
+    max-height: 185px !important;
     object-fit: contain !important;
-    padding: 16px !important;
+    padding: 8px 14px !important;
     border-radius: 21px 21px 0 0 !important;
     display: block !important;
     background: #FFFFFF !important;
@@ -3918,11 +3926,11 @@ html.shopify-design-mode .luxury-splash-screen {
 
   .modal-mock-placeholder {
     width: 100% !important;
-    height: 100% !important;
+    height: 185px !important;
     min-height: unset !important;
-    max-height: unset !important;
-    aspect-ratio: 1 / 1 !important;
-    padding: 16px !important;
+    max-height: 185px !important;
+    aspect-ratio: unset !important;
+    padding: 8px 14px !important;
     border-radius: 21px 21px 0 0 !important;
     background: #FFFFFF !important;
   }
@@ -3947,12 +3955,13 @@ html.shopify-design-mode .luxury-splash-screen {
   }
 
   .modal-details-col {
-    padding: 14px 16px 12px !important;
+    padding: 12px 16px 12px !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
-    height: 50% !important;
-    flex: 1 1 50% !important;
+    justify-content: flex-start !important;
+    height: auto !important;
+    max-height: calc(84vh - 185px) !important;
+    flex: 1 1 auto !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
@@ -4215,22 +4224,23 @@ html.shopify-design-mode .luxury-splash-screen {
 }
 
 @media (max-width: 360px) {
-  /* Ultra-small screens (iPhone SE, etc.) */
+  /* Ultra-small screens (iPhone SE, etc.) - keep 2.5 card proportion */
   .cat-square-card {
-    flex: 0 0 clamp(96px, 28vw, 108px) !important;
-    width: clamp(96px, 28vw, 108px) !important;
-    height: clamp(96px, 28vw, 108px) !important;
-    min-width: 96px !important;
-    min-height: 96px !important;
+    flex: 0 0 calc((100vw - 32px - 20px) / 2.35) !important;
+    width: calc((100vw - 32px - 20px) / 2.35) !important;
+    height: calc((100vw - 32px - 20px) / 2.35) !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    padding: 10px !important;
   }
 
   .cat-card-title {
-    font-size: 0.68rem !important;
+    font-size: 0.82rem !important;
   }
 
   .cat-pill-btn {
-    font-size: 0.48rem !important;
-    padding: 2px 5px !important;
+    font-size: 0.58rem !important;
+    padding: 3px 7px !important;
   }
 
   .catalog-products-grid {
