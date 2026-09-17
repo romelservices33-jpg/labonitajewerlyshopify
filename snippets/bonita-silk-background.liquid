@@ -121,22 +121,85 @@
   }
 
   .catalog-filter-bar {
-    background: #FFFFFF !important;
-    box-shadow: 0 8px 24px rgba(8, 25, 91, 0.06) !important;
-    border: 1px solid rgba(209, 176, 84, 0.25) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .catalog-category-tabs {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(8, 25, 91, 0.08) !important;
   }
 
   .catalog-category-tabs .cat-tab-btn {
-    color: #4B5563 !important;
-    background: #FFFFFF !important;
-    border: 1px solid #E5E7EB !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #6B7280 !important;
+    padding: 8px 14px !important;
+    font-family: var(--font-sans);
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    position: relative !important;
+    cursor: pointer !important;
+    outline: none !important;
   }
-  .catalog-category-tabs .cat-tab-btn.active,
   .catalog-category-tabs .cat-tab-btn:hover {
-    background: #D1B054 !important;
-    color: #040924 !important;
-    border-color: #D1B054 !important;
-    box-shadow: 0 4px 14px rgba(209, 176, 84, 0.35) !important;
+    background: transparent !important;
+    color: #08195B !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  .catalog-category-tabs .cat-tab-btn.active {
+    background: transparent !important;
+    color: #08195B !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  .catalog-category-tabs .cat-tab-btn::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: -1px !important;
+    left: 50% !important;
+    width: 0 !important;
+    height: 2.5px !important;
+    background: #08195B !important;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-radius: 2px !important;
+  }
+  .catalog-category-tabs .cat-tab-btn:hover::after,
+  .catalog-category-tabs .cat-tab-btn.active::after {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  .select.uiverse-select .selected,
+  .uiverse-select .selected {
+    background: #08195B !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 4px 12px rgba(8, 25, 91, 0.15) !important;
+    border-radius: 10px !important;
+  }
+  .select.uiverse-select:hover .selected,
+  .select.uiverse-select.is-open .selected {
+    background: #05103B !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 6px 18px rgba(8, 25, 91, 0.25) !important;
+  }
+  .select.uiverse-select .arrow,
+  .uiverse-select .arrow {
+    fill: #FFFFFF !important;
   }
 
   .cat-pill-btn {

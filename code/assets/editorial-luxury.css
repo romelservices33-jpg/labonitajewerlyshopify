@@ -1079,15 +1079,17 @@ html {
 }
 
 .cat-tab-btn {
-  background: transparent;
-  border: none;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   color: #6B7280;
   font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  padding: 8px 2px;
+  padding: 8px 4px;
   position: relative;
   cursor: pointer;
   transition: color 0.25s ease;
@@ -1107,12 +1109,13 @@ html {
 .cat-tab-btn::after {
   content: "";
   position: absolute;
-  bottom: -15px;
+  bottom: -4px;
   left: 50%;
   width: 0;
-  height: 2px;
+  height: 2.5px;
   background: var(--color-royal-navy);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
 }
 
 .cat-tab-btn:hover::after,
@@ -5379,7 +5382,7 @@ html.shopify-design-mode .luxury-splash-screen {
   box-sizing: border-box !important;
   background: #08195B !important;
   color: #FFFFFF !important;
-  border: 1.5px solid #D1B054 !important;
+  border: none !important;
   border-radius: 10px !important;
   padding: 10px 14px !important;
   display: flex !important;
@@ -5404,8 +5407,8 @@ html.shopify-design-mode .luxury-splash-screen {
 .select.uiverse-select:hover .selected,
 .select.uiverse-select.is-open .selected {
   background: #05103B !important;
-  border-color: #E8D394 !important;
-  box-shadow: 0 6px 18px rgba(209, 176, 84, 0.25) !important;
+  border: none !important;
+  box-shadow: 0 6px 18px rgba(8, 25, 91, 0.25) !important;
 }
 
 .select.uiverse-select .selected-text,
@@ -5432,7 +5435,7 @@ html.shopify-design-mode .luxury-splash-screen {
 .uiverse-select .arrow {
   width: 12px !important;
   height: 12px !important;
-  fill: #D1B054 !important;
+  fill: #FFFFFF !important;
   flex-shrink: 0 !important;
   transition: transform 0.22s ease !important;
 }
@@ -5450,10 +5453,10 @@ html.shopify-design-mode .luxury-splash-screen {
   min-width: 100% !important;
   box-sizing: border-box !important;
   background: #08195B !important;
-  border: 1px solid #D1B054 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 10px !important;
   padding: 6px !important;
-  box-shadow: 0 14px 34px rgba(4, 12, 45, 0.5), 0 0 18px rgba(209, 176, 84, 0.15) !important;
+  box-shadow: 0 14px 34px rgba(4, 12, 45, 0.5) !important;
   z-index: 999999 !important;
   display: flex !important;
   flex-direction: column !important;
