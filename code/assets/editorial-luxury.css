@@ -4167,72 +4167,441 @@ html.shopify-design-mode .luxury-splash-screen {
 /* ==========================================================================
    SHOPIFY FIXES: LUXURY FOOTER & MODAL VISIBILITY GUARDS
    ========================================================================== */
+/* ==========================================================================
+   ROYAL BLUE GRADIENT LUXURY FOOTER (Watermelon / Shadcn footer-7 layout)
+   ========================================================================== */
+.site-luxury-royal-footer,
 .site-white-footer {
-  background: #FAF9F6 !important;
-  color: #475569 !important;
-  border-top: 1px solid rgba(209, 176, 84, 0.25) !important;
-  padding: 36px 30px 20px !important;
+  background: linear-gradient(135deg, #040924 0%, #08195B 45%, #0D2B8A 85%, #061448 100%) !important;
+  color: #E2E8F0 !important;
+  border-top: 1px solid rgba(209, 176, 84, 0.35) !important;
+  box-shadow: 0 -10px 30px rgba(4, 9, 36, 0.5) !important;
+  padding: 50px 30px 24px !important;
   width: 100% !important;
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 10 !important;
+  overflow: hidden !important;
 }
 
-.footer-main-grid {
-  display: grid !important;
-  grid-template-columns: 1.3fr 1fr 1fr 1.2fr !important;
-  gap: 28px !important;
-  margin-bottom: 22px !important;
+.site-luxury-royal-footer::before,
+.site-white-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D1B054, transparent);
+  opacity: 0.6;
+}
+
+.luxury-footer-container {
+  max-width: 1280px !important;
+  margin: 0 auto !important;
   width: 100% !important;
-  max-width: 1240px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
-.footer-col-brand h3,
-.footer-col-nav h4 {
-  color: #08195B !important;
+/* 1. VIP Newsletter Bar */
+.footer-vip-newsletter-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 32px !important;
+  padding: 28px 36px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(209, 176, 84, 0.22) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  margin-bottom: 45px !important;
+  position: relative !important;
+}
+
+.vip-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #D1B054 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+}
+
+.newsletter-headline {
+  color: #FFFFFF !important;
   font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif) !important;
-  font-size: 1.05rem !important;
-  margin: 0 0 10px 0 !important;
+  font-size: 1.55rem !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.newsletter-sub {
+  color: #94A3B8 !important;
+  font-size: 0.82rem !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+  max-width: 520px !important;
+}
+
+.footer-newsletter-form-wrap {
+  flex-shrink: 0 !important;
+  width: 100% !important;
+  max-width: 440px !important;
+}
+
+.newsletter-input-group {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50px !important;
+  padding: 4px 4px 4px 18px !important;
+  transition: all 0.3s ease !important;
+}
+
+.newsletter-input-group:focus-within {
+  border-color: #D1B054 !important;
+  box-shadow: 0 0 0 3px rgba(209, 176, 84, 0.25) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.newsletter-input {
+  flex: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #FFFFFF !important;
+  font-size: 0.85rem !important;
+  padding: 8px 0 !important;
+  font-family: inherit !important;
+}
+
+.newsletter-input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.newsletter-submit-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #E5C368 0%, #D1B054 50%, #B8933B 100%) !important;
+  color: #040924 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  border: none !important;
+  border-radius: 40px !important;
+  padding: 10px 18px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  box-shadow: 0 4px 12px rgba(209, 176, 84, 0.3) !important;
+}
+
+.newsletter-submit-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(209, 176, 84, 0.45) !important;
+  filter: brightness(1.08) !important;
+}
+
+.newsletter-success-msg {
+  color: #34D399 !important;
+  font-size: 0.78rem !important;
+  margin-top: 8px !important;
   font-weight: 600 !important;
 }
 
-.footer-col-nav ul {
+/* 2. Main 4-Column Grid */
+.footer-main-grid-royal {
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr !important;
+  gap: 36px !important;
+  margin-bottom: 40px !important;
+}
+
+.footer-brand-logo-link {
+  display: inline-block !important;
+  margin-bottom: 12px !important;
+}
+
+.footer-brand-img {
+  height: 38px !important;
+  width: auto !important;
+  display: block !important;
+  filter: brightness(0) invert(1) !important;
+}
+
+.footer-brand-desc {
+  color: #94A3B8 !important;
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.footer-brand-desc strong {
+  color: #F1F5F9 !important;
+}
+
+.footer-whatsapp-concierge-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(37, 211, 102, 0.15) !important;
+  color: #25D366 !important;
+  border: 1px solid rgba(37, 211, 102, 0.4) !important;
+  padding: 8px 16px !important;
+  border-radius: 30px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  margin-bottom: 18px !important;
+}
+
+.footer-whatsapp-concierge-btn:hover {
+  background: #25D366 !important;
+  color: #040924 !important;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35) !important;
+}
+
+.footer-social-links-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.footer-social-icon-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #CBD5E1 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+}
+
+.footer-social-icon-btn:hover {
+  background: #D1B054 !important;
+  color: #040924 !important;
+  border-color: #D1B054 !important;
+  transform: translateY(-2px) !important;
+}
+
+.footer-col-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif) !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.gold-dot {
+  display: inline-block !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #D1B054 !important;
+}
+
+.footer-links-list {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 6px !important;
+  gap: 9px !important;
 }
 
-.site-white-footer a,
-.footer-col-nav ul a,
-.footer-contact-list a {
-  color: #64748B !important;
+.footer-links-list a {
+  color: #94A3B8 !important;
+  font-size: 0.82rem !important;
   text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-block !important;
+}
+
+.footer-links-list a:hover {
+  color: #D1B054 !important;
+  transform: translateX(3px) !important;
+}
+
+.footer-contact-items {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.footer-contact-items li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
   font-size: 0.80rem !important;
+  color: #94A3B8 !important;
+}
+
+.contact-icon-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+  background: rgba(209, 176, 84, 0.12) !important;
+  color: #D1B054 !important;
+  flex-shrink: 0 !important;
+  margin-top: 1px !important;
+}
+
+.contact-text strong {
+  display: block !important;
+  color: #F8FAFC !important;
+  font-size: 0.74rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin-bottom: 2px !important;
+}
+
+.contact-text a {
+  color: #CBD5E1 !important;
+  text-decoration: none !important;
   transition: color 0.2s ease !important;
 }
 
-.site-white-footer a:hover,
-.footer-col-nav ul a:hover,
-.footer-contact-list a:hover {
+.contact-text a:hover {
   color: #D1B054 !important;
 }
 
-.footer-bottom-bar {
+/* 3. Bottom Legal & Payment Badges Bar */
+.footer-bottom-bar-royal {
   display: flex !important;
-  justify-content: space-between !important;
   align-items: center !important;
-  padding-top: 14px !important;
-  border-top: 1px solid rgba(209, 176, 84, 0.2) !important;
-  font-size: 0.74rem !important;
-  max-width: 1240px !important;
-  margin: 0 auto !important;
+  justify-content: space-between !important;
   flex-wrap: wrap !important;
-  gap: 12px !important;
+  gap: 16px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.copyright-text {
+  font-size: 0.75rem !important;
+  color: #64748B !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.copyright-text strong {
+  color: #94A3B8 !important;
+}
+
+.footer-legal-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.72rem !important;
+}
+
+.footer-legal-links a {
+  color: #64748B !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-legal-links a:hover {
+  color: #D1B054 !important;
+}
+
+.legal-sep {
+  color: #475569 !important;
+}
+
+.footer-payment-badges-wrap {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+.pay-pill {
+  display: inline-block !important;
+  padding: 4px 9px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 6px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: #CBD5E1 !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+.pay-pill-gold {
+  background: rgba(209, 176, 84, 0.14) !important;
+  border-color: rgba(209, 176, 84, 0.4) !important;
+  color: #F5DE9C !important;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 980px) {
+  .footer-vip-newsletter-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 24px 20px !important;
+  }
+  .footer-newsletter-form-wrap {
+    max-width: 100% !important;
+  }
+  .footer-main-grid-royal {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .site-luxury-royal-footer,
+  .site-white-footer {
+    padding: 36px 16px 20px !important;
+  }
+  .footer-main-grid-royal {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .footer-bottom-bar-royal {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+  .newsletter-input-group {
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    padding: 10px !important;
+    gap: 8px !important;
+  }
+  .newsletter-input {
+    width: 100% !important;
+    padding: 4px 8px !important;
+  }
+  .newsletter-submit-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+  }
 }
 
 /* Trust Pillars Horizontal Strip (Single Line, No Paragraphs) */
