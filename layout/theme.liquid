@@ -436,8 +436,106 @@
         text-shadow: 0 2px 14px rgba(209, 176, 84, 0.5), 0 1px 3px rgba(8, 25, 91, 0.8) !important;
       }
       .hero-supporting-copy {
-        color: rgba(255, 255, 255, 0.98) !important;
-        text-shadow: 0 2px 12px rgba(8, 25, 91, 0.8), 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+        color: #F0F4FF !important;
+        text-shadow: 0 2px 10px rgba(8, 25, 91, 0.9) !important;
+      }
+
+      /* ------------------------------------------------------------- */
+      /* HEADER ON WHITE BACKGROUND (INTERNAL PAGES & SCROLLED STATE)   */
+      /* ------------------------------------------------------------- */
+      .desktop-floating-header.header-solid-white,
+      body.template-internal .desktop-floating-header,
+      .desktop-floating-header.header-scrolled-white {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: #FFFFFF !important;
+        border-bottom: 1px solid rgba(209, 176, 84, 0.28) !important;
+        box-shadow: 0 4px 20px rgba(8, 25, 91, 0.06) !important;
+        padding: 14px 48px !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+      }
+
+      .desktop-floating-header.header-scrolled-white {
+        position: fixed !important;
+        top: 0 !important;
+        animation: slideDownNav 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Nav links in Brand Royal Navy Blue (#08195B) on white background */
+      .desktop-floating-header.header-solid-white .hero-nav-link,
+      body.template-internal .desktop-floating-header .hero-nav-link,
+      .desktop-floating-header.header-scrolled-white .hero-nav-link {
+        color: #08195B !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+      }
+
+      .desktop-floating-header.header-solid-white .hero-nav-link:hover,
+      .desktop-floating-header.header-solid-white .hero-nav-link.active,
+      body.template-internal .desktop-floating-header .hero-nav-link:hover,
+      body.template-internal .desktop-floating-header .hero-nav-link.active,
+      .desktop-floating-header.header-scrolled-white .hero-nav-link:hover,
+      .desktop-floating-header.header-scrolled-white .hero-nav-link.active {
+        color: #D1B054 !important;
+        text-shadow: none !important;
+      }
+
+      .desktop-floating-header.header-solid-white .hero-nav-link:after,
+      body.template-internal .desktop-floating-header .hero-nav-link:after,
+      .desktop-floating-header.header-scrolled-white .hero-nav-link:after {
+        background: #08195B !important;
+      }
+
+      /* Header actions (WhatsApp & Carrito) in Brand Navy */
+      .desktop-floating-header.header-solid-white .header-action-link,
+      .desktop-floating-header.header-solid-white .header-action-btn,
+      body.template-internal .desktop-floating-header .header-action-link,
+      body.template-internal .desktop-floating-header .header-action-btn,
+      .desktop-floating-header.header-scrolled-white .header-action-link,
+      .desktop-floating-header.header-scrolled-white .header-action-btn {
+        color: #08195B !important;
+        text-shadow: none !important;
+      }
+
+      .desktop-floating-header.header-solid-white .header-action-link:hover,
+      .desktop-floating-header.header-solid-white .header-action-btn:hover,
+      body.template-internal .desktop-floating-header .header-action-link:hover,
+      body.template-internal .desktop-floating-header .header-action-btn:hover,
+      .desktop-floating-header.header-scrolled-white .header-action-link:hover,
+      .desktop-floating-header.header-scrolled-white .header-action-btn:hover {
+        color: #D1B054 !important;
+      }
+
+      .desktop-floating-header.header-solid-white .header-action-divider,
+      body.template-internal .desktop-floating-header .header-action-divider,
+      .desktop-floating-header.header-scrolled-white .header-action-divider {
+        background: rgba(8, 25, 91, 0.22) !important;
+      }
+
+      .desktop-floating-header.header-solid-white .desktop-header-logo img,
+      body.template-internal .desktop-floating-header .desktop-header-logo img,
+      .desktop-floating-header.header-scrolled-white .desktop-header-logo img {
+        filter: none !important;
+      }
+
+      /* Announcement Bar on Internal Pages */
+      .top-announcement-bar.announcement-solid-navy,
+      body.template-internal .top-announcement-bar {
+        position: relative !important;
+        background: #08195B !important;
+      }
+
+      /* Spacing on internal pages so no header overlap occurs */
+      body.template-internal main#MainContent {
+        padding-top: 15px !important;
+      }
+
+      @keyframes slideDownNav {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(0); }
       }
     </style>
 
@@ -448,7 +546,7 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="{% if template.name == 'index' %}template-index{% else %}template-internal{% endif %} gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

@@ -1,7 +1,12 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
+{%- assign is_index = false -%}
+{%- if template.name == 'index' -%}
+  {%- assign is_index = true -%}
+{%- endif -%}
+
 <!-- TOP ANNOUNCEMENT MARQUEE (Continuous Ticker) -->
-<div class="top-announcement-bar" role="region" aria-label="Avisos importantes">
+<div class="top-announcement-bar {% unless is_index %}announcement-solid-navy{% endunless %}" role="region" aria-label="Avisos importantes">
   <div class="top-marquee-track">
     <!-- Group 1 -->
     <div class="top-marquee-group">
@@ -53,7 +58,7 @@
 </div>
 
 <!-- DESKTOP FLOATING HEADER -->
-<header class="desktop-floating-header" role="banner" aria-label="Navegación principal">
+<header class="desktop-floating-header {% unless is_index %}header-solid-white{% endunless %}" id="luxuryDesktopHeader" role="banner" aria-label="Navegación principal">
   <!-- Left: Brand Logo -->
   <a href="{{ routes.root_url }}" class="desktop-header-logo" title="La Bonita Jewelry">
     <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry">
@@ -135,6 +140,22 @@
     var isOpen = dd.classList.toggle('show');
     if (ch) ch.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
   }
+
+  (function() {
+    var header = document.getElementById('luxuryDesktopHeader');
+    if (!header) return;
+    var isIndex = {{ is_index | json }};
+    if (isIndex) {
+      window.addEventListener('scroll', function() {
+        var currentScroll = window.scrollY || window.pageYOffset;
+        if (currentScroll > 420) {
+          header.classList.add('header-scrolled-white');
+        } else {
+          header.classList.remove('header-scrolled-white');
+        }
+      }, { passive: true });
+    }
+  })();
 </script>
 
 {% schema %}
