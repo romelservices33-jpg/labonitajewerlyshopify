@@ -571,12 +571,12 @@ html {
   position: relative;
   z-index: 25;
   max-width: 1440px;
-  margin: 35px auto 0;
+  margin: 25px auto 0;
   width: 100%;
   padding: 0 45px;
   --card-gap: 20px;
   --hero-card-size: clamp(290px, 22vw, 335px);
-  margin-bottom: calc(-1 * var(--hero-card-size) / 2);
+  margin-bottom: 0 !important;
 }
 
 .cat-slider-container {
@@ -592,7 +592,7 @@ html {
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 20px 8px 60px 8px;
+  padding: 16px 8px 30px 8px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -5256,11 +5256,13 @@ html.shopify-design-mode .luxury-splash-screen {
    (SAME EXACT SIZE AND PROPORTIONS AS CATALOG CARDS)
    ========================================================================== */
 .editorial-vitrine-section {
-  padding: 60px 24px !important;
-  max-width: 1380px !important;
+  padding: 85px 36px 80px !important;
+  max-width: 1440px !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
   width: 100% !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 .editorial-vitrine-header {
