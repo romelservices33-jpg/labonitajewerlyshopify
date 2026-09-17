@@ -386,6 +386,56 @@
     {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
     <style>
+      /* Sentient Editorial High-Fashion Typography */
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-Regular.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-Regular.woff' | asset_url }}") format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-Italic.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-Italic.woff' | asset_url }}") format('woff');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-Medium.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-Medium.woff' | asset_url }}") format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-MediumItalic.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-MediumItalic.woff' | asset_url }}") format('woff');
+        font-weight: 500;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-Bold.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-Bold.woff' | asset_url }}") format('woff');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Sentient';
+        src: url("{{ 'Sentient-BoldItalic.woff2' | asset_url }}") format('woff2'),
+             url("{{ 'Sentient-BoldItalic.woff' | asset_url }}") format('woff');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+      }
+
       /* Global reset for luxury editorial design */
       main#MainContent {
         padding: 0 !important;
@@ -393,13 +443,14 @@
         max-width: 100% !important;
         width: 100% !important;
       }
-      /* Enforce FONDA typography across all headings, titles, and editorial elements */
+      /* Enforce SENTIENT typography across all headings, titles, and editorial elements */
       :root {
-        --font-serif: 'Fonda', 'Cormorant Garamond', Georgia, serif;
-        --font-heading: 'Fonda', 'Cormorant Garamond', Georgia, serif;
+        --font-serif: 'Sentient', 'Cormorant Garamond', Georgia, serif;
+        --font-heading: 'Sentient', 'Cormorant Garamond', Georgia, serif;
       }
-      h1, h2, h3, h4,
+      h1, h2, h3, h4, h5, h6,
       .macro-hero-title,
+      .hero-main-headline,
       .hero-editorial-title,
       .section-heading-luxe,
       .luxury-heading,
@@ -409,12 +460,15 @@
       .silk-card-title,
       .quick-view-title,
       .editorial-title,
+      .editorial-vitrine-title,
       .footer-col-title,
       .newsletter-headline,
       .modal-title,
+      .modal-product-title,
+      .cat-card-title,
       .font-serif,
       .font-heading {
-        font-family: 'Fonda', 'Cormorant Garamond', Georgia, serif !important;
+        font-family: 'Sentient', 'Cormorant Garamond', Georgia, serif !important;
       }
       body {
         background-color: #FAF9F6 !important;
