@@ -462,13 +462,14 @@ html {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(8, 25, 91, 0.88) 0%,
-    rgba(14, 30, 95, 0.72) 35%,
-    rgba(8, 25, 91, 0.78) 65%,
-    rgba(8, 25, 91, 0.96) 100%
+    rgba(8, 25, 91, 0.75) 0%,
+    rgba(8, 25, 91, 0.42) 28%,
+    rgba(235, 240, 252, 0.30) 58%,
+    rgba(250, 249, 246, 0.85) 85%,
+    #FAF9F6 100%
   );
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
   z-index: 2;
   pointer-events: none;
 }

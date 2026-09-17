@@ -7,7 +7,7 @@ const storefrontLiquidPath = path.join(rootDir, 'sections', 'bonita-luxury-store
 const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
 <style>
-  /* Direct Royal Sapphire Blue Hero Tint Overlay */
+  /* Direct Royal Sapphire Blue to Pearl White Ombre Gradient Overlay */
   .macro-hero-section {
     position: relative !important;
     background-color: #08195B !important;
@@ -21,7 +21,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
     object-fit: cover !important;
     object-position: center 20% !important;
     z-index: 1 !important;
-    opacity: 0.70 !important;
+    opacity: 0.82 !important;
   }
   .macro-hero-section .hero-gradient-overlay {
     position: absolute !important;
@@ -30,13 +30,14 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
     height: 100% !important;
     background: linear-gradient(
       180deg,
-      rgba(8, 25, 91, 0.88) 0%,
-      rgba(14, 30, 95, 0.72) 35%,
-      rgba(8, 25, 91, 0.78) 65%,
-      rgba(8, 25, 91, 0.96) 100%
+      rgba(8, 25, 91, 0.75) 0%,
+      rgba(8, 25, 91, 0.42) 28%,
+      rgba(235, 240, 252, 0.30) 58%,
+      rgba(250, 249, 246, 0.85) 85%,
+      #FAF9F6 100%
     ) !important;
-    backdrop-filter: blur(1px) !important;
-    -webkit-backdrop-filter: blur(1px) !important;
+    backdrop-filter: blur(0.5px) !important;
+    -webkit-backdrop-filter: blur(0.5px) !important;
     z-index: 2 !important;
     pointer-events: none !important;
     display: block !important;
@@ -47,15 +48,15 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
   }
   .hero-main-headline {
     color: #FFFFFF !important;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+    text-shadow: 0 4px 20px rgba(8, 25, 91, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6) !important;
   }
   .hero-main-headline span.gold-highlight {
     color: #D1B054 !important;
-    text-shadow: 0 2px 14px rgba(209, 176, 84, 0.4) !important;
+    text-shadow: 0 2px 14px rgba(209, 176, 84, 0.5), 0 1px 3px rgba(8, 25, 91, 0.8) !important;
   }
   .hero-supporting-copy {
-    color: rgba(255, 255, 255, 0.95) !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+    color: rgba(255, 255, 255, 0.98) !important;
+    text-shadow: 0 2px 12px rgba(8, 25, 91, 0.8), 0 1px 3px rgba(0, 0, 0, 0.5) !important;
   }
 </style>
 
