@@ -111,6 +111,8 @@
         {%- if product.tags contains '10k' or product.title contains '10K' or product.title contains '10k' -%}
           {%- assign karat_tag = '10k' -%}
         {%- endif -%}
+        {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
+        {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
         <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="15.0" data-size="24" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
@@ -132,6 +134,7 @@
           <div class="cutout-card-content">
             <div class="cutout-title-row">
               <h4 class="cutout-product-title"><a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));" style="color:inherit; text-decoration:none;">{{ product.title }}</a></h4>
+              <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado</span>
             </div>
             <div class="product-card-pricing-row">
               <div class="pricing-amounts">
@@ -141,7 +144,7 @@
                     <span class="price-was">{{ product.compare_at_price | money }}</span>
                   {%- endif -%}
                 </div>
-                <div class="affirm-monthly-badge">Oro 100% Auténtico Garantizado</div>
+                <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>
               </div>
               <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
