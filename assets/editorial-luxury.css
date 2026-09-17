@@ -1844,8 +1844,9 @@ html {
     gap: 10px !important;
   }
 
-  /* Compact product cards for 2-column mobile grid */
-  .product-shop-card {
+  /* Compact product cards for 2-column mobile grid: reduced vertical height */
+  .product-shop-card,
+  .cutout-product-card {
     border-radius: 14px !important;
   }
 
@@ -1886,64 +1887,72 @@ html {
   }
 
   .cutout-card-content {
-    padding: 10px 10px 12px !important;
+    padding: 7px 8px 9px !important;
   }
 
   .cutout-title-row {
-    margin-bottom: 6px !important;
+    margin-bottom: 2px !important;
   }
 
   .cutout-product-title {
-    font-size: 0.82rem !important;
-    line-height: 1.25 !important;
-    min-height: 2.5em !important;
+    font-size: 0.74rem !important;
+    line-height: 1.2 !important;
+    min-height: auto !important;
+    max-height: 2.4em !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-    margin: 0 0 3px 0 !important;
+    margin: 0 0 2px 0 !important;
+    font-weight: 700 !important;
   }
 
   .spec-weight-tag {
-    font-size: 0.64rem !important;
+    font-size: 0.58rem !important;
+    line-height: 1.1 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    margin-top: 2px !important;
+    margin-top: 1px !important;
+    color: #64748B !important;
   }
 
   .product-card-pricing-row {
-    margin-top: auto !important;
-    padding-top: 8px !important;
-    gap: 4px !important;
+    margin-top: 4px !important;
+    padding-top: 4px !important;
+    gap: 3px !important;
+    border-top: 1px solid rgba(8, 25, 91, 0.05) !important;
   }
 
   .pricing-amounts {
-    gap: 2px !important;
+    gap: 1px !important;
   }
 
   .pricing-numbers-row {
-    gap: 4px !important;
+    gap: 3px !important;
   }
 
   .price-now {
-    font-size: 0.95rem !important;
+    font-size: 0.84rem !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
   }
 
   .price-was {
-    font-size: 0.72rem !important;
+    font-size: 0.64rem !important;
+    line-height: 1 !important;
   }
 
   .affirm-monthly-badge {
-    font-size: 0.58rem !important;
-    line-height: 1.15 !important;
+    font-size: 0.52rem !important;
+    line-height: 1.1 !important;
   }
 
   .btn-add-cart-pill {
-    width: 34px !important;
-    height: 34px !important;
-    min-width: 34px !important;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
     padding: 0 !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -1953,45 +1962,38 @@ html {
   }
 
   .btn-add-cart-pill svg {
-    width: 16px !important;
-    height: 16px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .cutout-card-wishlist {
-    width: 28px !important;
-    height: 28px !important;
-    top: 8px !important;
-    left: 8px !important;
+    width: 26px !important;
+    height: 26px !important;
+    top: 6px !important;
+    left: 6px !important;
   }
 
   .cutout-card-wishlist svg {
-    width: 13px !important;
-    height: 13px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .cutout-card-pin {
-    height: 24px !important;
-    font-size: 0.55rem !important;
-    padding: 0 8px 0 2px !important;
-  }
-
-  .cutout-corner-pin-left {
-    width: 18px !important;
-    height: 24px !important;
+    height: 20px !important;
+    font-size: 0.52rem !important;
+    padding: 0 7px !important;
+    border-radius: 0 0 0 8px !important;
   }
 
   .cutout-card-inset-label {
-    height: 24px !important;
-    padding: 0 2px 0 8px !important;
+    bottom: 5px !important;
+    left: 5px !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
   }
 
   .cutout-label-text {
-    font-size: 0.55rem !important;
-  }
-
-  .cutout-corner-label-right {
-    width: 18px !important;
-    height: 24px !important;
+    font-size: 0.52rem !important;
   }
 }
 
@@ -2745,21 +2747,21 @@ svg.cutout-corner,
     display: none !important;
   }
 
-  /* Compact collection cards: shorter vertically, wider proportion */
+  /* Square cards with full-bleed images (original balanced square) */
   .cat-square-card {
-    flex: 0 0 clamp(118px, 32vw, 138px) !important;
-    width: clamp(118px, 32vw, 138px) !important;
-    min-width: 118px !important;
-    max-width: 138px !important;
-    height: clamp(92px, 24vw, 106px) !important;
-    min-height: 90px !important;
-    max-height: 108px !important;
-    aspect-ratio: 1.25 / 1 !important;
+    flex: 0 0 clamp(110px, 30vw, 125px) !important;
+    width: clamp(110px, 30vw, 125px) !important;
+    min-width: 110px !important;
+    max-width: 125px !important;
+    height: clamp(110px, 30vw, 125px) !important;
+    min-height: 110px !important;
+    max-height: 125px !important;
+    aspect-ratio: 1 / 1 !important;
     scroll-snap-align: start !important;
-    padding: 7px 9px 7px !important;
+    padding: 8px !important;
     border-radius: 14px !important;
     box-shadow: 0 4px 14px rgba(8, 25, 91, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02) !important;
-    border: 1px solid rgba(209, 176, 84, 0.3) !important;
+    border: 1px solid rgba(229, 231, 235, 0.85) !important;
     box-sizing: border-box !important;
     position: relative !important;
     overflow: hidden !important;
@@ -2888,12 +2890,13 @@ svg.cutout-corner,
 
   .middle-cards-grid .product-shop-card,
   .silk-cards-grid .product-shop-card {
-    flex: 0 0 250px !important;
-    min-width: 250px !important;
-    max-width: 78vw !important;
+    flex: 0 0 clamp(160px, 45vw, 180px) !important;
+    min-width: clamp(160px, 45vw, 180px) !important;
+    max-width: 180px !important;
     scroll-snap-align: start;
     padding: 0 !important;
     overflow: hidden !important;
+    border-radius: 14px !important;
   }
 
   .middle-cards-grid .cutout-card-media,
@@ -2938,7 +2941,7 @@ svg.cutout-corner,
 
   .middle-cards-grid .cutout-card-content,
   .silk-cards-grid .cutout-card-content {
-    padding: 12px 14px 14px !important;
+    padding: 7px 8px 9px !important;
   }
 
   .product-image-frame {
