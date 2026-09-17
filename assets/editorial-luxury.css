@@ -1727,7 +1727,10 @@ html {
   .cutout-card-media {
     width: 100% !important;
     aspect-ratio: 1 / 1 !important;
-    height: auto !important;
+    height: 0 !important;
+    padding-bottom: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   .cutout-card-content {
@@ -1760,17 +1763,37 @@ html {
   .cutout-card-media {
     width: 100% !important;
     aspect-ratio: 1 / 1 !important;
-    height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
+    height: 0 !important;
+    padding-bottom: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
-  .cutout-card-image,
-  .mock-camera-placeholder {
+  .cutout-card-media > a,
+  .cutout-card-media a {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    aspect-ratio: 1 / 1 !important;
+    display: block !important;
+  }
+
+  .cutout-card-media img,
+  .cutout-card-img,
+  .cutout-card-image,
+  .mock-camera-placeholder {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
     object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
   }
 
   .cutout-card-content {
@@ -1906,28 +1929,50 @@ html {
   border-color: rgba(209, 176, 84, 0.75);
 }
 
-/* 1. Media Container */
+/* 1. Media Container (Strict 1:1 Aspect Ratio + 100% Cover Image) */
 .cutout-card-media {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  height: auto;
+  height: 0;
+  padding-bottom: 100%;
   overflow: hidden;
   background: #F8F7F3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cutout-card-image {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   display: block;
 }
 
+.cutout-card-media > a,
+.cutout-card-media a {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cutout-card-media img,
+.cutout-card-img,
+.cutout-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+}
+
+.product-shop-card:hover .cutout-card-media img,
+.product-shop-card:hover .cutout-card-img,
 .product-shop-card:hover .cutout-card-image {
   transform: scale(1.06);
 }
@@ -2741,17 +2786,39 @@ html {
   .silk-cards-grid .cutout-card-media {
     width: 100% !important;
     aspect-ratio: 1 / 1 !important;
-    height: auto !important;
+    height: 0 !important;
+    padding-bottom: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
     margin: 0 !important;
-    padding: 0 !important;
   }
 
-  .middle-cards-grid .cutout-card-image,
-  .silk-cards-grid .cutout-card-image {
+  .middle-cards-grid .cutout-card-media > a,
+  .middle-cards-grid .cutout-card-media a,
+  .silk-cards-grid .cutout-card-media > a,
+  .silk-cards-grid .cutout-card-media a {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    aspect-ratio: 1 / 1 !important;
+    display: block !important;
+  }
+
+  .middle-cards-grid .cutout-card-img,
+  .middle-cards-grid .cutout-card-image,
+  .silk-cards-grid .cutout-card-img,
+  .silk-cards-grid .cutout-card-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
     object-fit: cover !important;
+    object-position: center center !important;
     display: block !important;
   }
 
