@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <!-- Products Grid (Paginated 6 per page) -->
+    <!-- Products Grid (8 on Desktop, 6 on Mobile) -->
     <div class="catalog-products-grid" id="collectionProductsGrid">
       {%- for product in collection.products -%}
         {%- assign cat_tag = product.type | default: collection.title | downcase -%}
@@ -160,7 +160,7 @@
       {%- endfor -%}
     </div>
 
-    <!-- Pagination Controls (6 products per page) -->
+    <!-- Pagination Controls (8 on Desktop, 6 on Mobile) -->
     <div class="catalog-pagination-bar" id="collectionPaginationBar"></div>
 
     <!-- Trust Strip Horizontal -->
@@ -174,7 +174,9 @@
 <!-- JavaScript for Collection Filtering & 6-Product Pagination -->
 <script>
   var collectionPage = 1;
-  var COLLECTION_PER_PAGE = 6;
+  function getCollectionPerPage() {
+    return (window.innerWidth && window.innerWidth <= 860) ? 6 : 8;
+  }
   var activeCollectionKarat = 'all';
   var activeCollectionSort = 'default';
   var activeCollectionWeight = 70;
@@ -202,11 +204,12 @@
     allCards.forEach(function(c) { c.style.display = 'none'; });
 
     var total = activeCards.length;
-    var totalPages = Math.max(1, Math.ceil(total / COLLECTION_PER_PAGE));
+    var perPage = getCollectionPerPage();
+    var totalPages = Math.max(1, Math.ceil(total / perPage));
     if (collectionPage > totalPages) collectionPage = 1;
 
-    var start = (collectionPage - 1) * COLLECTION_PER_PAGE;
-    var end = start + COLLECTION_PER_PAGE;
+    var start = (collectionPage - 1) * perPage;
+    var end = start + perPage;
     var pageCards = activeCards.slice(start, end);
 
     pageCards.forEach(function(c) { c.style.display = 'flex'; });
@@ -307,6 +310,14 @@
 
   document.addEventListener('DOMContentLoaded', initCollectionPagination);
   if (document.readyState !== 'loading') initCollectionPagination();
+
+  var resizeCollectionTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeCollectionTimer);
+    resizeCollectionTimer = setTimeout(function() {
+      paginateCollectionGrid();
+    }, 150);
+  });
 </script>
 
 {% schema %}

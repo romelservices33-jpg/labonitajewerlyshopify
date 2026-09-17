@@ -1570,7 +1570,7 @@
         {%- endif -%}
       </div>
 
-      <!-- Dynamic Pagination Controls (Exact 6 products per page) -->
+      <!-- Dynamic Pagination Controls (8 on Desktop, 6 on Mobile) -->
       <div class="catalog-pagination-bar" id="catalogPaginationBar"></div>
 
       <!-- Empty State -->
@@ -2165,9 +2165,11 @@
 
   <!-- STOREFRONT JAVASCRIPT CONTROLLER -->
   <script>
-    /* Catalog Dynamic 6-Product Pagination & Filtering Engine */
+    /* Catalog Dynamic Responsive Pagination & Filtering Engine (8 on Desktop, 6 on Mobile) */
     var catalogPage = 1;
-    var CATALOG_PER_PAGE = 6;
+    function getCatalogPerPage() {
+      return (window.innerWidth && window.innerWidth <= 860) ? 6 : 8;
+    }
     var currentCatalogCategory = 'todos';
     var activeKaratFilter = 'all';
     var activeSizeFilter = 'all';
@@ -2222,11 +2224,12 @@
       activeCards = sortCatalogCards(activeCards);
 
       var total = activeCards.length;
-      var totalPages = Math.max(1, Math.ceil(total / CATALOG_PER_PAGE));
+      var perPage = getCatalogPerPage();
+      var totalPages = Math.max(1, Math.ceil(total / perPage));
       if (catalogPage > totalPages) catalogPage = 1;
 
-      var start = (catalogPage - 1) * CATALOG_PER_PAGE;
-      var end = start + CATALOG_PER_PAGE;
+      var start = (catalogPage - 1) * perPage;
+      var end = start + perPage;
       var pageCards = activeCards.slice(start, end);
 
       pageCards.forEach(function(c) {
@@ -2448,6 +2451,14 @@
       paginateCatalogGrid();
       setTimeout(dismissSplashScreen, 500);
     }
+  
+    var resizeCatalogTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeCatalogTimer);
+      resizeCatalogTimer = setTimeout(function() {
+        paginateCatalogGrid();
+      }, 150);
+    });
   </script>
 
   <!-- MOBILE FLOATING BOTTOM DOCK -->
