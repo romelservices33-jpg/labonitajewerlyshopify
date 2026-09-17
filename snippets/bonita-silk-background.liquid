@@ -1,0 +1,253 @@
+<!-- ========================================================================= -->
+<!-- REACT BITS SILK BACKGROUND COMPONENT (WebGL / GPU Shader Animation)        -->
+<!-- ========================================================================= -->
+<div class="bonita-silk-container" id="bonitaSilkWrap-{{ id | default: 'main' }}">
+  <canvas class="bonita-silk-canvas" id="bonitaSilkCanvas-{{ id | default: 'main' }}"></canvas>
+  <div class="bonita-silk-overlay"></div>
+</div>
+
+<style>
+  .bonita-silk-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+    background: #040924;
+  }
+  .bonita-silk-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .bonita-silk-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, transparent 20%, rgba(4, 9, 36, 0.45) 80%, rgba(4, 9, 36, 0.8) 100%);
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  (function() {
+    var canvasId = 'bonitaSilkCanvas-{{ id | default: "main" }}';
+    var canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    var isWebGL = !!gl;
+
+    var mouse = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 };
+    var time = 0;
+    var animFrame;
+
+    // Track mouse movement across window or parent section
+    window.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        mouse.targetX = (e.clientX - rect.left) / rect.width;
+        mouse.targetY = 1.0 - (e.clientY - rect.top) / rect.height;
+      }
+    }, { passive: true });
+
+    if (isWebGL) {
+      // -----------------------------------------------------------------------
+      // WebGL SILK SHADER IMPLEMENTATION
+      // -----------------------------------------------------------------------
+      var vertSrc = [
+        'attribute vec2 position;',
+        'varying vec2 vUv;',
+        'void main() {',
+        '  vUv = position * 0.5 + 0.5;',
+        '  gl_Position = vec4(position, 0.0, 1.0);',
+        '}'
+      ].join('\n');
+
+      var fragSrc = [
+        'precision highp float;',
+        'uniform vec2 u_resolution;',
+        'uniform float u_time;',
+        'uniform vec2 u_mouse;',
+        'varying vec2 vUv;',
+        '',
+        '// Smooth FBM & Silk Wave Functions',
+        'float hash(vec2 p) {',
+        '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);',
+        '}',
+        '',
+        'float noise(vec2 p) {',
+        '  vec2 i = floor(p);',
+        '  vec2 f = fract(p);',
+        '  vec2 u = f * f * (3.0 - 2.0 * f);',
+        '  return mix(mix(hash(i + vec2(0.0,0.0)), hash(i + vec2(1.0,0.0)), u.x),',
+        '             mix(hash(i + vec2(0.0,1.0)), hash(i + vec2(1.0,1.0)), u.x), u.y);',
+        '}',
+        '',
+        'float fbm(vec2 p) {',
+        '  float v = 0.0;',
+        '  float a = 0.5;',
+        '  mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));',
+        '  for (int i = 0; i < 4; ++i) {',
+        '    v += a * noise(p);',
+        '    p = rot * p * 2.0 + vec2(100.0);',
+        '    a *= 0.5;',
+        '  }',
+        '  return v;',
+        '}',
+        '',
+        'void main() {',
+        '  vec2 uv = gl_FragCoord.xy / u_resolution.xy;',
+        '  vec2 p = uv * 3.0;',
+        '  ',
+        '  float t = u_time * 0.45;',
+        '  vec2 mouseOffset = (u_mouse - 0.5) * 0.6;',
+        '  ',
+        '  // Simulating undulating fluid silk folds',
+        '  vec2 q = vec2(fbm(p + t * 0.15 + mouseOffset), fbm(p + vec2(5.2, 1.3) - t * 0.1));',
+        '  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + 0.15 * t), fbm(p + 3.0 * q + vec2(8.3, 2.8) + 0.126 * t));',
+        '  ',
+        '  float f = fbm(p + 4.0 * r + mouseOffset * 2.0);',
+        '  ',
+        '  // Silk Fold Ridges (derivative highlight)',
+        '  float fold = sin(f * 8.0 + t);',
+        '  float sheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 3.0);',
+        '  float goldSheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 7.0) * 0.35;',
+        '  ',
+        '  // Royal Navy & Deep Sapphire palette with Gold Accents',
+        '  vec3 cDeepNavy   = vec3(0.015, 0.04, 0.14);  // #040A24',
+        '  vec3 cRoyalBlue  = vec3(0.031, 0.098, 0.357); // #08195B',
+        '  vec3 cSapphire   = vec3(0.055, 0.176, 0.55);  // #0E2D8C',
+        '  vec3 cLightLuxe  = vec3(0.18, 0.34, 0.78);   // Highlight silk shimmer',
+        '  vec3 cGold       = vec3(0.82, 0.69, 0.33);   // #D1B054 Signature Gold',
+        '  ',
+        '  vec3 color = mix(cDeepNavy, cRoyalBlue, clamp(f * f * 2.5, 0.0, 1.0));',
+        '  color = mix(color, cSapphire, clamp(length(q), 0.0, 1.0) * 0.85);',
+        '  color = mix(color, cLightLuxe, sheen * 0.42);',
+        '  color += cGold * goldSheen * 0.55;',
+        '  ',
+        '  gl_FragColor = vec4(color, 1.0);',
+        '}'
+      ].join('\n');
+
+      function createShader(gl, type, source) {
+        var s = gl.createShader(type);
+        gl.shaderSource(s, source);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.warn('Shader compile failed:', gl.getShaderInfoLog(s));
+          gl.deleteShader(s);
+          return null;
+        }
+        return s;
+      }
+
+      var vs = createShader(gl, gl.VERTEX_SHADER, vertSrc);
+      var fs = createShader(gl, gl.FRAGMENT_SHADER, fragSrc);
+      if (!vs || !fs) return;
+
+      var program = gl.createProgram();
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.warn('Program link failed:', gl.getProgramInfoLog(program));
+        return;
+      }
+
+      gl.useProgram(program);
+
+      var positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1,
+         1, -1,
+        -1,  1,
+        -1,  1,
+         1, -1,
+         1,  1
+      ]), gl.STATIC_DRAW);
+
+      var posAttr = gl.getAttribLocation(program, 'position');
+      gl.enableVertexAttribArray(posAttr);
+      gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+      var uResolution = gl.getUniformLocation(program, 'u_resolution');
+      var uTime = gl.getUniformLocation(program, 'u_time');
+      var uMouse = gl.getUniformLocation(program, 'u_mouse');
+
+      function resize() {
+        var w = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+        var h = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+        var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      function render() {
+        time += 0.016;
+        mouse.x += (mouse.targetX - mouse.x) * 0.05;
+        mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+        gl.uniform2f(uResolution, canvas.width, canvas.height);
+        gl.uniform1f(uTime, time);
+        gl.uniform2f(uMouse, mouse.x, mouse.y);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        animFrame = requestAnimationFrame(render);
+      }
+      render();
+
+    } else {
+      // -----------------------------------------------------------------------
+      // 2D CANVAS FALLBACK SILK WAVES (If WebGL is unavailable)
+      // -----------------------------------------------------------------------
+      var ctx = canvas.getContext('2d');
+      function resizeFallback() {
+        canvas.width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+        canvas.height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+      }
+      window.addEventListener('resize', resizeFallback);
+      resizeFallback();
+
+      function renderFallback() {
+        time += 0.02;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#040A24');
+        grad.addColorStop(0.5, '#08195B');
+        grad.addColorStop(1, '#0E2D8C');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, canvas.height * (0.3 + i * 0.15));
+          for (var x = 0; x < canvas.width; x += 20) {
+            var y = Math.sin(x * 0.003 + time + i * 0.8) * 40 +
+                    Math.cos(x * 0.006 - time * 0.7 + i) * 25 +
+                    canvas.height * (0.3 + i * 0.15);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.closePath();
+          ctx.fillStyle = 'rgba(14, 45, 140, ' + (0.15 + i * 0.08) + ')';
+          ctx.fill();
+        }
+
+        animFrame = requestAnimationFrame(renderFallback);
+      }
+      renderFallback();
+    }
+  })();
+</script>
