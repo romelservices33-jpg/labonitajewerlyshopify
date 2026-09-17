@@ -1,6 +1,6 @@
 <!-- ========================================================================= -->
-<!-- REACT BITS PEARL WHITE SILK & GOLD BACKGROUND (WebGL / GPU Shader)        -->
-<!-- Ultra-subtle, casi imperceptible luxury satin waves                      -->
+<!-- REACT BITS BLANCO PULCRO SILK & GOLD BACKGROUND (WebGL / GPU Shader)      -->
+<!-- Movimiento autónomo continuo (60fps), blanco nítido y pliegues platino    -->
 <!-- ========================================================================= -->
 <div class="bonita-pearl-silk-background" id="bonitaPearlSilkWrap" aria-hidden="true">
   <canvas class="bonita-pearl-silk-canvas" id="bonitaPearlSilkCanvas"></canvas>
@@ -17,7 +17,7 @@
     overflow: hidden;
     z-index: 0;
     pointer-events: none;
-    background-color: #FAF9F6;
+    background-color: #FFFFFF;
   }
 
   .bonita-pearl-silk-canvas {
@@ -32,7 +32,7 @@
   .bonita-pearl-silk-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 90% 80% at 50% 40%, transparent 60%, rgba(240, 236, 230, 0.35) 100%);
+    background: radial-gradient(ellipse 90% 80% at 50% 40%, transparent 65%, rgba(226, 232, 240, 0.20) 100%);
     pointer-events: none;
   }
 
@@ -48,10 +48,10 @@
   }
 
   body {
-    background-color: #FAF9F6 !important;
+    background-color: #FFFFFF !important;
   }
 
-  /* Section backgrounds flow seamlessly over subtle Pearl Silk */
+  /* Section backgrounds flow seamlessly over subtle Pure White Silk */
   .hero-overlapping-cards-wrap,
   .cat-slider-container,
   .editorial-vitrine-section,
@@ -69,7 +69,7 @@
     z-index: 2 !important;
   }
 
-  /* Editorial Typography on Pearl White Silk */
+  /* Editorial Typography on Pure White Silk */
   .editorial-vitrine-title,
   .catalog-title,
   .section-heading-luxe,
@@ -218,7 +218,7 @@
 
     if (isWebGL) {
       // -----------------------------------------------------------------------
-      // WebGL PEARL WHITE & GOLD SILK SHADER (Casi Imperceptible)
+      // WebGL BLANCO PULCRO SILK SHADER (Movimiento Autónomo Continuo)
       // -----------------------------------------------------------------------
       var vertSrc = [
         'attribute vec2 position;',
@@ -263,33 +263,36 @@
         'void main() {',
         '  // Isotropic aspect ratio corrected coordinates',
         '  vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);',
-        '  vec2 p = uv * 2.2;',
+        '  vec2 p = uv * 2.4;',
         '  ',
-        '  float t = u_time * 0.22;',
-        '  vec2 mouseOffset = (u_mouse - 0.5) * 0.30;',
+        '  // Continuous autonomous organic wave propagation (moves independently)',
+        '  float t = u_time * 0.40;',
+        '  vec2 autoFlow = vec2(sin(t * 0.35) * 0.22 + t * 0.09, cos(t * 0.30) * 0.18 - t * 0.07);',
+        '  vec2 mouseOffset = (u_mouse - 0.5) * 0.25;',
         '  ',
-        '  // Undulating fluid silk coordinates',
-        '  vec2 q = vec2(fbm(p + t * 0.06 + mouseOffset), fbm(p + vec2(5.2, 1.3) - t * 0.05));',
-        '  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + 0.06 * t), fbm(p + 3.0 * q + vec2(8.3, 2.8) + 0.05 * t));',
+        '  // Multi-octave fluid silk coordinates',
+        '  vec2 q = vec2(fbm(p + autoFlow + mouseOffset), fbm(p + vec2(5.2, 1.3) - autoFlow * 0.8));',
+        '  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + t * 0.10), fbm(p + 3.0 * q + vec2(8.3, 2.8) - t * 0.08));',
         '  ',
-        '  float f = fbm(p + 3.5 * r + mouseOffset * 1.0);',
+        '  float f = fbm(p + 3.4 * r + mouseOffset * 0.6);',
         '  ',
         '  // Silk ridge highlights and soft satin shading',
-        '  float fold = sin(f * 6.0 + t);',
+        '  float fold = sin(f * 6.5 + t * 0.7);',
         '  float sheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 3.0);',
         '  float goldSheen = pow(clamp(fold * 0.5 + 0.5, 0.0, 1.0), 5.5);',
         '  ',
-        '  // Ultra-subtle luxury Pearl White, Soft Alabaster & Champagne Gold Palette',
-        '  vec3 cPearl     = vec3(0.985, 0.980, 0.972); // #FAF9F6 Pearl White Canvas',
-        '  vec3 cAlabaster = vec3(0.965, 0.958, 0.948); // #F7F4F0 Alabaster Silk Fold',
-        '  vec3 cSatinFold = vec3(0.945, 0.935, 0.918); // #F1ECE4 Subtle Satin Wave',
-        '  vec3 cHighlight = vec3(1.0, 1.0, 1.0);       // Pure White Shimmer',
-        '  vec3 cGold      = vec3(0.88, 0.76, 0.42);    // #D1B054 Champagne Gold Sheen',
+        '  // BLANCO PULCRO (Pure Pristine White, Cool Platinum Shimmer & Subtle Gold Glow)',
+        '  // ZERO yellowish / bone / ivory tints',
+        '  vec3 cPureWhite     = vec3(1.0, 1.0, 1.0);       // #FFFFFF Blanco Pulcro Canvas',
+        '  vec3 cPlatinumShade = vec3(0.925, 0.940, 0.965); // #ECF0F6 Cool Platinum Silk Fold',
+        '  vec3 cIceSilk       = vec3(0.865, 0.890, 0.930); // #DDE3ED Soft Sculptural Silver/Silk Shade',
+        '  vec3 cHighlight     = vec3(1.0, 1.0, 1.0);       // Pure White Shimmer',
+        '  vec3 cChampagneGold = vec3(0.90, 0.78, 0.45);    // #D1B054 Subtle Champagne Gold',
         '  ',
-        '  vec3 color = mix(cPearl, cAlabaster, clamp(f * 0.85, 0.0, 1.0));',
-        '  color = mix(color, cSatinFold, clamp(length(q) * 0.40, 0.0, 1.0));',
-        '  color = mix(color, cHighlight, sheen * 0.30);',
-        '  color += cGold * goldSheen * 0.10; // Ultra-subtle, casi imperceptible',
+        '  vec3 color = mix(cPureWhite, cPlatinumShade, clamp(f * 1.35, 0.0, 1.0));',
+        '  color = mix(color, cIceSilk, clamp(length(q) * 0.75, 0.0, 1.0));',
+        '  color = mix(color, cHighlight, sheen * 0.50);',
+        '  color += cChampagneGold * goldSheen * 0.16; // Reflejo visible y sedoso',
         '  ',
         '  gl_FragColor = vec4(color, 1.0);',
         '}'
@@ -352,9 +355,9 @@
       resize();
 
       function render() {
-        time += 0.010;
-        mouse.x += (mouse.targetX - mouse.x) * 0.030;
-        mouse.y += (mouse.targetY - mouse.y) * 0.030;
+        time += 0.016; // Continuous autonomous 60fps tick
+        mouse.x += (mouse.targetX - mouse.x) * 0.035;
+        mouse.y += (mouse.targetY - mouse.y) * 0.035;
 
         gl.uniform2f(uResolution, canvas.width, canvas.height);
         gl.uniform1f(uTime, time);
@@ -376,10 +379,10 @@
       resizeFallback();
 
       function renderFallback() {
-        time += 0.012;
+        time += 0.018;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#FAF9F6';
+        ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         var baseDim = Math.min(canvas.width, canvas.height);
@@ -388,15 +391,15 @@
           ctx.beginPath();
           ctx.moveTo(0, canvas.height * (0.2 + i * 0.22));
           for (var x = 0; x <= canvas.width; x += 20) {
-            var y = Math.sin(x * waveFreq + time + i * 0.8) * (baseDim * 0.04) +
-                    Math.cos(x * waveFreq * 1.8 - time * 0.5 + i) * (baseDim * 0.025) +
+            var y = Math.sin(x * waveFreq + time + i * 0.8) * (baseDim * 0.05) +
+                    Math.cos(x * waveFreq * 1.8 - time * 0.6 + i) * (baseDim * 0.03) +
                     canvas.height * (0.2 + i * 0.22);
             ctx.lineTo(x, y);
           }
           ctx.lineTo(canvas.width, canvas.height);
           ctx.lineTo(0, canvas.height);
           ctx.closePath();
-          ctx.fillStyle = 'rgba(240, 236, 230, ' + (0.25 + i * 0.08) + ')';
+          ctx.fillStyle = 'rgba(226, 232, 240, ' + (0.22 + i * 0.08) + ')';
           ctx.fill();
         }
 
