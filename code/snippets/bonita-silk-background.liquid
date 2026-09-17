@@ -298,6 +298,49 @@
     color: #08195B !important;
   }
 
+  /* Luxury Hero Brand Logo Gold Entrance & Shimmer Aura */
+  @keyframes heroLogoGoldEntrance {
+    0% {
+      opacity: 0;
+      transform: scale(0.84) translateY(22px);
+      filter: drop-shadow(0 0 0px rgba(209, 176, 84, 0)) brightness(0.5) contrast(1.3);
+    }
+    35% {
+      opacity: 0.85;
+      filter: drop-shadow(0 0 35px rgba(209, 176, 84, 0.95)) drop-shadow(0 0 15px rgba(255, 235, 170, 0.85)) brightness(1.6);
+    }
+    65% {
+      opacity: 1;
+      transform: scale(1.05) translateY(-3px);
+      filter: drop-shadow(0 12px 38px rgba(8, 25, 91, 0.65)) drop-shadow(0 0 25px rgba(209, 176, 84, 0.75)) brightness(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: drop-shadow(0 8px 30px rgba(8, 25, 91, 0.5)) drop-shadow(0 2px 10px rgba(209, 176, 84, 0.35)) brightness(1);
+    }
+  }
+
+  @keyframes heroLogoAuraPulse {
+    0%, 100% {
+      filter: drop-shadow(0 8px 30px rgba(8, 25, 91, 0.5)) drop-shadow(0 2px 10px rgba(209, 176, 84, 0.35));
+    }
+    50% {
+      filter: drop-shadow(0 12px 38px rgba(8, 25, 91, 0.65)) drop-shadow(0 0 20px rgba(209, 176, 84, 0.75)) brightness(1.08);
+    }
+  }
+
+  .hero-large-desktop-logo {
+    animation: heroLogoGoldEntrance 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards,
+               heroLogoAuraPulse 5s ease-in-out 2.0s infinite !important;
+    will-change: transform, filter, opacity;
+  }
+
+  .desktop-header-logo img {
+    animation: heroLogoGoldEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards !important;
+    will-change: transform, filter, opacity;
+  }
+
   .product-shop-card,
   .cutout-product-card {
     border-radius: 20px !important;
@@ -409,7 +452,6 @@
       height: 26px !important;
       min-width: 26px !important;
       padding: 0 !important;
-    }
     .btn-add-cart-pill svg {
       width: 12px !important;
       height: 12px !important;
@@ -419,6 +461,11 @@
       flex: 0 0 clamp(160px, 45vw, 180px) !important;
       min-width: clamp(160px, 45vw, 180px) !important;
       max-width: 180px !important;
+    }
+    .mobile-top-brand img {
+      animation: heroLogoGoldEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards,
+                 heroLogoAuraPulse 5s ease-in-out 1.8s infinite !important;
+      will-change: transform, filter, opacity;
     }
   }
 </style>
