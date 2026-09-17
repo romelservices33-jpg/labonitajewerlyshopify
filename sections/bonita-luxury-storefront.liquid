@@ -287,8 +287,8 @@
             Descubre joyas auténticas en oro de 10K y 14K con financiamiento y envío asegurado a todos los Estados Unidos y Puerto Rico.
           </p>
           <div class="hero-cta-group">
-            <a href="/collections/all" class="btn-pill-white">Ver Colecciones</a>
-            <a href="#financiamiento" class="btn-pill-glass">Financiamiento Affirm</a>
+            <a href="#catalogo" onclick="handleNavCategory(event, 'todos')" class="btn-pill-white">Ver Todos los Productos</a>
+            <a href="#ubicacion-mapa" class="btn-pill-glass">Ver en el Mapa</a>
           </div>
         </div>
 
@@ -1327,11 +1327,134 @@
       </span>
       <span>Garantía de Autenticidad de por Vida</span>
     </div>
+  <!-- ========================================================================= -->
+  <!-- 7.5 SECCIÓN: NUESTRA BOUTIQUE, MAPA & HORARIOS                             -->
+  <!-- ========================================================================= -->
+  <section class="boutique-location-section" id="ubicacion-mapa" style="padding: 70px 20px 60px; background: transparent; position: relative; z-index: 10;">
+    <div style="max-width: 1240px; margin: 0 auto;">
+      
+      <!-- Section Header -->
+      <div style="text-align: center; margin-bottom: 36px;">
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em; color: #D1B054; text-transform: uppercase;">✦ Sede Exclusiva & Atención VIP ✦</span>
+        <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 600; color: #08195B; margin: 6px 0 10px; line-height: 1.15;">
+          Visítanos en Nuestra <span style="color: #D1B054; font-style: italic;">Boutique & Horarios</span>
+        </h2>
+        <p style="font-size: 0.9rem; color: #64748B; max-width: 620px; margin: 0 auto; line-height: 1.55;">
+          Ven y conoce nuestras piezas en persona, solicita asesoría personalizada en quilataje y peso en gramos, y adquiere tu joya con total garantía.
+        </p>
+      </div>
+
+      <!-- 2-Column Grid: Info & Schedule (Left) + Interactive Map (Right) -->
+      <div class="boutique-grid-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch;">
+        
+        <!-- LEFT: Information & Schedule Card -->
+        <div style="background: #FFFFFF; border-radius: 24px; padding: 32px; box-shadow: 0 10px 30px rgba(8, 25, 91, 0.06); border: 1.5px solid rgba(209, 176, 84, 0.35); display: flex; flex-direction: column; justify-content: space-between;">
+          
+          <div>
+            <!-- Boutique Title & Badge -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(209, 176, 84, 0.12); display: flex; align-items: center; justify-content: center; color: #D1B054;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #08195B; margin: 0;">La Bonita Jewelry Sede</h3>
+                  <span style="font-size: 0.78rem; color: #64748B;">Louisville, Kentucky, USA</span>
+                </div>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(5, 150, 105, 0.10); color: #059669; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid rgba(5, 150, 105, 0.25);">
+                <span style="width: 6px; height: 6px; background: #059669; border-radius: 50%;"></span>
+                Abierto Hoy
+              </span>
+            </div>
+
+            <!-- Schedule Highlight Box -->
+            <div style="background: rgba(209, 176, 84, 0.07); border: 1px solid rgba(209, 176, 84, 0.25); border-radius: 18px; padding: 20px; margin-bottom: 24px;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: #08195B; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.08em;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Horarios de Atención</span>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(209, 176, 84, 0.25); padding-bottom: 8px;">
+                  <span style="color: #475569; font-weight: 600;">Lunes a Viernes</span>
+                  <span style="font-weight: 800; color: #08195B;">10:00 AM – 8:00 PM EST</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(209, 176, 84, 0.25); padding-bottom: 8px;">
+                  <span style="color: #475569; font-weight: 600;">Sábados</span>
+                  <span style="font-weight: 800; color: #08195B;">10:00 AM – 7:00 PM EST</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: #475569; font-weight: 600;">Domingos</span>
+                  <span style="font-weight: 700; color: #D1B054;">Citas VIP Privadas / Online 24/7</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Boutique Benefits -->
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
+                <span style="color: #D1B054; font-size: 1rem;">⚖️</span>
+                <span>Pesaje de oro certificado en balanza de precisión frente al cliente.</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
+                <span style="color: #D1B054; font-size: 1rem;">💳</span>
+                <span>Aceptamos financiamiento en tienda con Affirm, tarjetas y efectivo.</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #475569;">
+                <span style="color: #D1B054; font-size: 1rem;">🛡️</span>
+                <span>Instalaciones seguras y estacionamiento exclusivo para clientes.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://maps.google.com/?q=Louisville,+KY" target="_blank" rel="noopener" style="flex: 1; min-width: 180px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #08195B; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 0.86rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(8, 25, 91, 0.2); transition: all 0.25s ease;" onmouseover="this.style.background='#05103B'" onmouseout="this.style.background='#08195B'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Abrir en Google Maps</span>
+            </a>
+            
+            <a href="tel:5025994250" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(209, 176, 84, 0.15); color: #08195B; border: 1.5px solid rgba(209, 176, 84, 0.4); padding: 13px 20px; border-radius: 12px; font-size: 0.86rem; font-weight: 700; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.background='rgba(209, 176, 84, 0.28)'" onmouseout="this.style.background='rgba(209, 176, 84, 0.15)'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <span>Llamar: (502) 599-4250</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Google Maps Luxury Embed -->
+        <div style="background: #FFFFFF; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(8, 25, 91, 0.06); border: 1.5px solid rgba(209, 176, 84, 0.35); position: relative; min-height: 440px; display: flex;">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100344.86968037385!2d-85.84589254335938!3d38.22177309999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88690b1ab35bd511%3A0xd4d3b43343467468!2sLouisville%2C%20KY!5e0!3m2!1ses!2sus!4v1700000000000!5m2!1ses!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0; width:100%; height:100%; min-height:440px; display:block;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de La Bonita Jewelry en Google Maps"
+          ></iframe>
+          
+          <!-- Floating Map Badge Overlay -->
+          <div style="position: absolute; top: 16px; left: 16px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(209, 176, 84, 0.4); padding: 8px 14px; border-radius: 12px; box-shadow: 0 4px 16px rgba(8, 25, 91, 0.12); display: flex; align-items: center; gap: 8px; pointer-events: none;">
+            <span style="font-size: 1rem;">👑</span>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 700; color: #08195B;">La Bonita Jewelry • Louisville, KY</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </section>
 
   <!-- ========================================================================= -->
   <!-- 8. REDESIGNED COMPACT LUXURY FOOTER                                       -->
   <!-- ========================================================================= -->
+
   <footer class="site-white-footer" id="contacto" role="contentinfo" style="background:#FAF9F6; border-top:1px solid rgba(209,176,84,0.2); padding:36px 20px 20px; width:100%; box-sizing:border-box;">
     <div style="max-width:1380px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px; margin-bottom:28px;">
       <!-- Brand & Phone -->

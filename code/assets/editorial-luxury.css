@@ -5870,4 +5870,13 @@ html.shopify-design-mode .luxury-splash-screen {
   line-height: 1.3 !important;
 }
 
+/* Boutique Location & Map Section */
+@media (max-width: 900px) {
+  .boutique-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+
 
