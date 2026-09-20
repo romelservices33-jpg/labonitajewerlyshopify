@@ -474,12 +474,27 @@
           {%- assign price_num = product.price | divided_by: 100.0 -%}
           {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
           {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+          {%- assign product_weight = '' -%}
+          {%- if product.variants.first.weight > 0 -%}
+            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+            {%- assign product_weight = raw_w -%}
+          {%- endif -%}
+          {%- assign product_size = '' -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_name = opt.name | downcase -%}
+            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+              {%- assign product_size = opt.values.first -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+            {%- assign product_size = product.variants.first.title -%}
+          {%- endif -%}
           <div class="product-shop-card cutout-product-card" 
                data-category="{{ cat_tag }}" 
                data-karat="{{ karat_tag }}" 
                data-price="{{ price_num }}" 
-               data-weight="15.0" 
-               data-size="24" 
+               data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
@@ -704,12 +719,27 @@
           {%- assign price_num = product.price | divided_by: 100.0 -%}
           {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
           {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+          {%- assign product_weight = '' -%}
+          {%- if product.variants.first.weight > 0 -%}
+            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+            {%- assign product_weight = raw_w -%}
+          {%- endif -%}
+          {%- assign product_size = '' -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_name = opt.name | downcase -%}
+            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+              {%- assign product_size = opt.values.first -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+            {%- assign product_size = product.variants.first.title -%}
+          {%- endif -%}
           <div class="product-shop-card cutout-product-card" 
                data-category="{{ cat_tag }}" 
                data-karat="{{ karat_tag }}" 
                data-price="{{ price_num }}" 
-               data-weight="15.0" 
-               data-size="24" 
+               data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
@@ -776,12 +806,27 @@
           {%- assign price_num = product.price | divided_by: 100.0 -%}
           {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
           {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+          {%- assign product_weight = '' -%}
+          {%- if product.variants.first.weight > 0 -%}
+            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+            {%- assign product_weight = raw_w -%}
+          {%- endif -%}
+          {%- assign product_size = '' -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_name = opt.name | downcase -%}
+            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+              {%- assign product_size = opt.values.first -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+            {%- assign product_size = product.variants.first.title -%}
+          {%- endif -%}
           <div class="product-shop-card cutout-product-card" 
                data-category="{{ cat_tag }}" 
                data-karat="{{ karat_tag }}" 
                data-price="{{ price_num }}" 
-               data-weight="15.0" 
-               data-size="24" 
+               data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
@@ -1100,15 +1145,8 @@
             </div>
           </div>
 
-          <!-- Slider Gramaje a Todo el Ancho -->
-          <div class="filter-range-fullwidth">
-            <div class="filter-range-header">
-              <label for="filterWeight" class="filter-label">Peso Máximo</label>
-              <span class="filter-range-val" id="filterWeightVal">Hasta: 70.0 g</span>
-            </div>
-            <input type="range" id="filterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateWeightDisplay(this.value)" onchange="applyCatalogFilters()" aria-label="Filtrar por peso máximo en gramos">
-          </div>
-
+          
+      
           <!-- Status Line & Reset -->
           <div class="filter-meta-bar">
             <span class="filter-results-count" id="filterCount">Mostrando joyas de oro disponibles</span>
@@ -1148,12 +1186,27 @@
             {%- assign price_num = product.price | divided_by: 100.0 -%}
             {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
             {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+          {%- assign product_weight = '' -%}
+          {%- if product.variants.first.weight > 0 -%}
+            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+            {%- assign product_weight = raw_w -%}
+          {%- endif -%}
+          {%- assign product_size = '' -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_name = opt.name | downcase -%}
+            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+              {%- assign product_size = opt.values.first -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+            {%- assign product_size = product.variants.first.title -%}
+          {%- endif -%}
             <div class="product-shop-card cutout-product-card" 
                  data-category="{{ cat_tag }}" 
                  data-karat="{{ karat_tag }}" 
                  data-price="{{ price_num }}" 
-                 data-weight="15.0" 
-                 data-size="24" 
+                 data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                  data-default-order="{{ forloop.index }}"
                  data-variant-id="{{ product.variants.first.id }}"
                  onclick="openProductModalFromCard(this)">
@@ -1660,7 +1713,7 @@
               </span>
             </div>
 
-            <!-- Clean Minimal Schedule (No nested box container) -->
+                        <!-- Clean Minimal Schedule (Exact Official Hours) -->
             <div style="margin-bottom: 24px;">
               <div style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #08195B; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -1669,16 +1722,16 @@
               
               <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
-                  <span style="color: #64748B; font-weight: 500;">Lunes a Viernes</span>
-                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 8:00 PM EST</span>
+                  <span style="color: #64748B; font-weight: 500;">Lunes</span>
+                  <span style="font-weight: 700; color: #08195B;">12:00 PM – 7:00 PM</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
-                  <span style="color: #64748B; font-weight: 500;">Sábados</span>
-                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 7:00 PM EST</span>
+                  <span style="color: #64748B; font-weight: 500;">Martes a Sábado</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 7:00 PM</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2px;">
                   <span style="color: #64748B; font-weight: 500;">Domingos</span>
-                  <span style="font-weight: 700; color: #D1B054;">Citas VIP Privadas / Online 24/7</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 6:00 PM</span>
                 </div>
               </div>
             </div>
@@ -2190,7 +2243,7 @@
         if (currentCatalogCategory !== 'todos' && cat !== currentCatalogCategory) return false;
         if (activeKaratFilter !== 'all' && karat !== activeKaratFilter) return false;
         if (activeSizeFilter !== 'all' && size.indexOf(activeSizeFilter) === -1) return false;
-        if (weight > activeMaxWeight) return false;
+        // weight filter removed
 
         return true;
       });
@@ -2326,13 +2379,7 @@
       paginateCatalogGrid();
     }
 
-    function updateWeightDisplay(val) {
-      activeMaxWeight = parseFloat(val);
-      var el = document.getElementById('filterWeightVal');
-      if (el) el.textContent = 'Hasta: ' + activeMaxWeight.toFixed(1) + ' g';
-      catalogPage = 1;
-      paginateCatalogGrid();
-    }
+    function updateWeightDisplay(val) {}
 
     function resetCatalogFilters() {
       currentCatalogCategory = 'todos';
@@ -2360,10 +2407,7 @@
       var sortTxt = document.getElementById('selectedSortText');
       if (sortTxt) sortTxt.textContent = 'Destacados La Bonita';
 
-      var w = document.getElementById('filterWeight');
-      if (w) w.value = '70';
-      var wv = document.getElementById('filterWeightVal');
-      if (wv) wv.textContent = 'Hasta: 70.0 g';
+      
 
       catalogPage = 1;
       paginateCatalogGrid();

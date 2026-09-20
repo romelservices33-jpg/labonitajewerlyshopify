@@ -1,4 +1,17 @@
-{% comment %}
+const fs = require('fs');
+const path = require('path');
+
+console.log('=== UPDATING PRODUCT SPECS, FILTER METRICS & STORE HOURS ===');
+
+// -------------------------------------------------------------
+// 1. UPDATE QUICK VIEW MODAL (snippets/quick-view-modal.liquid)
+// -------------------------------------------------------------
+const modalFiles = [
+  'snippets/quick-view-modal.liquid',
+  'code/snippets/quick-view-modal.liquid'
+];
+
+const newQuickViewModalCode = `{% comment %}
   Renders a luxury Quick View PDP Modal for La Bonita Joyeria.
   Dynamically binds to real Shopify product inventory, karats, weights, and sizes.
 {% endcomment %}
@@ -146,12 +159,12 @@
 
     // Karat detection from title
     var karat = null;
-    if (/\b10k\b/i.test(title)) karat = '10k';
-    else if (/\b14k\b/i.test(title)) karat = '14k';
+    if (/\\b10k\\b/i.test(title)) karat = '10k';
+    else if (/\\b14k\\b/i.test(title)) karat = '14k';
 
     // Strip karat out before extracting numbers
-    var clean = title.replace(/\b10k\b|\b14k\b/gi, ' ');
-    var numMatches = clean.match(/\b\d+(?:\.\d+)?(?:g|gr|gramos)?\b/gi) || [];
+    var clean = title.replace(/\\b10k\\b|\\b14k\\b/gi, ' ');
+    var numMatches = clean.match(/\\b\\d+(?:\\.\\d+)?(?:g|gr|gramos)?\\b/gi) || [];
 
     var weight = null;
     var size = null;
@@ -523,3 +536,229 @@
     });
   }
 </script>
+`;
+
+modalFiles.forEach(f => {
+  if (fs.existsSync(f)) {
+    fs.writeFileSync(f, newQuickViewModalCode, 'utf8');
+    console.log('Updated quick view modal in:', f);
+  }
+});
+
+// -------------------------------------------------------------
+// 2. REMOVE "PESO MÁXIMO" SLIDER & HARDCODED 15g/24 IN STOREFRONT
+// -------------------------------------------------------------
+const storefrontFiles = [
+  'sections/bonita-luxury-storefront.liquid',
+  'code/sections/bonita-luxury-storefront.liquid'
+];
+
+storefrontFiles.forEach(f => {
+  if (fs.existsSync(f)) {
+    let c = fs.readFileSync(f, 'utf8');
+
+    // A. Remove "PESO MÁXIMO" slider block
+    c = c.replace(/<!-- Slider Gramaje a Todo el Ancho -->[\s\S]*?<\/div>\s*<\/div>/m, '');
+    c = c.replace(/<div class="filter-range-fullwidth">[\s\S]*?<\/div>\s*<\/div>/m, '');
+
+    // B. Replace hardcoded data-weight="15.0" data-size="24" with dynamic calculations
+    // We replace the loop definitions
+    c = c.replace(/data-weight="15\.0"\s+data-size="24"/g, 'data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}"');
+
+    // Make sure product_weight and product_size are assigned before the card in loops
+    const weightCalcBlock = `{%- assign product_weight = '' -%}
+          {%- if product.variants.first.weight > 0 -%}
+            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+            {%- assign product_weight = raw_w -%}
+          {%- endif -%}
+          {%- assign product_size = '' -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_name = opt.name | downcase -%}
+            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+              {%- assign product_size = opt.values.first -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+            {%- assign product_size = product.variants.first.title -%}
+          {%- endif -%}`;
+
+    // Add weightCalcBlock right after monthly_affirm assignment in storefront loops
+    c = c.replace(
+      /(\{%- if monthly_affirm < 20 -%\}\{%- assign monthly_affirm = 20 -%\}\{%- endif -%\})/g,
+      `$1\n          ${weightCalcBlock}`
+    );
+
+    // C. Update Horarios in Boutique / Map section
+    c = c.replace(
+      /<span style="color: #64748B; font-weight: 500;">Lunes a Viernes<\/span>[\s\S]*?<span style="font-weight: 700; color: #D1B054;">Citas VIP Privadas \/ Online 24\/7<\/span>\s*<\/div>/m,
+      `<div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
+                  <span style="color: #64748B; font-weight: 500;">Lunes</span>
+                  <span style="font-weight: 700; color: #08195B;">12:00 PM – 7:00 PM</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
+                  <span style="color: #64748B; font-weight: 500;">Martes a Sábado</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 7:00 PM</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2px;">
+                  <span style="color: #64748B; font-weight: 500;">Domingos</span>
+                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 6:00 PM</span>
+                </div>`
+    );
+
+    // D. Remove weight filter condition in JS: if (weight > activeMaxWeight) return false;
+    c = c.replace(/if\s*\(\s*weight\s*>\s*activeMaxWeight\s*\)\s*return\s+false;?/g, '// weight filter removed');
+
+    // E. Remove w & wv from resetCatalogFilters
+    c = c.replace(/var w = document\.getElementById\('filterWeight'\);[\s\S]*?if \(wv\) wv\.textContent = 'Hasta: 70\.0 g';/m, '');
+
+    fs.writeFileSync(f, c, 'utf8');
+    console.log('Updated storefront file:', f);
+  }
+});
+
+// -------------------------------------------------------------
+// 3. UPDATE FOOTER STORE HOURS (sections/bonita-luxury-footer.liquid)
+// -------------------------------------------------------------
+const footerFiles = [
+  'sections/bonita-luxury-footer.liquid',
+  'code/sections/bonita-luxury-footer.liquid'
+];
+
+footerFiles.forEach(f => {
+  if (fs.existsSync(f)) {
+    let c = fs.readFileSync(f, 'utf8');
+
+    c = c.replace(
+      /<strong>Horario VIP:<\/strong>\s*<span>Lun - Sáb: 10:00 AM - 8:00 PM EST<\/span>/g,
+      '<strong>Horario de Atención:</strong>\n              <span>Lun: 12:00 PM – 7:00 PM · Mar - Sáb: 10:00 AM – 7:00 PM · Dom: 10:00 AM – 6:00 PM</span>'
+    );
+
+    fs.writeFileSync(f, c, 'utf8');
+    console.log('Updated footer hours in:', f);
+  }
+});
+
+// -------------------------------------------------------------
+// 4. UPDATE COLLECTION TEMPLATE (sections/bonita-luxury-collection.liquid)
+// -------------------------------------------------------------
+const collectionFiles = [
+  'sections/bonita-luxury-collection.liquid',
+  'code/sections/bonita-luxury-collection.liquid'
+];
+
+collectionFiles.forEach(f => {
+  if (fs.existsSync(f)) {
+    let c = fs.readFileSync(f, 'utf8');
+
+    c = c.replace(/data-weight="15\.0"\s+data-size="24"/g, 'data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}"');
+
+    const weightCalcBlock = `{%- assign product_weight = '' -%}
+        {%- if product.variants.first.weight > 0 -%}
+          {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+          {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+          {%- assign product_weight = raw_w -%}
+        {%- endif -%}
+        {%- assign product_size = '' -%}
+        {%- for opt in product.options_with_values -%}
+          {%- assign opt_name = opt.name | downcase -%}
+          {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+            {%- assign product_size = opt.values.first -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+          {%- assign product_size = product.variants.first.title -%}
+        {%- endif -%}`;
+
+    c = c.replace(
+      /(\{%- if monthly_affirm < 20 -%\}\{%- assign monthly_affirm = 20 -%\}\{%- endif -%\})/g,
+      `$1\n        ${weightCalcBlock}`
+    );
+
+    // Remove weight filter condition in JS: if (weight > activeCollectionWeight) return false;
+    c = c.replace(/if\s*\(\s*weight\s*>\s*activeCollectionWeight\s*\)\s*return\s+false;?/g, '// weight filter removed');
+
+    fs.writeFileSync(f, c, 'utf8');
+    console.log('Updated collection file:', f);
+  }
+});
+
+// -------------------------------------------------------------
+// 5. UPDATE PDP SINGLE PRODUCT PAGE (sections/bonita-luxury-product.liquid)
+// -------------------------------------------------------------
+const pdpFiles = [
+  'sections/bonita-luxury-product.liquid',
+  'code/sections/bonita-luxury-product.liquid'
+];
+
+pdpFiles.forEach(f => {
+  if (fs.existsSync(f)) {
+    let c = fs.readFileSync(f, 'utf8');
+
+    // Add real weight calculation into pdpSpecWeight and size into pdpSpecSize
+    const scriptInsert = `
+<script>
+  (function() {
+    // Parse specs from title
+    var title = {{ product.title | json }} || '';
+    var type = {{ product.type | json }} || '';
+    var rawWeight = {{ selected_variant.weight | default: 0 }};
+    var weightEl = document.getElementById('pdpSpecWeight');
+    var sizeEl = document.getElementById('pdpSpecSize');
+    
+    // Check if title has specs e.g. Anillo Hollow 10K 6.5 3.86
+    var clean = title.replace(/\\b10k\\b|\\b14k\\b/gi, ' ');
+    var numMatches = clean.match(/\\b\\d+(?:\\.\\d+)?(?:g|gr|gramos)?\\b/gi) || [];
+    var weight = null;
+    var size = null;
+
+    for (var i = 0; i < numMatches.length; i++) {
+      if (/g|gr|gramos/i.test(numMatches[i])) {
+        weight = parseFloat(numMatches[i]);
+      }
+    }
+    var remaining = [];
+    for (var j = 0; j < numMatches.length; j++) {
+      var n = parseFloat(numMatches[j]);
+      if (!isNaN(n) && n !== weight) remaining.push(n);
+    }
+    
+    var isRing = title.toLowerCase().indexOf('anillo') !== -1 || type.toLowerCase().indexOf('anillo') !== -1;
+    if (isRing && remaining.length >= 2) {
+      if (remaining[0] >= 3.5 && remaining[0] <= 14) {
+        size = 'Talla ' + remaining[0];
+        weight = weight || remaining[1];
+      } else {
+        weight = weight || remaining[0];
+        size = 'Talla ' + remaining[1];
+      }
+    } else if (remaining.length >= 2) {
+      size = remaining[0] + '"';
+      weight = weight || remaining[1];
+    } else if (remaining.length === 1) {
+      weight = weight || remaining[0];
+    }
+
+    if (rawWeight > 0) {
+      var w = rawWeight > 500 ? (rawWeight / 1000).toFixed(2) : rawWeight;
+      if (weightEl) weightEl.textContent = w + ' g';
+    } else if (weight && weightEl) {
+      weightEl.textContent = weight + ' g';
+    }
+
+    if (size && sizeEl && (sizeEl.textContent.indexOf('Default') !== -1 || sizeEl.textContent.trim() === 'Estándar')) {
+      sizeEl.textContent = size;
+    }
+  })();
+</script>
+`;
+
+    if (!c.includes('pdpSpecWeight') || !c.includes('var rawWeight =')) {
+      c = c.replace('{% schema %}', `${scriptInsert}\n{% schema %}`);
+      fs.writeFileSync(f, c, 'utf8');
+      console.log('Updated PDP file with dynamic specs:', f);
+    }
+  }
+});
+
+console.log('ALL FILES UPDATED SUCCESSFULLY.');

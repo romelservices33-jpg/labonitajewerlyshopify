@@ -1,5 +1,6 @@
 {% comment %}
   Renders a luxury Quick View PDP Modal for La Bonita Joyeria.
+  Dynamically binds to real Shopify product inventory, karats, weights, and sizes.
 {% endcomment %}
 
 <div class="product-modal-backdrop" id="productModal" onclick="handleModalBackdropClick(event)">
@@ -49,33 +50,32 @@
         <span>O paga desde <strong id="modalAffirmMo">$47/mes</strong> en cuotas con <strong>Affirm</strong></span>
       </div>
 
-      <!-- Variant Selector: Pureza / Metal -->
-      <div class="pdp-option-group">
+      <!-- Variant Selector: Pureza / Metal (Real registered karat only, or options if real variants exist) -->
+      <div class="pdp-option-group" id="modalKaratGroup">
         <div class="pdp-option-label">
           <span>Pureza del Oro</span>
-          <span class="opt-selected-val" id="modalSelectedKaratText">Oro 14K Sólido</span>
+          <span class="opt-selected-val" id="modalSelectedKaratText">Oro Auténtico Garantizado</span>
         </div>
         <div class="pdp-pills-row" id="modalKaratPills">
-          <button type="button" class="pdp-variant-pill" id="pillKarat10k" onclick="selectModalKarat('10k')">Oro 10K</button>
-          <button type="button" class="pdp-variant-pill active" id="pillKarat14k" onclick="selectModalKarat('14k')">Oro 14K</button>
+          <!-- Populated dynamically: Only the actual registered karat badge is shown unless real multiple karat variants exist -->
         </div>
       </div>
 
-      <!-- Variant Selector: Medida / Longitud -->
+      <!-- Variant Selector: Medida / Longitud / Talla -->
       <div class="pdp-option-group" id="modalSizeGroup">
         <div class="pdp-option-label">
-          <span>Medida / Longitud</span>
+          <span id="modalSizeLabel">Medida / Talla</span>
           <span class="opt-selected-val" id="modalSelectedSizeText">Estándar</span>
         </div>
         <div class="pdp-pills-row" id="modalSizePills"></div>
       </div>
 
-      <!-- Goldsmith Specs Table -->
+      <!-- Goldsmith Specs Table (Binds directly to inventory characteristics) -->
       <table class="pdp-specs-table">
         <tbody>
           <tr>
             <td class="spec-name">Pureza de Metal</td>
-            <td class="spec-val" id="modalSpecKarat">Oro 14K Sólido Garantizado</td>
+            <td class="spec-val" id="modalSpecKarat">Oro Garantizado</td>
           </tr>
           <tr>
             <td class="spec-name">Peso Estimado</td>
@@ -132,6 +132,113 @@
 </div>
 
 <script>
+  /* Intelligent Jewelry Characteristics Parser */
+  function parseJewelrySpecs(title, productType) {
+    title = title || '';
+    var lowerTitle = title.toLowerCase();
+    var lowerType = (productType || '').toLowerCase();
+
+    var isRing = lowerTitle.indexOf('anillo') !== -1 || lowerType.indexOf('anillo') !== -1;
+    var isChain = lowerTitle.indexOf('cadena') !== -1 || lowerTitle.indexOf('collar') !== -1 || lowerTitle.indexOf('cuban') !== -1;
+    var isBracelet = lowerTitle.indexOf('pulsera') !== -1 || lowerTitle.indexOf('esclava') !== -1 || lowerTitle.indexOf('brazalete') !== -1;
+    var isEarring = lowerTitle.indexOf('arete') !== -1 || lowerTitle.indexOf('arracada') !== -1 || lowerTitle.indexOf('topo') !== -1;
+    var isPendant = lowerTitle.indexOf('dije') !== -1 || lowerTitle.indexOf('medalla') !== -1 || lowerTitle.indexOf('cruz') !== -1;
+
+    // Karat detection from title
+    var karat = null;
+    if (/\b10k\b/i.test(title)) karat = '10k';
+    else if (/\b14k\b/i.test(title)) karat = '14k';
+
+    // Strip karat out before extracting numbers
+    var clean = title.replace(/\b10k\b|\b14k\b/gi, ' ');
+    var numMatches = clean.match(/\b\d+(?:\.\d+)?(?:g|gr|gramos)?\b/gi) || [];
+
+    var weight = null;
+    var size = null;
+
+    for (var i = 0; i < numMatches.length; i++) {
+      if (/g|gr|gramos/i.test(numMatches[i])) {
+        weight = parseFloat(numMatches[i]);
+      }
+    }
+
+    var remaining = [];
+    for (var j = 0; j < numMatches.length; j++) {
+      var n = parseFloat(numMatches[j]);
+      if (!isNaN(n) && n !== weight) {
+        remaining.push(n);
+      }
+    }
+
+    if (isRing) {
+      if (remaining.length >= 2) {
+        // e.g. Anillo Hollow 10K 6.5 3.86 -> remaining is [6.5, 3.86]
+        if (remaining[0] >= 3.5 && remaining[0] <= 14) {
+          size = 'Talla ' + remaining[0];
+          weight = weight || remaining[1];
+        } else {
+          weight = weight || remaining[0];
+          size = 'Talla ' + remaining[1];
+        }
+      } else if (remaining.length === 1) {
+        if (remaining[0] >= 4 && remaining[0] <= 14 && !weight) {
+          size = 'Talla ' + remaining[0];
+        } else {
+          weight = weight || remaining[0];
+        }
+      }
+    } else if (isChain) {
+      if (remaining.length >= 2) {
+        var len = null;
+        for (var k = 0; k < remaining.length; k++) {
+          var r = Math.round(remaining[k]);
+          if ([16, 18, 20, 22, 24, 26, 28, 30].indexOf(r) !== -1) {
+            len = remaining[k];
+            break;
+          }
+        }
+        if (len) {
+          size = len + '" (' + Math.round(len * 2.54) + ' cm)';
+          for (var l = 0; l < remaining.length; l++) {
+            if (remaining[l] !== len) {
+              weight = weight || remaining[l];
+            }
+          }
+        } else {
+          size = remaining[0] + '"';
+          weight = weight || remaining[1];
+        }
+      } else if (remaining.length === 1) {
+        var r1 = Math.round(remaining[0]);
+        if ([16, 18, 20, 22, 24, 26, 28, 30].indexOf(r1) !== -1) {
+          size = remaining[0] + '" (' + Math.round(remaining[0] * 2.54) + ' cm)';
+        } else {
+          weight = weight || remaining[0];
+        }
+      }
+    } else if (isBracelet) {
+      if (remaining.length >= 2) {
+        size = remaining[0] + '"';
+        weight = weight || remaining[1];
+      } else if (remaining.length === 1) {
+        if (remaining[0] >= 6 && remaining[0] <= 10) {
+          size = remaining[0] + '"';
+        } else {
+          weight = weight || remaining[0];
+        }
+      }
+    } else {
+      if (remaining.length >= 2) {
+        size = remaining[0] + ' mm';
+        weight = weight || remaining[1];
+      } else if (remaining.length === 1) {
+        weight = weight || remaining[0];
+      }
+    }
+
+    return { karat: karat, size: size, weight: weight };
+  }
+
   var currentModalProduct = null;
 
   function openProductModalFromCard(card) {
@@ -143,13 +250,43 @@
 
     var title = titleEl ? titleEl.textContent.trim() : 'Joya de Oro La Bonita';
     var category = (card.getAttribute('data-category') || 'joyas').toLowerCase();
-    var karat = (card.getAttribute('data-karat') || '14k').toLowerCase();
+
+    // Parse real characteristics from the product title
+    var parsed = parseJewelrySpecs(title, category);
+
+    var karat = card.getAttribute('data-karat') || '';
+    if (parsed.karat) {
+      karat = parsed.karat;
+    } else if (!karat || karat === 'all') {
+      karat = '14k';
+    }
+    karat = karat.toLowerCase();
+
     var price = parseFloat(card.getAttribute('data-price')) || (priceEl ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) : 500);
-    var weight = parseFloat(card.getAttribute('data-weight')) || 10.0;
-    var size = card.getAttribute('data-size') || '20';
+
+    // Dynamic weight from inventory or title (never hardcode 15g)
+    var rawWeightAttr = card.getAttribute('data-weight');
+    var weight = null;
+    if (rawWeightAttr && rawWeightAttr !== '15.0' && parseFloat(rawWeightAttr) > 0) {
+      weight = parseFloat(rawWeightAttr);
+    } else if (parsed.weight) {
+      weight = parsed.weight;
+    }
+
+    // Dynamic size from inventory or title (never hardcode 24 for rings)
+    var rawSizeAttr = card.getAttribute('data-size');
+    var size = null;
+    if (rawSizeAttr && rawSizeAttr !== '24' && rawSizeAttr.trim() !== '') {
+      size = rawSizeAttr.trim();
+    } else if (parsed.size) {
+      size = parsed.size;
+    } else {
+      size = 'Estándar';
+    }
+
     var variantId = card.getAttribute('data-variant-id') || null;
     var imgSrc = imgEl ? imgEl.getAttribute('src') : null;
-    var badge = badgeEl ? badgeEl.textContent.trim() : ('Oro ' + karat.toUpperCase() + ' Sólido');
+    var badge = 'Oro ' + karat.toUpperCase() + ' Sólido';
 
     currentModalProduct = {
       title: title,
@@ -163,7 +300,8 @@
       qty: 1,
       imgSrc: imgSrc,
       badge: badge,
-      variantId: variantId
+      variantId: variantId,
+      hasMultipleKaratVariants: false
     };
 
     populateProductModalUI();
@@ -210,7 +348,7 @@
       if (placeholderEl) placeholderEl.style.display = 'flex';
     }
 
-    if (badgeEl) badgeEl.textContent = p.badge || ('Oro ' + p.selectedKarat.toUpperCase() + ' Sólido');
+    if (badgeEl) badgeEl.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido';
 
     // Title & Meta
     var catTag = document.getElementById('modalCategoryTag');
@@ -225,32 +363,100 @@
       priceCurrentEl.textContent = '$' + p.basePrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD';
     }
 
+    var gramRateEl = document.getElementById('modalGramRate');
+    if (gramRateEl) {
+      gramRateEl.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Macizo';
+    }
+
     var affirmMoEl = document.getElementById('modalAffirmMo');
     if (affirmMoEl) {
       var mo = Math.max(35, Math.round(p.basePrice / 12));
       affirmMoEl.textContent = '$' + mo + '/mes';
     }
 
-    // Karat Pills
-    var pill10 = document.getElementById('pillKarat10k');
-    var pill14 = document.getElementById('pillKarat14k');
-    if (pill10) pill10.classList.toggle('active', p.selectedKarat === '10k');
-    if (pill14) pill14.classList.toggle('active', p.selectedKarat === '14k');
-
+    // Karat Selector (Shows only the real registered karat)
+    var karatPillsContainer = document.getElementById('modalKaratPills');
     var karatText = document.getElementById('modalSelectedKaratText');
-    if (karatText) karatText.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido';
+    if (karatPillsContainer) {
+      karatPillsContainer.innerHTML = '';
+      if (p.hasMultipleKaratVariants) {
+        var btn10 = document.createElement('button');
+        btn10.type = 'button';
+        btn10.className = 'pdp-variant-pill' + (p.selectedKarat === '10k' ? ' active' : '');
+        btn10.textContent = 'Oro 10K';
+        btn10.onclick = function() { selectModalKarat('10k'); };
+        karatPillsContainer.appendChild(btn10);
 
-    // Specs
+        var btn14 = document.createElement('button');
+        btn14.type = 'button';
+        btn14.className = 'pdp-variant-pill' + (p.selectedKarat === '14k' ? ' active' : '');
+        btn14.textContent = 'Oro 14K';
+        btn14.onclick = function() { selectModalKarat('14k'); };
+        karatPillsContainer.appendChild(btn14);
+      } else {
+        var singlePill = document.createElement('span');
+        singlePill.className = 'pdp-variant-pill active';
+        singlePill.style.cursor = 'default';
+        singlePill.style.pointerEvents = 'none';
+        singlePill.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Auténtico';
+        karatPillsContainer.appendChild(singlePill);
+      }
+    }
+    if (karatText) {
+      karatText.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado';
+    }
+
+    // Size Selector
+    var sizePillsContainer = document.getElementById('modalSizePills');
+    var sizeText = document.getElementById('modalSelectedSizeText');
+    var sizeLabel = document.getElementById('modalSizeLabel');
+    if (sizeText) {
+      sizeText.textContent = p.selectedSize || 'Estándar';
+    }
+    if (sizeLabel) {
+      if (p.category === 'anillos') sizeLabel.textContent = 'Talla de Anillo';
+      else if (p.category === 'cadenas') sizeLabel.textContent = 'Largo de Cadena';
+      else if (p.category === 'pulseras') sizeLabel.textContent = 'Largo de Pulsera';
+      else sizeLabel.textContent = 'Medida / Dimensión';
+    }
+    if (sizePillsContainer) {
+      sizePillsContainer.innerHTML = '';
+      if (p.selectedSize && p.selectedSize !== 'Estándar') {
+        var sizePill = document.createElement('span');
+        sizePill.className = 'pdp-variant-pill active';
+        sizePill.style.cursor = 'default';
+        sizePill.style.pointerEvents = 'none';
+        sizePill.textContent = p.selectedSize;
+        sizePillsContainer.appendChild(sizePill);
+      } else {
+        var defPill = document.createElement('span');
+        defPill.className = 'pdp-variant-pill active';
+        defPill.style.cursor = 'default';
+        defPill.style.pointerEvents = 'none';
+        defPill.textContent = 'Medida Estándar / Ajustable';
+        sizePillsContainer.appendChild(defPill);
+      }
+    }
+
+    // Specs Table
     var specKarat = document.getElementById('modalSpecKarat');
     if (specKarat) specKarat.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado';
 
     var specWeight = document.getElementById('modalSpecWeight');
-    if (specWeight) specWeight.textContent = p.baseWeight ? (p.baseWeight + ' g (Aprox.)') : 'Oro Genuino Certificado';
+    if (specWeight) {
+      if (p.baseWeight && p.baseWeight > 0) {
+        specWeight.textContent = p.baseWeight + ' g';
+      } else {
+        specWeight.textContent = 'Oro Genuino Certificado';
+      }
+    }
 
     var specSize = document.getElementById('modalSpecSize');
-    if (specSize) specSize.textContent = p.selectedSize || 'Estándar';
+    if (specSize) {
+      specSize.textContent = p.selectedSize || 'Estándar / Ajustable';
+    }
 
-    // Quantity reset
+    // Reset Qty
     var qtyInput = document.getElementById('modalQtyInput');
     if (qtyInput) qtyInput.value = '1';
   }
@@ -278,49 +484,42 @@
     var qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
     var variantId = p.variantId;
 
+    if (!variantId) {
+      window.location.href = '/collections/all';
+      return;
+    }
+
     if (btn) {
       btn.disabled = true;
-      btn.querySelector('span').textContent = 'Agregando...';
+      btn.innerHTML = '<span>Agregando...</span>';
     }
 
-    if (variantId) {
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: qty })
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(data) {
-        if (btn) {
-          btn.querySelector('span').textContent = '¡Agregado!';
-          setTimeout(function() {
-            btn.disabled = false;
-            btn.querySelector('span').textContent = 'Agregar al Carrito';
-            closeProductModal();
-            window.location.href = '/cart';
-          }, 600);
-        }
-      })
-      .catch(function(err) {
-        console.error(err);
-        if (btn) {
-          btn.disabled = false;
-          btn.querySelector('span').textContent = 'Agregar al Carrito';
-        }
-      });
-    } else {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: parseInt(variantId), quantity: qty })
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('Add to cart failed');
+      return res.json();
+    })
+    .then(function(item) {
+      if (btn) {
+        btn.innerHTML = '<span>✓ ¡Agregado con Éxito!</span>';
+        btn.style.background = '#059669';
+      }
       setTimeout(function() {
-        if (btn) {
-          btn.disabled = false;
-          btn.querySelector('span').textContent = 'Agregar al Carrito';
-        }
         closeProductModal();
-        window.location.href = '/cart';
-      }, 600);
-    }
+        if (typeof window.openCartDrawer === 'function') {
+          window.openCartDrawer();
+        } else {
+          window.location.href = '/cart';
+        }
+      }, 700);
+    })
+    .catch(function(err) {
+      console.warn('Direct add to cart fallback:', err);
+      window.location.href = '/cart/add?id=' + variantId + '&quantity=' + qty;
+    });
   }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeProductModal();
-  });
 </script>

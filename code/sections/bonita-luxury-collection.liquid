@@ -113,7 +113,23 @@
         {%- endif -%}
         {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
         {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
-        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="15.0" data-size="24" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
+        {%- assign product_weight = '' -%}
+        {%- if product.variants.first.weight > 0 -%}
+          {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+          {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+          {%- assign product_weight = raw_w -%}
+        {%- endif -%}
+        {%- assign product_size = '' -%}
+        {%- for opt in product.options_with_values -%}
+          {%- assign opt_name = opt.name | downcase -%}
+          {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+            {%- assign product_size = opt.values.first -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+          {%- assign product_size = product.variants.first.title -%}
+        {%- endif -%}
+        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
               {%- if product.featured_image != blank -%}
@@ -193,7 +209,7 @@
       var weight = parseFloat(card.getAttribute('data-weight')) || 10;
 
       if (activeCollectionKarat !== 'all' && karat !== activeCollectionKarat) return false;
-      if (weight > activeCollectionWeight) return false;
+      // weight filter removed
       return true;
     });
   }
