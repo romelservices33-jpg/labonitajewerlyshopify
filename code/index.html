@@ -339,6 +339,47 @@
       border-top: 1px solid #ECEAE5;
       background: #FAF9F6;
     }
+  
+    /* Category Cards and Filter Row Perfection */
+    .hero-overlapping-cards-wrap {
+      margin-top: 40px !important;
+      margin-bottom: 25px !important;
+      overflow: visible !important;
+    }
+    .cat-slider-container {
+      overflow: visible !important;
+    }
+    .cat-slider-track {
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+      padding: 16px 12px 36px 12px !important;
+    }
+    .cat-square-card {
+      min-height: 290px !important;
+      max-height: 340px !important;
+      height: clamp(290px, 22vw, 340px) !important;
+      border-radius: 22px !important;
+      box-shadow: 0 8px 26px rgba(8, 25, 91, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+    .middle-split-section {
+      padding-top: 30px !important;
+    }
+    .filter-dropdowns-row {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 20px !important;
+      width: 100% !important;
+      max-width: 1000px !important;
+      margin: 0 auto 20px !important;
+    }
+    @media (max-width: 860px) {
+      .filter-dropdowns-row {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -764,11 +805,10 @@
           <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
         </nav>
 
-        <!-- Ultra-Minimalist Filter Bar (Pureza, Medida, Rango de Peso, Ordenar) -->
+        <!-- Seamless Filter Bar (3 Clean Dropdowns, No Weight Slider) -->
         <div class="catalog-filter-bar" id="catalogFilterBar">
-          <div class="filter-group-cluster">
-            
-            <!-- Pureza / Quilataje (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+          <div class="filter-dropdowns-row">
+            <!-- 1. Pureza de Oro -->
             <div class="filter-item-wrap">
               <span class="filter-label">Pureza de Oro</span>
               <div class="select uiverse-select" id="selectKarat" tabindex="0">
@@ -795,7 +835,7 @@
               </div>
             </div>
 
-            <!-- Medida / Longitud / Talla (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+            <!-- 2. Medida / Talla -->
             <div class="filter-item-wrap">
               <span class="filter-label">Medida / Talla</span>
               <div class="select uiverse-select" id="selectSize" tabindex="0">
@@ -854,16 +894,7 @@
               </div>
             </div>
 
-            <!-- Gramaje / Peso Slider -->
-            <div class="filter-item-wrap filter-range-wrap">
-              <div class="filter-range-header">
-                <label for="filterWeight" class="filter-label">Peso Máximo</label>
-                <span class="filter-range-val" id="filterWeightVal">Hasta: 70.0 g</span>
-              </div>
-              <input type="range" id="filterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateWeightDisplay(this.value)" onchange="applyCatalogFilters()" aria-label="Filtrar por peso máximo en gramos">
-            </div>
-
-            <!-- Ordenar Por (Uiverse.io Dropdown by 3bdel3ziz-T) -->
+            <!-- 3. Ordenar Por -->
             <div class="filter-item-wrap">
               <span class="filter-label">Ordenar Por</span>
               <div class="select uiverse-select" id="selectSort" tabindex="0">
@@ -897,7 +928,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
           <!-- Bottom Meta Bar: Results counter & Reset button -->
@@ -3261,14 +3291,19 @@
             matchCat = true;
           } else if (target === 'dijes' && (cCat.includes('dije') || title.includes('dije') || title.includes('medalla') || title.includes('cruz') || title.includes('cristo') || title.includes('virgen') || title.includes('pendant'))) {
             matchCat = true;
+          } else if (target === 'piercings' && (cCat.includes('piercing') || title.includes('piercing') || title.includes('arete') || title.includes('topo') || title.includes('oro'))) {
+            matchCat = true;
+          } else if (target === 'prendedores' && (cCat.includes('prendedor') || title.includes('prendedor') || title.includes('broche') || title.includes('pin') || title.includes('oro'))) {
+            matchCat = true;
+          } else if (target === 'relojes' && (cCat.includes('reloj') || title.includes('reloj') || title.includes('watch') || title.includes('oro'))) {
+            matchCat = true;
           }
         }
 
         const matchKarat = (karat === 'all' || cKarat === karat || title.includes(karat.toUpperCase()));
         const matchSize = (size === 'all' || cSize.indexOf(size) !== -1 || title.includes(size));
-        const matchWeight = (cWeight <= maxWeight);
 
-        if (matchCat && matchKarat && matchSize && matchWeight) {
+        if (matchCat && matchKarat && matchSize) {
           card.classList.remove('is-filtered-out');
           card.style.display = 'flex';
           visibleCount++;

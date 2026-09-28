@@ -709,10 +709,10 @@ html {
   display: flex;
   gap: var(--card-gap);
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 16px 8px 30px 8px;
+  padding: 16px 12px 36px 12px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -946,7 +946,7 @@ html {
 .middle-split-section {
   position: relative;
   z-index: 5;
-  padding: calc(clamp(290px, 22vw, 335px) / 2 + 80px) 40px 90px;
+  padding: 40px 40px 90px;
   background-color: var(--color-pure-white);
 }
 
