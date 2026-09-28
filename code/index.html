@@ -414,16 +414,16 @@
 
     <!-- Center: Floating Centered Independent Navbar -->
     <nav class="hero-floating-nav" aria-label="Navegación de colecciones">
-      <ul class="hero-nav-track">
-        <li><a href="#hero" class="hero-nav-link active">Inicio</a></li>
-        <li><a href="#cadenas" class="hero-nav-link">Cadenas</a></li>
-        <li><a href="#anillos" class="hero-nav-link">Anillos</a></li>
-        <li><a href="#aretes" class="hero-nav-link">Aretes</a></li>
-        <li><a href="#pulseras" class="hero-nav-link">Pulseras</a></li>
-        <li><a href="#dijes" class="hero-nav-link">Dijes</a></li>
-        <li><a href="#contacto" class="hero-nav-link">Contacto</a></li>
-      </ul>
-    </nav>
+        <a href="#catalogo" onclick="filterCatalog('cadenas'); return false;">Cadenas</a>
+        <a href="#catalogo" onclick="filterCatalog('cuban'); return false;">Cubanas</a>
+        <a href="#catalogo" onclick="filterCatalog('anillos'); return false;">Anillos</a>
+        <a href="#catalogo" onclick="filterCatalog('aretes'); return false;">Aretes</a>
+        <a href="#catalogo" onclick="filterCatalog('pulseras'); return false;">Pulseras</a>
+        <a href="#catalogo" onclick="filterCatalog('dijes'); return false;">Dijes</a>
+        <a href="#catalogo" onclick="filterCatalog('piercings'); return false;">Piercings</a>
+        <a href="#catalogo" onclick="filterCatalog('prendedores'); return false;">Prendedores</a>
+        <a href="#catalogo" onclick="filterCatalog('relojes'); return false;">Relojes</a>
+      </nav>
 
     <!-- Right: Actions Outside (WhatsApp & Carrito) -->
     <div class="desktop-header-actions" aria-label="Acciones de contacto y carrito">
@@ -571,6 +571,7 @@
         </button>
 
         <!-- Slider Track: Square 1:1 Cards -->
+        <!-- Slider Track: Square 1:1 Cards (All 9 Luxury Collections) -->
         <div class="cat-slider-track" id="catSliderTrack">
           <!-- Card 1: Cadenas -->
           <a href="#catalogo" onclick="filterCatalog('cadenas'); return false;" class="cat-square-card" id="cadenas" aria-label="Ver Colección de Cadenas">
@@ -579,38 +580,51 @@
               <h3 class="cat-card-title">Cadenas</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="assets/collection-cadenas.jpg" alt="Cadenas y Collares de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+              <img src="assets/collection-cadenas.jpg" alt="Cadenas de Oro 10K y 14K" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
                 <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
 
-          <!-- Card 2: Anillos -->
+          <!-- Card 2: Cadenas Cubanas -->
+          <a href="#catalogo" onclick="filterCatalog('cuban'); return false;" class="cat-square-card" id="cuban" aria-label="Ver Colección Cadenas Cubanas">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Especialidad</span>
+              <h3 class="cat-card-title">Cadenas Cubanas</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="assets/collection-cuban.jpg" alt="Cadenas Cubanas Miami de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 3: Anillos -->
           <a href="#catalogo" onclick="filterCatalog('anillos'); return false;" class="cat-square-card" id="anillos" aria-label="Ver Colección de Anillos">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Anillos</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="assets/collection-anillos.jpg" alt="Anillos y Compromiso de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+              <img src="assets/collection-anillos.jpg" alt="Anillos de Oro 10K y 14K" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
                 <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
 
-          <!-- Card 3: Aretes -->
+          <!-- Card 4: Aretes -->
           <a href="#catalogo" onclick="filterCatalog('aretes'); return false;" class="cat-square-card" id="aretes" aria-label="Ver Colección de Aretes">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
@@ -622,14 +636,12 @@
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
                 <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
 
-          <!-- Card 4: Pulseras -->
+          <!-- Card 5: Pulseras -->
           <a href="#catalogo" onclick="filterCatalog('pulseras'); return false;" class="cat-square-card" id="pulseras" aria-label="Ver Colección de Pulseras">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
@@ -641,28 +653,7 @@
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
                 <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </div>
-          </a>
-
-          <!-- Card 5: Cuban Links -->
-          <a href="#catalogo" onclick="filterCatalog('cuban'); return false;" class="cat-square-card" id="cuban" aria-label="Ver Colección Cuban Links">
-            <div class="cat-card-header">
-              <span class="cat-card-label">Categorías</span>
-              <h3 class="cat-card-title">Cuban Links</h3>
-            </div>
-            <div class="cat-card-img-wrap">
-              <img src="assets/category-cuban.jpg" alt="Joyas y Cadenas Estilo Cubano en Oro" class="cat-square-img" loading="lazy">
-            </div>
-            <div class="cat-card-footer">
-              <span class="cat-pill-btn">
-                <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
@@ -674,14 +665,63 @@
               <h3 class="cat-card-title">Dijes & Medallas</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="assets/product-anillo-signet.jpg" alt="Dijes y Medallas de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+              <img src="assets/collection-dijes.jpg" alt="Dijes y Medallas de Oro 10K y 14K" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
                 <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 7: Piercings -->
+          <a href="#catalogo" onclick="filterCatalog('piercings'); return false;" class="cat-square-card" id="piercings" aria-label="Ver Colección de Piercings">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Nueva Colección</span>
+              <h3 class="cat-card-title">Piercings</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="assets/collection-piercings.jpg" alt="Piercings de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 8: Prendedores -->
+          <a href="#catalogo" onclick="filterCatalog('prendedores'); return false;" class="cat-square-card" id="prendedores" aria-label="Ver Colección de Prendedores">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Nueva Colección</span>
+              <h3 class="cat-card-title">Prendedores</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="assets/collection-prendedores.jpg" alt="Prendedores y Broches de Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card 9: Relojes -->
+          <a href="#catalogo" onclick="filterCatalog('relojes'); return false;" class="cat-square-card" id="relojes" aria-label="Ver Colección de Relojes">
+            <div class="cat-card-header">
+              <span class="cat-card-label">Alta Gama</span>
+              <h3 class="cat-card-title">Relojes</h3>
+            </div>
+            <div class="cat-card-img-wrap">
+              <img src="assets/collection-relojes.jpg" alt="Relojes de Lujo y Oro" class="cat-square-img" loading="lazy">
+            </div>
+            <div class="cat-card-footer">
+              <span class="cat-pill-btn">
+                <span>Ver Colección</span>
+                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
@@ -714,11 +754,14 @@
         <nav class="catalog-category-tabs" id="catalogCategoryTabs" aria-label="Filtrar por colección">
           <button class="cat-tab-btn active" data-cat="todos" onclick="filterCatalog('todos', this)">Todas</button>
           <button class="cat-tab-btn" data-cat="cadenas" onclick="filterCatalog('cadenas', this)">Cadenas</button>
+          <button class="cat-tab-btn" data-cat="cuban" onclick="filterCatalog('cuban', this)">Cadenas Cubanas</button>
           <button class="cat-tab-btn" data-cat="anillos" onclick="filterCatalog('anillos', this)">Anillos</button>
           <button class="cat-tab-btn" data-cat="aretes" onclick="filterCatalog('aretes', this)">Aretes</button>
           <button class="cat-tab-btn" data-cat="pulseras" onclick="filterCatalog('pulseras', this)">Pulseras</button>
-          <button class="cat-tab-btn" data-cat="cuban" onclick="filterCatalog('cuban', this)">Cuban Links</button>
           <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
+          <button class="cat-tab-btn" data-cat="piercings" onclick="filterCatalog('piercings', this)">Piercings</button>
+          <button class="cat-tab-btn" data-cat="prendedores" onclick="filterCatalog('prendedores', this)">Prendedores</button>
+          <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
         </nav>
 
         <!-- Ultra-Minimalist Filter Bar (Pureza, Medida, Rango de Peso, Ordenar) -->
@@ -1997,6 +2040,85 @@
         </div>
 
         <!-- Empty State (No results) -->
+        
+        <!-- ==========================================
+             7. COLECCIÓN PIERCINGS (4 PRODUCTOS)
+             ========================================== -->
+        <div class="product-shop-card cutout-product-card" data-category="piercings" data-karat="14k" data-price="290" data-weight="2.1" data-size="arete-dije" data-default-order="25">
+          <div class="cutout-card-media">
+            <img src="assets/collection-piercings.jpg" alt="Piercing Helix Diamantado 14K" class="cutout-card-img" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+            <div class="cutout-card-pin"><span>Oro 14K</span></div>
+            <div class="cutout-card-inset-label"><span class="cutout-label-text">Piercings</span></div>
+          </div>
+          <div class="cutout-card-content">
+            <div class="cutout-title-row">
+              <h4 class="cutout-product-title">Piercing Helix Diamantado 14K</h4>
+              <span class="spec-weight-tag">Rosca Seguridad · 2.10 g</span>
+            </div>
+            <div class="product-card-pricing-row">
+              <div class="pricing-amounts">
+                <div class="pricing-numbers-row"><span class="price-now">$290</span><span class="price-was">$340</span></div>
+                <div class="affirm-monthly-badge">Desde <strong>$25/mes</strong> con Affirm</div>
+              </div>
+              <button class="btn-add-cart-pill" onclick="addToCartItem('Piercing Helix Diamantado 14K', 290, 'mock')" title="Agregar al carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             8. COLECCIÓN PRENDEDORES (4 PRODUCTOS)
+             ========================================== -->
+        <div class="product-shop-card cutout-product-card" data-category="prendedores" data-karat="14k" data-price="480" data-weight="3.8" data-size="arete-dije" data-default-order="26">
+          <div class="cutout-card-media">
+            <img src="assets/collection-prendedores.jpg" alt="Prendedor Azabache & Oro 14K" class="cutout-card-img" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+            <div class="cutout-card-pin"><span>Oro 14K</span></div>
+            <div class="cutout-card-inset-label"><span class="cutout-label-text">Prendedores</span></div>
+          </div>
+          <div class="cutout-card-content">
+            <div class="cutout-title-row">
+              <h4 class="cutout-product-title">Prendedor Azabache Protección 14K</h4>
+              <span class="spec-weight-tag">Oro & Piedra Genuina · 3.80 g</span>
+            </div>
+            <div class="product-card-pricing-row">
+              <div class="pricing-amounts">
+                <div class="pricing-numbers-row"><span class="price-now">$480</span><span class="price-was">$550</span></div>
+                <div class="affirm-monthly-badge">Desde <strong>$40/mes</strong> con Affirm</div>
+              </div>
+              <button class="btn-add-cart-pill" onclick="addToCartItem('Prendedor Azabache Protección 14K', 480, 'mock')" title="Agregar al carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             9. COLECCIÓN RELOJES (4 PRODUCTOS)
+             ========================================== -->
+        <div class="product-shop-card cutout-product-card" data-category="relojes" data-karat="14k" data-price="3850" data-weight="58.0" data-size="8.0" data-default-order="27">
+          <div class="cutout-card-media">
+            <img src="assets/collection-relojes.jpg" alt="Reloj Cronógrafo Bisel Oro 14K" class="cutout-card-img" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+            <div class="cutout-card-pin"><span>Edición Oro</span></div>
+            <div class="cutout-card-inset-label"><span class="cutout-label-text">Relojes</span></div>
+          </div>
+          <div class="cutout-card-content">
+            <div class="cutout-title-row">
+              <h4 class="cutout-product-title">Reloj President Crown Bisel Oro 14K</h4>
+              <span class="spec-weight-tag">Cristal Zafiro · 58.00 g Macizo</span>
+            </div>
+            <div class="product-card-pricing-row">
+              <div class="pricing-amounts">
+                <div class="pricing-numbers-row"><span class="price-now">$3,850</span><span class="price-was">$4,300</span></div>
+                <div class="affirm-monthly-badge">Desde <strong>$320/mes</strong> con Affirm</div>
+              </div>
+              <button class="btn-add-cart-pill" onclick="addToCartItem('Reloj President Crown Bisel Oro 14K', 3850, 'mock')" title="Agregar al carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="catalog-empty-state" id="catalogEmptyState" style="display: none;">
           <div class="empty-state-icon">
             <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -3258,13 +3380,16 @@
     function filterCatalog(category, tabBtn) {
       currentCatalogCategory = category || 'todos';
 
-      // Dynamic Editorial Collection Banners
+      // Dynamic Editorial Collection Banners for all 9 categories
       const titleEl = document.getElementById('catalogTitle');
       const subtitleEl = document.getElementById('catalogSubtitle');
       if (titleEl && subtitleEl) {
         if (category === 'cadenas') {
-          titleEl.innerHTML = 'Cadenas <span class="accent-gold">Cubanas & Italianas</span>';
-          subtitleEl.textContent = 'Eslabones macizos fundidos a mano en oro auténtico 10K y 14K con broche de seguridad.';
+          titleEl.innerHTML = 'Cadenas & <span class="accent-gold">Collares Italianos</span>';
+          subtitleEl.textContent = 'Diseños Franco, Soga, Fígaro y Mónaco fundidos a mano en oro 10K y 14K.';
+        } else if (category === 'cuban') {
+          titleEl.innerHTML = 'Especialidad <span class="accent-gold">Cadenas Cubanas</span>';
+          subtitleEl.textContent = 'Nuestra firma insignia: eslabones Miami Cuban macizos de alto gramaje con broche de seguridad.';
         } else if (category === 'anillos') {
           titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Sello</span>';
           subtitleEl.textContent = 'Piezas forjadas con acabados de alta orfebrería y piedras engastadas a mano.';
@@ -3274,12 +3399,18 @@
         } else if (category === 'pulseras') {
           titleEl.innerHTML = 'Pulseras & <span class="accent-gold">Bangles Exclusivos</span>';
           subtitleEl.textContent = 'Manillas y brazaletes pesados con cierre de caja reforzado y oro certificado.';
-        } else if (category === 'cuban') {
-          titleEl.innerHTML = 'Especialidad <span class="accent-gold">Cuban Links</span>';
-          subtitleEl.textContent = 'Nuestra firma insignia: cadenas y manillas Miami Cuban macizas garantizadas.';
         } else if (category === 'dijes') {
           titleEl.innerHTML = 'Dijes & <span class="accent-gold">Medallas Sagradas</span>';
           subtitleEl.textContent = 'Cruces, Cristos y medallas talladas en relieve con brillo diamantado superior.';
+        } else if (category === 'piercings') {
+          titleEl.innerHTML = 'Piercings & <span class="accent-gold">Broqueles de Oro</span>';
+          subtitleEl.textContent = 'Joyas hipoalergénicas en oro macizo 10K y 14K con rosca de máxima seguridad.';
+        } else if (category === 'prendedores') {
+          titleEl.innerHTML = 'Prendedores & <span class="accent-gold">Broches de Gala</span>';
+          subtitleEl.textContent = 'Prendedores finos de solapa y broches imperdibles en oro auténtico certificado.';
+        } else if (category === 'relojes') {
+          titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Oro</span>';
+          subtitleEl.textContent = 'Relojería fina con biseles de oro, cristales de zafiro y acabados de lujo.';
         } else {
           titleEl.innerHTML = 'Catálogo <span class="accent-gold">Exclusivo</span>';
           subtitleEl.textContent = 'Oro 100% auténtico 10K y 14K con peso garantizado y financiamiento Affirm.';
@@ -3306,6 +3437,7 @@
         catalogEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
+    window.filterCatalog = filterCatalog;
     window.filterCatalog = filterCatalog;
 
     function toggleHeart(btn) {
