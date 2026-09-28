@@ -14,7 +14,7 @@
       <div class="cat-slider-track" id="catSliderTrack-{{ section.id }}">
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
-            <a href="{{ block.settings.link | default: '/collections/all' }}" class="cat-square-card" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#catalogo' }}" onclick="if(typeof window.filterCatalog==='function'){var t='{{ block.settings.title | downcase }}'; if(t.includes('cadena'))window.filterCatalog('cadenas');else if(t.includes('anillo'))window.filterCatalog('anillos');else if(t.includes('arete'))window.filterCatalog('aretes');else if(t.includes('pulsera'))window.filterCatalog('pulseras');else if(t.includes('cuban'))window.filterCatalog('cuban');else if(t.includes('dije')||t.includes('medalla'))window.filterCatalog('dijes');else window.filterCatalog('todos'); return false;}" class="cat-square-card" {{ block.shopify_attributes }}>
               <div class="cat-card-header">
                 <span class="cat-card-label">{{ block.settings.label | default: 'Categorías' }}</span>
                 <h3 class="cat-card-title">{{ block.settings.title }}</h3>
@@ -45,7 +45,7 @@
           {%- endfor -%}
         {%- else -%}
           <!-- Default Fallback Cards -->
-          <a href="/collections/cadenas" class="cat-square-card">
+          <a href="#catalogo" onclick="if(typeof window.filterCatalog==='function'){window.filterCatalog('cadenas');return false;}" class="cat-square-card">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Cadenas</h3>
@@ -61,7 +61,7 @@
             </div>
           </a>
 
-          <a href="/collections/anillos" class="cat-square-card">
+          <a href="#catalogo" onclick="if(typeof window.filterCatalog==='function'){window.filterCatalog('anillos');return false;}" class="cat-square-card">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Anillos</h3>
@@ -77,7 +77,7 @@
             </div>
           </a>
 
-          <a href="/collections/aretes" class="cat-square-card">
+          <a href="#catalogo" onclick="if(typeof window.filterCatalog==='function'){window.filterCatalog('aretes');return false;}" class="cat-square-card">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Aretes</h3>
@@ -93,7 +93,7 @@
             </div>
           </a>
 
-          <a href="/collections/pulseras" class="cat-square-card">
+          <a href="#catalogo" onclick="if(typeof window.filterCatalog==='function'){window.filterCatalog('pulseras');return false;}" class="cat-square-card">
             <div class="cat-card-header">
               <span class="cat-card-label">Categorías</span>
               <h3 class="cat-card-title">Pulseras</h3>

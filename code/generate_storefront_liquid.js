@@ -138,7 +138,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
     </nav>
 
     <div class="desktop-header-actions" aria-label="Acciones de contacto y carrito">
-      <a href="https://wa.me/15025994250" target="_blank" rel="noopener" class="header-action-link" title="Contactar por WhatsApp">
+      <a href="https://wa.me/15026407747" target="_blank" rel="noopener" class="header-action-link" title="Contactar por WhatsApp">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.31a8.13 8.13 0 01-1.25-4.28c0-4.51 3.67-8.17 8.18-8.17 2.18 0 4.24.85 5.78 2.39 1.54 1.54 2.39 3.6 2.39 5.78 0 4.51-3.67 8.16-8.18 8.16zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
         </svg>
@@ -210,9 +210,9 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
           <span>Financiamiento flexible con <strong>Affirm</strong></span>
         </span>
         <span class="top-marquee-star">✦</span>
-        <a href="tel:5025994250" class="top-marquee-item">
+        <a href="tel:5026407747" class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span>Atención: <strong>(502) 599-4250</strong></span>
+          <span>Atención: <strong>(502) 640-7747</strong></span>
         </a>
         <span class="top-marquee-star">✦</span>
       </div>
@@ -232,9 +232,9 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
           <span>Financiamiento flexible con <strong>Affirm</strong></span>
         </span>
         <span class="top-marquee-star">✦</span>
-        <a href="tel:5025994250" class="top-marquee-item">
+        <a href="tel:5026407747" class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span>Atención: <strong>(502) 599-4250</strong></span>
+          <span>Atención: <strong>(502) 640-7747</strong></span>
         </a>
         <span class="top-marquee-star">✦</span>
       </div>
@@ -1301,9 +1301,9 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
         <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry" style="height:32px; width:auto; margin-bottom:10px;">
         <p style="font-size:0.82rem; color:#64748B; line-height:1.4; margin-bottom:10px;">Alta joyería en oro auténtico 10K y 14K con envíos asegurados a todo EE. UU. y Puerto Rico.</p>
         <div style="font-size:0.84rem; font-weight:700; color:#08195B;">
-          <a href="tel:5025994250" style="color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          <a href="tel:5026407747" style="color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:#D1B054;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span>+1 (502) 599-4250</span>
+            <span>+1 (502) 640-7747</span>
           </a>
         </div>
       </div>
@@ -1325,7 +1325,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
       <div>
         <h4 style="font-family:'Plus Jakarta Sans', sans-serif; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#08195B; margin-bottom:10px;">Atención al Cliente</h4>
         <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; font-size:0.82rem;">
-          <li><a href="https://wa.me/15025994250" target="_blank" rel="noopener" style="color:#059669; font-weight:700; text-decoration:none;">WhatsApp: +1 (502) 599-4250</a></li>
+          <li><a href="https://wa.me/15026407747" target="_blank" rel="noopener" style="color:#059669; font-weight:700; text-decoration:none;">WhatsApp: +1 (502) 640-7747</a></li>
           <li><a href="mailto:romelservices33@gmail.com" style="color:#64748B; text-decoration:none;">romelservices33@gmail.com</a></li>
           <li><a href="#financiamiento" style="color:#64748B; text-decoration:none;">Financiamiento Affirm</a></li>
           <li><a href="#financiamiento" style="color:#64748B; text-decoration:none;">Garantía y Envíos Asegurados</a></li>
@@ -1347,7 +1347,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
 
     <div style="max-width:1380px; margin:0 auto; padding-top:16px; border-top:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.78rem; color:#94A3B8;">
       <div>© 2026 La Bonita Jewelry. Oro 100% Auténtico 10K & 14K.</div>
-      <div>Atención Directa: <a href="tel:5025994250" style="color:#08195B; font-weight:700; text-decoration:none;">(502) 599-4250</a></div>
+      <div>Atención Directa: <a href="tel:5026407747" style="color:#08195B; font-weight:700; text-decoration:none;">(502) 640-7747</a></div>
     </div>
   </footer>
 
@@ -1664,7 +1664,7 @@ const storefrontLiquidContent = `{{ 'editorial-luxury.css' | asset_url | stylesh
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
       <span>Catálogo</span>
     </a>
-    <a href="https://wa.me/15025994250" target="_blank" rel="noopener" class="dock-item" title="WhatsApp">
+    <a href="https://wa.me/15026407747" target="_blank" rel="noopener" class="dock-item" title="WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
       <span>WhatsApp</span>
     </a>

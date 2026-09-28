@@ -150,7 +150,7 @@
     </nav>
 
     <div class="desktop-header-actions" aria-label="Acciones de contacto y carrito">
-      <a href="https://wa.me/15025994250" target="_blank" rel="noopener" class="header-action-link" title="Contactar por WhatsApp">
+      <a href="https://wa.me/15026407747" target="_blank" rel="noopener" class="header-action-link" title="Contactar por WhatsApp">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.31a8.13 8.13 0 01-1.25-4.28c0-4.51 3.67-8.17 8.18-8.17 2.18 0 4.24.85 5.78 2.39 1.54 1.54 2.39 3.6 2.39 5.78 0 4.51-3.67 8.16-8.18 8.16zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
         </svg>
@@ -222,9 +222,9 @@
           <span>Financiamiento flexible con <strong>Affirm</strong></span>
         </span>
         <span class="top-marquee-star">✦</span>
-        <a href="tel:5025994250" class="top-marquee-item">
+        <a href="tel:5026407747" class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span>Atención: <strong>(502) 599-4250</strong></span>
+          <span>Atención: <strong>(502) 640-7747</strong></span>
         </a>
         <span class="top-marquee-star">✦</span>
       </div>
@@ -244,9 +244,9 @@
           <span>Financiamiento flexible con <strong>Affirm</strong></span>
         </span>
         <span class="top-marquee-star">✦</span>
-        <a href="tel:5025994250" class="top-marquee-item">
+        <a href="tel:5026407747" class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span>Atención: <strong>(502) 599-4250</strong></span>
+          <span>Atención: <strong>(502) 640-7747</strong></span>
         </a>
         <span class="top-marquee-star">✦</span>
       </div>
@@ -451,26 +451,27 @@
       {%- assign bs_collection = section.settings.collection | default: collections['all'] -%}
       {%- if bs_collection != blank and bs_collection.products.size > 0 -%}
         {%- for product in bs_collection.products limit: 4 -%}
-          {%- assign cat_tag = product.type | default: 'cadenas' | downcase -%}
-          {%- if cat_tag == blank or cat_tag == 'all' -%}
-            {%- if product.tags contains 'cadenas' or product.title contains 'Cadena' or product.title contains 'cadena' or product.title contains 'Cuban' -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- elsif product.tags contains 'anillos' or product.title contains 'Anillo' or product.title contains 'anillo' -%}
+          {%- assign p_type = product.type | downcase -%}
+            {%- assign p_title = product.title | downcase -%}
+            {%- assign p_tags = product.tags | join: ',' | downcase -%}
+            {%- assign cat_tag = 'cadenas' -%}
+            {%- if p_type contains 'anillo' or p_title contains 'anillo' or p_tags contains 'anillo' or p_type contains 'ring' or p_title contains 'ring' -%}
               {%- assign cat_tag = 'anillos' -%}
-            {%- elsif product.tags contains 'aretes' or product.title contains 'Arete' or product.title contains 'arete' or product.title contains 'Arracada' -%}
+            {%- elsif p_type contains 'arete' or p_title contains 'arete' or p_tags contains 'arete' or p_title contains 'arracada' or p_type contains 'arracada' or p_type contains 'earring' -%}
               {%- assign cat_tag = 'aretes' -%}
-            {%- elsif product.tags contains 'pulseras' or product.title contains 'Pulsera' or product.title contains 'pulsera' or product.title contains 'Esclava' -%}
+            {%- elsif p_type contains 'pulsera' or p_title contains 'pulsera' or p_tags contains 'pulsera' or p_title contains 'esclava' or p_title contains 'manilla' or p_title contains 'bangle' or p_type contains 'bracelet' -%}
               {%- assign cat_tag = 'pulseras' -%}
-            {%- elsif product.tags contains 'dijes' or product.title contains 'Dije' or product.title contains 'dije' or product.title contains 'Medalla' -%}
+            {%- elsif p_type contains 'cuban' or p_title contains 'cuban' or p_tags contains 'cuban' or p_title contains 'miami' -%}
+              {%- assign cat_tag = 'cuban' -%}
+            {%- elsif p_type contains 'dije' or p_title contains 'dije' or p_tags contains 'dije' or p_title contains 'medalla' or p_title contains 'cruz' or p_title contains 'cristo' or p_type contains 'pendant' -%}
               {%- assign cat_tag = 'dijes' -%}
             {%- else -%}
               {%- assign cat_tag = 'cadenas' -%}
             {%- endif -%}
-          {%- endif -%}
-          {%- assign karat_tag = '14k' -%}
-          {%- if product.tags contains '10k' or product.tags contains '10K' or product.title contains '10K' or product.title contains '10k' -%}
-            {%- assign karat_tag = '10k' -%}
-          {%- endif -%}
+            {%- assign karat_tag = '14k' -%}
+            {%- if p_tags contains '10k' or p_title contains '10k' or p_type contains '10k' -%}
+              {%- assign karat_tag = '10k' -%}
+            {%- endif -%}
           {%- assign price_num = product.price | divided_by: 100.0 -%}
           {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
           {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
@@ -1760,9 +1761,9 @@
               <span>Abrir en Google Maps</span>
             </a>
             
-            <a href="tel:5025994250" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #FAF9F6; color: #08195B; border: 1px solid rgba(8, 25, 91, 0.12); padding: 12px 18px; border-radius: 10px; font-size: 0.84rem; font-weight: 700; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.background='#F1EFE9'" onmouseout="this.style.background='#FAF9F6'">
+            <a href="tel:5026407747" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #FAF9F6; color: #08195B; border: 1px solid rgba(8, 25, 91, 0.12); padding: 12px 18px; border-radius: 10px; font-size: 0.84rem; font-weight: 700; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.background='#F1EFE9'" onmouseout="this.style.background='#FAF9F6'">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <span>(502) 599-4250</span>
+              <span>(502) 640-7747</span>
             </a>
           </div>
 
@@ -2236,14 +2237,50 @@
 
       return cards.filter(function(card) {
         var cat = (card.getAttribute('data-category') || '').toLowerCase();
+        var titleEl = card.querySelector('.cutout-product-title');
+        var title = titleEl ? titleEl.textContent.toLowerCase() : '';
         var karat = (card.getAttribute('data-karat') || '').toLowerCase();
-        var size = card.getAttribute('data-size') || '';
-        var weight = parseFloat(card.getAttribute('data-weight')) || 0;
+        var size = (card.getAttribute('data-size') || '').toLowerCase();
 
-        if (currentCatalogCategory !== 'todos' && cat !== currentCatalogCategory) return false;
-        if (activeKaratFilter !== 'all' && karat !== activeKaratFilter) return false;
-        if (activeSizeFilter !== 'all' && size.indexOf(activeSizeFilter) === -1) return false;
-        // weight filter removed
+        // 1. Category Filtering
+        if (currentCatalogCategory !== 'todos') {
+          var target = currentCatalogCategory.toLowerCase();
+          var matched = false;
+
+          if (cat === target || cat.indexOf(target) !== -1) {
+            matched = true;
+          } else if (target === 'cadenas' && (cat.includes('cadena') || title.includes('cadena') || title.includes('collar') || title.includes('franco') || title.includes('soga') || title.includes('rope') || title.includes('figaro') || cat.includes('cuban') || title.includes('cuban'))) {
+            matched = true;
+          } else if (target === 'anillos' && (cat.includes('anillo') || title.includes('anillo') || title.includes('sello') || title.includes('solitario') || title.includes('ring'))) {
+            matched = true;
+          } else if (target === 'aretes' && (cat.includes('arete') || title.includes('arete') || title.includes('arracada') || title.includes('topos') || title.includes('earring'))) {
+            matched = true;
+          } else if (target === 'pulseras' && (cat.includes('pulsera') || title.includes('pulsera') || title.includes('manilla') || title.includes('esclava') || title.includes('bangle') || title.includes('bracelet'))) {
+            matched = true;
+          } else if (target === 'cuban' && (cat.includes('cuban') || title.includes('cuban') || title.includes('miami') || title.includes('eslabon'))) {
+            matched = true;
+          } else if (target === 'dijes' && (cat.includes('dije') || title.includes('dije') || title.includes('medalla') || title.includes('cruz') || title.includes('cristo') || title.includes('virgen') || title.includes('pendant'))) {
+            matched = true;
+          }
+
+          if (!matched) return false;
+        }
+
+        // 2. Karat Filtering
+        if (activeKaratFilter !== 'all') {
+          var targetKarat = activeKaratFilter.toLowerCase();
+          if (karat !== targetKarat && !title.includes(targetKarat)) {
+            return false;
+          }
+        }
+
+        // 3. Size Filtering
+        if (activeSizeFilter !== 'all') {
+          var targetSize = activeSizeFilter.toLowerCase();
+          if (size.indexOf(targetSize) === -1 && !title.includes(targetSize)) {
+            return false;
+          }
+        }
 
         return true;
       });
@@ -2261,6 +2298,16 @@
       } else if (activeSortFilter === 'weight-desc') {
         cards.sort(function(a, b) {
           return (parseFloat(b.getAttribute('data-weight')) || 0) - (parseFloat(a.getAttribute('data-weight')) || 0);
+        });
+      } else if (activeSortFilter === 'weight-asc') {
+        cards.sort(function(a, b) {
+          return (parseFloat(a.getAttribute('data-weight')) || 0) - (parseFloat(b.getAttribute('data-weight')) || 0);
+        });
+      } else {
+        cards.sort(function(a, b) {
+          var orderA = parseInt(a.getAttribute('data-default-order')) || 0;
+          var orderB = parseInt(b.getAttribute('data-default-order')) || 0;
+          return orderA - orderB;
         });
       }
       return cards;
@@ -2295,6 +2342,8 @@
       if (countText) {
         if (total === 0) {
           countText.textContent = '0 piezas encontradas con los filtros seleccionados';
+        } else if (total === 1) {
+          countText.textContent = 'Mostrando 1 pieza de oro auténtico';
         } else {
           countText.textContent = 'Mostrando ' + (start + 1) + '-' + Math.min(end, total) + ' de ' + total + ' piezas de oro auténtico';
         }
@@ -2304,6 +2353,14 @@
       var emptyState = document.getElementById('catalogEmptyState');
       if (emptyState) {
         emptyState.style.display = (total === 0) ? 'flex' : 'none';
+        if (total === 0) grid.appendChild(emptyState);
+      }
+
+      // Reset button active state
+      var resetBtn = document.getElementById('btnFilterReset');
+      if (resetBtn) {
+        var isModified = (currentCatalogCategory !== 'todos') || (activeKaratFilter !== 'all') || (activeSizeFilter !== 'all') || (activeSortFilter !== 'default');
+        resetBtn.classList.toggle('active', isModified);
       }
 
       renderCatalogPaginationButtons(totalPages);
@@ -2325,7 +2382,8 @@
         if (catalogPage > 1) {
           catalogPage--;
           paginateCatalogGrid();
-          document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+          var catEl = document.getElementById('catalogo');
+          if (catEl) catEl.scrollIntoView({ behavior: 'smooth' });
         }
       };
       bar.appendChild(prevBtn);
@@ -2339,7 +2397,8 @@
           numBtn.onclick = function() {
             catalogPage = pageNum;
             paginateCatalogGrid();
-            document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+            var catEl = document.getElementById('catalogo');
+            if (catEl) catEl.scrollIntoView({ behavior: 'smooth' });
           };
           bar.appendChild(numBtn);
         })(i);
@@ -2354,7 +2413,8 @@
         if (catalogPage < totalPages) {
           catalogPage++;
           paginateCatalogGrid();
-          document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+          var catEl = document.getElementById('catalogo');
+          if (catEl) catEl.scrollIntoView({ behavior: 'smooth' });
         }
       };
       bar.appendChild(nextBtn);
@@ -2378,8 +2438,6 @@
       catalogPage = 1;
       paginateCatalogGrid();
     }
-
-    function updateWeightDisplay(val) {}
 
     function resetCatalogFilters() {
       currentCatalogCategory = 'todos';
@@ -2407,21 +2465,61 @@
       var sortTxt = document.getElementById('selectedSortText');
       if (sortTxt) sortTxt.textContent = 'Destacados La Bonita';
 
-      
+      var titleEl = document.getElementById('catalogTitle');
+      var subtitleEl = document.getElementById('catalogSubtitle');
+      if (titleEl && subtitleEl) {
+        titleEl.innerHTML = 'Catálogo <span class="accent-gold">Exclusivo</span>';
+        subtitleEl.textContent = 'Oro 100% auténtico 10K y 14K con peso garantizado y financiamiento Affirm.';
+      }
 
       catalogPage = 1;
       paginateCatalogGrid();
     }
 
     function filterCatalog(category, tabBtn) {
-      currentCatalogCategory = category;
+      currentCatalogCategory = category || 'todos';
+
+      // Dynamic Editorial Collection Banners
+      var titleEl = document.getElementById('catalogTitle');
+      var subtitleEl = document.getElementById('catalogSubtitle');
+      if (titleEl && subtitleEl) {
+        if (category === 'cadenas') {
+          titleEl.innerHTML = 'Cadenas <span class="accent-gold">Cubanas & Italianas</span>';
+          subtitleEl.textContent = 'Eslabones macizos fundidos a mano en oro auténtico 10K y 14K con broche de seguridad.';
+        } else if (category === 'anillos') {
+          titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Sello</span>';
+          subtitleEl.textContent = 'Piezas forjadas con acabados de alta orfebrería y piedras engastadas a mano.';
+        } else if (category === 'aretes') {
+          titleEl.innerHTML = 'Aretes & <span class="accent-gold">Arracadas de Lujo</span>';
+          subtitleEl.textContent = 'Diseños italianos ligeros y cómodos para uso diario en oro sólido garantizado.';
+        } else if (category === 'pulseras') {
+          titleEl.innerHTML = 'Pulseras & <span class="accent-gold">Bangles Exclusivos</span>';
+          subtitleEl.textContent = 'Manillas y brazaletes pesados con cierre de caja reforzado y oro certificado.';
+        } else if (category === 'cuban') {
+          titleEl.innerHTML = 'Especialidad <span class="accent-gold">Cuban Links</span>';
+          subtitleEl.textContent = 'Nuestra firma insignia: cadenas y manillas Miami Cuban macizas garantizadas.';
+        } else if (category === 'dijes') {
+          titleEl.innerHTML = 'Dijes & <span class="accent-gold">Medallas Sagradas</span>';
+          subtitleEl.textContent = 'Cruces, Cristos y medallas talladas en relieve con brillo diamantado superior.';
+        } else {
+          titleEl.innerHTML = 'Catálogo <span class="accent-gold">Exclusivo</span>';
+          subtitleEl.textContent = 'Oro 100% auténtico 10K y 14K con peso garantizado y financiamiento Affirm.';
+        }
+      }
+
       var targetBtn = tabBtn || document.querySelector('.cat-tab-btn[data-cat="' + category + '"]');
       document.querySelectorAll('.cat-tab-btn').forEach(function(b) { b.classList.remove('active'); });
       if (targetBtn) {
         targetBtn.classList.add('active');
       }
+
       catalogPage = 1;
       paginateCatalogGrid();
+
+      var catalogEl = document.getElementById('catalogo');
+      if (catalogEl && !tabBtn) {
+        catalogEl.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     window.filterCatalog = filterCatalog;
 
@@ -2519,7 +2617,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
       <span>Catálogo</span>
     </a>
-    <a href="https://wa.me/15025994250" target="_blank" rel="noopener" class="dock-item" title="WhatsApp">
+    <a href="https://wa.me/15026407747" target="_blank" rel="noopener" class="dock-item" title="WhatsApp">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
       <span>WhatsApp</span>
     </a>

@@ -7,8 +7,8 @@ export const pneumaReferenceCollection: RadialEditorialCollection = {
   collectionTitle: 'COLECCIÓN ORO 10K & 14K',
   tagline: 'Orfebrería Esculpida en Oro Puro • Piezas de Autor',
   contact: {
-    phone: '+15025994250',
-    displayPhone: '(502) 599-4250',
+    phone: '+15026407747',
+    displayPhone: '(502) 640-7747',
     email: 'SALES@LABONITAJEWELRY.COM',
     brandName: 'LA BONITA JEWELRY',
     locationLine1: 'BASED IN',
