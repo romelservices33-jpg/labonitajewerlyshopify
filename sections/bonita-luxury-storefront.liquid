@@ -441,25 +441,6 @@
             </div>
           </a>
 
-          <!-- Card 8: Prendedores -->
-          <a href="#catalogo" onclick="handleNavCategory(event, 'prendedores')" class="cat-square-card" data-cat-link="prendedores" aria-label="Ver Colección de Prendedores">
-            <div class="cat-card-header">
-              <span class="cat-card-label">Nueva Colección</span>
-              <h3 class="cat-card-title">Prendedores</h3>
-            </div>
-            <div class="cat-card-img-wrap">
-              <img src="{{ 'collection-prendedores.jpg' | asset_url }}" alt="Prendedores y Broches de Oro" class="cat-square-img" loading="lazy">
-            </div>
-            <div class="cat-card-footer">
-              <span class="cat-pill-btn">
-                <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </div>
-          </a>
-
           <!-- Card 9: Relojes -->
           <a href="#catalogo" onclick="handleNavCategory(event, 'relojes')" class="cat-square-card" data-cat-link="relojes" aria-label="Ver Colección de Relojes">
             <div class="cat-card-header">
@@ -526,8 +507,7 @@
             {%- elsif p_type contains 'piercing' or p_title contains 'piercing' or p_tags contains 'piercing' or p_title contains 'broquel' -%}
               {%- assign cat_tag = 'piercings' -%}
             {%- elsif p_type contains 'prendedor' or p_title contains 'prendedor' or p_tags contains 'prendedor' or p_title contains 'broche' -%}
-              {%- assign cat_tag = 'prendedores' -%}
-            {%- elsif p_type contains 'reloj' or p_title contains 'reloj' or p_tags contains 'reloj' or p_type contains 'watch' or p_title contains 'watch' -%}
+              {%- elsif p_type contains 'reloj' or p_title contains 'reloj' or p_tags contains 'reloj' or p_type contains 'watch' or p_title contains 'watch' -%}
               {%- assign cat_tag = 'relojes' -%}
             {%- else -%}
               {%- assign cat_tag = 'cadenas' -%}
@@ -1099,7 +1079,6 @@
           <button class="cat-tab-btn" data-cat="pulseras" onclick="filterCatalog('pulseras', this)">Pulseras</button>
           <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
           <button class="cat-tab-btn" data-cat="piercings" onclick="filterCatalog('piercings', this)">Piercings</button>
-          <button class="cat-tab-btn" data-cat="prendedores" onclick="filterCatalog('prendedores', this)">Prendedores</button>
           <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
         </nav>
 
@@ -2330,33 +2309,7 @@
             matched = true;
           } else if (target === 'piercings' && (cat.includes('piercing') || title.includes('piercing') || title.includes('broquel') || title.includes('nariz') || title.includes('ombligo'))) {
             matched = true;
-          } else if (target === 'prendedores' && (cat.includes('prendedor') || title.includes('prendedor') || title.includes('broche') || title.includes('alfiler') || title.includes('pin'))) {
-            matched = true;
-          } else if (target === 'relojes' && (cat.includes('reloj') || title.includes('reloj') || title.includes('watch') || title.includes('cronografo'))) {
-            matched = true;
-          }
-
-          if (!matched) return false;
-        }
-
-        // 2. Karat Filtering
-        if (activeKaratFilter !== 'all') {
-          var targetKarat = activeKaratFilter.toLowerCase();
-          if (karat !== targetKarat && !title.includes(targetKarat)) {
-            return false;
-          }
-        }
-
-        // 3. Size Filtering
-        if (activeSizeFilter !== 'all') {
-          var targetSize = activeSizeFilter.toLowerCase();
-          if (size.indexOf(targetSize) === -1 && !title.includes(targetSize)) {
-            return false;
-          }
-        }
-
-        return true;
-      });
+          });
     }
 
     function sortCatalogCards(cards) {
@@ -2577,9 +2530,6 @@
         } else if (category === 'piercings') {
           titleEl.innerHTML = 'Piercings & <span class="accent-gold">Broqueles de Oro</span>';
           subtitleEl.textContent = 'Joyas hipoalergénicas en oro macizo 10K y 14K con rosca de máxima seguridad.';
-        } else if (category === 'prendedores') {
-          titleEl.innerHTML = 'Prendedores & <span class="accent-gold">Broches de Gala</span>';
-          subtitleEl.textContent = 'Prendedores finos de solapa y broches imperdibles en oro auténtico certificado.';
         } else if (category === 'relojes') {
           titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Oro</span>';
           subtitleEl.textContent = 'Relojería fina con biseles de oro, cristales de zafiro y acabados de lujo.';
