@@ -167,6 +167,10 @@
                 <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
               {%- endif -%}
             </a>
+            {%- if product.compare_at_price > product.price -%}
+              {%- assign promo_pct_top = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+              <span style="position:absolute;top:10px;left:10px;z-index:5;background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFF;font-size:0.65rem;font-weight:800;padding:4px 9px;border-radius:999px;letter-spacing:0.04em;box-shadow:0 4px 10px rgba(220,38,38,0.28);">✦ -{{ promo_pct_top }}% PROMO</span>
+            {%- endif -%}
             <div class="cutout-card-pin">
               <span>{{ karat_tag | upcase }} ORO</span>
               <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
@@ -186,7 +190,9 @@
                 <div class="pricing-numbers-row">
                   <span class="price-now">{{ product.price | money }}</span>
                   {%- if product.compare_at_price > product.price -%}
+                    {%- assign promo_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
                     <span class="price-was">{{ product.compare_at_price | money }}</span>
+                    <span class="promo-badge-20" style="background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFF;font-size:0.65rem;font-weight:800;padding:2px 7px;border-radius:999px;letter-spacing:0.03em;line-height:1.2;">-{{ promo_pct }}% OFF</span>
                   {%- endif -%}
                 </div>
                 <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>

@@ -304,6 +304,8 @@
     karat = karat.toLowerCase();
 
     var price = parseFloat(card.getAttribute('data-price')) || (priceEl ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) : 500);
+    var priceWasEl = card.querySelector('.price-was');
+    var comparePrice = priceWasEl ? parseFloat(priceWasEl.textContent.replace(/[^0-9.]/g, '')) : null;
 
     // Dynamic weight from inventory or title (never hardcode 15g)
     var rawWeightAttr = card.getAttribute('data-weight');
@@ -338,6 +340,7 @@
       baseKarat: karat,
       selectedKarat: karat,
       basePrice: price,
+      comparePrice: comparePrice,
       baseWeight: weight,
       baseSize: size,
       selectedSize: size,
@@ -412,6 +415,20 @@
     var priceCurrentEl = document.getElementById('modalPriceCurrent');
     if (priceCurrentEl) {
       priceCurrentEl.textContent = '$' + p.basePrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD';
+    }
+
+    var priceOldEl = document.getElementById('modalPriceOld');
+    if (priceOldEl) {
+      if (p.comparePrice && p.comparePrice > p.basePrice) {
+        var pct = Math.round(((p.comparePrice - p.basePrice) / p.comparePrice) * 100);
+        priceOldEl.innerHTML = '<span style="text-decoration:line-through;color:#94A3B8;font-size:0.95rem;">$' + p.comparePrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span> <span style="display:inline-block;background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFFFFF;font-size:0.7rem;font-weight:800;padding:2px 8px;border-radius:999px;margin-left:6px;text-decoration:none;">-' + pct + '% OFF</span>';
+        priceOldEl.style.display = 'inline-flex';
+        priceOldEl.style.alignItems = 'center';
+        priceOldEl.style.textDecoration = 'none';
+      } else {
+        priceOldEl.innerHTML = '';
+        priceOldEl.style.display = 'none';
+      }
     }
 
     var gramRateEl = document.getElementById('modalGramRate');

@@ -583,7 +583,9 @@
           <div class="pdp-pricing-row-single">
             <span class="pdp-price-now" id="pdpPriceNow">{{ selected_variant.price | money }}</span>
             {%- if selected_variant.compare_at_price > selected_variant.price -%}
+              {%- assign pdp_disc = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round -%}
               <span class="pdp-price-was" id="pdpPriceWas">{{ selected_variant.compare_at_price | money }}</span>
+              <span style="background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFFFFF;font-size:0.75rem;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:0.04em;">-{{ pdp_disc }}% OFF</span>
             {%- endif -%}
             <span class="pdp-green-pill-badge">Oro {{ karat_tag }} Macizo</span>
           </div>
