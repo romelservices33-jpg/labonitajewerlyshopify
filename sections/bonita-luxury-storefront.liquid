@@ -305,7 +305,7 @@
     <!-- 3. OVERLAPPING SQUARE COLLECTION CAROUSEL (Direct links to /collections/...) -->
     <div class="hero-overlapping-cards-wrap" id="colecciones">
       <div class="cat-slider-container">
-        <button type="button" class="cat-slider-arrow prev is-hidden" id="catSliderPrev" aria-label="Colección anterior">
+        <button type="button" class="cat-slider-arrow prev is-hidden" id="catSliderPrev" onclick="scrollCategorySlider(-1)" aria-label="Colección anterior">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
@@ -466,7 +466,7 @@
         </div>
 
 
-        <button type="button" class="cat-slider-arrow next" id="catSliderNext" aria-label="Colección siguiente">
+        <button type="button" class="cat-slider-arrow next" id="catSliderNext" onclick="scrollCategorySlider(1)" aria-label="Colección siguiente">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
@@ -2773,18 +2773,65 @@
       }
     }
 
+    // Collection Carousel Slider (#catSliderTrack, #catSliderPrev, #catSliderNext)
+    function updateCategorySliderArrows() {
+      var track = document.getElementById('catSliderTrack');
+      var prevBtn = document.getElementById('catSliderPrev');
+      var nextBtn = document.getElementById('catSliderNext');
+      if (!track) return;
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      if (prevBtn) {
+        prevBtn.classList.toggle('is-hidden', track.scrollLeft <= 8);
+      }
+      if (nextBtn) {
+        nextBtn.classList.toggle('is-hidden', maxScroll > 0 && track.scrollLeft >= maxScroll - 8);
+      }
+    }
+
+    function scrollCategorySlider(dir) {
+      var track = document.getElementById('catSliderTrack');
+      if (!track) return;
+      var firstCard = track.querySelector('.cat-square-card');
+      var cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 310;
+      var gap = 20;
+      var cardsPerStep = window.innerWidth > 900 ? 2 : 1;
+      var step = (cardWidth + gap) * cardsPerStep;
+      var targetLeft = track.scrollLeft + (dir * step);
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      if (dir > 0 && targetLeft > maxScroll - 20) {
+        targetLeft = maxScroll;
+      } else if (dir < 0 && targetLeft < 20) {
+        targetLeft = 0;
+      }
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+      setTimeout(updateCategorySliderArrows, 350);
+    }
+    window.scrollCategorySlider = scrollCategorySlider;
+
+    function initCategorySlider() {
+      var catTrack = document.getElementById('catSliderTrack');
+      if (catTrack && !catTrack._hasScrollListener) {
+        catTrack._hasScrollListener = true;
+        catTrack.addEventListener('scroll', updateCategorySliderArrows, { passive: true });
+      }
+      updateCategorySliderArrows();
+    }
+
     // Auto-dismiss timers (failsafe for mobile, simulators and fast loads)
     setTimeout(dismissSplashScreen, 1200);
     window.addEventListener('load', function() {
       setTimeout(dismissSplashScreen, 300);
+      updateCategorySliderArrows();
     });
     document.addEventListener('DOMContentLoaded', function() {
       paginateCatalogGrid();
+      initCategorySlider();
       setTimeout(checkStorefrontHashNavigation, 150);
       setTimeout(dismissSplashScreen, 800);
     });
     if (document.readyState !== 'loading') {
       paginateCatalogGrid();
+      initCategorySlider();
       setTimeout(checkStorefrontHashNavigation, 150);
       setTimeout(dismissSplashScreen, 500);
     }
@@ -2794,6 +2841,7 @@
       clearTimeout(resizeCatalogTimer);
       resizeCatalogTimer = setTimeout(function() {
         paginateCatalogGrid();
+        updateCategorySliderArrows();
       }, 150);
     });
   </script>
