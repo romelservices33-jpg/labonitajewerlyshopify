@@ -3,6 +3,47 @@
   Dynamically binds to real Shopify product inventory, karats, weights, and sizes.
 {% endcomment %}
 
+<style>
+  #productModal .modal-media-col {
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 520px;
+    background: #FAF8F2 !important;
+  }
+  #productModal #modalMainImg.modal-main-img {
+    position: absolute !important;
+    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  @media (max-width: 768px) {
+    #productModal .modal-media-col {
+      height: 230px !important;
+      max-height: 230px !important;
+      min-height: 230px !important;
+      border-radius: 21px 21px 0 0 !important;
+    }
+    #productModal #modalMainImg.modal-main-img {
+      border-radius: 21px 21px 0 0 !important;
+    }
+    #productModal .modal-details-col {
+      max-height: calc(84vh - 230px) !important;
+    }
+  }
+</style>
+
 <div class="product-modal-backdrop" id="productModal" onclick="handleModalBackdropClick(event)">
   <div class="product-modal-panel" id="productModalPanel" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
     <button class="modal-close-btn" onclick="closeProductModal()" aria-label="{{ 'accessibility.close' | t | default: 'Cerrar Ficha de Producto' }}">
@@ -14,7 +55,7 @@
 
     <!-- Left Media Gallery (Full Bleed Seamless Edge-to-Edge) -->
     <div class="modal-media-col">
-      <img id="modalMainImg" class="modal-main-img" src="" alt="Joya La Bonita" style="display:none;">
+      <img id="modalMainImg" class="modal-main-img" src="" alt="Joya La Bonita" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; padding:0; margin:0;">
       <div id="modalMockPlaceholder" class="modal-mock-placeholder" style="display:flex;">
         <div class="mock-camera-icon-wrap">
           <svg class="mock-camera-svg" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -286,6 +327,9 @@
 
     var variantId = card.getAttribute('data-variant-id') || null;
     var imgSrc = imgEl ? imgEl.getAttribute('src') : null;
+    if (imgSrc) {
+      imgSrc = imgSrc.replace(/width=\d+/, 'width=1200');
+    }
     var badge = 'Oro ' + karat.toUpperCase() + ' Sólido';
 
     currentModalProduct = {
@@ -341,6 +385,13 @@
         imgEl.src = p.imgSrc;
         imgEl.alt = p.title;
         imgEl.style.display = 'block';
+        imgEl.style.position = 'absolute';
+        imgEl.style.inset = '0';
+        imgEl.style.width = '100%';
+        imgEl.style.height = '100%';
+        imgEl.style.objectFit = 'cover';
+        imgEl.style.objectPosition = 'center center';
+        imgEl.style.padding = '0';
       }
       if (placeholderEl) placeholderEl.style.display = 'none';
     } else {
