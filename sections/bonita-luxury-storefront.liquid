@@ -1175,13 +1175,7 @@
                   {%- assign ptitle_down = product.title | downcase -%}
                   {%- assign cat_tag = ch -%}
                   {%- assign cat_label = product.type | default: 'Joya' -%}
-                  {%- if product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' -%}
-                    {%- assign cat_tag = 'cuban cadenas' -%}
-                    {%- assign cat_label = 'Cadena Cubana' -%}
-                  {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
-                    {%- assign cat_tag = 'cadenas' -%}
-                    {%- assign cat_label = 'Cadenas' -%}
-                  {%- elsif product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'reloj' -%}
+                  {%- if product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'invicta' or ptitle_down contains 'seiko' -%}
                     {%- assign cat_tag = 'relojes' -%}
                     {%- assign cat_label = 'Relojes' -%}
                   {%- elsif product.tags contains 'cat:piercings' and ptype_down contains 'piercing' -%}
@@ -1190,18 +1184,24 @@
                   {%- elsif product.tags contains 'cat:piercings' -%}
                     {%- assign cat_tag = 'aretes piercings' -%}
                     {%- assign cat_label = 'Piercings / Broqueles' -%}
-                  {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' -%}
-                    {%- assign cat_tag = 'aretes' -%}
-                    {%- assign cat_label = 'Aretes' -%}
                   {%- elsif product.tags contains 'cat:pulseras' or ptype_down contains 'pulsera' or ptype_down contains 'manilla' or ptitle_down contains 'pulsera' or ptitle_down contains 'manilla' or ptitle_down contains 'esclava' or ptitle_down contains 'brazalete' or ptitle_down contains 'semanario' or ptitle_down contains 'tobillera' -%}
                     {%- assign cat_tag = 'pulseras' -%}
                     {%- assign cat_label = 'Pulseras' -%}
-                  {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'cruz' or ptitle_down contains 'charms' -%}
-                    {%- assign cat_tag = 'dijes' -%}
-                    {%- assign cat_label = 'Dijes' -%}
-                  {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'compromiso' -%}
+                  {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'solitario' or ptitle_down contains 'compromiso' -%}
                     {%- assign cat_tag = 'anillos' -%}
                     {%- assign cat_label = 'Anillos' -%}
+                  {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
+                    {%- assign cat_tag = 'aretes' -%}
+                    {%- assign cat_label = 'Aretes' -%}
+                  {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
+                    {%- assign cat_tag = 'dijes' -%}
+                    {%- assign cat_label = 'Dijes' -%}
+                  {%- elsif product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' or ptitle_down contains 'mónaco' or ptitle_down contains 'monaco' -%}
+                    {%- assign cat_tag = 'cuban cadenas' -%}
+                    {%- assign cat_label = 'Cadena Cubana' -%}
+                  {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
+                    {%- assign cat_tag = 'cadenas' -%}
+                    {%- assign cat_label = 'Cadenas' -%}
                   {%- endif -%}
                   {%- assign karat_tag = '10k' -%}
                   {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
@@ -1285,13 +1285,7 @@
                 {%- assign ptitle_down = product.title | downcase -%}
                 {%- assign cat_tag = 'anillos' -%}
                 {%- assign cat_label = product.type | default: 'Joya' -%}
-                {%- if product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' -%}
-                  {%- assign cat_tag = 'cuban cadenas' -%}
-                  {%- assign cat_label = 'Cadena Cubana' -%}
-                {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
-                  {%- assign cat_tag = 'cadenas' -%}
-                  {%- assign cat_label = 'Cadenas' -%}
-                {%- elsif product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'reloj' -%}
+                {%- if product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'invicta' or ptitle_down contains 'seiko' -%}
                   {%- assign cat_tag = 'relojes' -%}
                   {%- assign cat_label = 'Relojes' -%}
                 {%- elsif product.tags contains 'cat:piercings' and ptype_down contains 'piercing' -%}
@@ -1300,18 +1294,24 @@
                 {%- elsif product.tags contains 'cat:piercings' -%}
                   {%- assign cat_tag = 'aretes piercings' -%}
                   {%- assign cat_label = 'Piercings / Broqueles' -%}
-                {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' -%}
-                  {%- assign cat_tag = 'aretes' -%}
-                  {%- assign cat_label = 'Aretes' -%}
                 {%- elsif product.tags contains 'cat:pulseras' or ptype_down contains 'pulsera' or ptype_down contains 'manilla' or ptitle_down contains 'pulsera' or ptitle_down contains 'manilla' or ptitle_down contains 'esclava' or ptitle_down contains 'brazalete' or ptitle_down contains 'semanario' or ptitle_down contains 'tobillera' -%}
                   {%- assign cat_tag = 'pulseras' -%}
                   {%- assign cat_label = 'Pulseras' -%}
-                {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'cruz' or ptitle_down contains 'charms' -%}
-                  {%- assign cat_tag = 'dijes' -%}
-                  {%- assign cat_label = 'Dijes' -%}
-                {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'compromiso' -%}
+                {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'solitario' or ptitle_down contains 'compromiso' -%}
                   {%- assign cat_tag = 'anillos' -%}
                   {%- assign cat_label = 'Anillos' -%}
+                {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
+                  {%- assign cat_tag = 'aretes' -%}
+                  {%- assign cat_label = 'Aretes' -%}
+                {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
+                  {%- assign cat_tag = 'dijes' -%}
+                  {%- assign cat_label = 'Dijes' -%}
+                {%- elsif product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' or ptitle_down contains 'mónaco' or ptitle_down contains 'monaco' -%}
+                  {%- assign cat_tag = 'cuban cadenas' -%}
+                  {%- assign cat_label = 'Cadena Cubana' -%}
+                {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
+                  {%- assign cat_tag = 'cadenas' -%}
+                  {%- assign cat_label = 'Cadenas' -%}
                 {%- endif -%}
                 {%- assign karat_tag = '10k' -%}
                 {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
