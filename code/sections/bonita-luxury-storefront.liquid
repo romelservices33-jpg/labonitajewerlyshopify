@@ -303,6 +303,21 @@
     </div>
 
     <!-- 3. OVERLAPPING SQUARE COLLECTION CAROUSEL (Direct links to /collections/...) -->
+    <style>
+      @media (min-width: 901px) {
+        #catSliderTrack.cat-slider-track {
+          padding: 16px 4px 36px 4px !important;
+          scroll-padding-inline: 4px !important;
+        }
+        #catSliderTrack .cat-square-card {
+          --cq-card-size: calc((100% - 3 * var(--card-gap, 20px)) / 4) !important;
+          flex: 0 0 calc((100% - 3 * var(--card-gap, 20px)) / 4) !important;
+          width: calc((100% - 3 * var(--card-gap, 20px)) / 4) !important;
+          height: auto !important;
+          aspect-ratio: 1 / 1 !important;
+        }
+      }
+    </style>
     <div class="hero-overlapping-cards-wrap" id="colecciones">
       <div class="cat-slider-container">
         <button type="button" class="cat-slider-arrow prev is-hidden" id="catSliderPrev" onclick="scrollCategorySlider(-1)" aria-label="Colección anterior">
@@ -2793,8 +2808,8 @@
       if (!track) return;
       var firstCard = track.querySelector('.cat-square-card');
       var cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 310;
-      var gap = 20;
-      var cardsPerStep = window.innerWidth > 900 ? 2 : 1;
+      var gap = parseFloat(window.getComputedStyle(track).gap) || 20;
+      var cardsPerStep = window.innerWidth > 900 ? 4 : 1;
       var step = (cardWidth + gap) * cardsPerStep;
       var targetLeft = track.scrollLeft + (dir * step);
       var maxScroll = track.scrollWidth - track.clientWidth;
@@ -2804,7 +2819,7 @@
         targetLeft = 0;
       }
       track.scrollTo({ left: targetLeft, behavior: 'smooth' });
-      setTimeout(updateCategorySliderArrows, 350);
+      setTimeout(updateCategorySliderArrows, 380);
     }
     window.scrollCategorySlider = scrollCategorySlider;
 

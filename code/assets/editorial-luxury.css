@@ -711,8 +711,9 @@ html {
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
   scroll-behavior: smooth;
-  padding: 16px 12px 36px 12px;
+  padding: 16px 4px 36px 4px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -723,10 +724,10 @@ html {
 
 /* Square 1:1 Collection Card (4 Columns in Desktop, Full-bleed Image Fill) */
 .cat-square-card {
-  flex: 0 0 var(--hero-card-size);
-  width: var(--hero-card-size);
-  height: var(--hero-card-size);
-  min-height: 290px;
+  flex: 0 0 calc((100% - 3 * var(--card-gap)) / 4);
+  width: calc((100% - 3 * var(--card-gap)) / 4);
+  height: auto;
+  min-height: 280px;
   max-height: 340px;
   aspect-ratio: 1 / 1;
   scroll-snap-align: start;
@@ -748,10 +749,11 @@ html {
 
 @supports (width: 1cqw) {
   .cat-square-card {
-    --cq-card-size: clamp(285px, calc((100cqw - 3 * var(--card-gap)) / 4), 335px);
+    --cq-card-size: calc((100% - 3 * var(--card-gap)) / 4);
     flex: 0 0 var(--cq-card-size);
     width: var(--cq-card-size);
-    height: var(--cq-card-size);
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 }
 
