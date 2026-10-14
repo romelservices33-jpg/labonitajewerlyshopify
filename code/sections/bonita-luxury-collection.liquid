@@ -1,6 +1,6 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
-{%- paginate collection.products by 50 -%}
+{%- paginate collection.products by 250 -%}
 <div class="bonita-collection-page-wrap" style="background:#FAF9F6; min-height:100vh; padding: 20px 20px 60px;">
   <div style="max-width:1240px; margin:0 auto;">
     
@@ -18,7 +18,7 @@
       <span class="hero-kicker" style="font-family:'Plus Jakarta Sans', sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; color:#D1B054; text-transform:uppercase;">Colección de Oro Auténtico 10K & 14K</span>
       <h1 style="font-family:'Sentient', Georgia, serif; font-size:clamp(2rem, 4vw, 3rem); font-weight:600; color:#08195B; margin:6px 0 10px; line-height:1.15;">{{ collection.title }}</h1>
       {%- if collection.description != blank -%}
-        <p style="font-size:0.88rem; color:#64748B; max-width:640px; margin:0 auto 10px; line-height:1.5;">{{ collection.description }}</p>
+        <p style="font-size:0.88rem; color:#64748B; max-width:640px; margin:0 auto 10px; line-height:1.5;">{{ collection.description | strip_html }}</p>
       {%- else -%}
         <p style="font-size:0.88rem; color:#64748B; max-width:640px; margin:0 auto 10px; line-height:1.5;">Explora piezas exclusivas garantizadas de por vida con especificación exacta de quilataje y peso en gramos.</p>
       {%- endif -%}
@@ -28,8 +28,20 @@
       </div>
     </header>
 
-    <!-- Seamless Filter Bar -->
-    <div class="catalog-filter-bar" id="collectionFilterBar" style="max-width:960px; margin:0 auto 28px;">
+    <!-- Category Navigation Tabs + Seamless Filter Bar -->
+    <div class="catalog-filter-bar" id="collectionFilterBar" style="max-width:1060px; margin:0 auto 28px;">
+      <div class="category-tabs-scroll" role="navigation" aria-label="Categorías de joyería" style="margin-bottom:18px;">
+        <a href="/collections/all" class="cat-tab-btn {% if collection.handle == 'all' %}active{% endif %}" style="text-decoration:none;">Todas</a>
+        <a href="/collections/cadenas" class="cat-tab-btn {% if collection.handle == 'cadenas' %}active{% endif %}" style="text-decoration:none;">Cadenas</a>
+        <a href="/collections/cuban" class="cat-tab-btn {% if collection.handle == 'cuban' or collection.handle == 'cadenas-cubanas' %}active{% endif %}" style="text-decoration:none;">Cadenas Cubanas</a>
+        <a href="/collections/anillos" class="cat-tab-btn {% if collection.handle == 'anillos' %}active{% endif %}" style="text-decoration:none;">Anillos</a>
+        <a href="/collections/aretes" class="cat-tab-btn {% if collection.handle == 'aretes' %}active{% endif %}" style="text-decoration:none;">Aretes</a>
+        <a href="/collections/pulseras" class="cat-tab-btn {% if collection.handle == 'pulseras' %}active{% endif %}" style="text-decoration:none;">Pulseras</a>
+        <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes</a>
+        <a href="/collections/piercings" class="cat-tab-btn {% if collection.handle == 'piercings' %}active{% endif %}" style="text-decoration:none;">Piercings</a>
+        <a href="/collections/relojes" class="cat-tab-btn {% if collection.handle == 'relojes' %}active{% endif %}" style="text-decoration:none;">Relojes</a>
+      </div>
+
       <div class="filter-dropdowns-row">
         <!-- Pureza -->
         <div class="filter-item-wrap">
@@ -80,20 +92,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Gramaje -->
-        <div class="filter-item-wrap" style="grid-column: span 1;">
-          <span class="filter-label">Gramaje</span>
-          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:10px; padding:6px 12px; display:flex; align-items:center; justify-content:space-between; min-height:38px;">
-            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">Hasta:</span>
-            <span style="font-size:0.75rem; color:#08195B; font-weight:700;" id="collectionWeightVal">70.0 g</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slider Full Width -->
-      <div class="filter-range-fullwidth">
-        <input type="range" id="collectionFilterWeight" class="filter-range-input" min="1" max="70" step="0.5" value="70" oninput="updateCollectionWeight(this.value)" aria-label="Filtrar por peso en gramos">
       </div>
 
       <!-- Status Line -->
@@ -106,10 +104,41 @@
     <!-- Products Grid (8 on Desktop, 6 on Mobile) -->
     <div class="catalog-products-grid" id="collectionProductsGrid">
       {%- for product in collection.products -%}
+        {%- assign ptype_down = product.type | downcase -%}
+        {%- assign ptitle_down = product.title | downcase -%}
         {%- assign cat_tag = product.type | default: collection.title | downcase -%}
-        {%- assign karat_tag = '14k' -%}
-        {%- if product.tags contains '10k' or product.title contains '10K' or product.title contains '10k' -%}
-          {%- assign karat_tag = '10k' -%}
+        {%- assign cat_label = product.type | default: collection.title -%}
+        {%- if product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' -%}
+          {%- assign cat_tag = 'cuban cadenas' -%}
+          {%- assign cat_label = 'Cadena Cubana' -%}
+        {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' -%}
+          {%- assign cat_tag = 'cadenas' -%}
+          {%- assign cat_label = 'Cadenas' -%}
+        {%- elsif product.tags contains 'cat:relojes' or ptype_down contains 'reloj' -%}
+          {%- assign cat_tag = 'relojes' -%}
+          {%- assign cat_label = 'Relojes' -%}
+        {%- elsif product.tags contains 'cat:piercings' and ptype_down contains 'piercing' -%}
+          {%- assign cat_tag = 'piercings' -%}
+          {%- assign cat_label = 'Piercings' -%}
+        {%- elsif product.tags contains 'cat:piercings' -%}
+          {%- assign cat_tag = 'aretes piercings' -%}
+          {%- assign cat_label = 'Piercings / Broqueles' -%}
+        {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' -%}
+          {%- assign cat_tag = 'aretes' -%}
+          {%- assign cat_label = 'Aretes' -%}
+        {%- elsif product.tags contains 'cat:pulseras' or ptype_down contains 'pulsera' -%}
+          {%- assign cat_tag = 'pulseras' -%}
+          {%- assign cat_label = 'Pulseras' -%}
+        {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' -%}
+          {%- assign cat_tag = 'dijes' -%}
+          {%- assign cat_label = 'Dijes' -%}
+        {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' -%}
+          {%- assign cat_tag = 'anillos' -%}
+          {%- assign cat_label = 'Anillos' -%}
+        {%- endif -%}
+        {%- assign karat_tag = '10k' -%}
+        {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
+          {%- assign karat_tag = '14k' -%}
         {%- endif -%}
         {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
         {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
@@ -129,7 +158,7 @@
         {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
           {%- assign product_size = product.variants.first.title -%}
         {%- endif -%}
-        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
+        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.variants.first.id }}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
               {%- if product.featured_image != blank -%}
@@ -143,7 +172,7 @@
               <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
             </div>
             <div class="cutout-card-inset-label">
-              <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
+              <span class="cutout-label-text">{{ cat_label }}</span>
               <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
             </div>
           </div>
@@ -187,7 +216,7 @@
 </div>
 {%- endpaginate -%}
 
-<!-- JavaScript for Collection Filtering & 6-Product Pagination -->
+<!-- JavaScript for Collection Filtering & Pagination -->
 <script>
   var collectionPage = 1;
   function getCollectionPerPage() {
@@ -195,7 +224,6 @@
   }
   var activeCollectionKarat = 'all';
   var activeCollectionSort = 'default';
-  var activeCollectionWeight = 70;
 
   function initCollectionPagination() {
     paginateCollectionGrid();
@@ -203,20 +231,34 @@
 
   function getActiveCollectionCards() {
     var cards = Array.from(document.querySelectorAll('#collectionProductsGrid .product-shop-card'));
-    return cards.filter(function(card) {
+    var filtered = cards.filter(function(card) {
       var karat = (card.getAttribute('data-karat') || '').toLowerCase();
-      var price = parseFloat(card.getAttribute('data-price')) || 0;
-      var weight = parseFloat(card.getAttribute('data-weight')) || 10;
-
       if (activeCollectionKarat !== 'all' && karat !== activeCollectionKarat) return false;
-      // weight filter removed
       return true;
     });
+
+    if (activeCollectionSort === 'price-asc') {
+      filtered.sort(function(a, b) {
+        return (parseFloat(a.getAttribute('data-price')) || 0) - (parseFloat(b.getAttribute('data-price')) || 0);
+      });
+    } else if (activeCollectionSort === 'price-desc') {
+      filtered.sort(function(a, b) {
+        return (parseFloat(b.getAttribute('data-price')) || 0) - (parseFloat(a.getAttribute('data-price')) || 0);
+      });
+    } else {
+      filtered.sort(function(a, b) {
+        return (parseInt(a.getAttribute('data-default-order')) || 0) - (parseInt(b.getAttribute('data-default-order')) || 0);
+      });
+    }
+
+    return filtered;
   }
 
   function paginateCollectionGrid() {
+    var grid = document.getElementById('collectionProductsGrid');
+    if (!grid) return;
     var activeCards = getActiveCollectionCards();
-    var allCards = document.querySelectorAll('#collectionProductsGrid .product-shop-card');
+    var allCards = grid.querySelectorAll('.product-shop-card');
     allCards.forEach(function(c) { c.style.display = 'none'; });
 
     var total = activeCards.length;
@@ -228,7 +270,10 @@
     var end = start + perPage;
     var pageCards = activeCards.slice(start, end);
 
-    pageCards.forEach(function(c) { c.style.display = 'flex'; });
+    pageCards.forEach(function(c) {
+      c.style.display = 'flex';
+      grid.appendChild(c);
+    });
 
     var countText = document.getElementById('collectionCountText');
     if (countText) {
@@ -298,31 +343,44 @@
       activeCollectionKarat = val;
       var t = document.getElementById('selectedCollectionKaratText');
       if (t) t.textContent = text;
+    } else if (type === 'sort') {
+      activeCollectionSort = val;
+      var s = document.getElementById('selectedCollectionSortText');
+      if (s) s.textContent = text;
     }
-    collectionPage = 1;
-    paginateCollectionGrid();
-  }
-
-  function updateCollectionWeight(val) {
-    activeCollectionWeight = parseFloat(val);
-    var label = document.getElementById('collectionWeightVal');
-    if (label) label.textContent = parseFloat(val).toFixed(1) + ' g';
+    document.querySelectorAll('.uiverse-select').forEach(function(sel) { sel.classList.remove('is-open'); });
     collectionPage = 1;
     paginateCollectionGrid();
   }
 
   function resetCollectionFilters() {
     activeCollectionKarat = 'all';
-    activeCollectionWeight = 70;
+    activeCollectionSort = 'default';
+    var kAll = document.getElementById('ckarat-all');
+    if (kAll) kAll.checked = true;
     var k = document.getElementById('selectedCollectionKaratText');
     if (k) k.textContent = 'Todas las purezas';
-    var w = document.getElementById('collectionFilterWeight');
-    if (w) w.value = '70';
-    var wv = document.getElementById('collectionWeightVal');
-    if (wv) wv.textContent = '70.0 g';
+    var sDef = document.getElementById('csort-default');
+    if (sDef) sDef.checked = true;
+    var s = document.getElementById('selectedCollectionSortText');
+    if (s) s.textContent = 'Destacados';
     collectionPage = 1;
     paginateCollectionGrid();
   }
+
+  document.addEventListener('click', function(e) {
+    var selectedEl = e.target.closest('.uiverse-select .selected');
+    if (selectedEl) {
+      var parentSelect = selectedEl.closest('.uiverse-select');
+      var wasOpen = parentSelect.classList.contains('is-open');
+      document.querySelectorAll('.uiverse-select').forEach(function(s) { s.classList.remove('is-open'); });
+      if (!wasOpen) parentSelect.classList.add('is-open');
+      return;
+    }
+    if (!e.target.closest('.uiverse-select')) {
+      document.querySelectorAll('.uiverse-select').forEach(function(s) { s.classList.remove('is-open'); });
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', initCollectionPagination);
   if (document.readyState !== 'loading') initCollectionPagination();

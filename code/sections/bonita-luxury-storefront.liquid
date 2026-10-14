@@ -139,13 +139,14 @@
 
     <nav class="hero-floating-nav" aria-label="Navegación de colecciones">
       <ul class="hero-nav-track">
-        <li><a href="{{ routes.root_url }}" class="hero-nav-link active">Inicio</a></li>
-        <li><a href="/collections/cadenas" class="hero-nav-link">Cadenas</a></li>
-        <li><a href="/collections/anillos" class="hero-nav-link">Anillos</a></li>
-        <li><a href="/collections/aretes" class="hero-nav-link">Aretes</a></li>
-        <li><a href="/collections/pulseras" class="hero-nav-link">Pulseras</a></li>
-        <li><a href="/collections/dijes" class="hero-nav-link">Dijes</a></li>
-        <li><a href="#contacto" class="hero-nav-link">Contacto</a></li>
+        <li><a href="{{ routes.root_url }}" class="hero-nav-link active" data-cat-nav="todos" onclick="handleNavCategory(event, 'todos')">Inicio</a></li>
+        <li><a href="/collections/cadenas" class="hero-nav-link" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
+        <li><a href="/collections/cuban" class="hero-nav-link" data-cat-nav="cuban" onclick="handleNavCategory(event, 'cuban')">Cubanas</a></li>
+        <li><a href="/collections/anillos" class="hero-nav-link" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
+        <li><a href="/collections/aretes" class="hero-nav-link" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
+        <li><a href="/collections/pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
+        <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+        <li><a href="#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
       </ul>
     </nav>
 
@@ -190,13 +191,16 @@
       </a>
     </div>
     <div class="notch-mobile-dropdown" id="notchMobileDropdown">
-      <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio')">Inicio</a>
-      <a href="/collections/cadenas" onclick="closeMobileNotch('Cadenas')">Cadenas</a>
-      <a href="/collections/anillos" onclick="closeMobileNotch('Anillos')">Anillos</a>
-      <a href="/collections/aretes" onclick="closeMobileNotch('Aretes')">Aretes</a>
-      <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras')">Pulseras</a>
-      <a href="/collections/dijes" onclick="closeMobileNotch('Dijes')">Dijes</a>
-      <a href="#contacto" onclick="closeMobileNotch('Contacto')">Contacto</a>
+      <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio'); handleNavCategory(event, 'todos');">Inicio</a>
+      <a href="/collections/cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
+      <a href="/collections/cuban" onclick="closeMobileNotch('Cadenas Cubanas'); handleNavCategory(event, 'cuban');">Cadenas Cubanas</a>
+      <a href="/collections/anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
+      <a href="/collections/aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
+      <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
+      <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
+      <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
+      <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
+      <a href="#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
     </div>
     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">
       <path d="M 20 0 C 8.954 0 0 8.954 0 20 H -1 V -1 H 20 Z" fill="currentColor"></path>
@@ -315,7 +319,7 @@
               <h3 class="cat-card-title">Cadenas</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="Cadenas de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+              <img src="{{ 'collection-cuban.jpg' | asset_url }}" alt="Cadenas de Oro 10K y 14K" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
@@ -334,7 +338,7 @@
               <h3 class="cat-card-title">Cadenas Cubanas</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="{{ 'collection-cuban.jpg' | asset_url }}" alt="Cadenas Cubanas Miami de Oro" class="cat-square-img" loading="lazy">
+              <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="Cadenas Cubanas Miami de Oro" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
@@ -441,25 +445,6 @@
             </div>
           </a>
 
-          <!-- Card 8: Prendedores -->
-          <a href="#catalogo" onclick="handleNavCategory(event, 'prendedores')" class="cat-square-card" data-cat-link="prendedores" aria-label="Ver Colección de Prendedores">
-            <div class="cat-card-header">
-              <span class="cat-card-label">Nueva Colección</span>
-              <h3 class="cat-card-title">Prendedores</h3>
-            </div>
-            <div class="cat-card-img-wrap">
-              <img src="{{ 'collection-prendedores.jpg' | asset_url }}" alt="Prendedores y Broches de Oro" class="cat-square-img" loading="lazy">
-            </div>
-            <div class="cat-card-footer">
-              <span class="cat-pill-btn">
-                <span>Ver Colección</span>
-                <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </div>
-          </a>
-
           <!-- Card 9: Relojes -->
           <a href="#catalogo" onclick="handleNavCategory(event, 'relojes')" class="cat-square-card" data-cat-link="relojes" aria-label="Ver Colección de Relojes">
             <div class="cat-card-header">
@@ -506,36 +491,49 @@
     </div>
 
     <div class="editorial-vitrine-grid">
-      {%- assign bs_collection = section.settings.collection | default: collections['all'] -%}
+      {%- assign bs_collection = collections['cuban'] | default: section.settings.collection | default: collections['all'] -%}
+      {%- if bs_collection == blank or bs_collection.products.size == 0 -%}
+        {%- assign bs_collection = collections['all'] -%}
+      {%- endif -%}
       {%- if bs_collection != blank and bs_collection.products.size > 0 -%}
         {%- for product in bs_collection.products limit: 4 -%}
           {%- assign p_type = product.type | downcase -%}
-            {%- assign p_title = product.title | downcase -%}
-            {%- assign p_tags = product.tags | join: ',' | downcase -%}
+          {%- assign p_title = product.title | downcase -%}
+          {%- assign p_tags = product.tags | join: ',' | downcase -%}
+          {%- assign cat_tag = 'cadenas' -%}
+          {%- assign cat_label = 'Cadenas' -%}
+          {%- if p_tags contains 'cat:piercings' and p_tags contains 'cat:aretes' -%}
+            {%- assign cat_tag = 'aretes piercings' -%}
+            {%- assign cat_label = 'Aretes' -%}
+          {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
+            {%- assign cat_tag = 'piercings' -%}
+            {%- assign cat_label = 'Piercings' -%}
+          {%- elsif p_tags contains 'cat:relojes' or p_type contains 'reloj' or p_title contains 'invicta' or p_title contains 'seiko' -%}
+            {%- assign cat_tag = 'relojes' -%}
+            {%- assign cat_label = 'Relojes' -%}
+          {%- elsif p_tags contains 'cat:pulseras' or p_type contains 'pulsera' or p_type contains 'manilla' or p_title contains 'manilla' or p_title contains 'pulsera' or p_title contains 'esclava' or p_title contains 'tobillera' -%}
+            {%- assign cat_tag = 'pulseras' -%}
+            {%- assign cat_label = 'Pulseras' -%}
+          {%- elsif p_tags contains 'cat:anillos' or p_type contains 'anillo' or p_title contains 'anillo' or p_title contains 'alianza' or p_title contains 'solitario' -%}
+            {%- assign cat_tag = 'anillos' -%}
+            {%- assign cat_label = 'Anillos' -%}
+          {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+            {%- assign cat_tag = 'aretes' -%}
+            {%- assign cat_label = 'Aretes' -%}
+          {%- elsif p_tags contains 'cat:dijes' or p_type contains 'dije' or p_title contains 'dije' or p_title contains 'medalla' or p_title contains 'charm' -%}
+            {%- assign cat_tag = 'dijes' -%}
+            {%- assign cat_label = 'Dijes' -%}
+          {%- elsif p_tags contains 'cat:cuban' or p_type contains 'cuban' or p_title contains 'cuban' or p_title contains 'mónaco' or p_title contains 'monaco' -%}
+            {%- assign cat_tag = 'cuban cadenas' -%}
+            {%- assign cat_label = 'Cadenas Cubanas' -%}
+          {%- else -%}
             {%- assign cat_tag = 'cadenas' -%}
-            {%- if p_type contains 'cuban' or p_title contains 'cuban' or p_tags contains 'cuban' or p_title contains 'miami' -%}
-              {%- assign cat_tag = 'cuban' -%}
-            {%- elsif p_type contains 'anillo' or p_title contains 'anillo' or p_tags contains 'anillo' or p_type contains 'ring' or p_title contains 'ring' -%}
-              {%- assign cat_tag = 'anillos' -%}
-            {%- elsif p_type contains 'arete' or p_title contains 'arete' or p_tags contains 'arete' or p_title contains 'arracada' or p_type contains 'arracada' or p_type contains 'earring' -%}
-              {%- assign cat_tag = 'aretes' -%}
-            {%- elsif p_type contains 'pulsera' or p_title contains 'pulsera' or p_tags contains 'pulsera' or p_title contains 'esclava' or p_title contains 'manilla' or p_title contains 'bangle' or p_type contains 'bracelet' -%}
-              {%- assign cat_tag = 'pulseras' -%}
-            {%- elsif p_type contains 'dije' or p_title contains 'dije' or p_tags contains 'dije' or p_title contains 'medalla' or p_title contains 'cruz' or p_title contains 'cristo' or p_type contains 'pendant' -%}
-              {%- assign cat_tag = 'dijes' -%}
-            {%- elsif p_type contains 'piercing' or p_title contains 'piercing' or p_tags contains 'piercing' or p_title contains 'broquel' -%}
-              {%- assign cat_tag = 'piercings' -%}
-            {%- elsif p_type contains 'prendedor' or p_title contains 'prendedor' or p_tags contains 'prendedor' or p_title contains 'broche' -%}
-              {%- assign cat_tag = 'prendedores' -%}
-            {%- elsif p_type contains 'reloj' or p_title contains 'reloj' or p_tags contains 'reloj' or p_type contains 'watch' or p_title contains 'watch' -%}
-              {%- assign cat_tag = 'relojes' -%}
-            {%- else -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- endif -%}
-            {%- assign karat_tag = '14k' -%}
-            {%- if p_tags contains '10k' or p_title contains '10k' or p_type contains '10k' -%}
-              {%- assign karat_tag = '10k' -%}
-            {%- endif -%}
+            {%- assign cat_label = 'Cadenas' -%}
+          {%- endif -%}
+          {%- assign karat_tag = '14k' -%}
+          {%- if p_tags contains '10k' or p_title contains '10k' or p_type contains '10k' -%}
+            {%- assign karat_tag = '10k' -%}
+          {%- endif -%}
           {%- assign price_num = product.price | divided_by: 100.0 -%}
           {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
           {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
@@ -575,7 +573,7 @@
                 <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
               </div>
               <div class="cutout-card-inset-label">
-                <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
+                <span class="cutout-label-text">{{ cat_label }}</span>
                 <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
               </div>
             </div>
@@ -758,114 +756,47 @@
     </div>
 
     <div class="editorial-vitrine-grid">
-      {%- assign new_collection = section.settings.collection | default: collections['all'] -%}
-      {%- if new_collection != blank and new_collection.products.size > 4 -%}
-        {%- for product in new_collection.products offset: 4 limit: 4 -%}
-          {%- assign cat_tag = product.type | default: 'cadenas' | downcase -%}
-          {%- if cat_tag == blank or cat_tag == 'all' -%}
-            {%- if product.tags contains 'cadenas' or product.title contains 'Cadena' or product.title contains 'cadena' or product.title contains 'Cuban' -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- elsif product.tags contains 'anillos' or product.title contains 'Anillo' or product.title contains 'anillo' -%}
-              {%- assign cat_tag = 'anillos' -%}
-            {%- elsif product.tags contains 'aretes' or product.title contains 'Arete' or product.title contains 'arete' or product.title contains 'Arracada' -%}
-              {%- assign cat_tag = 'aretes' -%}
-            {%- elsif product.tags contains 'pulseras' or product.title contains 'Pulsera' or product.title contains 'pulsera' or product.title contains 'Esclava' -%}
-              {%- assign cat_tag = 'pulseras' -%}
-            {%- elsif product.tags contains 'dijes' or product.title contains 'Dije' or product.title contains 'dije' or product.title contains 'Medalla' -%}
-              {%- assign cat_tag = 'dijes' -%}
-            {%- else -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- endif -%}
-          {%- endif -%}
-          {%- assign karat_tag = '14k' -%}
-          {%- if product.tags contains '10k' or product.tags contains '10K' or product.title contains '10K' or product.title contains '10k' -%}
-            {%- assign karat_tag = '10k' -%}
-          {%- endif -%}
-          {%- assign price_num = product.price | divided_by: 100.0 -%}
-          {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
-          {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
-          {%- assign product_weight = '' -%}
-          {%- if product.variants.first.weight > 0 -%}
-            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
-            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
-            {%- assign product_weight = raw_w -%}
-          {%- endif -%}
-          {%- assign product_size = '' -%}
-          {%- for opt in product.options_with_values -%}
-            {%- assign opt_name = opt.name | downcase -%}
-            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-              {%- assign product_size = opt.values.first -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-            {%- assign product_size = product.variants.first.title -%}
-          {%- endif -%}
-          <div class="product-shop-card cutout-product-card" 
-               data-category="{{ cat_tag }}" 
-               data-karat="{{ karat_tag }}" 
-               data-price="{{ price_num }}" 
-               data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
-               data-variant-id="{{ product.variants.first.id }}"
-               onclick="openProductModalFromCard(this)" 
-               style="position:relative;">
-            <span class="badge-emerald-new">✦ Novedad 2026</span>
-            <div class="cutout-card-media">
-              {%- if product.featured_image != blank -%}
-                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
-              {%- else -%}
-                <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
-              {%- endif -%}
-              <div class="cutout-card-pin">
-                <span>{{ karat_tag | upcase }} ORO</span>
-                <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
-              </div>
-              <div class="cutout-card-inset-label">
-                <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
-                <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
-              </div>
-            </div>
-            <div class="cutout-card-content">
-              <div class="cutout-title-row">
-                <h4 class="cutout-product-title">{{ product.title }}</h4>
-                <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado</span>
-              </div>
-              <div class="product-card-pricing-row">
-                <div class="pricing-amounts">
-                  <div class="pricing-numbers-row">
-                    <span class="price-now">{{ product.price | money }}</span>
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="price-was">{{ product.compare_at_price | money }}</span>
-                    {%- endif -%}
-                  </div>
-                  <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>
-                </div>
-                <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- elsif new_collection != blank and new_collection.products.size > 0 -%}
+      {%- assign new_collection = collections['pulseras'] | default: section.settings.collection | default: collections['all'] -%}
+      {%- if new_collection == blank or new_collection.products.size == 0 -%}
+        {%- assign new_collection = collections['all'] -%}
+      {%- endif -%}
+      {%- if new_collection != blank and new_collection.products.size > 0 -%}
         {%- for product in new_collection.products limit: 4 -%}
-          {%- assign cat_tag = product.type | default: 'cadenas' | downcase -%}
-          {%- if cat_tag == blank or cat_tag == 'all' -%}
-            {%- if product.tags contains 'cadenas' or product.title contains 'Cadena' or product.title contains 'cadena' or product.title contains 'Cuban' -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- elsif product.tags contains 'anillos' or product.title contains 'Anillo' or product.title contains 'anillo' -%}
-              {%- assign cat_tag = 'anillos' -%}
-            {%- elsif product.tags contains 'aretes' or product.title contains 'Arete' or product.title contains 'arete' or product.title contains 'Arracada' -%}
-              {%- assign cat_tag = 'aretes' -%}
-            {%- elsif product.tags contains 'pulseras' or product.title contains 'Pulsera' or product.title contains 'pulsera' or product.title contains 'Esclava' -%}
-              {%- assign cat_tag = 'pulseras' -%}
-            {%- elsif product.tags contains 'dijes' or product.title contains 'Dije' or product.title contains 'dije' or product.title contains 'Medalla' -%}
-              {%- assign cat_tag = 'dijes' -%}
-            {%- else -%}
-              {%- assign cat_tag = 'cadenas' -%}
-            {%- endif -%}
+          {%- assign p_type = product.type | downcase -%}
+          {%- assign p_title = product.title | downcase -%}
+          {%- assign p_tags = product.tags | join: ',' | downcase -%}
+          {%- assign cat_tag = 'cadenas' -%}
+          {%- assign cat_label = 'Cadenas' -%}
+          {%- if p_tags contains 'cat:piercings' and p_tags contains 'cat:aretes' -%}
+            {%- assign cat_tag = 'aretes piercings' -%}
+            {%- assign cat_label = 'Aretes' -%}
+          {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
+            {%- assign cat_tag = 'piercings' -%}
+            {%- assign cat_label = 'Piercings' -%}
+          {%- elsif p_tags contains 'cat:relojes' or p_type contains 'reloj' or p_title contains 'invicta' or p_title contains 'seiko' -%}
+            {%- assign cat_tag = 'relojes' -%}
+            {%- assign cat_label = 'Relojes' -%}
+          {%- elsif p_tags contains 'cat:pulseras' or p_type contains 'pulsera' or p_type contains 'manilla' or p_title contains 'manilla' or p_title contains 'pulsera' or p_title contains 'esclava' or p_title contains 'tobillera' -%}
+            {%- assign cat_tag = 'pulseras' -%}
+            {%- assign cat_label = 'Pulseras' -%}
+          {%- elsif p_tags contains 'cat:anillos' or p_type contains 'anillo' or p_title contains 'anillo' or p_title contains 'alianza' or p_title contains 'solitario' -%}
+            {%- assign cat_tag = 'anillos' -%}
+            {%- assign cat_label = 'Anillos' -%}
+          {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+            {%- assign cat_tag = 'aretes' -%}
+            {%- assign cat_label = 'Aretes' -%}
+          {%- elsif p_tags contains 'cat:dijes' or p_type contains 'dije' or p_title contains 'dije' or p_title contains 'medalla' or p_title contains 'charm' -%}
+            {%- assign cat_tag = 'dijes' -%}
+            {%- assign cat_label = 'Dijes' -%}
+          {%- elsif p_tags contains 'cat:cuban' or p_type contains 'cuban' or p_title contains 'cuban' or p_title contains 'mónaco' or p_title contains 'monaco' -%}
+            {%- assign cat_tag = 'cuban cadenas' -%}
+            {%- assign cat_label = 'Cadenas Cubanas' -%}
+          {%- else -%}
+            {%- assign cat_tag = 'cadenas' -%}
+            {%- assign cat_label = 'Cadenas' -%}
           {%- endif -%}
           {%- assign karat_tag = '14k' -%}
-          {%- if product.tags contains '10k' or product.tags contains '10K' or product.title contains '10K' or product.title contains '10k' -%}
+          {%- if p_tags contains '10k' or p_title contains '10k' or p_type contains '10k' -%}
             {%- assign karat_tag = '10k' -%}
           {%- endif -%}
           {%- assign price_num = product.price | divided_by: 100.0 -%}
@@ -907,7 +838,7 @@
                 <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
               </div>
               <div class="cutout-card-inset-label">
-                <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
+                <span class="cutout-label-text">{{ cat_label }}</span>
                 <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
               </div>
             </div>
@@ -1099,7 +1030,6 @@
           <button class="cat-tab-btn" data-cat="pulseras" onclick="filterCatalog('pulseras', this)">Pulseras</button>
           <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
           <button class="cat-tab-btn" data-cat="piercings" onclick="filterCatalog('piercings', this)">Piercings</button>
-          <button class="cat-tab-btn" data-cat="prendedores" onclick="filterCatalog('prendedores', this)">Prendedores</button>
           <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
         </nav>
 
@@ -1229,92 +1159,231 @@
       <!-- Products Grid -->
       {%- assign catalog_collection = section.settings.collection | default: collections['all'] -%}
       <div class="catalog-products-grid" id="catalogProductsGrid">
-        {%- if catalog_collection != blank and catalog_collection.products.size > 0 -%}
-          {%- for product in catalog_collection.products limit: 48 -%}
-            {%- assign cat_tag = product.type | default: 'cadenas' | downcase -%}
-            {%- if cat_tag == blank or cat_tag == 'all' -%}
-              {%- if product.tags contains 'cadenas' or product.title contains 'Cadena' or product.title contains 'cadena' or product.title contains 'Cuban' -%}
-                {%- assign cat_tag = 'cadenas' -%}
-              {%- elsif product.tags contains 'anillos' or product.title contains 'Anillo' or product.title contains 'anillo' -%}
-                {%- assign cat_tag = 'anillos' -%}
-              {%- elsif product.tags contains 'aretes' or product.title contains 'Arete' or product.title contains 'arete' or product.title contains 'Arracada' -%}
-                {%- assign cat_tag = 'aretes' -%}
-              {%- elsif product.tags contains 'pulseras' or product.title contains 'Pulsera' or product.title contains 'pulsera' or product.title contains 'Esclava' -%}
-                {%- assign cat_tag = 'pulseras' -%}
-              {%- elsif product.tags contains 'dijes' or product.title contains 'Dije' or product.title contains 'dije' or product.title contains 'Medalla' -%}
-                {%- assign cat_tag = 'dijes' -%}
-              {%- else -%}
-                {%- assign cat_tag = 'cadenas' -%}
-              {%- endif -%}
-            {%- endif -%}
-            {%- assign karat_tag = '14k' -%}
-            {%- if product.tags contains '10k' or product.tags contains '10K' or product.title contains '10K' or product.title contains '10k' -%}
-              {%- assign karat_tag = '10k' -%}
-            {%- endif -%}
-            {%- assign price_num = product.price | divided_by: 100.0 -%}
-            {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
-            {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
-          {%- assign product_weight = '' -%}
-          {%- if product.variants.first.weight > 0 -%}
-            {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
-            {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
-            {%- assign product_weight = raw_w -%}
-          {%- endif -%}
-          {%- assign product_size = '' -%}
-          {%- for opt in product.options_with_values -%}
-            {%- assign opt_name = opt.name | downcase -%}
-            {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-              {%- assign product_size = opt.values.first -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-            {%- assign product_size = product.variants.first.title -%}
-          {%- endif -%}
-            <div class="product-shop-card cutout-product-card" 
-                 data-category="{{ cat_tag }}" 
-                 data-karat="{{ karat_tag }}" 
-                 data-price="{{ price_num }}" 
-                 data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
-                 data-default-order="{{ forloop.index }}"
-                 data-variant-id="{{ product.variants.first.id }}"
-                 onclick="openProductModalFromCard(this)">
-              <div class="cutout-card-media">
-                {%- if product.featured_image != blank -%}
-                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
-                {%- else -%}
-                  <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
-                {%- endif -%}
-                <div class="cutout-card-pin">
-                  <span>{{ karat_tag | upcase }} ORO</span>
-                  <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
-                </div>
-                <div class="cutout-card-inset-label">
-                  <span class="cutout-label-text">{{ cat_tag | capitalize }}</span>
-                  <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
-                </div>
-              </div>
-              <div class="cutout-card-content">
-                <div class="cutout-title-row">
-                  <h4 class="cutout-product-title">{{ product.title }}</h4>
-                  <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado</span>
-                </div>
-                <div class="product-card-pricing-row">
-                  <div class="pricing-amounts">
-                    <div class="pricing-numbers-row">
-                      <span class="price-now">{{ product.price | money }}</span>
-                      {%- if product.compare_at_price > product.price -%}
-                        <span class="price-was">{{ product.compare_at_price | money }}</span>
+        {%- assign rendered_ids = ',' -%}
+        {%- assign card_order_idx = 0 -%}
+        {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,relojes,anillos,dijes' | split: ',' -%}
+        {%- if catalog_collection != blank and catalog_collection.products_count > 0 -%}
+          {%- for ch in cat_handles -%}
+            {%- assign sub_col = collections[ch] -%}
+            {%- if sub_col != blank and sub_col.products.size > 0 -%}
+              {%- for product in sub_col.products limit: 100 -%}
+                {%- assign pid_check = ',' | append: product.id | append: ',' -%}
+                {%- unless rendered_ids contains pid_check -%}
+                  {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
+                  {%- assign card_order_idx = card_order_idx | plus: 1 -%}
+                  {%- assign ptype_down = product.type | downcase -%}
+                  {%- assign ptitle_down = product.title | downcase -%}
+                  {%- assign cat_tag = ch -%}
+                  {%- assign cat_label = product.type | default: 'Joya' -%}
+                  {%- if product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' -%}
+                    {%- assign cat_tag = 'cuban cadenas' -%}
+                    {%- assign cat_label = 'Cadena Cubana' -%}
+                  {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
+                    {%- assign cat_tag = 'cadenas' -%}
+                    {%- assign cat_label = 'Cadenas' -%}
+                  {%- elsif product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'reloj' -%}
+                    {%- assign cat_tag = 'relojes' -%}
+                    {%- assign cat_label = 'Relojes' -%}
+                  {%- elsif product.tags contains 'cat:piercings' and ptype_down contains 'piercing' -%}
+                    {%- assign cat_tag = 'piercings' -%}
+                    {%- assign cat_label = 'Piercings' -%}
+                  {%- elsif product.tags contains 'cat:piercings' -%}
+                    {%- assign cat_tag = 'aretes piercings' -%}
+                    {%- assign cat_label = 'Piercings / Broqueles' -%}
+                  {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' -%}
+                    {%- assign cat_tag = 'aretes' -%}
+                    {%- assign cat_label = 'Aretes' -%}
+                  {%- elsif product.tags contains 'cat:pulseras' or ptype_down contains 'pulsera' or ptype_down contains 'manilla' or ptitle_down contains 'pulsera' or ptitle_down contains 'manilla' or ptitle_down contains 'esclava' or ptitle_down contains 'brazalete' or ptitle_down contains 'semanario' or ptitle_down contains 'tobillera' -%}
+                    {%- assign cat_tag = 'pulseras' -%}
+                    {%- assign cat_label = 'Pulseras' -%}
+                  {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'cruz' or ptitle_down contains 'charms' -%}
+                    {%- assign cat_tag = 'dijes' -%}
+                    {%- assign cat_label = 'Dijes' -%}
+                  {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'compromiso' -%}
+                    {%- assign cat_tag = 'anillos' -%}
+                    {%- assign cat_label = 'Anillos' -%}
+                  {%- endif -%}
+                  {%- assign karat_tag = '10k' -%}
+                  {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
+                    {%- assign karat_tag = '14k' -%}
+                  {%- endif -%}
+                  {%- assign price_num = product.price | divided_by: 100.0 -%}
+                  {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
+                  {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+                  {%- assign product_weight = '' -%}
+                  {%- if product.variants.first.weight > 0 -%}
+                    {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+                    {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+                    {%- assign product_weight = raw_w -%}
+                  {%- endif -%}
+                  {%- assign product_size = '' -%}
+                  {%- for opt in product.options_with_values -%}
+                    {%- assign opt_name = opt.name | downcase -%}
+                    {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+                      {%- assign product_size = opt.values.first -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+                    {%- assign product_size = product.variants.first.title -%}
+                  {%- endif -%}
+                  {%- assign default_order_score = forloop.index | times: 10 | plus: forloop.parentloop.index -%}
+                  <div class="product-shop-card cutout-product-card" 
+                       data-category="{{ cat_tag }}" 
+                       data-karat="{{ karat_tag }}" 
+                       data-price="{{ price_num }}" 
+                       data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
+                       data-default-order="{{ default_order_score }}"
+                       data-variant-id="{{ product.variants.first.id }}"
+                       onclick="openProductModalFromCard(this)">
+                    <div class="cutout-card-media">
+                      {%- if product.featured_image != blank -%}
+                        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+                      {%- else -%}
+                        <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
                       {%- endif -%}
+                      <div class="cutout-card-pin">
+                        <span>{{ karat_tag | upcase }} ORO</span>
+                        <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
+                      </div>
+                      <div class="cutout-card-inset-label">
+                        <span class="cutout-label-text">{{ cat_label }}</span>
+                        <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
+                      </div>
                     </div>
-                    <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>
+                    <div class="cutout-card-content">
+                      <div class="cutout-title-row">
+                        <h4 class="cutout-product-title">{{ product.title }}</h4>
+                        <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado</span>
+                      </div>
+                      <div class="product-card-pricing-row">
+                        <div class="pricing-amounts">
+                          <div class="pricing-numbers-row">
+                            <span class="price-now">{{ product.price | money }}</span>
+                            {%- if product.compare_at_price > product.price -%}
+                              <span class="price-was">{{ product.compare_at_price | money }}</span>
+                            {%- endif -%}
+                          </div>
+                          <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>
+                        </div>
+                        <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endif -%}
           {%- endfor -%}
+          {%- paginate catalog_collection.products by 250 -%}
+            {%- for product in catalog_collection.products -%}
+              {%- assign pid_check = ',' | append: product.id | append: ',' -%}
+              {%- unless rendered_ids contains pid_check -%}
+                {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
+                {%- assign card_order_idx = card_order_idx | plus: 1 -%}
+                {%- assign ptype_down = product.type | downcase -%}
+                {%- assign ptitle_down = product.title | downcase -%}
+                {%- assign cat_tag = 'anillos' -%}
+                {%- assign cat_label = product.type | default: 'Joya' -%}
+                {%- if product.tags contains 'cat:cuban' or ptype_down contains 'cuban' or ptitle_down contains 'cuban' or ptitle_down contains 'miami' -%}
+                  {%- assign cat_tag = 'cuban cadenas' -%}
+                  {%- assign cat_label = 'Cadena Cubana' -%}
+                {%- elsif product.tags contains 'cat:cadenas' or ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
+                  {%- assign cat_tag = 'cadenas' -%}
+                  {%- assign cat_label = 'Cadenas' -%}
+                {%- elsif product.tags contains 'cat:relojes' or ptype_down contains 'reloj' or ptitle_down contains 'reloj' -%}
+                  {%- assign cat_tag = 'relojes' -%}
+                  {%- assign cat_label = 'Relojes' -%}
+                {%- elsif product.tags contains 'cat:piercings' and ptype_down contains 'piercing' -%}
+                  {%- assign cat_tag = 'piercings' -%}
+                  {%- assign cat_label = 'Piercings' -%}
+                {%- elsif product.tags contains 'cat:piercings' -%}
+                  {%- assign cat_tag = 'aretes piercings' -%}
+                  {%- assign cat_label = 'Piercings / Broqueles' -%}
+                {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' -%}
+                  {%- assign cat_tag = 'aretes' -%}
+                  {%- assign cat_label = 'Aretes' -%}
+                {%- elsif product.tags contains 'cat:pulseras' or ptype_down contains 'pulsera' or ptype_down contains 'manilla' or ptitle_down contains 'pulsera' or ptitle_down contains 'manilla' or ptitle_down contains 'esclava' or ptitle_down contains 'brazalete' or ptitle_down contains 'semanario' or ptitle_down contains 'tobillera' -%}
+                  {%- assign cat_tag = 'pulseras' -%}
+                  {%- assign cat_label = 'Pulseras' -%}
+                {%- elsif product.tags contains 'cat:dijes' or ptype_down contains 'dije' or ptitle_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'cruz' or ptitle_down contains 'charms' -%}
+                  {%- assign cat_tag = 'dijes' -%}
+                  {%- assign cat_label = 'Dijes' -%}
+                {%- elsif product.tags contains 'cat:anillos' or ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'compromiso' -%}
+                  {%- assign cat_tag = 'anillos' -%}
+                  {%- assign cat_label = 'Anillos' -%}
+                {%- endif -%}
+                {%- assign karat_tag = '10k' -%}
+                {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
+                  {%- assign karat_tag = '14k' -%}
+                {%- endif -%}
+                {%- assign price_num = product.price | divided_by: 100.0 -%}
+                {%- assign monthly_affirm = product.price | divided_by: 1200 -%}
+                {%- if monthly_affirm < 20 -%}{%- assign monthly_affirm = 20 -%}{%- endif -%}
+                {%- assign product_weight = '' -%}
+                {%- if product.variants.first.weight > 0 -%}
+                  {%- assign raw_w = product.variants.first.weight | divided_by: 1.0 -%}
+                  {%- if raw_w > 500 -%}{%- assign raw_w = raw_w | divided_by: 1000.0 -%}{%- endif -%}
+                  {%- assign product_weight = raw_w -%}
+                {%- endif -%}
+                {%- assign product_size = '' -%}
+                {%- for opt in product.options_with_values -%}
+                  {%- assign opt_name = opt.name | downcase -%}
+                  {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
+                    {%- assign product_size = opt.values.first -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
+                  {%- assign product_size = product.variants.first.title -%}
+                {%- endif -%}
+                {%- assign fallback_order_score = card_order_idx | plus: 2000 -%}
+                <div class="product-shop-card cutout-product-card" 
+                     data-category="{{ cat_tag }}" 
+                     data-karat="{{ karat_tag }}" 
+                     data-price="{{ price_num }}" 
+                     data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
+                     data-default-order="{{ fallback_order_score }}"
+                     data-variant-id="{{ product.variants.first.id }}"
+                     onclick="openProductModalFromCard(this)">
+                  <div class="cutout-card-media">
+                    {%- if product.featured_image != blank -%}
+                      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+                    {%- else -%}
+                      <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+                    {%- endif -%}
+                    <div class="cutout-card-pin">
+                      <span>{{ karat_tag | upcase }} ORO</span>
+                      <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="cutout-card-inset-label">
+                      <span class="cutout-label-text">{{ cat_label }}</span>
+                      <svg class="cutout-corner cutout-corner-label-right" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 C6.63 0 12 7.17 12 16 C12 24.83 17.38 32 24 32 H0 V0 Z" fill="currentColor"/></svg>
+                    </div>
+                  </div>
+                  <div class="cutout-card-content">
+                    <div class="cutout-title-row">
+                      <h4 class="cutout-product-title">{{ product.title }}</h4>
+                      <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado</span>
+                    </div>
+                    <div class="product-card-pricing-row">
+                      <div class="pricing-amounts">
+                        <div class="pricing-numbers-row">
+                          <span class="price-now">{{ product.price | money }}</span>
+                          {%- if product.compare_at_price > product.price -%}
+                            <span class="price-was">{{ product.compare_at_price | money }}</span>
+                          {%- endif -%}
+                        </div>
+                        <div class="affirm-monthly-badge">Desde <strong>${{ monthly_affirm }}/mes</strong> con Affirm</div>
+                      </div>
+                      <button type="button" class="btn-add-cart-pill" onclick="event.stopPropagation(); openProductModalFromCard(this.closest('.product-shop-card'));" title="Ver y Comprar" aria-label="Ver y Comprar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a4 4 0 0 1-8 0M3.6 7.4L2.9 15.8C2.8 17.6 2.7 18.5 3 19.2c.3.6.7 1.1 1.3 1.4.7.4 1.6.4 3.4.4h8.6c1.8 0 2.7 0 3.4-.4.6-.3 1-.8 1.3-1.4.3-.7.2-1.6.1-3.4l-.7-8.4c-.1-1.6-.2-2.3-.5-2.9-.3-.5-.8-1-1.3-1.2C18 3 17.2 3 15.6 3H8.4C6.8 3 6 3 5.4 3.3c-.5.2-1 .7-1.3 1.2-.3.6-.4 1.3-.5 2.9z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              {%- endunless -%}
+            {%- endfor -%}
+          {%- endpaginate -%}
         {%- else -%}
           <div class="product-shop-card cutout-product-card" data-category="cadenas" data-karat="14k" data-price="1620" data-weight="14.8" data-size="24" data-default-order="1" onclick="openProductModalFromCard(this)">
             <div class="cutout-card-media">
@@ -2313,26 +2382,25 @@
         if (currentCatalogCategory !== 'todos') {
           var target = currentCatalogCategory.toLowerCase();
           var matched = false;
+          var catTokens = cat.split(/\s+/);
 
-          if (cat === target || cat.indexOf(target) !== -1) {
+          if (cat === target || catTokens.indexOf(target) !== -1 || cat.indexOf(target) !== -1) {
             matched = true;
-          } else if (target === 'cadenas' && (cat.includes('cadena') || title.includes('cadena') || title.includes('collar') || title.includes('franco') || title.includes('soga') || title.includes('rope') || title.includes('figaro'))) {
+          } else if (target === 'cadenas' && (cat.includes('cadena') || cat.includes('cuban') || title.includes('cadena') || title.includes('collar') || title.includes('franco') || title.includes('soga') || title.includes('rope') || title.includes('figaro') || title.includes('gargantilla') || title.includes('rosario'))) {
             matched = true;
-          } else if (target === 'cuban' && (cat.includes('cuban') || title.includes('cuban') || title.includes('miami') || title.includes('eslabon') || title.includes('cubana'))) {
+          } else if (target === 'cuban' && (cat.includes('cuban') || title.includes('cuban') || title.includes('miami') || title.includes('mónaco') || title.includes('monaco'))) {
             matched = true;
-          } else if (target === 'anillos' && (cat.includes('anillo') || title.includes('anillo') || title.includes('sello') || title.includes('solitario') || title.includes('ring'))) {
+          } else if (target === 'anillos' && (cat.includes('anillo') || title.includes('anillo') || title.includes('alianza') || title.includes('sortija') || title.includes('compromiso') || title.includes('solitario') || title.includes('sello'))) {
             matched = true;
-          } else if (target === 'aretes' && (cat.includes('arete') || title.includes('arete') || title.includes('arracada') || title.includes('topos') || title.includes('earring'))) {
+          } else if (target === 'aretes' && (cat.includes('arete') || title.includes('arete') || title.includes('arracada') || title.includes('argolla') || title.includes('topos') || title.includes('dormilon') || title.includes('omega'))) {
             matched = true;
-          } else if (target === 'pulseras' && (cat.includes('pulsera') || title.includes('pulsera') || title.includes('manilla') || title.includes('esclava') || title.includes('bangle') || title.includes('bracelet'))) {
+          } else if (target === 'pulseras' && (cat.includes('pulsera') || title.includes('pulsera') || title.includes('manilla') || title.includes('esclava') || title.includes('brazalete') || title.includes('semanario') || title.includes('tobillera'))) {
             matched = true;
-          } else if (target === 'dijes' && (cat.includes('dije') || title.includes('dije') || title.includes('medalla') || title.includes('cruz') || title.includes('cristo') || title.includes('virgen') || title.includes('pendant'))) {
+          } else if (target === 'dijes' && (cat.includes('dije') || title.includes('dije') || title.includes('medalla') || title.includes('cruz') || title.includes('cristo') || title.includes('virgen') || title.includes('charm'))) {
             matched = true;
-          } else if (target === 'piercings' && (cat.includes('piercing') || title.includes('piercing') || title.includes('broquel') || title.includes('nariz') || title.includes('ombligo'))) {
+          } else if (target === 'piercings' && (cat.includes('piercing') || title.includes('piercing') || title.includes('broquel') || title.includes('dormilon') || title.includes('ombligo'))) {
             matched = true;
-          } else if (target === 'prendedores' && (cat.includes('prendedor') || title.includes('prendedor') || title.includes('broche') || title.includes('alfiler') || title.includes('pin'))) {
-            matched = true;
-          } else if (target === 'relojes' && (cat.includes('reloj') || title.includes('reloj') || title.includes('watch') || title.includes('cronografo'))) {
+          } else if (target === 'relojes' && (cat.includes('reloj') || title.includes('reloj') || title.includes('invicta') || title.includes('seiko'))) {
             matched = true;
           }
 
@@ -2341,17 +2409,31 @@
 
         // 2. Karat Filtering
         if (activeKaratFilter !== 'all') {
-          var targetKarat = activeKaratFilter.toLowerCase();
-          if (karat !== targetKarat && !title.includes(targetKarat)) {
-            return false;
-          }
+          if (karat !== activeKaratFilter.toLowerCase()) return false;
         }
 
         // 3. Size Filtering
         if (activeSizeFilter !== 'all') {
-          var targetSize = activeSizeFilter.toLowerCase();
-          if (size.indexOf(targetSize) === -1 && !title.includes(targetSize)) {
-            return false;
+          var combined = (size + ' ' + title).toLowerCase();
+          var numMatches = combined.match(/\d+(\.\d+)?/g) || [];
+          var nums = numMatches.map(function(n) { return parseFloat(n); });
+          if (activeSizeFilter === 'short') {
+            var hasShort = nums.some(function(n) { return n >= 6.5 && n <= 8.5; }) || combined.includes('7"') || combined.includes('7.5"') || combined.includes('8"') || combined.includes('16"') || combined.includes('18"') || combined.includes('pulsera') || combined.includes('manilla') || combined.includes('esclava');
+            if (!hasShort) return false;
+          } else if (activeSizeFilter === 'medium') {
+            var hasMed = nums.some(function(n) { return n >= 19 && n <= 22; }) || combined.includes('20"') || combined.includes('22"');
+            if (!hasMed) return false;
+          } else if (activeSizeFilter === 'long') {
+            var hasLong = nums.some(function(n) { return n >= 23 && n <= 30; }) || combined.includes('24"') || combined.includes('26"') || combined.includes('28"');
+            if (!hasLong) return false;
+          } else if (activeSizeFilter === 'ring7') {
+            if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
+            var hasRing7 = nums.some(function(n) { return n >= 5 && n <= 8.5; });
+            if (!hasRing7 && size !== '') return false;
+          } else if (activeSizeFilter === 'ring10') {
+            if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
+            var hasRing10 = nums.some(function(n) { return n >= 9 && n <= 13; });
+            if (!hasRing10) return false;
           }
         }
 
@@ -2577,9 +2659,6 @@
         } else if (category === 'piercings') {
           titleEl.innerHTML = 'Piercings & <span class="accent-gold">Broqueles de Oro</span>';
           subtitleEl.textContent = 'Joyas hipoalergénicas en oro macizo 10K y 14K con rosca de máxima seguridad.';
-        } else if (category === 'prendedores') {
-          titleEl.innerHTML = 'Prendedores & <span class="accent-gold">Broches de Gala</span>';
-          subtitleEl.textContent = 'Prendedores finos de solapa y broches imperdibles en oro auténtico certificado.';
         } else if (category === 'relojes') {
           titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Oro</span>';
           subtitleEl.textContent = 'Relojería fina con biseles de oro, cristales de zafiro y acabados de lujo.';
@@ -2605,6 +2684,39 @@
     }
     window.filterCatalog = filterCatalog;
 
+    window.handleNavCategory = window.handleNavCategory || function(e, category) {
+      var catalog = document.getElementById('catalogo');
+      if (catalog) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (history.pushState) {
+          history.pushState(null, null, '#' + category);
+        } else {
+          window.location.hash = category;
+        }
+        filterCatalog(category);
+      }
+    };
+
+    window.handleNavContact = window.handleNavContact || function(e) {
+      var contact = document.getElementById('contacto') || document.querySelector('.site-luxury-royal-footer') || document.querySelector('.site-white-footer');
+      if (contact) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (history.pushState) {
+          history.pushState(null, null, '#contacto');
+        }
+        contact.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    function checkStorefrontHashNavigation() {
+      var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
+      if (!hash) return;
+      var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'todos'];
+      if (validCategories.indexOf(hash) !== -1) {
+        filterCatalog(hash);
+      }
+    }
+    window.addEventListener('hashchange', checkStorefrontHashNavigation);
 
     // Dropdowns click behavior
     document.addEventListener('click', function(e) {
@@ -2626,15 +2738,19 @@
       var dd = document.getElementById('notchMobileDropdown');
       var ch = document.getElementById('mobileNotchChevron');
       if (dd) {
-        dd.classList.toggle('open');
-        if (ch) ch.style.transform = dd.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+        var isOpen = dd.classList.toggle('open');
+        dd.classList.toggle('show', isOpen);
+        if (ch) ch.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0)';
       }
     }
     function closeMobileNotch(lbl) {
       var dd = document.getElementById('notchMobileDropdown');
       var ch = document.getElementById('mobileNotchChevron');
       var el = document.getElementById('mobileNotchLabel');
-      if (dd) dd.classList.remove('open');
+      if (dd) {
+        dd.classList.remove('open');
+        dd.classList.remove('show');
+      }
       if (ch) ch.style.transform = 'rotate(0)';
       if (el && lbl) el.textContent = lbl;
     }
@@ -2669,13 +2785,15 @@
     });
     document.addEventListener('DOMContentLoaded', function() {
       paginateCatalogGrid();
+      setTimeout(checkStorefrontHashNavigation, 150);
       setTimeout(dismissSplashScreen, 800);
     });
     if (document.readyState !== 'loading') {
       paginateCatalogGrid();
+      setTimeout(checkStorefrontHashNavigation, 150);
       setTimeout(dismissSplashScreen, 500);
     }
-  
+
     var resizeCatalogTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeCatalogTimer);

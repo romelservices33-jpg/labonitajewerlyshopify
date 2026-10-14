@@ -68,11 +68,11 @@
   <nav class="hero-floating-nav" aria-label="Navegación de colecciones">
     <ul class="hero-nav-track">
       <li><a href="{{ routes.root_url }}" class="hero-nav-link {% if template.name == 'index' %}active{% endif %}">Inicio</a></li>
-      <li><a href="{{ routes.root_url }}#cadenas" class="hero-nav-link" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
-      <li><a href="{{ routes.root_url }}#anillos" class="hero-nav-link" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
-      <li><a href="{{ routes.root_url }}#aretes" class="hero-nav-link" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
-      <li><a href="{{ routes.root_url }}#pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
-      <li><a href="{{ routes.root_url }}#dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+      <li><a href="/collections/cadenas" class="hero-nav-link {% if collection.handle == 'cadenas' or collection.handle == 'cuban' %}active{% endif %}" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
+      <li><a href="/collections/anillos" class="hero-nav-link {% if collection.handle == 'anillos' %}active{% endif %}" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
+      <li><a href="/collections/aretes" class="hero-nav-link {% if collection.handle == 'aretes' %}active{% endif %}" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
+      <li><a href="/collections/pulseras" class="hero-nav-link {% if collection.handle == 'pulseras' %}active{% endif %}" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
+      <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
       <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
     </ul>
   </nav>
@@ -120,11 +120,14 @@
   </div>
   <div class="notch-mobile-dropdown" id="notchMobileDropdown">
     <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio')">Inicio</a>
-    <a href="{{ routes.root_url }}#cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
-    <a href="{{ routes.root_url }}#anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
-    <a href="{{ routes.root_url }}#aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
-    <a href="{{ routes.root_url }}#pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
-    <a href="{{ routes.root_url }}#dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes</a>
+    <a href="/collections/cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
+    <a href="/collections/cuban" onclick="closeMobileNotch('Cadenas Cubanas'); handleNavCategory(event, 'cuban');">Cadenas Cubanas</a>
+    <a href="/collections/anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
+    <a href="/collections/aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
+    <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
+    <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes</a>
+    <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
+    <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
     <a href="{{ routes.root_url }}#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">
@@ -138,7 +141,20 @@
     var ch = document.getElementById('mobileNotchChevron');
     if (!dd) return;
     var isOpen = dd.classList.toggle('show');
+    dd.classList.toggle('open', isOpen);
     if (ch) ch.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  function closeMobileNotch(lbl) {
+    var dd = document.getElementById('notchMobileDropdown');
+    var ch = document.getElementById('mobileNotchChevron');
+    var el = document.getElementById('mobileNotchLabel');
+    if (dd) {
+      dd.classList.remove('open');
+      dd.classList.remove('show');
+    }
+    if (ch) ch.style.transform = 'rotate(0deg)';
+    if (el && lbl) el.textContent = lbl;
   }
 
   function handleNavCategory(e, category) {
@@ -185,7 +201,7 @@
     var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
     if (!hash) return;
     
-    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'todos'];
+    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'todos'];
     if (validCategories.indexOf(hash) !== -1) {
       if (typeof window.filterCatalog === 'function') {
         window.filterCatalog(hash);
