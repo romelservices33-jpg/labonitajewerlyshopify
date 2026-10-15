@@ -1,0 +1,38 @@
+name: Daily Kitco Gold Price Sync (93% Store Buyback)
+
+on:
+  schedule:
+    # Runs every day at 13:00 UTC (9:00 AM EDT / 8:00 AM EST - US Market Open) and 21:00 UTC (5:00 PM EDT)
+    - cron: '0 13,21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-kitco-gold:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract Live Gold Price from Kitco & Sync 93% Buyback to Shopify
+        env:
+          SHOPIFY_SHOP_DOMAIN: ${{ secrets.SHOPIFY_SHOP_DOMAIN || '184ei8-su.myshopify.com' }}
+          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID || '141357809760' }}
+          SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+          SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+        run: node scripts/sync_kitco_gold.js
+
+      - name: Commit updated daily gold price snapshot
+        run: |
+          git config user.name "La Bonita Gold Price Bot"
+          git config user.email "bot@labonitajewelry.com"
+          git add assets/kitco-gold-price.json code/assets/kitco-gold-price.json || true
+          git diff --staged --quiet || git commit -m "chore(gold): update daily Kitco gold price & 93% store buyback rate"
+          git push || true
