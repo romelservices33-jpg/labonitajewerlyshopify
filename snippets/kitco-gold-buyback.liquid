@@ -1,5 +1,5 @@
 <!-- ========================================================================= -->
-<!-- SECCIÓN: COTIZACIÓN OFICIAL KITCO & COMPRA DE ORO EN TIENDA AL 93%        -->
+<!-- SECCIÓN: PRECIO DE COMPRA DE ORO HOY EN TIENDA (CALCULADO AL 93% INTERNO) -->
 <!-- ========================================================================= -->
 <style>
   .kitco-gold-section {
@@ -30,7 +30,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 26px;
+    gap: 28px;
   }
   .kitco-metric-block {
     display: flex;
@@ -125,74 +125,81 @@
   }
 </style>
 
-<section class="kitco-gold-section" id="compra-oro" aria-label="Cotización Oficial del Oro Kitco y Compra al 93%">
+<section class="kitco-gold-section" id="compra-oro" aria-label="Precios de Compra de Oro Hoy en Tienda">
   <div class="kitco-gold-container">
     <!-- Section Header -->
     <div style="text-align: center; margin-bottom: 30px;">
       <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(209, 176, 84, 0.14); border: 1px solid rgba(209, 176, 84, 0.45); color: #08195B; padding: 6px 16px; border-radius: 999px; font-size: 0.73rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">
         <span style="width: 8px; height: 8px; border-radius: 50%; background: #059669; box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2); display: inline-block;"></span>
-        <span>Datos Oficiales Extraídos Diariamente de Kitco.com · Pagamos el 93%</span>
+        <span>Cotización de Compra Actualizada Hoy · Pago Inmediato en Efectivo</span>
       </div>
       <h2 style="font-family: 'Sentient', Georgia, serif; font-size: clamp(1.95rem, 3.6vw, 2.75rem); font-weight: 600; color: #08195B; margin: 4px 0 10px; line-height: 1.15;">
-        Compramos tu Oro en Tienda al <span style="color: #D1B054; font-style: italic;">93% del Precio Oficial</span>
+        Compramos tu Oro Hoy al <span style="color: #D1B054; font-style: italic;">Mejor Precio</span>
       </h2>
-      <p style="font-size: 1rem; color: #475569; max-width: 740px; margin: 0 auto; line-height: 1.55;">
-        Sincronizado todos los días en tiempo real con la cotización oficial internacional de <strong>Kitco.com</strong>. En <strong>La Bonita Jewelry</strong> te garantizamos el pago más alto del mercado: <strong>el 93% del valor oficial del oro</strong> con pesaje certificado frente a ti.
+      <p style="font-size: 1rem; color: #475569; max-width: 720px; margin: 0 auto; line-height: 1.55;">
+        Consulta a cómo estamos pagando el gramo de oro hoy en <strong>La Bonita Jewelry</strong>. Realizamos el pesaje certificado en balanza de precisión frente a ti y te pagamos al instante.
       </p>
     </div>
 
-    <!-- Top Live Kitco Official Spot Banner -->
+    <!-- Top Live Store Buyback Banner -->
     <div class="kitco-live-banner">
       <div class="kitco-spot-metrics">
-        <div class="kitco-metric-block">
-          <span class="kitco-metric-label">Precio Oficial del Oro Hoy (Kitco Spot 24K)</span>
-          <div class="kitco-metric-value">
-            <span id="kitcoSpotOzDisplay" class="js-kitco-spot-oz">$4,143.70</span>
-            <span style="font-size: 0.85rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: rgba(255,255,255,0.75);">USD / oz troy</span>
-            <span id="kitcoChangeBadge" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.74rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: rgba(16, 185, 129, 0.22); color: #6EE7B7;">+$39.20 (+0.96%)</span>
+        <div class="kitco-metric-block" style="background: rgba(209, 176, 84, 0.16); border: 1px solid rgba(209, 176, 84, 0.5); padding: 10px 18px; border-radius: 14px;">
+          <span class="kitco-metric-label" style="color: #FFE082;">Compra Oro 24K Hoy</span>
+          <div class="kitco-metric-value gold-accent">
+            <span id="kitcoBuybackGram24kTop">$123.90</span>
+            <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #FFE082;">USD / g</span>
           </div>
         </div>
 
         <div class="kitco-metric-block">
-          <span class="kitco-metric-label">Gramo de Oro Oficial (100% Kitco 24K)</span>
+          <span class="kitco-metric-label">Compra Oro 18K Hoy</span>
           <div class="kitco-metric-value">
-            <span id="kitcoOfficialGram24k">$133.22</span>
+            <span id="kitcoBanner18kGram">$92.92</span>
             <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: rgba(255,255,255,0.75);">USD / g</span>
           </div>
         </div>
 
-        <div class="kitco-metric-block" style="background: rgba(209, 176, 84, 0.16); border: 1px solid rgba(209, 176, 84, 0.5); padding: 10px 18px; border-radius: 14px;">
-          <span class="kitco-metric-label" style="color: #FFE082;">Precio Compra en Tienda (93% Oficial)</span>
-          <div class="kitco-metric-value gold-accent">
-            <span id="kitcoBuybackOz24k">$3,853.64</span>
-            <span style="font-size: 0.80rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #FFE082;">/ oz · <strong id="kitcoBuybackGram24kTop">$123.90/g</strong> (24K)</span>
+        <div class="kitco-metric-block">
+          <span class="kitco-metric-label">Compra Oro 14K Hoy</span>
+          <div class="kitco-metric-value">
+            <span id="kitcoBanner14kGram">$72.27</span>
+            <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: rgba(255,255,255,0.75);">USD / g</span>
+          </div>
+        </div>
+
+        <div class="kitco-metric-block">
+          <span class="kitco-metric-label">Compra Oro 10K Hoy</span>
+          <div class="kitco-metric-value">
+            <span id="kitcoBanner10kGram">$51.62</span>
+            <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: rgba(255,255,255,0.75);">USD / g</span>
           </div>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 0.76rem; color: rgba(255,255,255,0.8);">
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.85);">
         <div style="display: inline-flex; align-items: center; gap: 6px;">
-          <span>Rango Hoy: <strong id="kitcoRangeToday" style="color:#FFF;">$4,072.70 – $4,171.10</strong></span>
+          <span>Compra por Onza (24K): <strong id="kitcoBuybackOz24k" style="color:#FFE082;">$3,853.64 USD / oz</strong></span>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <span id="kitcoUpdatedTime">Actualizado hoy en vivo</span>
-          <a href="https://www.kitco.com/" target="_blank" rel="noopener noreferrer" style="color: #FFE082; font-weight: 700; text-decoration: underline;">Verificar en Kitco.com ↗</a>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; display: inline-block;"></span>
+          <span id="kitcoUpdatedTime">Precios de compra actualizados hoy</span>
         </div>
       </div>
     </div>
 
-    <!-- 2-Column Grid: Left = 93% Buyback Table by Karat, Right = Interactive Payout Calculator -->
+    <!-- 2-Column Grid: Left = Buyback Table by Karat, Right = Interactive Payout Calculator -->
     <div class="kitco-grid-2col">
       
-      <!-- LEFT COLUMN: Official 93% Store Buyback Rates by Karat -->
+      <!-- LEFT COLUMN: Store Buyback Rates by Karat -->
       <div style="background: #FFFFFF; border-radius: 20px; padding: 30px; box-shadow: 0 4px 20px rgba(8, 25, 91, 0.05); border: 1px solid rgba(8, 25, 91, 0.08); display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(8, 25, 91, 0.07);">
             <div>
-              <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #D1B054;">Tabla Oficial de Compra en Tienda</span>
-              <h3 style="font-family: 'Sentient', Georgia, serif; font-size: 1.45rem; color: #08195B; margin: 2px 0 0; font-weight: 600;">Pago por Gramo Hoy al 93%</h3>
+              <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #D1B054;">Tarifas de Compra en Tienda Hoy</span>
+              <h3 style="font-family: 'Sentient', Georgia, serif; font-size: 1.45rem; color: #08195B; margin: 2px 0 0; font-weight: 600;">¿A Cómo Pagamos el Gramo Hoy?</h3>
             </div>
-            <span style="background: #08195B; color: #FFE082; font-size: 0.73rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; letter-spacing: 0.04em;">GARANTÍA 93% KITCO</span>
+            <span style="background: #08195B; color: #FFE082; font-size: 0.73rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; letter-spacing: 0.04em;">PAGO AL INSTANTE</span>
           </div>
 
           <div class="kitco-karat-cards-grid">
@@ -203,14 +210,14 @@
                   <span style="background: rgba(209, 176, 84, 0.2); color: #08195B; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px;">ORO 24K</span>
                   <span style="font-size: 0.72rem; color: #64748B; font-weight: 600;">Pureza 99.9%</span>
                 </div>
-                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Precio Compra Tienda (93%):</div>
-                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #08195B; line-height: 1.15;">
+                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Te pagamos hoy por gramo:</div>
+                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.75rem; font-weight: 700; color: #08195B; line-height: 1.15;">
                   <span id="kitcoCard24kGram">$123.90</span> <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #64748B;">USD / g</span>
                 </div>
               </div>
               <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(8, 25, 91, 0.1); display: flex; justify-content: space-between; font-size: 0.73rem; color: #64748B;">
-                <span>Oficial Kitco: <strong id="kitcoCard24kOfficial">$133.22/g</strong></span>
-                <span style="color: #059669; font-weight: 700;">93% Pagado</span>
+                <span>Por Onza: <strong id="kitcoCard24kOz">$3,853.64/oz</strong></span>
+                <span style="color: #059669; font-weight: 700;">✓ Pago en Efectivo</span>
               </div>
             </div>
 
@@ -221,14 +228,14 @@
                   <span style="background: rgba(209, 176, 84, 0.2); color: #08195B; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px;">ORO 18K</span>
                   <span style="font-size: 0.72rem; color: #64748B; font-weight: 600;">Pureza 75.0%</span>
                 </div>
-                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Precio Compra Tienda (93%):</div>
-                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #08195B; line-height: 1.15;">
+                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Te pagamos hoy por gramo:</div>
+                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.75rem; font-weight: 700; color: #08195B; line-height: 1.15;">
                   <span id="kitcoCard18kGram">$92.92</span> <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #64748B;">USD / g</span>
                 </div>
               </div>
               <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(8, 25, 91, 0.1); display: flex; justify-content: space-between; font-size: 0.73rem; color: #64748B;">
-                <span>Oficial Kitco: <strong id="kitcoCard18kOfficial">$99.92/g</strong></span>
-                <span style="color: #059669; font-weight: 700;">93% Pagado</span>
+                <span>Por Onza: <strong id="kitcoCard18kOz">$2,890.23/oz</strong></span>
+                <span style="color: #059669; font-weight: 700;">✓ Pago en Efectivo</span>
               </div>
             </div>
 
@@ -239,14 +246,14 @@
                   <span style="background: #08195B; color: #FFE082; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px;">ORO 14K</span>
                   <span style="font-size: 0.72rem; color: #64748B; font-weight: 600;">Pureza 58.3%</span>
                 </div>
-                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Precio Compra Tienda (93%):</div>
-                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #08195B; line-height: 1.15;">
+                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Te pagamos hoy por gramo:</div>
+                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.75rem; font-weight: 700; color: #08195B; line-height: 1.15;">
                   <span id="kitcoCard14kGram">$72.27</span> <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #64748B;">USD / g</span>
                 </div>
               </div>
               <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(8, 25, 91, 0.1); display: flex; justify-content: space-between; font-size: 0.73rem; color: #64748B;">
-                <span>Oficial Kitco: <strong id="kitcoCard14kOfficial">$77.71/g</strong></span>
-                <span style="color: #059669; font-weight: 700;">93% Pagado</span>
+                <span>Por Onza: <strong id="kitcoCard14kOz">$2,247.96/oz</strong></span>
+                <span style="color: #059669; font-weight: 700;">✓ Pago en Efectivo</span>
               </div>
             </div>
 
@@ -257,14 +264,14 @@
                   <span style="background: #08195B; color: #FFE082; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px;">ORO 10K</span>
                   <span style="font-size: 0.72rem; color: #64748B; font-weight: 600;">Pureza 41.7%</span>
                 </div>
-                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Precio Compra Tienda (93%):</div>
-                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #08195B; line-height: 1.15;">
+                <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 2px;">Te pagamos hoy por gramo:</div>
+                <div style="font-family: 'Sentient', Georgia, serif; font-size: 1.75rem; font-weight: 700; color: #08195B; line-height: 1.15;">
                   <span id="kitcoCard10kGram">$51.62</span> <span style="font-size: 0.82rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #64748B;">USD / g</span>
                 </div>
               </div>
               <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(8, 25, 91, 0.1); display: flex; justify-content: space-between; font-size: 0.73rem; color: #64748B;">
-                <span>Oficial Kitco: <strong id="kitcoCard10kOfficial">$55.51/g</strong></span>
-                <span style="color: #059669; font-weight: 700;">93% Pagado</span>
+                <span>Por Onza: <strong id="kitcoCard10kOz">$1,605.68/oz</strong></span>
+                <span style="color: #059669; font-weight: 700;">✓ Pago en Efectivo</span>
               </div>
             </div>
           </div>
@@ -272,21 +279,21 @@
 
         <div style="margin-top: 18px; padding: 12px 16px; border-radius: 12px; background: #FAF9F6; border: 1px solid rgba(8, 25, 91, 0.06); font-size: 0.78rem; color: #475569; display: flex; align-items: center; gap: 10px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
-          <span>Haz clic en cualquier quilataje para calcular cuánto efectivo recibes hoy por tus prendas o gramos de oro al <strong>93% del precio oficial de Kitco</strong>.</span>
+          <span>Compramos cadenas, anillos, pulseras, monedas y prendas de oro en cualquier estado. Selecciona el quilataje para calcular tu pago inmediato.</span>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: Interactive 93% Gold Buyback Calculator -->
+      <!-- RIGHT COLUMN: Interactive Gold Buyback Calculator -->
       <div style="background: #FFFFFF; border-radius: 20px; padding: 30px; box-shadow: 0 4px 20px rgba(8, 25, 91, 0.05); border: 1px solid rgba(209, 176, 84, 0.35); display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(8, 25, 91, 0.07);">
-            <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #059669;">Calculadora de Pago Inmediato</span>
-            <h3 style="font-family: 'Sentient', Georgia, serif; font-size: 1.45rem; color: #08195B; margin: 2px 0 0; font-weight: 600;">Calcula tu Pago al 93%</h3>
+            <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #059669;">Calculadora de Compra de Oro</span>
+            <h3 style="font-family: 'Sentient', Georgia, serif; font-size: 1.45rem; color: #08195B; margin: 2px 0 0; font-weight: 600;">Calcula Cuánto Recibes Hoy</h3>
           </div>
 
           <!-- 1. Select Karat -->
           <div style="margin-bottom: 16px;">
-            <label style="display: block; font-size: 0.76rem; font-weight: 700; color: #08195B; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">1. Selecciona el Quilataje del Oro</label>
+            <label style="display: block; font-size: 0.76rem; font-weight: 700; color: #08195B; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">1. Selecciona el Quilataje de tu Prenda</label>
             <div class="kitco-karat-btn-group">
               <button type="button" class="kitco-karat-pill" data-karat-btn="10k" onclick="selectKitcoCalculatorKarat('10k')">10K</button>
               <button type="button" class="kitco-karat-pill active" data-karat-btn="14k" onclick="selectKitcoCalculatorKarat('14k')">14K</button>
@@ -314,16 +321,12 @@
 
           <!-- 3. Payout Breakdown Box -->
           <div style="background: linear-gradient(135deg, #08195B 0%, #0F2982 100%); border-radius: 16px; padding: 18px 20px; color: #FFFFFF; margin-bottom: 18px; border: 1px solid rgba(209, 176, 84, 0.4);">
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(255,255,255,0.78); margin-bottom: 6px;">
-              <span>Valor Oficial Kitco (100% · <span id="kitcoCalcKaratLabel">14K</span>):</span>
-              <span id="kitcoCalcOfficialTotal" style="font-weight: 600;">$777.14 USD</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #6EE7B7; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.14);">
-              <span>Tasa de Compra en La Bonita:</span>
-              <span style="font-weight: 800;">93% del Precio Oficial Kitco</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.80rem; color: rgba(255,255,255,0.82); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14);">
+              <span>Precio de Compra Hoy (<span id="kitcoCalcKaratLabel">14K</span>):</span>
+              <span id="kitcoCalcRatePerGram" style="font-weight: 700; color: #FFFFFF;">$72.27 USD / g</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <span style="font-size: 0.84rem; font-weight: 700; color: #FFE082; text-transform: uppercase; letter-spacing: 0.05em;">Te Pagamos Hoy (93%):</span>
+              <span style="font-size: 0.84rem; font-weight: 700; color: #FFE082; text-transform: uppercase; letter-spacing: 0.05em;">Te Pagamos Hoy:</span>
               <span id="kitcoCalcStorePayout" style="font-family: 'Sentient', Georgia, serif; font-size: 1.95rem; font-weight: 700; color: #FFE082;">$722.74 USD</span>
             </div>
           </div>
@@ -331,9 +334,9 @@
 
         <!-- CTA Buttons -->
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a id="kitcoWhatsappSellBtn" href="https://wa.me/15026980759?text=Hola%20La%20Bonita%20Jewelry%2C%20quiero%20vender%20mi%20oro%20al%2093%25%20de%20la%20cotizaci%C3%B3n%20oficial%20de%20Kitco." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #059669; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.24); transition: all 0.2s ease;">
+          <a id="kitcoWhatsappSellBtn" href="https://wa.me/15026980759?text=Hola%20La%20Bonita%20Jewelry%2C%20quiero%20vender%20mi%20oro%20al%20precio%20de%20compra%20de%20hoy." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #059669; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.24); transition: all 0.2s ease;">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.31a8.13 8.13 0 01-1.25-4.28c0-4.51 3.67-8.17 8.18-8.17 2.18 0 4.24.85 5.78 2.39 1.54 1.54 2.39 3.6 2.39 5.78 0 4.51-3.67 8.16-8.18 8.16zm4.49-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-            <span>Vender mi Oro al 93% por WhatsApp</span>
+            <span>Vender mi Oro Hoy por WhatsApp</span>
           </a>
         </div>
       </div>
@@ -345,7 +348,7 @@
 <script>
   (function() {
     var TROY_OUNCE_GRAMS = 31.1034768;
-    var BUYBACK_RATE = 0.93; // 93% of official Kitco gold price
+    var BUYBACK_RATE = 0.93; // Internal calculation: 93% of official Kitco spot gold price
     var currentSpotOzUsd = 4143.70;
     var selectedKarat = '14k';
     var karatFactors = {
@@ -367,22 +370,22 @@
       var officialGram24k = currentSpotOzUsd / TROY_OUNCE_GRAMS;
       var buybackOz24k = currentSpotOzUsd * BUYBACK_RATE;
 
-      var g24Off = officialGram24k;
-      var g18Off = officialGram24k * karatFactors['18k'];
-      var g14Off = officialGram24k * karatFactors['14k'];
-      var g10Off = officialGram24k * karatFactors['10k'];
+      var g24Buy = officialGram24k * karatFactors['24k'] * BUYBACK_RATE;
+      var g18Buy = officialGram24k * karatFactors['18k'] * BUYBACK_RATE;
+      var g14Buy = officialGram24k * karatFactors['14k'] * BUYBACK_RATE;
+      var g10Buy = officialGram24k * karatFactors['10k'] * BUYBACK_RATE;
 
-      var g24Buy = g24Off * BUYBACK_RATE;
-      var g18Buy = g18Off * BUYBACK_RATE;
-      var g14Buy = g14Off * BUYBACK_RATE;
-      var g10Buy = g10Off * BUYBACK_RATE;
+      var oz24Buy = buybackOz24k * karatFactors['24k'];
+      var oz18Buy = buybackOz24k * karatFactors['18k'];
+      var oz14Buy = buybackOz24k * karatFactors['14k'];
+      var oz10Buy = buybackOz24k * karatFactors['10k'];
 
-      // Update top announcement marquee & spot displays
-      document.querySelectorAll('.js-kitco-spot-oz').forEach(function(el) {
-        el.textContent = formatUSD(currentSpotOzUsd) + (el.id === 'kitcoSpotOzDisplay' ? '' : '/oz');
-      });
+      // Update top announcement marquee items
       document.querySelectorAll('.js-kitco-buy-24k').forEach(function(el) {
         el.textContent = formatUSD(g24Buy) + '/g (24K)';
+      });
+      document.querySelectorAll('.js-kitco-buy-18k').forEach(function(el) {
+        el.textContent = formatUSD(g18Buy) + '/g (18K)';
       });
       document.querySelectorAll('.js-kitco-buy-14k').forEach(function(el) {
         el.textContent = formatUSD(g14Buy) + '/g (14K)';
@@ -391,48 +394,40 @@
         el.textContent = formatUSD(g10Buy) + '/g (10K)';
       });
 
-      var offGramEl = document.getElementById('kitcoOfficialGram24k');
-      if (offGramEl) offGramEl.textContent = formatUSD(officialGram24k);
+      // Update top banner
+      var buyGramTopEl = document.getElementById('kitcoBuybackGram24kTop');
+      if (buyGramTopEl) buyGramTopEl.textContent = formatUSD(g24Buy);
+
+      var b18El = document.getElementById('kitcoBanner18kGram');
+      if (b18El) b18El.textContent = formatUSD(g18Buy);
+
+      var b14El = document.getElementById('kitcoBanner14kGram');
+      if (b14El) b14El.textContent = formatUSD(g14Buy);
+
+      var b10El = document.getElementById('kitcoBanner10kGram');
+      if (b10El) b10El.textContent = formatUSD(g10Buy);
 
       var buyOzEl = document.getElementById('kitcoBuybackOz24k');
-      if (buyOzEl) buyOzEl.textContent = formatUSD(buybackOz24k);
+      if (buyOzEl) buyOzEl.textContent = formatUSD(buybackOz24k) + ' USD / oz';
 
-      var buyGramTopEl = document.getElementById('kitcoBuybackGram24kTop');
-      if (buyGramTopEl) buyGramTopEl.textContent = formatUSD(g24Buy) + '/g';
-
-      if (quoteData) {
-        var changeBadge = document.getElementById('kitcoChangeBadge');
-        if (changeBadge && typeof quoteData.change === 'number') {
-          var chg = Number(quoteData.change);
-          var pct = Number(quoteData.changePercentage || 0);
-          var sign = chg >= 0 ? '+' : '';
-          changeBadge.textContent = sign + formatUSD(chg) + ' (' + sign + pct.toFixed(2) + '%)';
-          changeBadge.style.background = chg >= 0 ? 'rgba(16, 185, 129, 0.22)' : 'rgba(239, 68, 68, 0.24)';
-          changeBadge.style.color = chg >= 0 ? '#6EE7B7' : '#FCA5A5';
-        }
-        var rangeEl = document.getElementById('kitcoRangeToday');
-        if (rangeEl && quoteData.low && quoteData.high) {
-          rangeEl.textContent = formatUSD(quoteData.low) + ' – ' + formatUSD(quoteData.high);
-        }
-        var timeEl = document.getElementById('kitcoUpdatedTime');
-        if (timeEl) {
-          var now = new Date();
-          timeEl.textContent = 'Cotización Kitco hoy: ' + now.toLocaleDateString('es-US', { day: '2-digit', month: 'short', year: 'numeric' });
-        }
+      var timeEl = document.getElementById('kitcoUpdatedTime');
+      if (timeEl) {
+        var now = new Date();
+        timeEl.textContent = 'Precios de compra hoy: ' + now.toLocaleDateString('es-US', { day: '2-digit', month: 'short', year: 'numeric' });
       }
 
       // Update Karat Cards
       var mapCards = [
-        { k: '24k', buy: g24Buy, off: g24Off },
-        { k: '18k', buy: g18Buy, off: g18Off },
-        { k: '14k', buy: g14Buy, off: g14Off },
-        { k: '10k', buy: g10Buy, off: g10Off }
+        { k: '24k', buy: g24Buy, oz: oz24Buy },
+        { k: '18k', buy: g18Buy, oz: oz18Buy },
+        { k: '14k', buy: g14Buy, oz: oz14Buy },
+        { k: '10k', buy: g10Buy, oz: oz10Buy }
       ];
       mapCards.forEach(function(item) {
         var gEl = document.getElementById('kitcoCard' + item.k + 'Gram');
         if (gEl) gEl.textContent = formatUSD(item.buy);
-        var oEl = document.getElementById('kitcoCard' + item.k + 'Official');
-        if (oEl) oEl.textContent = formatUSD(item.off) + '/g';
+        var oEl = document.getElementById('kitcoCard' + item.k + 'Oz');
+        if (oEl) oEl.textContent = formatUSD(item.oz) + '/oz';
       });
 
       recalculateKitcoBuyback();
@@ -463,23 +458,22 @@
       if (isNaN(weightGrams) || weightGrams < 0) weightGrams = 0;
 
       var purity = karatFactors[selectedKarat] || (14 / 24);
-      var officialPerGram = (currentSpotOzUsd / TROY_OUNCE_GRAMS) * purity;
-      var officialTotal = officialPerGram * weightGrams;
-      var storePayout93 = officialTotal * BUYBACK_RATE;
+      var buybackPerGram = (currentSpotOzUsd / TROY_OUNCE_GRAMS) * purity * BUYBACK_RATE;
+      var storePayout = buybackPerGram * weightGrams;
 
       var kLabel = document.getElementById('kitcoCalcKaratLabel');
       if (kLabel) kLabel.textContent = selectedKarat.toUpperCase();
 
-      var offTotalEl = document.getElementById('kitcoCalcOfficialTotal');
-      if (offTotalEl) offTotalEl.textContent = formatUSD(officialTotal) + ' USD';
+      var rateEl = document.getElementById('kitcoCalcRatePerGram');
+      if (rateEl) rateEl.textContent = formatUSD(buybackPerGram) + ' USD / g';
 
       var payoutEl = document.getElementById('kitcoCalcStorePayout');
-      if (payoutEl) payoutEl.textContent = formatUSD(storePayout93) + ' USD';
+      if (payoutEl) payoutEl.textContent = formatUSD(storePayout) + ' USD';
 
       var waBtn = document.getElementById('kitcoWhatsappSellBtn');
       if (waBtn) {
         var msg = 'Hola La Bonita Jewelry, quiero vender ' + weightGrams + 'g de oro ' + selectedKarat.toUpperCase() +
-          ' con la cotización oficial de Kitco hoy (' + formatUSD(currentSpotOzUsd) + '/oz). Pago estimado al 93% en tienda: ' + formatUSD(storePayout93) + ' USD.';
+          ' al precio de compra de hoy (' + formatUSD(buybackPerGram) + '/g · Pago estimado: ' + formatUSD(storePayout) + ' USD).';
         waBtn.href = 'https://wa.me/15026980759?text=' + encodeURIComponent(msg);
       }
     };
@@ -501,17 +495,12 @@
         }
       })
       .catch(function() {
-        // Fallback to daily synced Shopify JSON asset
         fetch("{{ 'kitco-gold-price.json' | asset_url }}")
           .then(function(r) { return r.json(); })
           .then(function(data) {
             if (data && data.official_spot) {
               updateAllKitcoDOM({
-                bid: data.official_spot.bid_oz_usd,
-                change: data.official_spot.change_usd,
-                changePercentage: data.official_spot.change_percentage,
-                high: data.official_spot.high_oz_usd,
-                low: data.official_spot.low_oz_usd
+                bid: data.official_spot.bid_oz_usd
               });
             }
           })
@@ -528,7 +517,6 @@
       updateAllKitcoDOM(null);
       fetchLiveKitcoPrice();
     }
-    // Refresh live Kitco quote every 60 seconds while customer is on page
     setInterval(fetchLiveKitcoPrice, 60000);
   })();
 </script>
