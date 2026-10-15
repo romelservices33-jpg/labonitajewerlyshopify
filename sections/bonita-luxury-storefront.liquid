@@ -587,6 +587,7 @@
                data-price="{{ price_num }}" 
                data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
+               data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
             <span class="badge-gold-bestseller">✦ Top #{{ forloop.index }} Mas Vendido</span>
@@ -854,6 +855,7 @@
                data-price="{{ price_num }}" 
                data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
+               data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
             <span class="badge-emerald-new">✦ Novedad 2026</span>
@@ -1287,6 +1289,7 @@
                        data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                        data-default-order="{{ default_order_score }}"
                        data-variant-id="{{ product.variants.first.id }}"
+                       data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                        onclick="openProductModalFromCard(this)">
                     <div class="cutout-card-media">
                       {%- if product.featured_image != blank -%}
