@@ -1,0 +1,65 @@
+{
+  "source": "Kitco Official (https://www.kitco.com/)",
+  "symbol": "AU",
+  "currency": "USD",
+  "troy_ounce_grams": 31.1034768,
+  "store_buyback_percentage": 93,
+  "store_buyback_factor": 0.93,
+  "updated_at_iso": "2026-10-14T22:22:59.673Z",
+  "synced_at_iso": "2026-10-15T02:23:14.126Z",
+  "official_spot": {
+    "bid_oz_usd": 4143.7,
+    "ask_oz_usd": 4145.7,
+    "mid_oz_usd": 4144.7,
+    "gram_24k_usd": 133.22,
+    "change_usd": 39.2,
+    "change_percentage": 0.96,
+    "high_oz_usd": 4171.1,
+    "low_oz_usd": 4072.7
+  },
+  "store_buyback_93": {
+    "oz_24k_usd": 3853.64,
+    "gram_24k_usd": 123.9,
+    "gram_18k_usd": 92.92,
+    "gram_14k_usd": 72.27,
+    "gram_10k_usd": 51.62,
+    "by_karat": {
+      "24k": {
+        "karat": "24K",
+        "purity": 100,
+        "purityLabel": "99.9%",
+        "official_per_gram_usd": 133.22,
+        "official_per_oz_usd": 4143.7,
+        "store_buyback_per_gram_usd": 123.9,
+        "store_buyback_per_oz_usd": 3853.64
+      },
+      "18k": {
+        "karat": "18K",
+        "purity": 75,
+        "purityLabel": "75.0%",
+        "official_per_gram_usd": 99.92,
+        "official_per_oz_usd": 3107.77,
+        "store_buyback_per_gram_usd": 92.92,
+        "store_buyback_per_oz_usd": 2890.23
+      },
+      "14k": {
+        "karat": "14K",
+        "purity": 58.33,
+        "purityLabel": "58.33%",
+        "official_per_gram_usd": 77.71,
+        "official_per_oz_usd": 2417.16,
+        "store_buyback_per_gram_usd": 72.27,
+        "store_buyback_per_oz_usd": 2247.96
+      },
+      "10k": {
+        "karat": "10K",
+        "purity": 41.67,
+        "purityLabel": "41.67%",
+        "official_per_gram_usd": 55.51,
+        "official_per_oz_usd": 1726.54,
+        "store_buyback_per_gram_usd": 51.62,
+        "store_buyback_per_oz_usd": 1605.68
+      }
+    }
+  }
+}
