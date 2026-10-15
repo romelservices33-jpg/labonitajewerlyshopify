@@ -146,6 +146,7 @@
         <li><a href="/collections/aretes" class="hero-nav-link" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
         <li><a href="/collections/pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
         <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+        <li><a href="#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Oro 93% (Kitco)</a></li>
         <li><a href="#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
       </ul>
     </nav>
@@ -200,6 +201,7 @@
       <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
       <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
       <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
+      <a href="#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro (93% Kitco)</a>
       <a href="#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
     </div>
     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">
@@ -211,6 +213,11 @@
   <div class="top-announcement-bar" role="region" aria-label="Avisos importantes">
     <div class="top-marquee-track">
       <div class="top-marquee-group">
+        <a href="#compra-oro" class="top-marquee-item" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6-3 6-3 6 3-6 3zm0 2.5l-10-5v2l10 5 10-5v-2l-10 5zm0 4l-10-5v2l10 5 10-5v-2l-10 5z"/></svg>
+          <span><strong>Oro Oficial Kitco Hoy:</strong> <span class="js-kitco-spot-oz">$4,143.70/oz</span> · <strong>Compramos tu Oro en Tienda al 93%:</strong> <span class="js-kitco-buy-24k">$123.90/g (24K)</span> · <span class="js-kitco-buy-14k">$72.27/g (14K)</span> · <span class="js-kitco-buy-10k">$51.62/g (10K)</span></span>
+        </a>
+        <span class="top-marquee-star">✦</span>
         <span class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
           <span><strong>Envíos a todo EE. UU. y Puerto Rico</strong> con entrega asegurada</span>
@@ -233,6 +240,11 @@
         <span class="top-marquee-star">✦</span>
       </div>
       <div class="top-marquee-group" aria-hidden="true">
+        <a href="#compra-oro" class="top-marquee-item" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6-3 6-3 6 3-6 3zm0 2.5l-10-5v2l10 5 10-5v-2l-10 5zm0 4l-10-5v2l10 5 10-5v-2l-10 5z"/></svg>
+          <span><strong>Oro Oficial Kitco Hoy:</strong> <span class="js-kitco-spot-oz">$4,143.70/oz</span> · <strong>Compramos tu Oro en Tienda al 93%:</strong> <span class="js-kitco-buy-24k">$123.90/g (24K)</span> · <span class="js-kitco-buy-14k">$72.27/g (14K)</span> · <span class="js-kitco-buy-10k">$51.62/g (10K)</span></span>
+        </a>
+        <span class="top-marquee-star">✦</span>
         <span class="top-marquee-item">
           <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
           <span><strong>Envíos a todo EE. UU. y Puerto Rico</strong> con entrega asegurada</span>
@@ -292,6 +304,7 @@
           </p>
           <div class="hero-cta-group">
             <a href="#catalogo" onclick="handleNavCategory(event, 'todos')" class="btn-pill-white">Ver Todos los Productos</a>
+            <a href="#compra-oro" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" class="btn-pill-glass" style="border-color:rgba(209,176,84,0.65); color:#FFE8A3;">✦ Compramos tu Oro al 93% (Kitco)</a>
             <a href="#ubicacion-mapa" class="btn-pill-glass">Ver en el Mapa</a>
           </div>
         </div>
@@ -1844,6 +1857,9 @@
       <span>Garantía de Autenticidad de por Vida</span>
     </div>
   </section>
+
+  <!-- 7.2 SECCIÓN: COTIZACIÓN OFICIAL KITCO & COMPRA DE ORO EN TIENDA AL 93% -->
+  {% render 'kitco-gold-buyback' %}
 
   <!-- ========================================================================= -->
   <!-- 7.5 SECCIÓN: NUESTRA BOUTIQUE, MAPA & HORARIOS (MINIMALISTA Y EDITORIAL)   -->

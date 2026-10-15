@@ -10,6 +10,11 @@
   <div class="top-marquee-track">
     <!-- Group 1 -->
     <div class="top-marquee-group">
+      <a href="{{ routes.root_url }}#compra-oro" class="top-marquee-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6-3 6-3 6 3-6 3zm0 2.5l-10-5v2l10 5 10-5v-2l-10 5zm0 4l-10-5v2l10 5 10-5v-2l-10 5z"/></svg>
+        <span><strong>Oro Oficial Kitco Hoy:</strong> <span class="js-kitco-spot-oz">$4,143.70/oz</span> · <strong>Compramos tu Oro en Tienda al 93%:</strong> <span class="js-kitco-buy-24k">$123.90/g (24K)</span> · <span class="js-kitco-buy-14k">$72.27/g (14K)</span> · <span class="js-kitco-buy-10k">$51.62/g (10K)</span></span>
+      </a>
+      <span class="top-marquee-star">✦</span>
       <span class="top-marquee-item">
         <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
         <span><strong>Envíos a todo EE. UU. y Puerto Rico</strong> con entrega asegurada</span>
@@ -33,6 +38,11 @@
     </div>
     <!-- Group 2 (Duplicate for Seamless Loop) -->
     <div class="top-marquee-group" aria-hidden="true">
+      <a href="{{ routes.root_url }}#compra-oro" class="top-marquee-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6-3 6-3 6 3-6 3zm0 2.5l-10-5v2l10 5 10-5v-2l-10 5zm0 4l-10-5v2l10 5 10-5v-2l-10 5z"/></svg>
+        <span><strong>Oro Oficial Kitco Hoy:</strong> <span class="js-kitco-spot-oz">$4,143.70/oz</span> · <strong>Compramos tu Oro en Tienda al 93%:</strong> <span class="js-kitco-buy-24k">$123.90/g (24K)</span> · <span class="js-kitco-buy-14k">$72.27/g (14K)</span> · <span class="js-kitco-buy-10k">$51.62/g (10K)</span></span>
+      </a>
+      <span class="top-marquee-star">✦</span>
       <span class="top-marquee-item">
         <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
         <span><strong>Envíos a todo EE. UU. y Puerto Rico</strong> con entrega asegurada</span>
@@ -73,6 +83,7 @@
       <li><a href="/collections/aretes" class="hero-nav-link {% if collection.handle == 'aretes' %}active{% endif %}" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
       <li><a href="/collections/pulseras" class="hero-nav-link {% if collection.handle == 'pulseras' %}active{% endif %}" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
       <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+      <li><a href="{{ routes.root_url }}#compra-oro" class="hero-nav-link" style="color:#D1B054; font-weight:700;">Oro 93% (Kitco)</a></li>
       <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
     </ul>
   </nav>
@@ -128,6 +139,7 @@
     <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes</a>
     <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
     <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
+    <a href="{{ routes.root_url }}#compra-oro" onclick="closeMobileNotch('Compra de Oro');" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro (93% Kitco)</a>
     <a href="{{ routes.root_url }}#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">
@@ -232,6 +244,13 @@
           contact.scrollIntoView({ behavior: 'smooth' });
         }, 120);
       }
+    } else if (hash === 'compra-oro') {
+      var goldSec = document.getElementById('compra-oro');
+      if (goldSec) {
+        setTimeout(function() {
+          goldSec.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      }
     }
   }
 
@@ -244,6 +263,29 @@
   }
 
   (function() {
+    if (!document.getElementById('compra-oro')) {
+      var query = 'query GetMetalQuoteV3($symbol: String!, $currency: String!) { GetMetalQuoteV3(symbol: $symbol, currency: $currency) { results { bid } } }';
+      fetch('https://kdb-gw.prod.kitco.com/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ query: query, variables: { symbol: 'AU', currency: 'USD' } })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(json) {
+        var bid = json && json.data && json.data.GetMetalQuoteV3 && json.data.GetMetalQuoteV3.results && json.data.GetMetalQuoteV3.results[0] && json.data.GetMetalQuoteV3.results[0].bid;
+        if (typeof bid === 'number' && bid > 100) {
+          var g24 = (bid / 31.1034768) * 0.93;
+          var g14 = g24 * (14 / 24);
+          var g10 = g24 * (10 / 24);
+          var fmt = function(n) { return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+          document.querySelectorAll('.js-kitco-spot-oz').forEach(function(el) { el.textContent = fmt(bid) + '/oz'; });
+          document.querySelectorAll('.js-kitco-buy-24k').forEach(function(el) { el.textContent = fmt(g24) + '/g (24K)'; });
+          document.querySelectorAll('.js-kitco-buy-14k').forEach(function(el) { el.textContent = fmt(g14) + '/g (14K)'; });
+          document.querySelectorAll('.js-kitco-buy-10k').forEach(function(el) { el.textContent = fmt(g10) + '/g (10K)'; });
+        }
+      })
+      .catch(function() {});
+    }
     var header = document.getElementById('luxuryDesktopHeader');
     if (!header) return;
     var isIndex = {{ is_index | json }};
