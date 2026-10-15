@@ -467,7 +467,7 @@
               <h3 class="cat-card-title">Relojes</h3>
             </div>
             <div class="cat-card-img-wrap">
-              <img src="{{ 'collection-relojes.jpg' | asset_url }}" alt="Relojes de Lujo y Oro" class="cat-square-img" loading="lazy">
+              <img src="{{ 'collection-relojes.jpg' | asset_url }}" alt="Relojes Automáticos de Alta Gama" class="cat-square-img" loading="lazy">
             </div>
             <div class="cat-card-footer">
               <span class="cat-pill-btn">
@@ -584,7 +584,7 @@
                 <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
               {%- endif -%}
               <div class="cutout-card-pin">
-                <span>{{ karat_tag | upcase }} ORO</span>
+                <span>{%- if cat_tag == 'relojes' -%}AUTOMÁTICO{%- else -%}{{ karat_tag | upcase }} ORO{%- endif -%}</span>
                 <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
               </div>
               <div class="cutout-card-inset-label">
@@ -595,7 +595,7 @@
             <div class="cutout-card-content">
               <div class="cutout-title-row">
                 <h4 class="cutout-product-title">{{ product.title }}</h4>
-                <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado</span>
+                <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado{%- endif -%}</span>
               </div>
               <div class="product-card-pricing-row">
                 <div class="pricing-amounts">
@@ -851,7 +851,7 @@
                 <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
               {%- endif -%}
               <div class="cutout-card-pin">
-                <span>{{ karat_tag | upcase }} ORO</span>
+                <span>{%- if cat_tag == 'relojes' -%}AUTOMÁTICO{%- else -%}{{ karat_tag | upcase }} ORO{%- endif -%}</span>
                 <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
               </div>
               <div class="cutout-card-inset-label">
@@ -862,7 +862,7 @@
             <div class="cutout-card-content">
               <div class="cutout-title-row">
                 <h4 class="cutout-product-title">{{ product.title }}</h4>
-                <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado</span>
+                <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Autentico · Envio Asegurado{%- endif -%}</span>
               </div>
               <div class="product-card-pricing-row">
                 <div class="pricing-amounts">
@@ -1265,7 +1265,7 @@
                         <span style="position:absolute;top:10px;left:10px;z-index:5;background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFF;font-size:0.65rem;font-weight:800;padding:4px 9px;border-radius:999px;letter-spacing:0.04em;box-shadow:0 4px 10px rgba(220,38,38,0.28);">✦ -{{ promo_pct_top }}% PROMO</span>
                       {%- endif -%}
                       <div class="cutout-card-pin">
-                        <span>{{ karat_tag | upcase }} ORO</span>
+                        <span>{%- if cat_tag == 'relojes' -%}AUTOMÁTICO{%- else -%}{{ karat_tag | upcase }} ORO{%- endif -%}</span>
                         <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
                       </div>
                       <div class="cutout-card-inset-label">
@@ -1276,7 +1276,7 @@
                     <div class="cutout-card-content">
                       <div class="cutout-title-row">
                         <h4 class="cutout-product-title">{{ product.title }}</h4>
-                        <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado</span>
+                        <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
                       </div>
                       <div class="product-card-pricing-row">
                         <div class="pricing-amounts">
@@ -1381,7 +1381,7 @@
                       <span style="position:absolute;top:10px;left:10px;z-index:5;background:linear-gradient(135deg,#DC2626,#991B1B);color:#FFF;font-size:0.65rem;font-weight:800;padding:4px 9px;border-radius:999px;letter-spacing:0.04em;box-shadow:0 4px 10px rgba(220,38,38,0.28);">✦ -{{ promo_pct_top }}% PROMO</span>
                     {%- endif -%}
                     <div class="cutout-card-pin">
-                      <span>{{ karat_tag | upcase }} ORO</span>
+                      <span>{%- if cat_tag == 'relojes' -%}AUTOMÁTICO{%- else -%}{{ karat_tag | upcase }} ORO{%- endif -%}</span>
                       <svg class="cutout-corner cutout-corner-pin-left" width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M0 0 H24 V32 C17.38 32 12 24.83 12 16 C12 7.17 6.63 0 0 0 Z" fill="currentColor"/></svg>
                     </div>
                     <div class="cutout-card-inset-label">
@@ -1392,7 +1392,7 @@
                   <div class="cutout-card-content">
                     <div class="cutout-title-row">
                       <h4 class="cutout-product-title">{{ product.title }}</h4>
-                      <span class="spec-weight-tag">{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado</span>
+                      <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
                     </div>
                     <div class="product-card-pricing-row">
                       <div class="pricing-amounts">
@@ -1881,25 +1881,21 @@
               </span>
             </div>
 
-                        <!-- Clean Minimal Schedule (Exact Official Hours) -->
+                        <!-- Clean Minimal Schedule (Online Web Support Hours) -->
             <div style="margin-bottom: 24px;">
               <div style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #08195B; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span>Horarios de Atención</span>
+                <span>Horario de Atención Online (Web & WhatsApp)</span>
               </div>
               
               <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
-                  <span style="color: #64748B; font-weight: 500;">Lunes</span>
-                  <span style="font-weight: 700; color: #08195B;">12:00 PM – 7:00 PM</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(8, 25, 91, 0.05);">
-                  <span style="color: #64748B; font-weight: 500;">Martes a Sábado</span>
-                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 7:00 PM</span>
+                  <span style="color: #64748B; font-weight: 500;">Lunes a Sábado</span>
+                  <span style="font-weight: 700; color: #08195B;">7:00 AM – 10:00 PM</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2px;">
                   <span style="color: #64748B; font-weight: 500;">Domingos</span>
-                  <span style="font-weight: 700; color: #08195B;">10:00 AM – 6:00 PM</span>
+                  <span style="font-weight: 700; color: #08195B;">9:00 AM – 10:00 PM</span>
                 </div>
               </div>
             </div>
@@ -2505,12 +2501,14 @@
       // Update Results Counter
       var countText = document.getElementById('filterCount');
       if (countText) {
+        var unitSuffix = (currentCatalogCategory === 'relojes') ? 'relojes de colección' : 'piezas de oro auténtico';
+        var singleUnitSuffix = (currentCatalogCategory === 'relojes') ? 'reloj de colección' : 'pieza de oro auténtico';
         if (total === 0) {
           countText.textContent = '0 piezas encontradas';
         } else if (total === 1) {
-          countText.textContent = 'Mostrando 1 pieza de oro auténtico';
+          countText.textContent = 'Mostrando 1 ' + singleUnitSuffix;
         } else {
-          countText.textContent = 'Mostrando ' + (start + 1) + '-' + Math.min(end, total) + ' de ' + total + ' piezas de oro auténtico';
+          countText.textContent = 'Mostrando ' + (start + 1) + '-' + Math.min(end, total) + ' de ' + total + ' ' + unitSuffix;
         }
       }
 
@@ -2670,8 +2668,8 @@
           titleEl.innerHTML = 'Piercings & <span class="accent-gold">Broqueles de Oro</span>';
           subtitleEl.textContent = 'Joyas hipoalergénicas en oro macizo 10K y 14K con rosca de máxima seguridad.';
         } else if (category === 'relojes') {
-          titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Oro</span>';
-          subtitleEl.textContent = 'Relojería fina con biseles de oro, cristales de zafiro y acabados de lujo.';
+          titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Precisión</span>';
+          subtitleEl.textContent = 'Relojería automática y de colección en acero inoxidable con acabados dorados de lujo y garantía oficial.';
         } else {
           titleEl.innerHTML = 'Catálogo <span class="accent-gold">Exclusivo</span>';
           subtitleEl.textContent = 'Oro 100% auténtico 10K y 14K con peso garantizado y financiamiento Affirm.';

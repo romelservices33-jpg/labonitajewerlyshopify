@@ -180,10 +180,15 @@
     var lowerType = (productType || '').toLowerCase();
 
     var isRing = lowerTitle.indexOf('anillo') !== -1 || lowerType.indexOf('anillo') !== -1;
+    var isWatch = !isRing && (lowerTitle.indexOf('reloj') !== -1 || lowerType.indexOf('reloj') !== -1 || lowerTitle.indexOf('invicta') !== -1 || lowerTitle.indexOf('seiko') !== -1);
     var isChain = lowerTitle.indexOf('cadena') !== -1 || lowerTitle.indexOf('collar') !== -1 || lowerTitle.indexOf('cuban') !== -1;
     var isBracelet = lowerTitle.indexOf('pulsera') !== -1 || lowerTitle.indexOf('esclava') !== -1 || lowerTitle.indexOf('brazalete') !== -1;
     var isEarring = lowerTitle.indexOf('arete') !== -1 || lowerTitle.indexOf('arracada') !== -1 || lowerTitle.indexOf('topo') !== -1;
     var isPendant = lowerTitle.indexOf('dije') !== -1 || lowerTitle.indexOf('medalla') !== -1 || lowerTitle.indexOf('cruz') !== -1;
+
+    if (isWatch) {
+      return { karat: null, size: 'Caja Estándar · Brazalete Ajustable', weight: null };
+    }
 
     // Karat detection from title
     var karat = null;
@@ -402,7 +407,11 @@
       if (placeholderEl) placeholderEl.style.display = 'flex';
     }
 
-    if (badgeEl) badgeEl.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido';
+    var isWatchModal = (p.category && p.category.indexOf('reloj') !== -1) || /reloj|invicta|seiko/i.test(p.title || '');
+
+    if (badgeEl) {
+      badgeEl.textContent = isWatchModal ? 'Relojería Automática' : ('Oro ' + p.selectedKarat.toUpperCase() + ' Sólido');
+    }
 
     // Title & Meta
     var catTag = document.getElementById('modalCategoryTag');
@@ -433,7 +442,7 @@
 
     var gramRateEl = document.getElementById('modalGramRate');
     if (gramRateEl) {
-      gramRateEl.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Macizo';
+      gramRateEl.textContent = isWatchModal ? 'Acero Inoxidable' : ('Oro ' + p.selectedKarat.toUpperCase() + ' Macizo');
     }
 
     var affirmMoEl = document.getElementById('modalAffirmMo');
@@ -442,12 +451,23 @@
       affirmMoEl.textContent = '$' + mo + '/mes';
     }
 
-    // Karat Selector (Shows only the real registered karat)
+    // Karat Selector (Shows only the real registered karat, or Stainless Steel for watches)
+    var karatGroupLabel = document.querySelector('#modalKaratGroup .pdp-option-label span:first-child');
+    if (karatGroupLabel) {
+      karatGroupLabel.textContent = isWatchModal ? 'Material de Caja y Pulso' : 'Pureza del Oro';
+    }
     var karatPillsContainer = document.getElementById('modalKaratPills');
     var karatText = document.getElementById('modalSelectedKaratText');
     if (karatPillsContainer) {
       karatPillsContainer.innerHTML = '';
-      if (p.hasMultipleKaratVariants) {
+      if (isWatchModal) {
+        var watchPill = document.createElement('span');
+        watchPill.className = 'pdp-variant-pill active';
+        watchPill.style.cursor = 'default';
+        watchPill.style.pointerEvents = 'none';
+        watchPill.textContent = 'Acero Inoxidable · Tono Dorado';
+        karatPillsContainer.appendChild(watchPill);
+      } else if (p.hasMultipleKaratVariants) {
         var btn10 = document.createElement('button');
         btn10.type = 'button';
         btn10.className = 'pdp-variant-pill' + (p.selectedKarat === '10k' ? ' active' : '');
@@ -471,7 +491,7 @@
       }
     }
     if (karatText) {
-      karatText.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado';
+      karatText.textContent = isWatchModal ? 'Acabado Dorado de Alta Resistencia' : ('Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado');
     }
 
     // Size Selector
@@ -482,7 +502,8 @@
       sizeText.textContent = p.selectedSize || 'Estándar';
     }
     if (sizeLabel) {
-      if (p.category === 'anillos') sizeLabel.textContent = 'Talla de Anillo';
+      if (isWatchModal) sizeLabel.textContent = 'Caja y Brazalete';
+      else if (p.category === 'anillos') sizeLabel.textContent = 'Talla de Anillo';
       else if (p.category === 'cadenas') sizeLabel.textContent = 'Largo de Cadena';
       else if (p.category === 'pulseras') sizeLabel.textContent = 'Largo de Pulsera';
       else sizeLabel.textContent = 'Medida / Dimensión';
@@ -508,11 +529,15 @@
 
     // Specs Table
     var specKarat = document.getElementById('modalSpecKarat');
-    if (specKarat) specKarat.textContent = 'Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado';
+    if (specKarat) {
+      specKarat.textContent = isWatchModal ? 'Acero Inoxidable (No es Oro)' : ('Oro ' + p.selectedKarat.toUpperCase() + ' Sólido Garantizado');
+    }
 
     var specWeight = document.getElementById('modalSpecWeight');
     if (specWeight) {
-      if (p.baseWeight && p.baseWeight > 0) {
+      if (isWatchModal) {
+        specWeight.textContent = 'Movimiento Automático de Precisión';
+      } else if (p.baseWeight && p.baseWeight > 0) {
         specWeight.textContent = p.baseWeight + ' g';
       } else {
         specWeight.textContent = 'Oro Genuino Certificado';
@@ -522,6 +547,11 @@
     var specSize = document.getElementById('modalSpecSize');
     if (specSize) {
       specSize.textContent = p.selectedSize || 'Estándar / Ajustable';
+    }
+
+    var specClasp = document.getElementById('modalSpecClasp');
+    if (specClasp) {
+      specClasp.textContent = isWatchModal ? 'Brazalete de Acero con Cierre Desplegable' : 'Caja con Doble Seguro de Presión';
     }
 
     // Reset Qty
