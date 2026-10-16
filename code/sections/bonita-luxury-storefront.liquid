@@ -53,7 +53,11 @@
   }
   .hero-content-wrap {
     position: relative !important;
-    z-index: 10 !important;
+    z-index: 35 !important;
+  }
+  .hero-content-wrap:focus-within,
+  .hero-content-wrap.search-dropdown-open {
+    z-index: 120 !important;
   }
   .hero-main-headline {
     color: #FFFFFF !important;
@@ -66,6 +70,250 @@
   .hero-supporting-copy {
     color: rgba(255, 255, 255, 0.98) !important;
     text-shadow: 0 2px 12px rgba(8, 25, 91, 0.8), 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+    margin-bottom: 20px !important;
+  }
+  /* Luxury Hero Search Bar */
+  .hero-search-wrap {
+    position: relative;
+    max-width: 580px;
+    width: 100%;
+    margin: 0 0 22px 0;
+    z-index: 130;
+  }
+  .hero-search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(8, 25, 91, 0.52);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(209, 176, 84, 0.62);
+    border-radius: 999px;
+    padding: 6px 6px 6px 18px;
+    box-shadow: 0 10px 30px rgba(4, 12, 45, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero-search-form:hover {
+    background: rgba(8, 25, 91, 0.64);
+    border-color: rgba(209, 176, 84, 0.85);
+  }
+  .hero-search-form:focus-within {
+    background: rgba(8, 25, 91, 0.78);
+    border-color: #D1B054;
+    box-shadow: 0 14px 36px rgba(4, 12, 45, 0.45), 0 0 0 3px rgba(209, 176, 84, 0.25);
+  }
+  .hero-search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #D1B054;
+    flex-shrink: 0;
+  }
+  .hero-search-input {
+    flex: 1;
+    min-width: 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #FFFFFF !important;
+    font-family: 'Plus Jakarta Sans', var(--font-sans, sans-serif);
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 8px 4px;
+    line-height: 1.3;
+  }
+  .hero-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.74);
+    font-weight: 400;
+  }
+  .hero-search-input::-webkit-search-cancel-button,
+  .hero-search-input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+  .hero-search-clear {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.16);
+    color: #FFFFFF;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .hero-search-clear:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: scale(1.06);
+  }
+  .hero-search-submit {
+    background: linear-gradient(135deg, #D1B054 0%, #B8923A 100%);
+    color: #08195B;
+    font-family: 'Plus Jakarta Sans', var(--font-sans, sans-serif);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 22px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(209, 176, 84, 0.35);
+    transition: all 0.25s ease;
+  }
+  .hero-search-submit:hover {
+    background: linear-gradient(135deg, #E2C36B 0%, #C7A044 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(209, 176, 84, 0.5);
+  }
+  /* Live Predictive Dropdown */
+  .hero-search-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(209, 176, 84, 0.48);
+    border-radius: 20px;
+    box-shadow: 0 22px 55px rgba(8, 25, 91, 0.32), 0 4px 14px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    z-index: 300;
+    text-align: left;
+    max-height: 410px;
+    overflow-y: auto;
+  }
+  .hero-search-dd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #64748B;
+    padding: 2px 8px 8px;
+    border-bottom: 1px solid rgba(8, 25, 91, 0.07);
+    margin-bottom: 6px;
+  }
+  .hero-search-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease;
+    text-decoration: none;
+  }
+  .hero-search-item:hover {
+    background: rgba(8, 25, 91, 0.055);
+    transform: translateX(2px);
+  }
+  .hero-search-item-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(8, 25, 91, 0.1);
+    background: #FAF8F2;
+  }
+  .hero-search-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .hero-search-item-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #08195B;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hero-search-item-meta {
+    font-size: 0.72rem;
+    color: #64748B;
+    font-weight: 600;
+  }
+  .hero-search-item-price {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #08195B;
+    flex-shrink: 0;
+  }
+  .hero-search-view-all {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: none;
+    background: #08195B;
+    color: #FFFFFF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.2s ease;
+  }
+  .hero-search-view-all:hover {
+    background: #0F2982;
+  }
+  .hero-search-quick-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 4px 2px;
+  }
+  .hero-search-tag-chip {
+    background: #F8FAFC;
+    border: 1px solid rgba(8, 25, 91, 0.12);
+    color: #08195B;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .hero-search-tag-chip:hover {
+    background: #08195B;
+    color: #D1B054;
+    border-color: #08195B;
+  }
+  @media (max-width: 768px) {
+    .hero-search-wrap {
+      max-width: 100%;
+      margin: 0 auto 18px auto;
+    }
+    .hero-search-form {
+      padding: 5px 5px 5px 14px;
+    }
+    .hero-search-input {
+      font-size: 16px;
+      padding: 7px 2px;
+    }
+    .hero-search-submit {
+      padding: 9px 16px;
+      font-size: 0.78rem;
+    }
   }
 </style>
 
@@ -302,6 +550,34 @@
           <p class="hero-supporting-copy">
             Descubre joyas auténticas en oro de 10K y 14K con financiamiento y envío asegurado a todos los Estados Unidos y Puerto Rico.
           </p>
+          <!-- Luxury Hero Search Bar -->
+          <div class="hero-search-wrap" id="heroSearchWrap">
+            <form class="hero-search-form" id="heroSearchForm" onsubmit="handleHeroSearchSubmit(event)" role="search" aria-label="Buscar joyas en el catálogo">
+              <span class="hero-search-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input
+                type="search"
+                id="heroSearchInput"
+                class="hero-search-input"
+                placeholder="Buscar cadenas cubanas, anillos 14K, aretes, Rolex..."
+                autocomplete="off"
+                aria-label="Buscar joyas por nombre, categoría o quilataje"
+                oninput="handleHeroSearchInput(this.value)"
+                onfocus="handleHeroSearchFocus()"
+              >
+              <button type="button" class="hero-search-clear" id="heroSearchClear" onclick="clearHeroSearch()" aria-label="Limpiar búsqueda">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+              <button type="submit" class="hero-search-submit">
+                <span>Buscar</span>
+              </button>
+            </form>
+            <div class="hero-search-dropdown" id="heroSearchDropdown" role="listbox" aria-label="Resultados sugeridos" style="display:none;"></div>
+          </div>
           <div class="hero-cta-group">
             <a href="#catalogo" onclick="handleNavCategory(event, 'todos')" class="btn-pill-white">Ver Todos los Productos</a>
             <a href="#compra-oro" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" class="btn-pill-glass" style="border-color:rgba(209,176,84,0.65); color:#FFE8A3;">✦ Compramos tu Oro Hoy</a>
@@ -587,6 +863,7 @@
                data-price="{{ price_num }}" 
                data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
+               data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
             <span class="badge-gold-bestseller">✦ Top #{{ forloop.index }} Mas Vendido</span>
@@ -854,6 +1131,7 @@
                data-price="{{ price_num }}" 
                data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                data-variant-id="{{ product.variants.first.id }}"
+               data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                onclick="openProductModalFromCard(this)" 
                style="position:relative;">
             <span class="badge-emerald-new">✦ Novedad 2026</span>
@@ -1287,6 +1565,7 @@
                        data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                        data-default-order="{{ default_order_score }}"
                        data-variant-id="{{ product.variants.first.id }}"
+                       data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                        onclick="openProductModalFromCard(this)">
                     <div class="cutout-card-media">
                       {%- if product.featured_image != blank -%}
@@ -1424,6 +1703,7 @@
                      data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                      data-default-order="{{ fallback_order_score }}"
                      data-variant-id="{{ product.variants.first.id }}"
+                     data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                      onclick="openProductModalFromCard(this)">
                   <div class="cutout-card-media">
                     {%- if product.featured_image != blank -%}
@@ -2450,6 +2730,52 @@
     var activeSizeFilter = 'all';
     var activeSortFilter = 'default';
     var activeMaxWeight = 70;
+    var activeSearchQuery = '';
+
+    function normalizeSearchText(str) {
+      return (str || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    }
+
+    function escapeSearchHtml(str) {
+      return (str || '').toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function cardMatchesSearchQuery(card, rawQuery) {
+      var q = normalizeSearchText(rawQuery);
+      if (!q) return true;
+      var tokens = q.split(/\s+/).filter(Boolean);
+      if (!tokens.length) return true;
+
+      var cat = (card.getAttribute('data-category') || '').toLowerCase();
+      var titleEl = card.querySelector('.cutout-product-title');
+      var title = titleEl ? titleEl.textContent : '';
+      var labelEl = card.querySelector('.cutout-label-text');
+      var label = labelEl ? labelEl.textContent : '';
+      var specEl = card.querySelector('.spec-weight-tag');
+      var spec = specEl ? specEl.textContent : '';
+      var karat = card.getAttribute('data-karat') || '';
+      var weight = card.getAttribute('data-weight') || '';
+      var size = card.getAttribute('data-size') || '';
+
+      var synonyms = '';
+      if (cat === 'cuban') synonyms = 'cubana cubanas cadena cadenas miami monaco eslabon cubano';
+      else if (cat === 'cadenas') synonyms = 'cadena cadenas collar collares gargantilla rosario';
+      else if (cat === 'pulseras') synonyms = 'pulsera pulseras manilla manillas brazalete esclava semanario tobillera bangle';
+      else if (cat === 'anillos') synonyms = 'anillo anillos sortija alianza compromiso sello';
+      else if (cat === 'aretes') synonyms = 'arete aretes argolla arracada topo broquel dormilon huggie pendiente';
+      else if (cat === 'dijes') synonyms = 'dije dijes medalla cruz cristo virgen san relicario guardapelo charm';
+      else if (cat === 'piercings') synonyms = 'piercing piercings broquel nariz oreja';
+      else if (cat === 'relojes') synonyms = 'reloj relojes automatico rolex invicta seiko';
+
+      var haystack = normalizeSearchText([title, label, spec, cat, karat, weight ? weight + 'g' : '', size, synonyms, 'oro'].join(' '));
+      return tokens.every(function(tok) {
+        return haystack.indexOf(tok) !== -1;
+      });
+    }
 
     function getActiveFilteredCatalogCards() {
       var grid = document.getElementById('catalogProductsGrid');
@@ -2462,6 +2788,11 @@
         var title = titleEl ? titleEl.textContent.toLowerCase() : '';
         var karat = (card.getAttribute('data-karat') || '').toLowerCase();
         var size = (card.getAttribute('data-size') || '').toLowerCase();
+
+        // 0. Search Query Filtering
+        if (activeSearchQuery && !cardMatchesSearchQuery(card, activeSearchQuery)) {
+          return false;
+        }
 
         // 1. Category Filtering
         if (currentCatalogCategory !== 'todos') {
@@ -2580,7 +2911,7 @@
       // Reset button active state
       var resetBtn = document.getElementById('btnFilterReset');
       if (resetBtn) {
-        var isModified = (currentCatalogCategory !== 'todos') || (activeKaratFilter !== 'all') || (activeSizeFilter !== 'all') || (activeSortFilter !== 'default');
+        var isModified = (currentCatalogCategory !== 'todos') || (activeKaratFilter !== 'all') || (activeSizeFilter !== 'all') || (activeSortFilter !== 'default') || (activeSearchQuery !== '');
         resetBtn.classList.toggle('active', isModified);
       }
 
@@ -2666,6 +2997,13 @@
       activeSizeFilter = 'all';
       activeSortFilter = 'default';
       activeMaxWeight = 70;
+      activeSearchQuery = '';
+
+      var heroInput = document.getElementById('heroSearchInput');
+      if (heroInput) heroInput.value = '';
+      var heroClear = document.getElementById('heroSearchClear');
+      if (heroClear) heroClear.style.display = 'none';
+      closeHeroSearchDropdown();
 
       document.querySelectorAll('.cat-tab-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.getAttribute('data-cat') === 'todos');
@@ -2699,6 +3037,12 @@
 
     function filterCatalog(category, tabBtn) {
       currentCatalogCategory = category || 'todos';
+      activeSearchQuery = '';
+      var heroInput = document.getElementById('heroSearchInput');
+      if (heroInput) heroInput.value = '';
+      var heroClear = document.getElementById('heroSearchClear');
+      if (heroClear) heroClear.style.display = 'none';
+      closeHeroSearchDropdown();
 
       // Dynamic Editorial Collection Banners for all 9 categories
       var titleEl = document.getElementById('catalogTitle');
@@ -2749,6 +3093,188 @@
       }
     }
     window.filterCatalog = filterCatalog;
+
+    /* Hero Search Bar Controller (Live Predictive Dropdown + Catalog Filter) */
+    function closeHeroSearchDropdown() {
+      var dd = document.getElementById('heroSearchDropdown');
+      if (dd) dd.style.display = 'none';
+      var wrap = document.querySelector('.hero-content-wrap');
+      if (wrap) wrap.classList.remove('search-dropdown-open');
+    }
+
+    function openHeroSearchModalByIndex(idx) {
+      var matches = window._lastHeroSearchMatches || [];
+      var card = matches[idx];
+      closeHeroSearchDropdown();
+      if (card && typeof window.openProductModalFromCard === 'function') {
+        window.openProductModalFromCard(card);
+      }
+    }
+    window.openHeroSearchModalByIndex = openHeroSearchModalByIndex;
+
+    function applyHeroQuickTag(tagText) {
+      var input = document.getElementById('heroSearchInput');
+      if (input) input.value = tagText;
+      var clearBtn = document.getElementById('heroSearchClear');
+      if (clearBtn) clearBtn.style.display = 'inline-flex';
+      handleHeroSearchSubmit();
+    }
+    window.applyHeroQuickTag = applyHeroQuickTag;
+
+    function renderQuickSearchSuggestions(dd, emptyMsg) {
+      var html = '';
+      if (emptyMsg) {
+        html += '<div class="hero-search-dd-header" style="color:#DC2626;"><span>' + escapeSearchHtml(emptyMsg) + '</span></div>';
+      } else {
+        html += '<div class="hero-search-dd-header"><span>✦ Búsquedas Populares</span><span>Oro 10K & 14K</span></div>';
+      }
+      var tags = ['Cadenas Cubanas', 'Anillos 14K', 'Pulseras', 'Aretes', 'Relojes', 'Dijes', 'Piercings'];
+      html += '<div class="hero-search-quick-tags">';
+      tags.forEach(function(t) {
+        html += '<button type="button" class="hero-search-tag-chip" onclick="applyHeroQuickTag(\'' + t + '\')">' + t + '</button>';
+      });
+      html += '</div>';
+      dd.innerHTML = html;
+      dd.style.display = 'block';
+      var wrap = document.querySelector('.hero-content-wrap');
+      if (wrap) wrap.classList.add('search-dropdown-open');
+    }
+
+    function handleHeroSearchFocus() {
+      var input = document.getElementById('heroSearchInput');
+      var val = input ? input.value : '';
+      handleHeroSearchInput(val);
+    }
+    window.handleHeroSearchFocus = handleHeroSearchFocus;
+
+    function handleHeroSearchInput(val) {
+      var clearBtn = document.getElementById('heroSearchClear');
+      var q = (val || '').trim();
+      if (clearBtn) {
+        clearBtn.style.display = q.length > 0 ? 'inline-flex' : 'none';
+      }
+
+      var dd = document.getElementById('heroSearchDropdown');
+      if (!dd) return;
+
+      if (!q) {
+        renderQuickSearchSuggestions(dd, '');
+        return;
+      }
+
+      var grid = document.getElementById('catalogProductsGrid');
+      if (!grid) return;
+      var allCards = Array.from(grid.querySelectorAll('.cutout-product-card'));
+      var matches = allCards.filter(function(c) {
+        return cardMatchesSearchQuery(c, q);
+      });
+      window._lastHeroSearchMatches = matches;
+
+      if (matches.length === 0) {
+        renderQuickSearchSuggestions(dd, 'Sin resultados exactos para "' + q + '" · Explora por categoría:');
+        return;
+      }
+
+      var topMatches = matches.slice(0, 5);
+      var html = '<div class="hero-search-dd-header"><span>✦ Joyas encontradas (' + matches.length + ')</span><span>Clic para vista rápida</span></div>';
+      topMatches.forEach(function(card, idx) {
+        var imgEl = card.querySelector('.cutout-card-img');
+        var imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+        var titleEl = card.querySelector('.cutout-product-title');
+        var title = titleEl ? titleEl.textContent.trim() : 'Joya de Oro';
+        var priceEl = card.querySelector('.price-now');
+        var price = priceEl ? priceEl.textContent.trim() : '';
+        var karat = (card.getAttribute('data-karat') || '10k').toUpperCase();
+        var cat = card.getAttribute('data-category') || '';
+        var labelEl = card.querySelector('.cutout-label-text');
+        var label = labelEl ? labelEl.textContent.trim() : cat;
+        var badge = (cat === 'relojes') ? 'AUTOMÁTICO · ' + label : karat + ' ORO · ' + label;
+
+        html += '<div class="hero-search-item" role="option" onclick="openHeroSearchModalByIndex(' + idx + ')">' +
+          '<img class="hero-search-item-thumb" src="' + escapeSearchHtml(imgSrc) + '" alt="' + escapeSearchHtml(title) + '" loading="lazy">' +
+          '<div class="hero-search-item-info">' +
+            '<div class="hero-search-item-title">' + escapeSearchHtml(title) + '</div>' +
+            '<div class="hero-search-item-meta">' + escapeSearchHtml(badge) + '</div>' +
+          '</div>' +
+          '<div class="hero-search-item-price">' + escapeSearchHtml(price) + '</div>' +
+        '</div>';
+      });
+
+      html += '<button type="button" class="hero-search-view-all" onclick="handleHeroSearchSubmit()">' +
+        '<span>Ver las ' + matches.length + ' piezas en el catálogo</span>' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>' +
+      '</button>';
+
+      dd.innerHTML = html;
+      dd.style.display = 'block';
+      var wrap = document.querySelector('.hero-content-wrap');
+      if (wrap) wrap.classList.add('search-dropdown-open');
+    }
+    window.handleHeroSearchInput = handleHeroSearchInput;
+
+    function handleHeroSearchSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      var input = document.getElementById('heroSearchInput');
+      var q = input ? input.value.trim() : '';
+      closeHeroSearchDropdown();
+      if (input) input.blur();
+
+      if (!q) {
+        resetCatalogFilters();
+        var catElEmpty = document.getElementById('catalogo');
+        if (catElEmpty) catElEmpty.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      activeSearchQuery = q;
+      currentCatalogCategory = 'todos';
+      document.querySelectorAll('.cat-tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-cat') === 'todos');
+      });
+
+      var titleEl = document.getElementById('catalogTitle');
+      var subtitleEl = document.getElementById('catalogSubtitle');
+      if (titleEl && subtitleEl) {
+        titleEl.innerHTML = 'Resultados para <span class="accent-gold">“' + escapeSearchHtml(q) + '”</span>';
+        subtitleEl.textContent = 'Mostrando joyas auténticas disponibles que coinciden con tu búsqueda.';
+      }
+
+      catalogPage = 1;
+      paginateCatalogGrid();
+
+      var catEl = document.getElementById('catalogo');
+      if (catEl) {
+        catEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    window.handleHeroSearchSubmit = handleHeroSearchSubmit;
+
+    function clearHeroSearch() {
+      var input = document.getElementById('heroSearchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      var clearBtn = document.getElementById('heroSearchClear');
+      if (clearBtn) clearBtn.style.display = 'none';
+      if (activeSearchQuery) {
+        resetCatalogFilters();
+      } else {
+        closeHeroSearchDropdown();
+      }
+    }
+    window.clearHeroSearch = clearHeroSearch;
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#heroSearchWrap')) {
+        closeHeroSearchDropdown();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeHeroSearchDropdown();
+      }
+    });
 
     window.handleNavCategory = window.handleNavCategory || function(e, category) {
       var catalog = document.getElementById('catalogo');
