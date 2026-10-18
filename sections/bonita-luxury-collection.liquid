@@ -42,6 +42,21 @@
         <a href="/collections/relojes" class="cat-tab-btn {% if collection.handle == 'relojes' %}active{% endif %}" style="text-decoration:none;">Relojes</a>
       </div>
 
+      <div style="margin: 0 auto 16px; max-width: 560px; position: relative;">
+        <input
+          type="search"
+          id="collectionSearchInput"
+          placeholder="Buscar por nombre, charm, descripción, SKU o quilataje..."
+          autocomplete="off"
+          oninput="filterCollectionBySearch(this.value)"
+          style="width:100%; padding:11px 38px 11px 40px; border-radius:999px; border:1px solid rgba(209,176,84,0.55); background:#FFFFFF; color:#08195B; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.88rem; font-weight:500; box-shadow:0 4px 16px rgba(8,25,91,0.06); outline:none;"
+        >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1B054" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:15px; top:50%; transform:translateY(-50%); pointer-events:none;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+
       <div class="filter-dropdowns-row">
         <!-- Pureza -->
         <div class="filter-item-wrap">
@@ -179,7 +194,7 @@
         {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
           {%- assign product_size = product.variants.first.title -%}
         {%- endif -%}
-        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.variants.first.id }}" data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}" onclick="openProductModalFromCard(this)">
+        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.variants.first.id }}" data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}" data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
               {%- if product.featured_image != blank -%}
@@ -251,16 +266,52 @@
   }
   var activeCollectionKarat = 'all';
   var activeCollectionSort = 'default';
+  var activeCollectionSearch = '';
+
+  function normalizeCollectionSearchText(str) {
+    return (str || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  }
 
   function initCollectionPagination() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var qParam = params.get('q') || params.get('search') || '';
+      if (qParam) {
+        activeCollectionSearch = qParam;
+        var sInput = document.getElementById('collectionSearchInput');
+        if (sInput) sInput.value = qParam;
+      }
+    } catch(e) {}
+    paginateCollectionGrid();
+  }
+
+  function filterCollectionBySearch(val) {
+    activeCollectionSearch = (val || '').trim();
+    collectionPage = 1;
     paginateCollectionGrid();
   }
 
   function getActiveCollectionCards() {
     var cards = Array.from(document.querySelectorAll('#collectionProductsGrid .product-shop-card'));
+    var q = normalizeCollectionSearchText(activeCollectionSearch);
+    var tokens = q ? q.split(/\s+/).filter(Boolean) : [];
     var filtered = cards.filter(function(card) {
       var karat = (card.getAttribute('data-karat') || '').toLowerCase();
       if (activeCollectionKarat !== 'all' && karat !== activeCollectionKarat) return false;
+      if (tokens.length > 0) {
+        var titleEl = card.querySelector('.cutout-product-title');
+        var title = titleEl ? titleEl.textContent : '';
+        var searchAttr = card.getAttribute('data-search') || '';
+        var cat = card.getAttribute('data-category') || '';
+        var haystack = normalizeCollectionSearchText([title, searchAttr, cat, karat, 'oro'].join(' '));
+        var matchesAll = tokens.every(function(tok) {
+          if (haystack.indexOf(tok) !== -1) return true;
+          if (tok.length > 4 && tok.slice(-2) === 'es' && haystack.indexOf(tok.slice(0, -2)) !== -1) return true;
+          if (tok.length > 3 && tok.slice(-1) === 's' && haystack.indexOf(tok.slice(0, -1)) !== -1) return true;
+          return false;
+        });
+        if (!matchesAll) return false;
+      }
       return true;
     });
 
@@ -383,6 +434,9 @@
   function resetCollectionFilters() {
     activeCollectionKarat = 'all';
     activeCollectionSort = 'default';
+    activeCollectionSearch = '';
+    var sInput = document.getElementById('collectionSearchInput');
+    if (sInput) sInput.value = '';
     var kAll = document.getElementById('ckarat-all');
     if (kAll) kAll.checked = true;
     var k = document.getElementById('selectedCollectionKaratText');
