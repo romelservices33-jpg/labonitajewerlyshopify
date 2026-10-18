@@ -1472,7 +1472,8 @@
           {%- for ch in cat_handles -%}
             {%- assign sub_col = collections[ch] -%}
             {%- if sub_col != blank and sub_col.products.size > 0 -%}
-              {%- for product in sub_col.products limit: 100 -%}
+              {%- paginate sub_col.products by 250 -%}
+              {%- for product in sub_col.products limit: 250 -%}
                 {%- assign pid_check = ',' | append: product.id | append: ',' -%}
                 {%- unless rendered_ids contains pid_check -%}
                   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
@@ -1561,6 +1562,7 @@
                        data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                        data-default-order="{{ default_order_score }}"
                        data-variant-id="{{ product.variants.first.id }}"
+                       data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}"
                        data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                        onclick="openProductModalFromCard(this)">
                     <div class="cutout-card-media">
@@ -1607,6 +1609,7 @@
                   </div>
                 {%- endunless -%}
               {%- endfor -%}
+              {%- endpaginate -%}
             {%- endif -%}
           {%- endfor -%}
           {%- paginate catalog_collection.products by 250 -%}
@@ -1699,6 +1702,7 @@
                      data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
                      data-default-order="{{ fallback_order_score }}"
                      data-variant-id="{{ product.variants.first.id }}"
+                     data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}"
                      data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
                      onclick="openProductModalFromCard(this)">
                   <div class="cutout-card-media">
@@ -2756,6 +2760,7 @@
       var karat = card.getAttribute('data-karat') || '';
       var weight = card.getAttribute('data-weight') || '';
       var size = card.getAttribute('data-size') || '';
+      var searchExtra = card.getAttribute('data-search') || '';
 
       var synonyms = '';
       if (cat === 'cuban') synonyms = 'cubana cubanas cadena cadenas miami monaco eslabon cubano';
@@ -2763,13 +2768,16 @@
       else if (cat === 'pulseras') synonyms = 'pulsera pulseras manilla manillas brazalete esclava semanario tobillera bangle';
       else if (cat === 'anillos') synonyms = 'anillo anillos sortija alianza compromiso sello';
       else if (cat === 'aretes') synonyms = 'arete aretes argolla arracada topo broquel dormilon huggie pendiente';
-      else if (cat === 'dijes') synonyms = 'dije dijes medalla cruz cristo virgen san relicario guardapelo charm';
-      else if (cat === 'piercings') synonyms = 'piercing piercings broquel nariz oreja';
+      else if (cat === 'dijes') synonyms = 'dije dijes colgante colgantes';
+      else if (cat === 'piercings') synonyms = 'piercing piercings broquel nariz oreja ombligo';
       else if (cat === 'relojes') synonyms = 'reloj relojes automatico rolex invicta seiko';
 
-      var haystack = normalizeSearchText([title, label, spec, cat, karat, weight ? weight + 'g' : '', size, synonyms, 'oro'].join(' '));
+      var haystack = normalizeSearchText([title, label, spec, cat, karat, weight ? weight + 'g' : '', size, searchExtra, synonyms, 'oro'].join(' '));
       return tokens.every(function(tok) {
-        return haystack.indexOf(tok) !== -1;
+        if (haystack.indexOf(tok) !== -1) return true;
+        if (tok.length > 4 && tok.slice(-2) === 'es' && haystack.indexOf(tok.slice(0, -2)) !== -1) return true;
+        if (tok.length > 3 && tok.slice(-1) === 's' && haystack.indexOf(tok.slice(0, -1)) !== -1) return true;
+        return false;
       });
     }
 
@@ -3130,7 +3138,7 @@
       } else {
         html += '<div class="hero-search-dd-header"><span>✦ Búsquedas Populares</span><span>Oro 10K & 14K</span></div>';
       }
-      var tags = ['Cadenas Cubanas', 'Anillos 14K', 'Pulseras', 'Aretes', 'Relojes', 'Dijes', 'Piercings'];
+      var tags = ['Cadenas Cubanas', 'Anillos 14K', 'Pulseras', 'Aretes', 'Charms', 'Dijes', 'Piercings', 'Relojes'];
       html += '<div class="hero-search-quick-tags">';
       tags.forEach(function(t) {
         html += '<button type="button" class="hero-search-tag-chip" onclick="applyHeroQuickTag(\'' + t + '\')">' + t + '</button>';
