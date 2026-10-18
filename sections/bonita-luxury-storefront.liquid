@@ -1472,7 +1472,8 @@
           {%- for ch in cat_handles -%}
             {%- assign sub_col = collections[ch] -%}
             {%- if sub_col != blank and sub_col.products.size > 0 -%}
-              {%- for product in sub_col.products limit: 100 -%}
+              {%- paginate sub_col.products by 250 -%}
+              {%- for product in sub_col.products limit: 250 -%}
                 {%- assign pid_check = ',' | append: product.id | append: ',' -%}
                 {%- unless rendered_ids contains pid_check -%}
                   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
@@ -1608,6 +1609,7 @@
                   </div>
                 {%- endunless -%}
               {%- endfor -%}
+              {%- endpaginate -%}
             {%- endif -%}
           {%- endfor -%}
           {%- paginate catalog_collection.products by 250 -%}
