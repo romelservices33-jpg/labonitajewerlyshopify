@@ -156,6 +156,101 @@
     background: #D1B054;
     border-color: #FFFFFF;
   }
+  /* Product Card & Modal Share Button Styles */
+  .card-action-pills-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .btn-share-product-pill {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(8, 25, 91, 0.14);
+    background: #FAF8F2;
+    color: #08195B;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+  }
+  .btn-share-product-pill svg {
+    width: 16px;
+    height: 16px;
+  }
+  .btn-share-product-pill:hover {
+    background: #FFFFFF;
+    border-color: #D1B054;
+    color: #08195B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(209, 176, 84, 0.28);
+  }
+  .btn-share-product-pill.copied {
+    background: #059669 !important;
+    border-color: #059669 !important;
+    color: #FFFFFF !important;
+  }
+  .pdp-btn-share {
+    height: 48px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(8, 25, 91, 0.16);
+    background: #FAF8F2;
+    color: #08195B;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+  }
+  .pdp-btn-share:hover {
+    background: #FFFFFF;
+    border-color: #D1B054;
+    box-shadow: 0 4px 14px rgba(209, 176, 84, 0.25);
+    transform: translateY(-1px);
+  }
+  .pdp-btn-share.copied {
+    background: #059669 !important;
+    border-color: #059669 !important;
+    color: #FFFFFF !important;
+  }
+  .bonita-share-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #08195B;
+    color: #FFFFFF;
+    border: 1px solid #D1B054;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 28px rgba(8, 25, 91, 0.35);
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .bonita-share-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
   @media (max-width: 768px) {
     #productModal .modal-media-col {
       height: 250px !important;
@@ -172,6 +267,20 @@
     .modal-thumb-btn {
       width: 40px;
       height: 40px;
+    }
+    .btn-share-product-pill {
+      width: 32px;
+      height: 32px;
+    }
+    .btn-share-product-pill svg {
+      width: 14px;
+      height: 14px;
+    }
+    .pdp-btn-share span {
+      display: none;
+    }
+    .pdp-btn-share {
+      padding: 0 12px;
     }
   }
 </style>
@@ -290,6 +399,16 @@
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
           <span>Agregar al Carrito</span>
+        </button>
+        <button type="button" class="pdp-btn-share" id="modalShareBtn" onclick="shareModalProduct(this, event)" title="Compartir enlace del producto" aria-label="Compartir enlace del producto">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span>Compartir</span>
         </button>
       </div>
 
@@ -473,6 +592,8 @@
     }
 
     var variantId = card.getAttribute('data-variant-id') || null;
+    var linkEl = card.querySelector('a[href*="/products/"]');
+    var productUrl = card.getAttribute('data-url') || (linkEl ? linkEl.getAttribute('href') : '') || '';
     var imgSrc = imgEl ? imgEl.getAttribute('src') : null;
     if (imgSrc) {
       imgSrc = imgSrc.replace(/width=\d+/, 'width=1200');
@@ -507,6 +628,7 @@
       activeImageIdx: initialIdx,
       badge: badge,
       variantId: variantId,
+      url: productUrl,
       hasMultipleKaratVariants: false
     };
 
@@ -771,6 +893,14 @@
     // Reset Qty
     var qtyInput = document.getElementById('modalQtyInput');
     if (qtyInput) qtyInput.value = '1';
+
+    // Reset Share Btn
+    var shareBtn = document.getElementById('modalShareBtn');
+    if (shareBtn) {
+      shareBtn.classList.remove('copied');
+      var shareSpan = shareBtn.querySelector('span');
+      if (shareSpan) shareSpan.textContent = 'Compartir';
+    }
   }
 
   function selectModalKarat(k) {
@@ -835,6 +965,125 @@
     });
   }
 
+  /* Product Link Share & Copy System */
+  function showBonitaShareToast(msg) {
+    var existingToast = document.getElementById('toastPill');
+    var existingMsg = document.getElementById('toastMsg');
+    if (existingToast && existingMsg) {
+      existingMsg.textContent = msg;
+      existingToast.classList.add('show');
+      clearTimeout(window._bonitaToastTimer);
+      window._bonitaToastTimer = setTimeout(function() {
+        existingToast.classList.remove('show');
+      }, 2800);
+      return;
+    }
+    var toast = document.getElementById('bonitaShareToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'bonitaShareToast';
+      toast.className = 'bonita-share-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._bonitaToastTimer);
+    window._bonitaToastTimer = setTimeout(function() {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+
+  function copyTextToClipboardFallback(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+  }
+
+  function copyAndShareProductUrl(rawUrl, title, btnEl, ev) {
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+    var fullUrl = rawUrl || window.location.href;
+    if (fullUrl.indexOf('http') !== 0) {
+      fullUrl = window.location.origin + (fullUrl.charAt(0) === '/' ? '' : '/') + fullUrl;
+    }
+    var shareTitle = title || 'La Bonita Joyería';
+
+    // Always copy link to clipboard first so user immediately has it
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullUrl).catch(function() {
+        copyTextToClipboardFallback(fullUrl);
+      });
+    } else {
+      copyTextToClipboardFallback(fullUrl);
+    }
+
+    // Visual button feedback
+    if (btnEl) {
+      var origHtml = btnEl._origShareHtml || btnEl.innerHTML;
+      btnEl._origShareHtml = origHtml;
+      btnEl.classList.add('copied');
+      if (btnEl.classList.contains('btn-share-product-pill')) {
+        btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      } else {
+        btnEl.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¡Copiado!</span>';
+      }
+      clearTimeout(btnEl._shareResetTimer);
+      btnEl._shareResetTimer = setTimeout(function() {
+        btnEl.classList.remove('copied');
+        btnEl.innerHTML = origHtml;
+      }, 2200);
+    }
+
+    showBonitaShareToast('✓ Enlace copiado para compartir');
+
+    // On mobile/touch devices, also open native share sheet (WhatsApp, iMessage, etc.)
+    if (navigator.share && window.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+      navigator.share({
+        title: shareTitle,
+        text: shareTitle + ' — La Bonita Joyería',
+        url: fullUrl
+      }).catch(function() {});
+    }
+  }
+
+  function shareCardProduct(btnEl, ev) {
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+    var card = btnEl ? btnEl.closest('.product-shop-card') : null;
+    if (!card) return;
+    var titleEl = card.querySelector('.cutout-product-title');
+    var title = titleEl ? titleEl.textContent.trim() : 'Joya de Oro La Bonita';
+    var linkEl = card.querySelector('a[href*="/products/"]');
+    var rawUrl = card.getAttribute('data-url') || (linkEl ? linkEl.getAttribute('href') : '') || window.location.pathname;
+    copyAndShareProductUrl(rawUrl, title, btnEl, ev);
+  }
+
+  function shareModalProduct(btnEl, ev) {
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+    var rawUrl = (currentModalProduct && currentModalProduct.url) ? currentModalProduct.url : window.location.href;
+    var title = (currentModalProduct && currentModalProduct.title) ? currentModalProduct.title : 'Joya de Oro La Bonita';
+    copyAndShareProductUrl(rawUrl, title, btnEl, ev);
+  }
+
+  window.copyAndShareProductUrl = copyAndShareProductUrl;
+  window.shareCardProduct = shareCardProduct;
+  window.shareModalProduct = shareModalProduct;
+
   /* Interactive Card-Level Image Switcher on Product Cards */
   function setCardImageIdx(card, idx) {
     if (!card) return;
@@ -856,6 +1105,28 @@
   }
 
   function initCardInlineGalleries() {
+    // Ensure all product cards (including static fallbacks) have a share button
+    var allCards = document.querySelectorAll('.cutout-product-card');
+    allCards.forEach(function(card) {
+      if (!card.querySelector('.btn-share-product-pill')) {
+        var addBtn = card.querySelector('.btn-add-cart-pill');
+        if (addBtn && addBtn.parentNode) {
+          var group = document.createElement('div');
+          group.className = 'card-action-pills-group';
+          var shareB = document.createElement('button');
+          shareB.type = 'button';
+          shareB.className = 'btn-share-product-pill';
+          shareB.title = 'Compartir enlace';
+          shareB.setAttribute('aria-label', 'Compartir enlace');
+          shareB.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>';
+          shareB.onclick = function(ev) { shareCardProduct(shareB, ev); };
+          addBtn.parentNode.insertBefore(group, addBtn);
+          group.appendChild(shareB);
+          group.appendChild(addBtn);
+        }
+      }
+    });
+
     var cards = document.querySelectorAll('.cutout-product-card[data-images]');
     cards.forEach(function(card) {
       if (card._hasInlineGallery) return;

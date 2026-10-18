@@ -380,6 +380,38 @@
     transform: none;
   }
 
+  .pdp-btn-share-unified {
+    height: 38px;
+    padding: 0 12px;
+    background: #FAF8F2;
+    color: #08195B;
+    border: 1.5px solid rgba(8, 25, 91, 0.16);
+    border-radius: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+  }
+
+  .pdp-btn-share-unified:hover {
+    background: #FFFFFF;
+    border-color: #D1B054;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(209, 176, 84, 0.25);
+  }
+
+  .pdp-btn-share-unified.copied {
+    background: #059669 !important;
+    border-color: #059669 !important;
+    color: #FFFFFF !important;
+  }
+
   /* Trust Strip */
   .pdp-trust-icons-strip {
     display: flex;
@@ -671,6 +703,24 @@
                 </svg>
                 <span>{% if selected_variant.available %}Agregar al Carrito{% else %}Agotado{% endif %}</span>
               </button>
+
+              <button
+                type="button"
+                class="pdp-btn-share-unified"
+                id="pdpShareBtn"
+                onclick="sharePdpProduct(this, event)"
+                title="Compartir enlace del producto"
+                aria-label="Compartir enlace del producto"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                <span>Compartir</span>
+              </button>
             </div>
           </form>
         </div>
@@ -699,6 +749,36 @@
 
 <!-- INLINE JAVASCRIPT FOR PDP FLOATING CARD -->
 <script>
+  function sharePdpProduct(btnEl, ev) {
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+    var fullUrl = window.location.href;
+    var title = {{ product.title | json }} || 'La Bonita Joyería';
+    if (typeof window.copyAndShareProductUrl === 'function') {
+      window.copyAndShareProductUrl(fullUrl, title, btnEl, ev);
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullUrl).catch(function() {});
+    }
+    if (btnEl) {
+      var orig = btnEl._origHtml || btnEl.innerHTML;
+      btnEl._origHtml = orig;
+      btnEl.classList.add('copied');
+      btnEl.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¡Copiado!</span>';
+      clearTimeout(btnEl._t);
+      btnEl._t = setTimeout(function() {
+        btnEl.classList.remove('copied');
+        btnEl.innerHTML = orig;
+      }, 2200);
+    }
+    if (navigator.share && window.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+      navigator.share({ title: title, text: title + ' — La Bonita Joyería', url: fullUrl }).catch(function() {});
+    }
+  }
+
   function switchPdpThumb(src, btn) {
     var main = document.getElementById('pdpMainImg');
     if (main) main.src = src;
