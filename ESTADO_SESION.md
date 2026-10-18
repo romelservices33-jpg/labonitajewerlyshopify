@@ -47,3 +47,21 @@ Todas las imágenes corregidas fueron guardadas en `c:\TRABAJO\La Bonita Joyeria
 - Se integró la barra de búsqueda de lujo (`#heroSearchWrap`, `#heroSearchForm`, `#heroSearchInput`, `#heroSearchDropdown`) directamente en el Hero entre el subtítulo y los botones de acción, tanto en `sections/bonita-luxury-storefront.liquid` como en `code/sections/bonita-luxury-storefront.liquid`.
 - Incluye autocompletado predictivo instantáneo con miniaturas, quilataje, categoría y precio (clic abre la vista rápida del producto), sugerencias rápidas por categoría y filtrado directo del `#catalogo` con scroll suave.
 
+---
+
+## 5. Actualizaciones del 18 Oct 2026 (Catálogo Shopify + Colección Piercings + Correcciones de Prendas)
+1. **Nueva Categoría y Colección Piercings (ID 510992646240):**
+   - Añadida en menú de navegación, carrusel de categorías del Home y filtros de colección (onita-luxury-header.liquid, onita-luxury-storefront.liquid, onita-luxury-collection.liquid).
+   - 4 productos publicados en la colección Piercings:
+     - 10314044964960: *Piercing de Ombligo Mariposa con Circonia Cúbica en Oro Amarillo de 10K (1.40g)* (4030-1.40).
+     - 15413012856928: *Piercing de Ombligo Flor de Circonias en Oro Amarillo de 10K (1.40g)* (4030-1.40-FLOR).
+     - 15413012889696: *Piercing de Ombligo Clásico de Doble Esfera Lisa en Oro Amarillo de 10K (1.40g)* (4030-1.40-ESFERA — esferas 100% lisas en oro sin piedras).
+     - 15413012922464: *Piercing de Ombligo Corazón Calado en Pavé de Circonias en Oro Amarillo de 10K (1.40g)* (4030-1.40-CORAZON).
+2. **Correcciones de Cierres y Prendas Subidas a Shopify (con bust de caché CDN):**
+   - **SKU-3934 (3934-56.00):** Cadena Mónaco 10K con broche de caja Mónaco liso (sin corona) y pulsador lateral en ocho.
+   - **SKU-3516 (3516-2.46):** Anillo Flecha de Cupido 10K con orientación consistente en ambas vistas.
+   - **SKU-3548 (3548-2.96):** Anillo Hoja de Olivo Calada 10K con diseño idéntico en ambas vistas.
+   - **5 Manillas Barbado Italiano (4072-14.60, 4074-19.23, 4075-19.33, 4076-24.51, 4077-14.04):** Broche de cajón liso con doble seguro lateral en ocho (sin pulsador superior).
+   - **SKU-3832 (3832-15.00):** Manilla Tejido Doble Eslabón Trenzado Princess Cut 10K con cierre de ranura integrado al ras y seguro lateral en ocho con bolita.
+   - **SKU-3325 (3325-8.11):** Manilla Eslabón Cubano Mónaco con Pavé 10K corregida en la segunda vista con un único cierre frontal.
+   - **SKU-3478 (3478-3.17):** *Dúo de Anillos de Compromiso y Alianza Curva Marquise en Oro 10K (Talla 8) - 3.17g* — corregido título y regeneradas ambas vistas mostrando los 2 anillos independientes (Vista 1 juntos, Vista 2 separados).
