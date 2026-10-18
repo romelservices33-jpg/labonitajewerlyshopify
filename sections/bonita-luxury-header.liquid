@@ -67,6 +67,58 @@
   </div>
 </div>
 
+<style>
+  .desktop-floating-header {
+    padding: 0 28px !important;
+  }
+  .hero-floating-nav {
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 0 8px !important;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-nav-track {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 2px !important;
+    list-style: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: auto !important;
+  }
+  .hero-nav-track li {
+    display: inline-flex !important;
+    padding: 6px 0 !important;
+  }
+  .hero-nav-link {
+    font-size: 11px !important;
+    letter-spacing: 0.06em !important;
+    padding: 10px 7px !important;
+    white-space: nowrap !important;
+  }
+  @media (min-width: 1440px) {
+    .desktop-floating-header {
+      padding: 0 40px !important;
+    }
+    .hero-nav-link {
+      font-size: 12px !important;
+      letter-spacing: 0.08em !important;
+      padding: 10px 10px !important;
+    }
+  }
+  @media (min-width: 1680px) {
+    .hero-nav-link {
+      font-size: 12.5px !important;
+      letter-spacing: 0.1em !important;
+      padding: 10px 13px !important;
+    }
+  }
+</style>
+
 <!-- DESKTOP FLOATING HEADER -->
 <header class="desktop-floating-header {% unless is_index %}header-solid-white{% endunless %}" id="luxuryDesktopHeader" role="banner" aria-label="Navegación principal">
   <!-- Left: Brand Logo -->
@@ -74,16 +126,19 @@
     <img src="{{ 'logo-completo.svg' | asset_url }}" alt="La Bonita Jewelry">
   </a>
 
-  <!-- Center: Floating Centered Independent Navbar -->
+  <!-- Center: Floating Centered Independent Navbar (Synced with the 8 Hero Category Cards) -->
   <nav class="hero-floating-nav" aria-label="Navegación de colecciones">
     <ul class="hero-nav-track">
-      <li><a href="{{ routes.root_url }}" class="hero-nav-link {% if template.name == 'index' %}active{% endif %}">Inicio</a></li>
-      <li><a href="/collections/cadenas" class="hero-nav-link {% if collection.handle == 'cadenas' or collection.handle == 'cuban' %}active{% endif %}" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
+      <li><a href="{{ routes.root_url }}" class="hero-nav-link {% if template.name == 'index' %}active{% endif %}" data-cat-nav="todos" onclick="handleNavCategory(event, 'todos')">Inicio</a></li>
+      <li><a href="/collections/cadenas" class="hero-nav-link {% if collection.handle == 'cadenas' %}active{% endif %}" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
+      <li><a href="/collections/cuban" class="hero-nav-link {% if collection.handle == 'cuban' or collection.handle == 'cadenas-cubanas' %}active{% endif %}" data-cat-nav="cuban" onclick="handleNavCategory(event, 'cuban')">Cadenas Cubanas</a></li>
       <li><a href="/collections/anillos" class="hero-nav-link {% if collection.handle == 'anillos' %}active{% endif %}" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
       <li><a href="/collections/aretes" class="hero-nav-link {% if collection.handle == 'aretes' %}active{% endif %}" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
       <li><a href="/collections/pulseras" class="hero-nav-link {% if collection.handle == 'pulseras' %}active{% endif %}" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
-      <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
-      <li><a href="{{ routes.root_url }}#compra-oro" class="hero-nav-link" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
+      <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
+      <li><a href="/collections/piercings" class="hero-nav-link {% if collection.handle == 'piercings' %}active{% endif %}" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
+      <li><a href="/collections/relojes" class="hero-nav-link {% if collection.handle == 'relojes' %}active{% endif %}" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
+      <li><a href="{{ routes.root_url }}#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
       <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
     </ul>
   </nav>
@@ -130,16 +185,16 @@
     </a>
   </div>
   <div class="notch-mobile-dropdown" id="notchMobileDropdown">
-    <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio')">Inicio</a>
+    <a href="{{ routes.root_url }}" onclick="closeMobileNotch('Inicio'); handleNavCategory(event, 'todos');">Inicio</a>
     <a href="/collections/cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
     <a href="/collections/cuban" onclick="closeMobileNotch('Cadenas Cubanas'); handleNavCategory(event, 'cuban');">Cadenas Cubanas</a>
     <a href="/collections/anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
     <a href="/collections/aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
     <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
-    <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes</a>
+    <a href="/collections/dijes" onclick="closeMobileNotch('Dijes & Medallas'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
     <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
     <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
-    <a href="{{ routes.root_url }}#compra-oro" onclick="closeMobileNotch('Compra de Oro');" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
+    <a href="{{ routes.root_url }}#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
     <a href="{{ routes.root_url }}#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" class="notch-wing notch-wing-right">

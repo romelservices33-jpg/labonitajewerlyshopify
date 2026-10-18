@@ -37,7 +37,7 @@
         <a href="/collections/anillos" class="cat-tab-btn {% if collection.handle == 'anillos' %}active{% endif %}" style="text-decoration:none;">Anillos</a>
         <a href="/collections/aretes" class="cat-tab-btn {% if collection.handle == 'aretes' %}active{% endif %}" style="text-decoration:none;">Aretes</a>
         <a href="/collections/pulseras" class="cat-tab-btn {% if collection.handle == 'pulseras' %}active{% endif %}" style="text-decoration:none;">Pulseras</a>
-        <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes</a>
+        <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes & Medallas</a>
         <a href="/collections/piercings" class="cat-tab-btn {% if collection.handle == 'piercings' %}active{% endif %}" style="text-decoration:none;">Piercings</a>
         <a href="/collections/relojes" class="cat-tab-btn {% if collection.handle == 'relojes' %}active{% endif %}" style="text-decoration:none;">Relojes</a>
       </div>
@@ -111,6 +111,9 @@
         {%- if product.tags contains 'cat:relojes' -%}
           {%- assign cat_tag = 'relojes' -%}
           {%- assign cat_label = 'Relojes' -%}
+        {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'dormilon' -%}
+          {%- assign cat_tag = 'aretes' -%}
+          {%- assign cat_label = 'Aretes' -%}
         {%- elsif product.tags contains 'cat:piercings' -%}
           {%- assign cat_tag = 'piercings' -%}
           {%- assign cat_label = 'Piercings' -%}
@@ -120,9 +123,6 @@
         {%- elsif product.tags contains 'cat:anillos' -%}
           {%- assign cat_tag = 'anillos' -%}
           {%- assign cat_label = 'Anillos' -%}
-        {%- elsif product.tags contains 'cat:aretes' -%}
-          {%- assign cat_tag = 'aretes' -%}
-          {%- assign cat_label = 'Aretes' -%}
         {%- elsif product.tags contains 'cat:dijes' -%}
           {%- assign cat_tag = 'dijes' -%}
           {%- assign cat_label = 'Dijes' -%}
@@ -144,7 +144,7 @@
         {%- elsif ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'solitario' or ptitle_down contains 'compromiso' -%}
           {%- assign cat_tag = 'anillos' -%}
           {%- assign cat_label = 'Anillos' -%}
-        {%- elsif ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
+        {%- elsif ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
           {%- assign cat_tag = 'aretes' -%}
           {%- assign cat_label = 'Aretes' -%}
         {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}

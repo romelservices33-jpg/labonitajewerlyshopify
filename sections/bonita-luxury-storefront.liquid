@@ -389,11 +389,13 @@
       <ul class="hero-nav-track">
         <li><a href="{{ routes.root_url }}" class="hero-nav-link active" data-cat-nav="todos" onclick="handleNavCategory(event, 'todos')">Inicio</a></li>
         <li><a href="/collections/cadenas" class="hero-nav-link" data-cat-nav="cadenas" onclick="handleNavCategory(event, 'cadenas')">Cadenas</a></li>
-        <li><a href="/collections/cuban" class="hero-nav-link" data-cat-nav="cuban" onclick="handleNavCategory(event, 'cuban')">Cubanas</a></li>
+        <li><a href="/collections/cuban" class="hero-nav-link" data-cat-nav="cuban" onclick="handleNavCategory(event, 'cuban')">Cadenas Cubanas</a></li>
         <li><a href="/collections/anillos" class="hero-nav-link" data-cat-nav="anillos" onclick="handleNavCategory(event, 'anillos')">Anillos</a></li>
         <li><a href="/collections/aretes" class="hero-nav-link" data-cat-nav="aretes" onclick="handleNavCategory(event, 'aretes')">Aretes</a></li>
         <li><a href="/collections/pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
-        <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes</a></li>
+        <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
+        <li><a href="/collections/piercings" class="hero-nav-link" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
+        <li><a href="/collections/relojes" class="hero-nav-link" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
         <li><a href="#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
         <li><a href="#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
       </ul>
@@ -806,8 +808,8 @@
           {%- assign p_tags = product.tags | join: ',' | downcase -%}
           {%- assign cat_tag = 'cadenas' -%}
           {%- assign cat_label = 'Cadenas' -%}
-          {%- if p_tags contains 'cat:piercings' and p_tags contains 'cat:aretes' -%}
-            {%- assign cat_tag = 'aretes piercings' -%}
+          {%- if p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+            {%- assign cat_tag = 'aretes' -%}
             {%- assign cat_label = 'Aretes' -%}
           {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
             {%- assign cat_tag = 'piercings' -%}
@@ -821,9 +823,6 @@
           {%- elsif p_tags contains 'cat:anillos' or p_type contains 'anillo' or p_title contains 'anillo' or p_title contains 'alianza' or p_title contains 'solitario' -%}
             {%- assign cat_tag = 'anillos' -%}
             {%- assign cat_label = 'Anillos' -%}
-          {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
-            {%- assign cat_tag = 'aretes' -%}
-            {%- assign cat_label = 'Aretes' -%}
           {%- elsif p_tags contains 'cat:dijes' or p_type contains 'dije' or p_title contains 'dije' or p_title contains 'medalla' or p_title contains 'charm' -%}
             {%- assign cat_tag = 'dijes' -%}
             {%- assign cat_label = 'Dijes' -%}
@@ -1074,8 +1073,8 @@
           {%- assign p_tags = product.tags | join: ',' | downcase -%}
           {%- assign cat_tag = 'cadenas' -%}
           {%- assign cat_label = 'Cadenas' -%}
-          {%- if p_tags contains 'cat:piercings' and p_tags contains 'cat:aretes' -%}
-            {%- assign cat_tag = 'aretes piercings' -%}
+          {%- if p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+            {%- assign cat_tag = 'aretes' -%}
             {%- assign cat_label = 'Aretes' -%}
           {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
             {%- assign cat_tag = 'piercings' -%}
@@ -1089,9 +1088,6 @@
           {%- elsif p_tags contains 'cat:anillos' or p_type contains 'anillo' or p_title contains 'anillo' or p_title contains 'alianza' or p_title contains 'solitario' -%}
             {%- assign cat_tag = 'anillos' -%}
             {%- assign cat_label = 'Anillos' -%}
-          {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
-            {%- assign cat_tag = 'aretes' -%}
-            {%- assign cat_label = 'Aretes' -%}
           {%- elsif p_tags contains 'cat:dijes' or p_type contains 'dije' or p_title contains 'dije' or p_title contains 'medalla' or p_title contains 'charm' -%}
             {%- assign cat_tag = 'dijes' -%}
             {%- assign cat_label = 'Dijes' -%}
@@ -1488,6 +1484,9 @@
                   {%- if product.tags contains 'cat:relojes' -%}
                     {%- assign cat_tag = 'relojes' -%}
                     {%- assign cat_label = 'Relojes' -%}
+                  {%- elsif product.tags contains 'cat:aretes' -%}
+                    {%- assign cat_tag = 'aretes' -%}
+                    {%- assign cat_label = 'Aretes' -%}
                   {%- elsif product.tags contains 'cat:piercings' -%}
                     {%- assign cat_tag = 'piercings' -%}
                     {%- assign cat_label = 'Piercings' -%}
@@ -1497,9 +1496,6 @@
                   {%- elsif product.tags contains 'cat:anillos' -%}
                     {%- assign cat_tag = 'anillos' -%}
                     {%- assign cat_label = 'Anillos' -%}
-                  {%- elsif product.tags contains 'cat:aretes' -%}
-                    {%- assign cat_tag = 'aretes' -%}
-                    {%- assign cat_label = 'Aretes' -%}
                   {%- elsif product.tags contains 'cat:dijes' -%}
                     {%- assign cat_tag = 'dijes' -%}
                     {%- assign cat_label = 'Dijes' -%}
@@ -1512,6 +1508,9 @@
                   {%- elsif ptype_down contains 'reloj' or ptitle_down contains 'invicta' or ptitle_down contains 'seiko' -%}
                     {%- assign cat_tag = 'relojes' -%}
                     {%- assign cat_label = 'Relojes' -%}
+                  {%- elsif ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
+                    {%- assign cat_tag = 'aretes' -%}
+                    {%- assign cat_label = 'Aretes' -%}
                   {%- elsif ptype_down contains 'piercing' or ptitle_down contains 'piercing' -%}
                     {%- assign cat_tag = 'piercings' -%}
                     {%- assign cat_label = 'Piercings' -%}
@@ -1521,9 +1520,6 @@
                   {%- elsif ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'solitario' or ptitle_down contains 'compromiso' -%}
                     {%- assign cat_tag = 'anillos' -%}
                     {%- assign cat_label = 'Anillos' -%}
-                  {%- elsif ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
-                    {%- assign cat_tag = 'aretes' -%}
-                    {%- assign cat_label = 'Aretes' -%}
                   {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
                     {%- assign cat_tag = 'dijes' -%}
                     {%- assign cat_label = 'Dijes' -%}
@@ -1626,6 +1622,9 @@
                 {%- if product.tags contains 'cat:relojes' -%}
                   {%- assign cat_tag = 'relojes' -%}
                   {%- assign cat_label = 'Relojes' -%}
+                {%- elsif product.tags contains 'cat:aretes' -%}
+                  {%- assign cat_tag = 'aretes' -%}
+                  {%- assign cat_label = 'Aretes' -%}
                 {%- elsif product.tags contains 'cat:piercings' -%}
                   {%- assign cat_tag = 'piercings' -%}
                   {%- assign cat_label = 'Piercings' -%}
@@ -1635,9 +1634,6 @@
                 {%- elsif product.tags contains 'cat:anillos' -%}
                   {%- assign cat_tag = 'anillos' -%}
                   {%- assign cat_label = 'Anillos' -%}
-                {%- elsif product.tags contains 'cat:aretes' -%}
-                  {%- assign cat_tag = 'aretes' -%}
-                  {%- assign cat_label = 'Aretes' -%}
                 {%- elsif product.tags contains 'cat:dijes' -%}
                   {%- assign cat_tag = 'dijes' -%}
                   {%- assign cat_label = 'Dijes' -%}
@@ -1650,6 +1646,9 @@
                 {%- elsif ptype_down contains 'reloj' or ptitle_down contains 'invicta' or ptitle_down contains 'seiko' -%}
                   {%- assign cat_tag = 'relojes' -%}
                   {%- assign cat_label = 'Relojes' -%}
+                {%- elsif ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
+                  {%- assign cat_tag = 'aretes' -%}
+                  {%- assign cat_label = 'Aretes' -%}
                 {%- elsif ptype_down contains 'piercing' or ptitle_down contains 'piercing' -%}
                   {%- assign cat_tag = 'piercings' -%}
                   {%- assign cat_label = 'Piercings' -%}
@@ -1659,9 +1658,6 @@
                 {%- elsif ptype_down contains 'anillo' or ptitle_down contains 'anillo' or ptitle_down contains 'alianza' or ptitle_down contains 'sortija' or ptitle_down contains 'solitario' or ptitle_down contains 'compromiso' -%}
                   {%- assign cat_tag = 'anillos' -%}
                   {%- assign cat_label = 'Anillos' -%}
-                {%- elsif ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'arracada' or ptitle_down contains 'argolla' or ptitle_down contains 'dormilon' or ptitle_down contains 'huggie' or ptitle_down contains 'broquel' or ptitle_down contains 'topo' -%}
-                  {%- assign cat_tag = 'aretes' -%}
-                  {%- assign cat_label = 'Aretes' -%}
                 {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
                   {%- assign cat_tag = 'dijes' -%}
                   {%- assign cat_label = 'Dijes' -%}
@@ -3008,6 +3004,9 @@
       document.querySelectorAll('.cat-tab-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.getAttribute('data-cat') === 'todos');
       });
+      document.querySelectorAll('.hero-nav-link[data-cat-nav]').forEach(function(navLink) {
+        navLink.classList.toggle('active', navLink.getAttribute('data-cat-nav') === 'todos');
+      });
 
       var kAll = document.getElementById('karat-all');
       if (kAll) kAll.checked = true;
@@ -3083,6 +3082,9 @@
       if (targetBtn) {
         targetBtn.classList.add('active');
       }
+      document.querySelectorAll('.hero-nav-link[data-cat-nav]').forEach(function(navLink) {
+        navLink.classList.toggle('active', navLink.getAttribute('data-cat-nav') === currentCatalogCategory);
+      });
 
       catalogPage = 1;
       paginateCatalogGrid();
