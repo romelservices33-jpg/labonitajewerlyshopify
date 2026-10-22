@@ -5,60 +5,60 @@
   "troy_ounce_grams": 31.1034768,
   "store_buyback_percentage": 93,
   "store_buyback_factor": 0.93,
-  "updated_at_iso": "2026-10-21T19:55:55.98Z",
-  "synced_at_iso": "2026-10-21T23:56:38.812Z",
+  "updated_at_iso": "2026-10-22T13:54:00.48Z",
+  "synced_at_iso": "2026-10-22T17:54:14.203Z",
   "official_spot": {
-    "bid_oz_usd": 4126.5,
-    "ask_oz_usd": 4128.5,
-    "mid_oz_usd": 4127.5,
-    "gram_24k_usd": 132.67,
-    "change_usd": -13.8,
-    "change_percentage": -0.33,
+    "bid_oz_usd": 4044.4,
+    "ask_oz_usd": 4046.4,
+    "mid_oz_usd": 4045.4,
+    "gram_24k_usd": 130.03,
+    "change_usd": -95.9,
+    "change_percentage": -2.32,
     "high_oz_usd": 4145.3,
-    "low_oz_usd": 4104.5
+    "low_oz_usd": 4033.6
   },
   "store_buyback_93": {
-    "oz_24k_usd": 3837.65,
-    "gram_24k_usd": 123.38,
-    "gram_18k_usd": 92.54,
-    "gram_14k_usd": 71.97,
-    "gram_10k_usd": 51.41,
+    "oz_24k_usd": 3761.29,
+    "gram_24k_usd": 120.93,
+    "gram_18k_usd": 90.7,
+    "gram_14k_usd": 70.54,
+    "gram_10k_usd": 50.39,
     "by_karat": {
       "24k": {
         "karat": "24K",
         "purity": 100,
         "purityLabel": "99.9%",
-        "official_per_gram_usd": 132.67,
-        "official_per_oz_usd": 4126.5,
-        "store_buyback_per_gram_usd": 123.38,
-        "store_buyback_per_oz_usd": 3837.65
+        "official_per_gram_usd": 130.03,
+        "official_per_oz_usd": 4044.4,
+        "store_buyback_per_gram_usd": 120.93,
+        "store_buyback_per_oz_usd": 3761.29
       },
       "18k": {
         "karat": "18K",
         "purity": 75,
         "purityLabel": "75.0%",
-        "official_per_gram_usd": 99.5,
-        "official_per_oz_usd": 3094.88,
-        "store_buyback_per_gram_usd": 92.54,
-        "store_buyback_per_oz_usd": 2878.23
+        "official_per_gram_usd": 97.52,
+        "official_per_oz_usd": 3033.3,
+        "store_buyback_per_gram_usd": 90.7,
+        "store_buyback_per_oz_usd": 2820.97
       },
       "14k": {
         "karat": "14K",
         "purity": 58.33,
         "purityLabel": "58.33%",
-        "official_per_gram_usd": 77.39,
-        "official_per_oz_usd": 2407.13,
-        "store_buyback_per_gram_usd": 71.97,
-        "store_buyback_per_oz_usd": 2238.63
+        "official_per_gram_usd": 75.85,
+        "official_per_oz_usd": 2359.23,
+        "store_buyback_per_gram_usd": 70.54,
+        "store_buyback_per_oz_usd": 2194.09
       },
       "10k": {
         "karat": "10K",
         "purity": 41.67,
         "purityLabel": "41.67%",
-        "official_per_gram_usd": 55.28,
-        "official_per_oz_usd": 1719.38,
-        "store_buyback_per_gram_usd": 51.41,
-        "store_buyback_per_oz_usd": 1599.02
+        "official_per_gram_usd": 54.18,
+        "official_per_oz_usd": 1685.17,
+        "store_buyback_per_gram_usd": 50.39,
+        "store_buyback_per_oz_usd": 1567.21
       }
     }
   }
