@@ -736,6 +736,107 @@
   aspect-ratio: 1 / 1 !important;
   }
   }
+  .cat-combos-mobile-single-wrap {
+  display: none;
+  }
+  @media (max-width: 768px) {
+  #catSliderTrack .cat-card-combos-desktop {
+  display: none !important;
+  }
+  .cat-combos-mobile-single-wrap {
+  display: block !important;
+  padding: 2px 16px 6px 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  }
+  .cat-combos-mobile-single-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 154px !important;
+  min-height: 154px !important;
+  max-height: 154px !important;
+  padding: 14px 16px !important;
+  border-radius: 18px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(209, 176, 84, 0.65) !important;
+  box-shadow: 0 6px 20px rgba(8, 25, 91, 0.10), 0 2px 6px rgba(209, 176, 84, 0.15) !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  }
+  .cat-combos-mobile-single-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.93) 0%,
+    rgba(255, 255, 255, 0.52) 28%,
+    rgba(255, 255, 255, 0.05) 54%,
+    rgba(255, 255, 255, 0.88) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  }
+  .cat-combos-mobile-trio-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2px !important;
+  background: rgba(209, 176, 84, 0.35) !important;
+  }
+  .cat-combos-mobile-trio-bg img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  }
+  .cat-combos-mobile-single-card .cat-card-header {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  }
+  .cat-combos-mobile-header-left {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+  }
+  .cat-combos-mobile-badge {
+  background: linear-gradient(135deg, #D1B054 0%, #B8923A 100%) !important;
+  color: #08195B !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 4px 9px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 2px 8px rgba(209, 176, 84, 0.35) !important;
+  white-space: nowrap !important;
+  }
+  .cat-combos-mobile-single-card .cat-card-footer {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  }
+  }
   </style>
   <div class="hero-overlapping-cards-wrap" id="colecciones">
   <div class="cat-slider-container">
@@ -898,8 +999,8 @@
   </div>
   </a>
 
-  <!-- Card 10: Combos -->
-  <a href="#catalogo" onclick="handleNavCategory(event, 'combos')" class="cat-square-card" data-cat-link="combos" aria-label="Ver Colección de Combos">
+  <!-- Card 10: Combos (Desktop Carousel) -->
+  <a href="#catalogo" onclick="handleNavCategory(event, 'combos')" class="cat-square-card cat-card-combos-desktop" data-cat-link="combos" aria-label="Ver Colección de Combos">
   <div class="cat-card-header">
   <span class="cat-card-label">Ofertas Especiales</span>
   <h3 class="cat-card-title">Combos</h3>
@@ -924,6 +1025,34 @@
   <polyline points="9 18 15 12 9 6"></polyline>
   </svg>
   </button>
+  </div>
+
+  <!-- Mobile-Only Single Card for Combos (Displayed directly below the collections carousel) -->
+  {%- assign m_combo2_img = all_products['combo-argollas-oro-10k-cadena-fina-dije-inicial-corona'].featured_image | image_url: width: 600 -%}
+  {%- assign m_combo1_img = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'].featured_image | image_url: width: 600 -%}
+  <div class="cat-combos-mobile-single-wrap">
+  <a href="#catalogo" onclick="handleNavCategory(event, 'combos')" class="cat-combos-mobile-single-card" data-cat-link="combos" aria-label="Ver Colección de Combos y Ofertas Exclusivas">
+  <div class="cat-combos-mobile-trio-bg">
+  <img src="https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-cadena-cubana-capilla-10k-reloj-hombre-1.jpg?v=1792868053" alt="Combo Cadena Cubana Capilla 10K + Reloj" loading="lazy">
+  <img src="{{ m_combo2_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_iniciales_banner_real2_v3_1792865465839.jpg?v=1792866298' }}" alt="Combo Inicial Corona + Cadena + Argollas 10K" loading="lazy">
+  <img src="{{ m_combo1_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_seiko_argollas_banner_real_v4_1792854403956.jpg?v=1792866262' }}" alt="Combo Reloj Seiko 5 + 3 Argollas 10K" loading="lazy">
+  </div>
+  <div class="cat-card-header">
+  <div class="cat-combos-mobile-header-left">
+  <span class="cat-card-label">✦ Ofertas Especiales</span>
+  <h3 class="cat-card-title">Combos Exclusivos</h3>
+  </div>
+  <span class="cat-combos-mobile-badge">3 Promos Activas</span>
+  </div>
+  <div class="cat-card-footer">
+  <span class="cat-pill-btn">
+  <span>Ver Combos</span>
+  <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+  </span>
+  </div>
+  </a>
   </div>
   </div>
   </section>
