@@ -1,0 +1,290 @@
+{%- comment -%}
+  Push-Up / Pop-Up Promotional Banner 1:1 — Combo Exclusivo 4 Prendas
+  Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
+  Sincronizado en tiempo real con el inventario de las 4 prendas individuales.
+{%- endcomment -%}
+
+{%- assign combo_product = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'] -%}
+{%- assign comp_watch = all_products['reloj-seiko-automatico-no-metal'] -%}
+{%- assign comp_hoop1 = all_products['aretes-hollow-10k-1x4mm-1-46'] -%}
+{%- assign comp_hoop2 = all_products['aretes-hollow-10k-2x4mm-1-76'] -%}
+{%- assign comp_hoop3 = all_products['aretes-hollow-10k-3x4mm-2-13'] -%}
+
+{%- assign combo_all_in_stock = false -%}
+{%- if combo_product != blank and combo_product.available and comp_watch.available and comp_hoop1.available and comp_hoop2.available and comp_hoop3.available -%}
+  {%- assign combo_all_in_stock = true -%}
+{%- endif -%}
+
+{%- assign combo_url = combo_product.url | default: '/products/combo-reloj-seiko-5-3-argollas-oro-10k' -%}
+{%- assign banner_img_url = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-seiko-argollas-banner.jpg?v=1792848767' -%}
+
+{%- if combo_all_in_stock -%}
+  <style>
+    .lb-combo-popup-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(8, 7, 5, 0.76);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.38s ease;
+    }
+    .lb-combo-popup-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .lb-combo-popup-card {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      background: #110f0c;
+      border: 1.5px solid rgba(212, 175, 55, 0.55);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      transform: translateY(28px) scale(0.96);
+      transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .lb-combo-popup-backdrop.is-open .lb-combo-popup-card {
+      transform: translateY(0) scale(1);
+    }
+    .lb-combo-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background: rgba(15, 13, 10, 0.78);
+      color: #f8f1df;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      font-size: 20px;
+      line-height: 1;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .lb-combo-popup-close:hover {
+      background: rgba(212, 175, 55, 0.92);
+      color: #110f0c;
+      transform: scale(1.06);
+    }
+    .lb-combo-popup-image-link {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #1a1612;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .lb-combo-popup-image-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .lb-combo-popup-image-link:hover img {
+      transform: scale(1.02);
+    }
+    .lb-combo-popup-footer {
+      padding: 14px 16px 16px;
+      background: linear-gradient(180deg, #16130e 0%, #0d0b08 100%);
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .lb-combo-popup-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
+      color: #120f0a !important;
+      font-weight: 800;
+      font-size: 14.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .lb-combo-popup-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(212, 175, 55, 0.5);
+    }
+    .lb-combo-popup-dismiss {
+      display: inline-block;
+      margin-top: 9px;
+      background: none;
+      border: none;
+      color: rgba(245, 238, 220, 0.68);
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 2px 6px;
+    }
+    .lb-combo-popup-dismiss:hover {
+      color: #f5eedc;
+    }
+    .lb-combo-floating-pill {
+      position: fixed;
+      bottom: 20px;
+      left: 18px;
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(17, 15, 12, 0.94);
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      color: #f5e6c4;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .lb-combo-floating-pill.is-visible {
+      display: inline-flex;
+    }
+    .lb-combo-floating-pill:hover {
+      transform: translateY(-2px);
+      border-color: #f3d77d;
+    }
+    .lb-combo-floating-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4af37;
+      box-shadow: 0 0 8px #d4af37;
+    }
+    @media (max-width: 480px) {
+      .lb-combo-popup-card {
+        max-width: 93vw;
+        border-radius: 16px;
+      }
+      .lb-combo-popup-cta {
+        font-size: 13.5px;
+        padding: 12px 14px;
+      }
+      .lb-combo-floating-pill {
+        bottom: 14px;
+        left: 12px;
+        font-size: 11.5px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+
+  <div id="lbComboPopup" class="lb-combo-popup-backdrop" role="dialog" aria-modal="true" aria-label="Oferta Combo Exclusivo 4 Prendas Ahorra +$300">
+    <div class="lb-combo-popup-card">
+      <button type="button" class="lb-combo-popup-close" id="lbComboPopupClose" aria-label="Cerrar oferta">&times;</button>
+      <a href="{{ combo_url }}" class="lb-combo-popup-image-link" id="lbComboPopupImageLink">
+        <img
+          src="{{ banner_img_url }}"
+          alt="Combo Exclusivo 4 Prendas: Ahorra +$300 - Hoy Solo Por $749 - Reloj Seiko 5 + 3 Pares de Argollas Oro 10K"
+          width="1024"
+          height="1024"
+          loading="eager"
+        >
+      </a>
+      <div class="lb-combo-popup-footer">
+        <a href="{{ combo_url }}" class="lb-combo-popup-cta" id="lbComboPopupCta">
+          Ver Combo Exclusivo &mdash; Hoy Solo por $749
+        </a>
+        <button type="button" class="lb-combo-popup-dismiss" id="lbComboPopupDismiss">
+          Continuar viendo la tienda
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver oferta Combo Ahorra +$300">
+    <span class="lb-combo-floating-dot"></span>
+    <span>COMBO 4 PRENDAS &middot; AHORRA +$300</span>
+  </button>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'lb_combo_seiko_3667_popup_seen_v2';
+      var popup = document.getElementById('lbComboPopup');
+      var closeBtn = document.getElementById('lbComboPopupClose');
+      var dismissBtn = document.getElementById('lbComboPopupDismiss');
+      var pillBtn = document.getElementById('lbComboFloatingPill');
+      if (!popup) return;
+
+      var path = window.location.pathname || '';
+      var isOnComboPage = path.indexOf('combo-reloj-seiko-5-3-argollas-oro-10k') !== -1;
+
+      function openPopup() {
+        popup.classList.add('is-open');
+        if (pillBtn) pillBtn.classList.remove('is-visible');
+      }
+
+      function closePopup() {
+        popup.classList.remove('is-open');
+        try {
+          sessionStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {}
+        if (!isOnComboPage && pillBtn) {
+          pillBtn.classList.add('is-visible');
+        }
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closePopup);
+      if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
+      popup.addEventListener('click', function (e) {
+        if (e.target === popup) closePopup();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && popup.classList.contains('is-open')) closePopup();
+      });
+      if (pillBtn) {
+        pillBtn.addEventListener('click', openPopup);
+      }
+
+      if (!isOnComboPage) {
+        var alreadySeen = false;
+        try {
+          alreadySeen = sessionStorage.getItem(STORAGE_KEY) === '1';
+        } catch (e) {}
+        if (!alreadySeen) {
+          setTimeout(openPopup, 1800);
+        } else if (pillBtn) {
+          pillBtn.classList.add('is-visible');
+        }
+      }
+    })();
+  </script>
+{%- elsif request.page_type == 'product' and product.handle == 'combo-reloj-seiko-5-3-argollas-oro-10k' -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var btns = document.querySelectorAll('form[action*="/cart/add"] button[type="submit"], .shopify-payment-button');
+      btns.forEach(function (b) {
+        if (b.tagName === 'BUTTON') {
+          b.disabled = true;
+          b.textContent = 'Agotado (Prenda vendida individualmente)';
+        } else {
+          b.style.display = 'none';
+        }
+      });
+    });
+  </script>
+{%- endif -%}
