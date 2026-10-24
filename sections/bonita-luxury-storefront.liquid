@@ -1028,21 +1028,21 @@
   </div>
 
   <!-- Mobile-Only Single Card for Combos (Displayed directly below the collections carousel) -->
-  {%- assign m_combo2_img = all_products['combo-argollas-oro-10k-cadena-fina-dije-inicial-corona'].featured_image | image_url: width: 600 -%}
-  {%- assign m_combo1_img = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'].featured_image | image_url: width: 600 -%}
+  {%- assign m_combo_liso_img = all_products['combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k'].featured_image | image_url: width: 600 -%}
+  {%- assign m_combo_pave_img = all_products['combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k'].featured_image | image_url: width: 600 -%}
   <div class="cat-combos-mobile-single-wrap">
   <a href="#catalogo" onclick="handleNavCategory(event, 'combos')" class="cat-combos-mobile-single-card" data-cat-link="combos" aria-label="Ver Colección de Combos y Ofertas Exclusivas">
   <div class="cat-combos-mobile-trio-bg">
+  <img src="{{ m_combo_pave_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k-1.jpg?v=1792874603' }}" alt="Combo Set Collar + Pulsera + Aretes Marco Ovalado Pavé 10K ($999)" loading="lazy">
   <img src="https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-cadena-cubana-capilla-10k-reloj-hombre-1.jpg?v=1792868053" alt="Combo Cadena Cubana Capilla 10K + Reloj" loading="lazy">
-  <img src="{{ m_combo2_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_iniciales_banner_real2_v3_1792865465839.jpg?v=1792866298' }}" alt="Combo Inicial Corona + Cadena + Argollas 10K" loading="lazy">
-  <img src="{{ m_combo1_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_seiko_argollas_banner_real_v4_1792854403956.jpg?v=1792866262' }}" alt="Combo Reloj Seiko 5 + 3 Argollas 10K" loading="lazy">
+  <img src="{{ m_combo_liso_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k-1.jpg?v=1792874594' }}" alt="Combo Set Collar + Pulsera + Aretes Marco Ovalado Liso 10K ($999)" loading="lazy">
   </div>
   <div class="cat-card-header">
   <div class="cat-combos-mobile-header-left">
   <span class="cat-card-label">✦ Ofertas Especiales</span>
   <h3 class="cat-card-title">Combos Exclusivos</h3>
   </div>
-  <span class="cat-combos-mobile-badge">3 Promos Activas</span>
+  <span class="cat-combos-mobile-badge">5 Combos Activos</span>
   </div>
   <div class="cat-card-footer">
   <span class="cat-pill-btn">
@@ -1084,7 +1084,10 @@
   {%- assign p_tags = product.tags | join: ',' | downcase -%}
   {%- assign cat_tag = 'cadenas' -%}
   {%- assign cat_label = 'Cadenas' -%}
-  {%- if p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+  {%- if p_tags contains 'cat:combos' or p_type contains 'combo' -%}
+  {%- assign cat_tag = 'combos' -%}
+  {%- assign cat_label = 'Combos' -%}
+  {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
   {%- assign cat_tag = 'aretes' -%}
   {%- assign cat_label = 'Aretes' -%}
   {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
@@ -1355,7 +1358,10 @@
   {%- assign p_tags = product.tags | join: ',' | downcase -%}
   {%- assign cat_tag = 'cadenas' -%}
   {%- assign cat_label = 'Cadenas' -%}
-  {%- if p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
+  {%- if p_tags contains 'cat:combos' or p_type contains 'combo' -%}
+  {%- assign cat_tag = 'combos' -%}
+  {%- assign cat_label = 'Combos' -%}
+  {%- elsif p_tags contains 'cat:aretes' or p_type contains 'arete' or p_title contains 'arete' or p_title contains 'argolla' or p_title contains 'arracada' or p_title contains 'dormilon' or p_title contains 'huggie' -%}
   {%- assign cat_tag = 'aretes' -%}
   {%- assign cat_label = 'Aretes' -%}
   {%- elsif p_tags contains 'cat:piercings' or p_type contains 'piercing' or p_title contains 'piercing' or p_title contains 'ombligo' -%}
