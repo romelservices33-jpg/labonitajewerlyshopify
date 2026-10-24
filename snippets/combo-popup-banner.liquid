@@ -1,30 +1,44 @@
 {%- comment -%}
-  Push-Up / Pop-Up Promotional Banner 1:1 — Combo Exclusivo 4 Prendas
-  Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
-  Sincronizado en tiempo real con el inventario de las 4 prendas individuales.
+  Push-Up / Pop-Up Promotional Banner 1:1 — Dual Combo Showcase
+  1) Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
+  2) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
+  Sincronizado en tiempo real con el inventario de las prendas individuales.
 {%- endcomment -%}
 
-{%- assign combo_product = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'] -%}
+{%- assign combo1_product = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'] -%}
 {%- assign comp_watch = all_products['reloj-seiko-automatico-no-metal'] -%}
 {%- assign comp_hoop1 = all_products['aretes-hollow-10k-1x4mm-1-46'] -%}
 {%- assign comp_hoop2 = all_products['aretes-hollow-10k-2x4mm-1-76'] -%}
 {%- assign comp_hoop3 = all_products['aretes-hollow-10k-3x4mm-2-13'] -%}
 
-{%- assign combo_all_in_stock = false -%}
-{%- if combo_product != blank and combo_product.available and comp_watch.available and comp_hoop1.available and comp_hoop2.available and comp_hoop3.available -%}
-  {%- assign combo_all_in_stock = true -%}
+{%- assign combo1_in_stock = false -%}
+{%- if combo1_product != blank and combo1_product.available and comp_watch.available and comp_hoop1.available and comp_hoop2.available and comp_hoop3.available -%}
+  {%- assign combo1_in_stock = true -%}
 {%- endif -%}
 
-{%- assign combo_url = combo_product.url | default: '/products/combo-reloj-seiko-5-3-argollas-oro-10k' -%}
-{%- assign banner_img_url = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-seiko-argollas-banner.jpg?v=1792854606' -%}
+{%- assign combo2_product = all_products['combo-argollas-oro-10k-cadena-fina-dije-inicial-corona'] -%}
+{%- if combo2_product == blank -%}
+  {%- assign combo2_product = all_products['combo-argollas-oro-10k-cadena-cubana-dije-inicial-corona'] -%}
+{%- endif -%}
 
-{%- if combo_all_in_stock -%}
+{%- assign combo2_in_stock = false -%}
+{%- if combo2_product != blank and combo2_product.available -%}
+  {%- assign combo2_in_stock = true -%}
+{%- endif -%}
+
+{%- assign combo1_url = combo1_product.url | default: '/products/combo-reloj-seiko-5-3-argollas-oro-10k' -%}
+{%- assign combo1_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-seiko-argollas-banner.jpg?v=1792854606' -%}
+
+{%- assign combo2_url = combo2_product.url | default: '/products/combo-argollas-oro-10k-cadena-fina-dije-inicial-corona' -%}
+{%- assign combo2_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_iniciales_banner_fino_1792861697249.jpg?v=1792862545' -%}
+
+{%- if combo1_in_stock or combo2_in_stock -%}
   <style>
     .lb-combo-popup-backdrop {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(8, 7, 5, 0.76);
+      background: rgba(8, 7, 5, 0.78);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       display: flex;
@@ -44,12 +58,12 @@
     .lb-combo-popup-card {
       position: relative;
       width: 100%;
-      max-width: 440px;
+      max-width: 450px;
       background: #110f0c;
-      border: 1.5px solid rgba(212, 175, 55, 0.55);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
       transform: translateY(28px) scale(0.96);
       transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -58,14 +72,14 @@
     }
     .lb-combo-popup-close {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 3;
-      width: 36px;
-      height: 36px;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      border: 1px solid rgba(212, 175, 55, 0.55);
-      background: rgba(15, 13, 10, 0.78);
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      background: rgba(15, 13, 10, 0.85);
       color: #f8f1df;
       display: flex;
       align-items: center;
@@ -77,9 +91,44 @@
       transition: background 0.2s ease, transform 0.2s ease;
     }
     .lb-combo-popup-close:hover {
-      background: rgba(212, 175, 55, 0.92);
+      background: rgba(212, 175, 55, 0.95);
       color: #110f0c;
       transform: scale(1.06);
+    }
+    .lb-combo-popup-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 10px 48px 10px 12px;
+      background: #16130e;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    }
+    .lb-combo-popup-tab {
+      appearance: none;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(248, 241, 223, 0.78);
+      border-radius: 9px;
+      padding: 7px 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      text-align: center;
+      line-height: 1.2;
+      transition: all 0.2s ease;
+    }
+    .lb-combo-popup-tab.is-active {
+      background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
+      color: #120f0a;
+      border-color: #f3d77d;
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.3);
+    }
+    .lb-combo-popup-slide {
+      display: none;
+    }
+    .lb-combo-popup-slide.is-active {
+      display: block;
     }
     .lb-combo-popup-image-link {
       display: block;
@@ -101,7 +150,7 @@
       transform: scale(1.02);
     }
     .lb-combo-popup-footer {
-      padding: 14px 16px 16px;
+      padding: 13px 16px 15px;
       background: linear-gradient(180deg, #16130e 0%, #0d0b08 100%);
       text-align: center;
       border-top: 1px solid rgba(212, 175, 55, 0.25);
@@ -111,13 +160,13 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 13px 18px;
+      padding: 13px 16px;
       border-radius: 10px;
       background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
       color: #120f0a !important;
       font-weight: 800;
-      font-size: 14.5px;
-      letter-spacing: 0.06em;
+      font-size: 14px;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       text-decoration: none;
       box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
@@ -127,13 +176,27 @@
       transform: translateY(-1px);
       box-shadow: 0 10px 26px rgba(212, 175, 55, 0.5);
     }
-    .lb-combo-popup-dismiss {
+    .lb-combo-popup-switch-hint {
       display: inline-block;
-      margin-top: 9px;
+      margin-top: 8px;
       background: none;
       border: none;
-      color: rgba(245, 238, 220, 0.68);
-      font-size: 12.5px;
+      color: #e6c665;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+    .lb-combo-popup-switch-hint:hover {
+      text-decoration: underline;
+    }
+    .lb-combo-popup-dismiss {
+      display: inline-block;
+      margin-top: 6px;
+      background: none;
+      border: none;
+      color: rgba(245, 238, 220, 0.65);
+      font-size: 12px;
       cursor: pointer;
       text-decoration: underline;
       padding: 2px 6px;
@@ -180,9 +243,13 @@
         max-width: 93vw;
         border-radius: 16px;
       }
+      .lb-combo-popup-tab {
+        font-size: 10.5px;
+        padding: 6px 6px;
+      }
       .lb-combo-popup-cta {
-        font-size: 13.5px;
-        padding: 12px 14px;
+        font-size: 13px;
+        padding: 12px 12px;
       }
       .lb-combo-floating-pill {
         bottom: 14px;
@@ -193,45 +260,129 @@
     }
   </style>
 
-  <div id="lbComboPopup" class="lb-combo-popup-backdrop" role="dialog" aria-modal="true" aria-label="Oferta Combo Exclusivo 4 Prendas Ahorra +$300">
+  <div id="lbComboPopup" class="lb-combo-popup-backdrop" role="dialog" aria-modal="true" aria-label="Ofertas de Combos Exclusivos en Oro 10K">
     <div class="lb-combo-popup-card">
       <button type="button" class="lb-combo-popup-close" id="lbComboPopupClose" aria-label="Cerrar oferta">&times;</button>
-      <a href="{{ combo_url }}" class="lb-combo-popup-image-link" id="lbComboPopupImageLink">
-        <img
-          src="{{ banner_img_url }}"
-          alt="Combo Exclusivo 4 Prendas: Ahorra +$300 - Hoy Solo Por $749 - Reloj Seiko 5 + 3 Pares de Argollas Oro 10K"
-          width="1024"
-          height="1024"
-          loading="eager"
-        >
-      </a>
-      <div class="lb-combo-popup-footer">
-        <a href="{{ combo_url }}" class="lb-combo-popup-cta" id="lbComboPopupCta">
-          Ver Combo Exclusivo &mdash; Hoy Solo por $749
-        </a>
-        <button type="button" class="lb-combo-popup-dismiss" id="lbComboPopupDismiss">
-          Continuar viendo la tienda
-        </button>
-      </div>
+
+      {%- if combo1_in_stock and combo2_in_stock -%}
+        <div class="lb-combo-popup-tabs" role="tablist">
+          <button type="button" class="lb-combo-popup-tab is-active" data-combo-tab="combo2" role="tab" aria-selected="true">
+            ✨ Iniciales + Cadena + Argollas<br><strong>$564.99</strong> (Ahorra +$225)
+          </button>
+          <button type="button" class="lb-combo-popup-tab" data-combo-tab="combo1" role="tab" aria-selected="false">
+            ⌚ Reloj Seiko + 3 Argollas 10K<br><strong>$749.00</strong> (Ahorra +$300)
+          </button>
+        </div>
+      {%- endif -%}
+
+      {%- if combo2_in_stock -%}
+        <div class="lb-combo-popup-slide is-active" data-combo-slide="combo2">
+          <a href="{{ combo2_url }}" class="lb-combo-popup-image-link">
+            <img
+              src="{{ combo2_img }}"
+              alt="Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
+              width="1024"
+              height="1024"
+              loading="eager"
+            >
+          </a>
+          <div class="lb-combo-popup-footer">
+            <a href="{{ combo2_url }}" class="lb-combo-popup-cta">
+              Elegir Mi Letra Inicial &mdash; Hoy Solo por $564.99
+            </a>
+            {%- if combo1_in_stock -%}
+              <div>
+                <button type="button" class="lb-combo-popup-switch-hint" data-combo-switch="combo1">
+                  Ver también: Combo Reloj Seiko 5 + 3 Argollas 10K por $749 &rarr;
+                </button>
+              </div>
+            {%- endif -%}
+            <button type="button" class="lb-combo-popup-dismiss" data-combo-dismiss>
+              Continuar viendo la tienda
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if combo1_in_stock -%}
+        <div class="lb-combo-popup-slide {% unless combo2_in_stock %}is-active{% endunless %}" data-combo-slide="combo1">
+          <a href="{{ combo1_url }}" class="lb-combo-popup-image-link">
+            <img
+              src="{{ combo1_img }}"
+              alt="Combo Exclusivo 4 Prendas ($749): Reloj Seiko 5 Automático Dorado + 3 Pares de Argollas Oro 10K"
+              width="1024"
+              height="1024"
+              loading="eager"
+            >
+          </a>
+          <div class="lb-combo-popup-footer">
+            <a href="{{ combo1_url }}" class="lb-combo-popup-cta">
+              Ver Combo Seiko 4 Prendas &mdash; Hoy Solo por $749
+            </a>
+            {%- if combo2_in_stock -%}
+              <div>
+                <button type="button" class="lb-combo-popup-switch-hint" data-combo-switch="combo2">
+                  Ver también: Combo Cadena Fina + Dije Inicial + Argollas por $564.99 &rarr;
+                </button>
+              </div>
+            {%- endif -%}
+            <button type="button" class="lb-combo-popup-dismiss" data-combo-dismiss>
+              Continuar viendo la tienda
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 
-  <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver oferta Combo Ahorra +$300">
+  <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver Combos Exclusivos en Oferta">
     <span class="lb-combo-floating-dot"></span>
-    <span>COMBO 4 PRENDAS &middot; AHORRA +$300</span>
+    <span>{% if combo1_in_stock and combo2_in_stock %}2 COMBOS EXCLUSIVOS &middot; DESDE $564.99{% elsif combo2_in_stock %}COMBO INICIALES 10K &middot; $564.99{% else %}COMBO 4 PRENDAS &middot; AHORRA +$300{% endif %}</span>
   </button>
 
   <script>
     (function () {
-      var STORAGE_KEY = 'lb_combo_seiko_3667_popup_seen_v2';
+      var STORAGE_KEY = 'lb_dual_combos_popup_seen_v3';
       var popup = document.getElementById('lbComboPopup');
       var closeBtn = document.getElementById('lbComboPopupClose');
-      var dismissBtn = document.getElementById('lbComboPopupDismiss');
       var pillBtn = document.getElementById('lbComboFloatingPill');
       if (!popup) return;
 
+      var tabs = popup.querySelectorAll('[data-combo-tab]');
+      var slides = popup.querySelectorAll('[data-combo-slide]');
+      var switches = popup.querySelectorAll('[data-combo-switch]');
+      var dismissBtns = popup.querySelectorAll('[data-combo-dismiss]');
+
+      function activateCombo(targetKey) {
+        tabs.forEach(function (t) {
+          var active = t.getAttribute('data-combo-tab') === targetKey;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        slides.forEach(function (s) {
+          var active = s.getAttribute('data-combo-slide') === targetKey;
+          s.classList.toggle('is-active', active);
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          activateCombo(tab.getAttribute('data-combo-tab'));
+        });
+      });
+
+      switches.forEach(function (sw) {
+        sw.addEventListener('click', function () {
+          activateCombo(sw.getAttribute('data-combo-switch'));
+        });
+      });
+
       var path = window.location.pathname || '';
-      var isOnComboPage = path.indexOf('combo-reloj-seiko-5-3-argollas-oro-10k') !== -1;
+      var isOnCombo1Page = path.indexOf('combo-reloj-seiko-5-3-argollas-oro-10k') !== -1;
+      var isOnCombo2Page =
+        path.indexOf('combo-argollas-oro-10k-cadena-fina-dije-inicial-corona') !== -1 ||
+        path.indexOf('combo-argollas-oro-10k-cadena-cubana-dije-inicial-corona') !== -1;
+      var isOnAnyComboPage = isOnCombo1Page || isOnCombo2Page;
 
       function openPopup() {
         popup.classList.add('is-open');
@@ -243,13 +394,15 @@
         try {
           sessionStorage.setItem(STORAGE_KEY, '1');
         } catch (e) {}
-        if (!isOnComboPage && pillBtn) {
+        if (!isOnAnyComboPage && pillBtn) {
           pillBtn.classList.add('is-visible');
         }
       }
 
       if (closeBtn) closeBtn.addEventListener('click', closePopup);
-      if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
+      dismissBtns.forEach(function (btn) {
+        btn.addEventListener('click', closePopup);
+      });
       popup.addEventListener('click', function (e) {
         if (e.target === popup) closePopup();
       });
@@ -260,7 +413,7 @@
         pillBtn.addEventListener('click', openPopup);
       }
 
-      if (!isOnComboPage) {
+      if (!isOnAnyComboPage) {
         var alreadySeen = false;
         try {
           alreadySeen = sessionStorage.getItem(STORAGE_KEY) === '1';
@@ -271,29 +424,18 @@
           pillBtn.classList.add('is-visible');
         }
       } else {
+        if (pillBtn) pillBtn.classList.add('is-visible');
         var priceEl = document.querySelector('.price__container, .product__price, [id^="price-"]');
         if (priceEl && !document.getElementById('lbComboSaveBadge')) {
           var badge = document.createElement('div');
           badge.id = 'lbComboSaveBadge';
           badge.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#d4af37 0%,#f3d77d 50%,#b88917 100%);color:#120f0a;font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 14px rgba(212,175,55,0.3);';
-          badge.innerHTML = '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>';
+          badge.innerHTML = isOnCombo2Page
+            ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
+            : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>';
           priceEl.appendChild(badge);
         }
       }
     })();
-  </script>
-{%- elsif request.page_type == 'product' and product.handle == 'combo-reloj-seiko-5-3-argollas-oro-10k' -%}
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var btns = document.querySelectorAll('form[action*="/cart/add"] button[type="submit"], .shopify-payment-button');
-      btns.forEach(function (b) {
-        if (b.tagName === 'BUTTON') {
-          b.disabled = true;
-          b.textContent = 'Agotado (Prenda vendida individualmente)';
-        } else {
-          b.style.display = 'none';
-        }
-      });
-    });
   </script>
 {%- endif -%}
