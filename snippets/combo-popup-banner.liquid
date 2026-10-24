@@ -1,5 +1,5 @@
 {%- comment -%}
-  Push-Up / Pop-Up Promotional Banner 1:1 — Dual Combo Showcase
+  Push-Up / Pop-Up Promotional Banner Carousel 1:1 — Multi-Promo Peek Carousel
   1) Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
   2) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
   Sincronizado en tiempo real con el inventario de las prendas individuales.
@@ -38,13 +38,13 @@
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(8, 7, 5, 0.78);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(6, 5, 4, 0.82);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -58,35 +58,66 @@
     .lb-combo-popup-card {
       position: relative;
       width: 100%;
-      max-width: 450px;
-      background: #110f0c;
-      border: 1.5px solid rgba(212, 175, 55, 0.6);
-      border-radius: 18px;
+      max-width: 480px;
+      background: #100e0b;
+      border: 1.5px solid rgba(212, 175, 55, 0.65);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
       transform: translateY(28px) scale(0.96);
       transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .lb-combo-popup-backdrop.is-open .lb-combo-popup-card {
       transform: translateY(0) scale(1);
     }
+
+    /* Header Bar with Promo Counter */
+    .lb-carousel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, #17130d 0%, #211b11 50%, #17130d 100%);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    }
+    .lb-carousel-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lb-carousel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.16);
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      color: #f5df98;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .lb-carousel-counter {
+      color: rgba(248, 241, 223, 0.85);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
     .lb-combo-popup-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 5;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      border: 1px solid rgba(212, 175, 55, 0.6);
-      background: rgba(15, 13, 10, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      background: rgba(15, 13, 10, 0.9);
       color: #f8f1df;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       padding: 0;
-      font-size: 20px;
+      font-size: 19px;
       line-height: 1;
       transition: background 0.2s ease, transform 0.2s ease;
     }
@@ -95,41 +126,68 @@
       color: #110f0c;
       transform: scale(1.06);
     }
-    .lb-combo-popup-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 10px 48px 10px 12px;
-      background: #16130e;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+
+    /* Animated Autoplay Progress Bar */
+    .lb-carousel-progress-wrap {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
     }
-    .lb-combo-popup-tab {
-      appearance: none;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      background: rgba(255, 255, 255, 0.03);
-      color: rgba(248, 241, 223, 0.78);
-      border-radius: 9px;
-      padding: 7px 8px;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+    .lb-carousel-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #d4af37, #fff1b8, #d4af37);
+      transition: width 0.1s linear;
+    }
+
+    /* Horizontal Peek Carousel Viewport */
+    .lb-carousel-viewport {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 12px 0 6px;
+      background: radial-gradient(circle at center, #1f1911 0%, #0f0d0a 100%);
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .lb-carousel-track {
+      display: flex;
+      align-items: stretch;
+      transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    /* When multiple slides exist, each slide takes 84% width so the next promo visibly peeks in on the side */
+    .lb-carousel-viewport.is-multi .lb-carousel-slide {
+      flex: 0 0 84%;
+      width: 84%;
+      margin-right: 12px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      background: #14110d;
+      transform: scale(0.94);
+      opacity: 0.58;
+      transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.48s ease, border-color 0.48s ease, box-shadow 0.48s ease;
       cursor: pointer;
-      text-align: center;
-      line-height: 1.2;
-      transition: all 0.2s ease;
     }
-    .lb-combo-popup-tab.is-active {
-      background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
-      color: #120f0a;
+    .lb-carousel-viewport.is-multi .lb-carousel-slide.is-active {
+      transform: scale(1);
+      opacity: 1;
       border-color: #f3d77d;
-      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 18px rgba(212, 175, 55, 0.22);
+      cursor: default;
     }
-    .lb-combo-popup-slide {
-      display: none;
+    .lb-carousel-viewport.is-single .lb-carousel-slide {
+      flex: 0 0 92%;
+      width: 92%;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid #f3d77d;
+      background: #14110d;
     }
-    .lb-combo-popup-slide.is-active {
-      display: block;
-    }
+
     .lb-combo-popup-image-link {
       display: block;
       width: 100%;
@@ -144,14 +202,28 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
+      pointer-events: none;
     }
-    .lb-combo-popup-image-link:hover img {
-      transform: scale(1.02);
+    .lb-slide-corner-pill {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      background: rgba(12, 10, 8, 0.84);
+      border: 1px solid rgba(212, 175, 55, 0.75);
+      color: #f7e39c;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
     }
-    .lb-combo-popup-footer {
-      padding: 13px 16px 15px;
-      background: linear-gradient(180deg, #16130e 0%, #0d0b08 100%);
+
+    .lb-slide-body {
+      padding: 11px 12px 12px;
+      background: linear-gradient(180deg, #17130e 0%, #0e0c09 100%);
       text-align: center;
       border-top: 1px solid rgba(212, 175, 55, 0.25);
     }
@@ -160,43 +232,162 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 13px 16px;
+      padding: 12px 14px;
       border-radius: 10px;
       background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
       color: #120f0a !important;
       font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.05em;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .lb-combo-popup-cta:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 26px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 10px 24px rgba(212, 175, 55, 0.5);
     }
-    .lb-combo-popup-switch-hint {
-      display: inline-block;
-      margin-top: 8px;
-      background: none;
-      border: none;
-      color: #e6c665;
-      font-size: 12px;
-      font-weight: 600;
+
+    /* Prominent Floating Left/Right Carousel Arrows */
+    .lb-carousel-arrow {
+      position: absolute;
+      top: 44%;
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid #f3d77d;
+      background: rgba(14, 12, 9, 0.9);
+      color: #f7e39c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      padding: 2px 6px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.75), 0 0 12px rgba(212, 175, 55, 0.35);
+      transition: all 0.2s ease;
+      padding: 0;
     }
-    .lb-combo-popup-switch-hint:hover {
-      text-decoration: underline;
+    .lb-carousel-arrow:hover {
+      background: linear-gradient(135deg, #d4af37 0%, #f3d77d 100%);
+      color: #120f0a;
+      transform: translateY(-50%) scale(1.08);
     }
+    .lb-carousel-arrow--prev {
+      left: 8px;
+    }
+    .lb-carousel-arrow--next {
+      right: 8px;
+      animation: lbArrowNudge 1.8s infinite ease-in-out;
+    }
+    @keyframes lbArrowNudge {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-50%) translateX(3px); }
+    }
+    .lb-carousel-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    /* Bottom Carousel Controls: Mini-Thumbnails + Dots + Dismiss */
+    .lb-carousel-footer {
+      padding: 10px 14px 13px;
+      background: #0d0b08;
+      border-top: 1px solid rgba(212, 175, 55, 0.22);
+      text-align: center;
+    }
+    .lb-carousel-thumbs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .lb-carousel-thumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(248, 241, 223, 0.75);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .lb-carousel-thumb.is-active {
+      border-color: #f3d77d;
+      background: rgba(212, 175, 55, 0.16);
+      color: #fff6dc;
+      box-shadow: 0 0 0 1px rgba(243, 215, 125, 0.35);
+    }
+    .lb-carousel-thumb img {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+    .lb-carousel-thumb-meta {
+      min-width: 0;
+      flex: 1;
+      line-height: 1.2;
+    }
+    .lb-carousel-thumb-title {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lb-carousel-thumb-price {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: #f3d77d;
+    }
+
+    .lb-carousel-dots-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .lb-carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.32);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.28s ease;
+    }
+    .lb-carousel-dot.is-active {
+      width: 24px;
+      background: linear-gradient(90deg, #d4af37, #f3d77d);
+    }
+    .lb-carousel-swipe-hint {
+      font-size: 11px;
+      color: rgba(243, 215, 125, 0.78);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
     .lb-combo-popup-dismiss {
       display: inline-block;
-      margin-top: 6px;
+      margin-top: 5px;
       background: none;
       border: none;
-      color: rgba(245, 238, 220, 0.65);
-      font-size: 12px;
+      color: rgba(245, 238, 220, 0.62);
+      font-size: 11.5px;
       cursor: pointer;
       text-decoration: underline;
       padding: 2px 6px;
@@ -204,6 +395,8 @@
     .lb-combo-popup-dismiss:hover {
       color: #f5eedc;
     }
+
+    /* Floating Pill Re-opener */
     .lb-combo-floating-pill {
       position: fixed;
       bottom: 20px;
@@ -238,18 +431,24 @@
       background: #d4af37;
       box-shadow: 0 0 8px #d4af37;
     }
+
     @media (max-width: 480px) {
       .lb-combo-popup-card {
-        max-width: 93vw;
+        max-width: 95vw;
         border-radius: 16px;
       }
-      .lb-combo-popup-tab {
-        font-size: 10.5px;
-        padding: 6px 6px;
+      .lb-carousel-viewport.is-multi .lb-carousel-slide {
+        flex: 0 0 83%;
+        width: 83%;
+        margin-right: 10px;
+      }
+      .lb-carousel-arrow {
+        width: 36px;
+        height: 36px;
       }
       .lb-combo-popup-cta {
-        font-size: 13px;
-        padding: 12px 12px;
+        font-size: 12.5px;
+        padding: 11px 10px;
       }
       .lb-combo-floating-pill {
         bottom: 14px;
@@ -260,122 +459,272 @@
     }
   </style>
 
-  <div id="lbComboPopup" class="lb-combo-popup-backdrop" role="dialog" aria-modal="true" aria-label="Ofertas de Combos Exclusivos en Oro 10K">
-    <div class="lb-combo-popup-card">
-      <button type="button" class="lb-combo-popup-close" id="lbComboPopupClose" aria-label="Cerrar oferta">&times;</button>
+  <div id="lbComboPopup" class="lb-combo-popup-backdrop" role="dialog" aria-modal="true" aria-label="Carrusel de Combos Exclusivos en Oro 10K">
+    <div class="lb-combo-popup-card" id="lbComboPopupCard">
+      <div class="lb-carousel-header">
+        <div class="lb-carousel-header-left">
+          <span class="lb-carousel-badge">★ Combos Exclusivos</span>
+          <span class="lb-carousel-counter" id="lbCarouselCounter">Promoción 1 de 2</span>
+        </div>
+        <button type="button" class="lb-combo-popup-close" id="lbComboPopupClose" aria-label="Cerrar ofertas">&times;</button>
+      </div>
 
       {%- if combo1_in_stock and combo2_in_stock -%}
-        <div class="lb-combo-popup-tabs" role="tablist">
-          <button type="button" class="lb-combo-popup-tab is-active" data-combo-tab="combo2" role="tab" aria-selected="true">
-            ✨ Iniciales + Cadena + Argollas<br><strong>$564.99</strong> (Ahorra +$225)
-          </button>
-          <button type="button" class="lb-combo-popup-tab" data-combo-tab="combo1" role="tab" aria-selected="false">
-            ⌚ Reloj Seiko + 3 Argollas 10K<br><strong>$749.00</strong> (Ahorra +$300)
-          </button>
+        <div class="lb-carousel-progress-wrap">
+          <div class="lb-carousel-progress-bar" id="lbCarouselProgressBar"></div>
         </div>
       {%- endif -%}
 
-      {%- if combo2_in_stock -%}
-        <div class="lb-combo-popup-slide is-active" data-combo-slide="combo2">
-          <a href="{{ combo2_url }}" class="lb-combo-popup-image-link">
-            <img
-              src="{{ combo2_img }}"
-              alt="Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
-              width="1024"
-              height="1024"
-              loading="eager"
-            >
-          </a>
-          <div class="lb-combo-popup-footer">
-            <a href="{{ combo2_url }}" class="lb-combo-popup-cta">
-              Elegir Mi Letra Inicial &mdash; Hoy Solo por $564.99
-            </a>
-            {%- if combo1_in_stock -%}
-              <div>
-                <button type="button" class="lb-combo-popup-switch-hint" data-combo-switch="combo1">
-                  Ver también: Combo Reloj Seiko 5 + 3 Argollas 10K por $749 &rarr;
-                </button>
-              </div>
-            {%- endif -%}
-            <button type="button" class="lb-combo-popup-dismiss" data-combo-dismiss>
-              Continuar viendo la tienda
-            </button>
-          </div>
-        </div>
-      {%- endif -%}
+      <div class="lb-carousel-viewport {% if combo1_in_stock and combo2_in_stock %}is-multi{% else %}is-single{% endif %}" id="lbCarouselViewport">
+        {%- if combo1_in_stock and combo2_in_stock -%}
+          <button type="button" class="lb-carousel-arrow lb-carousel-arrow--prev" id="lbCarouselPrev" aria-label="Promoción anterior">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" class="lb-carousel-arrow lb-carousel-arrow--next" id="lbCarouselNext" aria-label="Siguiente promoción">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        {%- endif -%}
 
-      {%- if combo1_in_stock -%}
-        <div class="lb-combo-popup-slide {% unless combo2_in_stock %}is-active{% endunless %}" data-combo-slide="combo1">
-          <a href="{{ combo1_url }}" class="lb-combo-popup-image-link">
-            <img
-              src="{{ combo1_img }}"
-              alt="Combo Exclusivo 4 Prendas ($749): Reloj Seiko 5 Automático Dorado + 3 Pares de Argollas Oro 10K"
-              width="1024"
-              height="1024"
-              loading="eager"
-            >
-          </a>
-          <div class="lb-combo-popup-footer">
-            <a href="{{ combo1_url }}" class="lb-combo-popup-cta">
-              Ver Combo Seiko 4 Prendas &mdash; Hoy Solo por $749
-            </a>
-            {%- if combo2_in_stock -%}
-              <div>
-                <button type="button" class="lb-combo-popup-switch-hint" data-combo-switch="combo2">
-                  Ver también: Combo Cadena Fina + Dije Inicial + Argollas por $564.99 &rarr;
-                </button>
+        <div class="lb-carousel-track" id="lbCarouselTrack">
+          {%- if combo2_in_stock -%}
+            <div class="lb-carousel-slide is-active" data-slide-index="0">
+              <a href="{{ combo2_url }}" class="lb-combo-popup-image-link">
+                <span class="lb-slide-corner-pill">Promo #1 &middot; 3 Prendas 10K</span>
+                <img
+                  src="{{ combo2_img }}"
+                  alt="Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
+                  width="1024"
+                  height="1024"
+                  loading="eager"
+                >
+              </a>
+              <div class="lb-slide-body">
+                <a href="{{ combo2_url }}" class="lb-combo-popup-cta">
+                  Elegir Mi Letra Inicial &mdash; Solo $564.99
+                </a>
               </div>
-            {%- endif -%}
-            <button type="button" class="lb-combo-popup-dismiss" data-combo-dismiss>
-              Continuar viendo la tienda
+            </div>
+          {%- endif -%}
+
+          {%- if combo1_in_stock -%}
+            <div class="lb-carousel-slide {% unless combo2_in_stock %}is-active{% endunless %}" data-slide-index="{% if combo2_in_stock %}1{% else %}0{% endif %}">
+              <a href="{{ combo1_url }}" class="lb-combo-popup-image-link">
+                <span class="lb-slide-corner-pill">Promo #{% if combo2_in_stock %}2{% else %}1{% endif %} &middot; 4 Prendas</span>
+                <img
+                  src="{{ combo1_img }}"
+                  alt="Combo Exclusivo 4 Prendas ($749): Reloj Seiko 5 Automático Dorado + 3 Pares de Argollas Oro 10K"
+                  width="1024"
+                  height="1024"
+                  loading="eager"
+                >
+              </a>
+              <div class="lb-slide-body">
+                <a href="{{ combo1_url }}" class="lb-combo-popup-cta">
+                  Ver Combo Seiko + 3 Argollas &mdash; $749
+                </a>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="lb-carousel-footer">
+        {%- if combo1_in_stock and combo2_in_stock -%}
+          <div class="lb-carousel-thumbs">
+            <button type="button" class="lb-carousel-thumb is-active" data-goto-slide="0">
+              <img src="{{ combo2_img }}" alt="Combo Iniciales 10K">
+              <span class="lb-carousel-thumb-meta">
+                <span class="lb-carousel-thumb-title">1. Cadena + Inicial + Argollas</span>
+                <span class="lb-carousel-thumb-price">$564.99 (Ahorra +$225)</span>
+              </span>
+            </button>
+            <button type="button" class="lb-carousel-thumb" data-goto-slide="1">
+              <img src="{{ combo1_img }}" alt="Combo Seiko + 3 Argollas">
+              <span class="lb-carousel-thumb-meta">
+                <span class="lb-carousel-thumb-title">2. Seiko 5 + 3 Argollas 10K</span>
+                <span class="lb-carousel-thumb-price">$749.00 (Ahorra +$300)</span>
+              </span>
             </button>
           </div>
-        </div>
-      {%- endif -%}
+          <div class="lb-carousel-dots-row">
+            <button type="button" class="lb-carousel-dot is-active" data-goto-slide="0" aria-label="Ir a promoción 1"></button>
+            <button type="button" class="lb-carousel-dot" data-goto-slide="1" aria-label="Ir a promoción 2"></button>
+            <span class="lb-carousel-swipe-hint">‹ Desliza para ver más promociones ›</span>
+          </div>
+        {%- endif -%}
+
+        <button type="button" class="lb-combo-popup-dismiss" id="lbComboPopupDismiss">
+          Continuar viendo la tienda
+        </button>
+      </div>
     </div>
   </div>
 
-  <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver Combos Exclusivos en Oferta">
+  <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver Carrusel de Combos Exclusivos">
     <span class="lb-combo-floating-dot"></span>
-    <span>{% if combo1_in_stock and combo2_in_stock %}2 COMBOS EXCLUSIVOS &middot; DESDE $564.99{% elsif combo2_in_stock %}COMBO INICIALES 10K &middot; $564.99{% else %}COMBO 4 PRENDAS &middot; AHORRA +$300{% endif %}</span>
+    <span>{% if combo1_in_stock and combo2_in_stock %}2 PROMOS ACTIVAS &middot; DESDE $564.99{% elsif combo2_in_stock %}COMBO INICIALES 10K &middot; $564.99{% else %}COMBO 4 PRENDAS &middot; AHORRA +$300{% endif %}</span>
   </button>
 
   <script>
     (function () {
-      var STORAGE_KEY = 'lb_dual_combos_popup_seen_v3';
+      var STORAGE_KEY = 'lb_carousel_combos_popup_seen_v4';
       var popup = document.getElementById('lbComboPopup');
+      var card = document.getElementById('lbComboPopupCard');
       var closeBtn = document.getElementById('lbComboPopupClose');
+      var dismissBtn = document.getElementById('lbComboPopupDismiss');
       var pillBtn = document.getElementById('lbComboFloatingPill');
-      if (!popup) return;
+      var viewport = document.getElementById('lbCarouselViewport');
+      var track = document.getElementById('lbCarouselTrack');
+      var prevBtn = document.getElementById('lbCarouselPrev');
+      var nextBtn = document.getElementById('lbCarouselNext');
+      var counterEl = document.getElementById('lbCarouselCounter');
+      var progressBar = document.getElementById('lbCarouselProgressBar');
+      if (!popup || !track) return;
 
-      var tabs = popup.querySelectorAll('[data-combo-tab]');
-      var slides = popup.querySelectorAll('[data-combo-slide]');
-      var switches = popup.querySelectorAll('[data-combo-switch]');
-      var dismissBtns = popup.querySelectorAll('[data-combo-dismiss]');
+      var slides = Array.prototype.slice.call(track.querySelectorAll('.lb-carousel-slide'));
+      var dots = Array.prototype.slice.call(popup.querySelectorAll('.lb-carousel-dot'));
+      var thumbs = Array.prototype.slice.call(popup.querySelectorAll('.lb-carousel-thumb'));
+      var totalSlides = slides.length;
+      var currentIndex = 0;
 
-      function activateCombo(targetKey) {
-        tabs.forEach(function (t) {
-          var active = t.getAttribute('data-combo-tab') === targetKey;
-          t.classList.toggle('is-active', active);
-          t.setAttribute('aria-selected', active ? 'true' : 'false');
+      var AUTOPLAY_MS = 5500;
+      var elapsedMs = 0;
+      var tickInterval = null;
+      var isPaused = false;
+
+      function updateTrackPosition() {
+        if (totalSlides <= 1) {
+          if (counterEl) counterEl.textContent = 'Oferta Especial';
+          return;
+        }
+        var viewportWidth = viewport ? viewport.clientWidth : 440;
+        var slideEl = slides[0];
+        var slideWidth = slideEl ? slideEl.offsetWidth : viewportWidth * 0.84;
+        var gap = 12;
+        if (window.innerWidth <= 480) gap = 10;
+
+        // Center the active slide while leaving the adjacent slide visibly peeking
+        var centerOffset = (viewportWidth - slideWidth) / 2;
+        var translateX = centerOffset - currentIndex * (slideWidth + gap);
+        track.style.transform = 'translate3d(' + translateX + 'px, 0, 0)';
+
+        slides.forEach(function (s, idx) {
+          s.classList.toggle('is-active', idx === currentIndex);
         });
-        slides.forEach(function (s) {
-          var active = s.getAttribute('data-combo-slide') === targetKey;
-          s.classList.toggle('is-active', active);
+        dots.forEach(function (d, idx) {
+          d.classList.toggle('is-active', idx === currentIndex);
+        });
+        thumbs.forEach(function (t, idx) {
+          t.classList.toggle('is-active', idx === currentIndex);
+        });
+        if (counterEl) {
+          counterEl.textContent = 'Promoción ' + (currentIndex + 1) + ' de ' + totalSlides;
+        }
+      }
+
+      function goToSlide(idx, resetTimer) {
+        if (totalSlides <= 1) return;
+        currentIndex = (idx + totalSlides) % totalSlides;
+        updateTrackPosition();
+        if (resetTimer) {
+          elapsedMs = 0;
+          if (progressBar) progressBar.style.width = '0%';
+        }
+      }
+
+      function startAutoplay() {
+        if (totalSlides <= 1) return;
+        stopAutoplay();
+        tickInterval = setInterval(function () {
+          if (isPaused || !popup.classList.contains('is-open')) return;
+          elapsedMs += 100;
+          if (progressBar) {
+            var pct = Math.min(100, (elapsedMs / AUTOPLAY_MS) * 100);
+            progressBar.style.width = pct + '%';
+          }
+          if (elapsedMs >= AUTOPLAY_MS) {
+            elapsedMs = 0;
+            goToSlide(currentIndex + 1, false);
+          }
+        }, 100);
+      }
+
+      function stopAutoplay() {
+        if (tickInterval) {
+          clearInterval(tickInterval);
+          tickInterval = null;
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          goToSlide(currentIndex - 1, true);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          goToSlide(currentIndex + 1, true);
         });
       }
 
-      tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          activateCombo(tab.getAttribute('data-combo-tab'));
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          goToSlide(parseInt(dot.getAttribute('data-goto-slide'), 10) || 0, true);
         });
       });
 
-      switches.forEach(function (sw) {
-        sw.addEventListener('click', function () {
-          activateCombo(sw.getAttribute('data-combo-switch'));
+      thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+          goToSlide(parseInt(thumb.getAttribute('data-goto-slide'), 10) || 0, true);
         });
       });
+
+      // Clicking a peeking (inactive) slide transitions directly to it instead of navigating away immediately
+      slides.forEach(function (slide, idx) {
+        slide.addEventListener('click', function (e) {
+          if (idx !== currentIndex) {
+            e.preventDefault();
+            e.stopPropagation();
+            goToSlide(idx, true);
+          }
+        });
+      });
+
+      // Touch / Swipe gesture support
+      var touchStartX = 0;
+      var touchDeltaX = 0;
+      if (viewport && totalSlides > 1) {
+        viewport.addEventListener('touchstart', function (e) {
+          if (!e.touches || !e.touches.length) return;
+          touchStartX = e.touches[0].clientX;
+          touchDeltaX = 0;
+          isPaused = true;
+        }, { passive: true });
+
+        viewport.addEventListener('touchmove', function (e) {
+          if (!e.touches || !e.touches.length) return;
+          touchDeltaX = e.touches[0].clientX - touchStartX;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', function () {
+          isPaused = false;
+          if (Math.abs(touchDeltaX) > 42) {
+            if (touchDeltaX < 0) {
+              goToSlide(currentIndex + 1, true);
+            } else {
+              goToSlide(currentIndex - 1, true);
+            }
+          }
+        });
+      }
+
+      if (card) {
+        card.addEventListener('mouseenter', function () { isPaused = true; });
+        card.addEventListener('mouseleave', function () { isPaused = false; });
+      }
+      window.addEventListener('resize', updateTrackPosition);
 
       var path = window.location.pathname || '';
       var isOnCombo1Page = path.indexOf('combo-reloj-seiko-5-3-argollas-oro-10k') !== -1;
@@ -387,27 +736,31 @@
       function openPopup() {
         popup.classList.add('is-open');
         if (pillBtn) pillBtn.classList.remove('is-visible');
+        setTimeout(updateTrackPosition, 30);
+        startAutoplay();
       }
 
       function closePopup() {
         popup.classList.remove('is-open');
+        stopAutoplay();
         try {
           sessionStorage.setItem(STORAGE_KEY, '1');
         } catch (e) {}
-        if (!isOnAnyComboPage && pillBtn) {
+        if (pillBtn) {
           pillBtn.classList.add('is-visible');
         }
       }
 
       if (closeBtn) closeBtn.addEventListener('click', closePopup);
-      dismissBtns.forEach(function (btn) {
-        btn.addEventListener('click', closePopup);
-      });
+      if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
       popup.addEventListener('click', function (e) {
         if (e.target === popup) closePopup();
       });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && popup.classList.contains('is-open')) closePopup();
+        if (!popup.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closePopup();
+        if (e.key === 'ArrowRight') goToSlide(currentIndex + 1, true);
+        if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1, true);
       });
       if (pillBtn) {
         pillBtn.addEventListener('click', openPopup);
@@ -419,7 +772,7 @@
           alreadySeen = sessionStorage.getItem(STORAGE_KEY) === '1';
         } catch (e) {}
         if (!alreadySeen) {
-          setTimeout(openPopup, 1800);
+          setTimeout(openPopup, 1500);
         } else if (pillBtn) {
           pillBtn.classList.add('is-visible');
         }
