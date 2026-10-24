@@ -1,7 +1,8 @@
 {%- comment -%}
-  Push-Up / Pop-Up Promotional Banner Carousel 1:1 — Multi-Promo Peek Carousel
-  1) Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
-  2) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
+  Push-Up / Pop-Up Promotional Banner Carousel 1:1 — Multi-Promo Peek Carousel (3 Promociones)
+  1) Combo Exclusivo ($1,699.00): Cadena Cubana (Size 22" o 24") con Dije Capilla Virgen de la Caridad 10K (17.94g) + Reloj de Hombre a Elegir (1435)
+  2) Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
+  3) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
   Sincronizado en tiempo real con el inventario de las prendas individuales.
 {%- endcomment -%}
 
@@ -26,13 +27,28 @@
   {%- assign combo2_in_stock = true -%}
 {%- endif -%}
 
+{%- assign combo3_product = all_products['combo-cadena-cubana-capilla-oro-10k-reloj-hombre-1435'] -%}
+{%- assign comp_capilla_chain = all_products['cadena-cubana-22-24-dije-capilla-virgen-caridad-oro-10k-4273'] -%}
+{%- assign combo3_in_stock = false -%}
+{%- if combo3_product != blank and combo3_product.available and comp_capilla_chain.available -%}
+  {%- assign combo3_in_stock = true -%}
+{%- endif -%}
+
+{%- assign active_promos_count = 0 -%}
+{%- if combo3_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
+{%- if combo2_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
+{%- if combo1_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
+
 {%- assign combo1_url = combo1_product.url | default: '/products/combo-reloj-seiko-5-3-argollas-oro-10k' -%}
 {%- assign combo1_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_seiko_argollas_banner_real_v4_1792854403956.jpg?v=1792866262' -%}
 
 {%- assign combo2_url = combo2_product.url | default: '/products/combo-argollas-oro-10k-cadena-fina-dije-inicial-corona' -%}
 {%- assign combo2_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_iniciales_banner_real2_v3_1792865465839.jpg?v=1792866298' -%}
 
-{%- if combo1_in_stock or combo2_in_stock -%}
+{%- assign combo3_url = combo3_product.url | default: '/products/combo-cadena-cubana-capilla-oro-10k-reloj-hombre-1435' -%}
+{%- assign combo3_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-cadena-cubana-capilla-10k-reloj-hombre-banner.jpg?v=1792868053' -%}
+
+{%- if active_promos_count > 0 -%}
   <style>
     .lb-combo-popup-backdrop {
       position: fixed;
@@ -157,7 +173,6 @@
       transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
     }
-    /* When multiple slides exist, each slide takes 84% width so the next promo visibly peeks in on the side */
     .lb-carousel-viewport.is-multi .lb-carousel-slide {
       flex: 0 0 84%;
       width: 84%;
@@ -237,7 +252,7 @@
       background: linear-gradient(135deg, #d4af37 0%, #f3d77d 50%, #b88917 100%);
       color: #120f0a !important;
       font-weight: 800;
-      font-size: 13.5px;
+      font-size: 13px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
@@ -295,29 +310,30 @@
 
     /* Bottom Carousel Controls: Mini-Thumbnails + Dots + Dismiss */
     .lb-carousel-footer {
-      padding: 10px 14px 13px;
+      padding: 10px 12px 13px;
       background: #0d0b08;
       border-top: 1px solid rgba(212, 175, 55, 0.22);
       text-align: center;
     }
     .lb-carousel-thumbs {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: repeat({{ active_promos_count }}, minmax(0, 1fr));
+      gap: 6px;
       margin-bottom: 8px;
     }
     .lb-carousel-thumb {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 5px 8px;
-      border-radius: 10px;
+      gap: 6px;
+      padding: 5px 6px;
+      border-radius: 9px;
       border: 1px solid rgba(212, 175, 55, 0.28);
       background: rgba(255, 255, 255, 0.03);
       color: rgba(248, 241, 223, 0.75);
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
+      min-width: 0;
     }
     .lb-carousel-thumb.is-active {
       border-color: #f3d77d;
@@ -326,9 +342,9 @@
       box-shadow: 0 0 0 1px rgba(243, 215, 125, 0.35);
     }
     .lb-carousel-thumb img {
-      width: 34px;
-      height: 34px;
-      border-radius: 6px;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
       object-fit: cover;
       flex-shrink: 0;
       border: 1px solid rgba(212, 175, 55, 0.4);
@@ -336,11 +352,11 @@
     .lb-carousel-thumb-meta {
       min-width: 0;
       flex: 1;
-      line-height: 1.2;
+      line-height: 1.15;
     }
     .lb-carousel-thumb-title {
       display: block;
-      font-size: 10.5px;
+      font-size: 9.8px;
       font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
@@ -348,7 +364,7 @@
     }
     .lb-carousel-thumb-price {
       display: block;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       color: #f3d77d;
     }
@@ -447,7 +463,7 @@
         height: 36px;
       }
       .lb-combo-popup-cta {
-        font-size: 12.5px;
+        font-size: 12px;
         padding: 11px 10px;
       }
       .lb-combo-floating-pill {
@@ -464,19 +480,19 @@
       <div class="lb-carousel-header">
         <div class="lb-carousel-header-left">
           <span class="lb-carousel-badge">★ Combos Exclusivos</span>
-          <span class="lb-carousel-counter" id="lbCarouselCounter">Promoción 1 de 2</span>
+          <span class="lb-carousel-counter" id="lbCarouselCounter">Promoción 1 de {{ active_promos_count }}</span>
         </div>
         <button type="button" class="lb-combo-popup-close" id="lbComboPopupClose" aria-label="Cerrar ofertas">&times;</button>
       </div>
 
-      {%- if combo1_in_stock and combo2_in_stock -%}
+      {%- if active_promos_count > 1 -%}
         <div class="lb-carousel-progress-wrap">
           <div class="lb-carousel-progress-bar" id="lbCarouselProgressBar"></div>
         </div>
       {%- endif -%}
 
-      <div class="lb-carousel-viewport {% if combo1_in_stock and combo2_in_stock %}is-multi{% else %}is-single{% endif %}" id="lbCarouselViewport">
-        {%- if combo1_in_stock and combo2_in_stock -%}
+      <div class="lb-carousel-viewport {% if active_promos_count > 1 %}is-multi{% else %}is-single{% endif %}" id="lbCarouselViewport">
+        {%- if active_promos_count > 1 -%}
           <button type="button" class="lb-carousel-arrow lb-carousel-arrow--prev" id="lbCarouselPrev" aria-label="Promoción anterior">
             <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
@@ -486,10 +502,33 @@
         {%- endif -%}
 
         <div class="lb-carousel-track" id="lbCarouselTrack">
+          {%- assign slide_idx = 0 -%}
+
+          {%- if combo3_in_stock -%}
+            <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
+              <a href="{{ combo3_url }}" class="lb-combo-popup-image-link">
+                <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; Capilla 10K + Reloj</span>
+                <img
+                  src="{{ combo3_img }}"
+                  alt="Combo Exclusivo ($1,699): Cadena Cubana Size 22 o 24 con Dije Capilla Virgen de la Caridad en Oro 10K (17.94g) + Reloj de Hombre a Elegir"
+                  width="1024"
+                  height="1024"
+                  loading="eager"
+                >
+              </a>
+              <div class="lb-slide-body">
+                <a href="{{ combo3_url }}" class="lb-combo-popup-cta">
+                  Elegir Size (22&Prime; o 24&Prime;) y Reloj &mdash; $1,699
+                </a>
+              </div>
+            </div>
+            {%- assign slide_idx = slide_idx | plus: 1 -%}
+          {%- endif -%}
+
           {%- if combo2_in_stock -%}
-            <div class="lb-carousel-slide is-active" data-slide-index="0">
+            <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
               <a href="{{ combo2_url }}" class="lb-combo-popup-image-link">
-                <span class="lb-slide-corner-pill">Promo #1 &middot; 3 Prendas 10K</span>
+                <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; 3 Prendas 10K</span>
                 <img
                   src="{{ combo2_img }}"
                   alt="Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
@@ -504,12 +543,13 @@
                 </a>
               </div>
             </div>
+            {%- assign slide_idx = slide_idx | plus: 1 -%}
           {%- endif -%}
 
           {%- if combo1_in_stock -%}
-            <div class="lb-carousel-slide {% unless combo2_in_stock %}is-active{% endunless %}" data-slide-index="{% if combo2_in_stock %}1{% else %}0{% endif %}">
+            <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
               <a href="{{ combo1_url }}" class="lb-combo-popup-image-link">
-                <span class="lb-slide-corner-pill">Promo #{% if combo2_in_stock %}2{% else %}1{% endif %} &middot; 4 Prendas</span>
+                <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; 4 Prendas</span>
                 <img
                   src="{{ combo1_img }}"
                   alt="Combo Exclusivo 4 Prendas ($749): Reloj Seiko 5 Automático Dorado + 3 Pares de Argollas Oro 10K"
@@ -524,32 +564,55 @@
                 </a>
               </div>
             </div>
+            {%- assign slide_idx = slide_idx | plus: 1 -%}
           {%- endif -%}
         </div>
       </div>
 
       <div class="lb-carousel-footer">
-        {%- if combo1_in_stock and combo2_in_stock -%}
+        {%- if active_promos_count > 1 -%}
+          {%- assign thumb_idx = 0 -%}
           <div class="lb-carousel-thumbs">
-            <button type="button" class="lb-carousel-thumb is-active" data-goto-slide="0">
-              <img src="{{ combo2_img }}" alt="Combo Iniciales 10K">
-              <span class="lb-carousel-thumb-meta">
-                <span class="lb-carousel-thumb-title">1. Cadena + Inicial + Argollas</span>
-                <span class="lb-carousel-thumb-price">$564.99 (Ahorra +$225)</span>
-              </span>
-            </button>
-            <button type="button" class="lb-carousel-thumb" data-goto-slide="1">
-              <img src="{{ combo1_img }}" alt="Combo Seiko + 3 Argollas">
-              <span class="lb-carousel-thumb-meta">
-                <span class="lb-carousel-thumb-title">2. Seiko 5 + 3 Argollas 10K</span>
-                <span class="lb-carousel-thumb-price">$749.00 (Ahorra +$300)</span>
-              </span>
-            </button>
+            {%- if combo3_in_stock -%}
+              <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
+                <img src="{{ combo3_img }}" alt="Combo Capilla 10K + Reloj">
+                <span class="lb-carousel-thumb-meta">
+                  <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Capilla 10K + Reloj</span>
+                  <span class="lb-carousel-thumb-price">$1,699 (-$1,090)</span>
+                </span>
+              </button>
+              {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if combo2_in_stock -%}
+              <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
+                <img src="{{ combo2_img }}" alt="Combo Iniciales 10K">
+                <span class="lb-carousel-thumb-meta">
+                  <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Inicial + Argollas</span>
+                  <span class="lb-carousel-thumb-price">$564.99 (-$225)</span>
+                </span>
+              </button>
+              {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if combo1_in_stock -%}
+              <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
+                <img src="{{ combo1_img }}" alt="Combo Seiko + 3 Argollas">
+                <span class="lb-carousel-thumb-meta">
+                  <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Seiko + 3 Argollas</span>
+                  <span class="lb-carousel-thumb-price">$749.00 (-$300)</span>
+                </span>
+              </button>
+              {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+            {%- endif -%}
           </div>
+
           <div class="lb-carousel-dots-row">
-            <button type="button" class="lb-carousel-dot is-active" data-goto-slide="0" aria-label="Ir a promoción 1"></button>
-            <button type="button" class="lb-carousel-dot" data-goto-slide="1" aria-label="Ir a promoción 2"></button>
-            <span class="lb-carousel-swipe-hint">‹ Desliza para ver más promociones ›</span>
+            {%- assign dot_max = active_promos_count | minus: 1 -%}
+            {%- for i in (0..dot_max) -%}
+              <button type="button" class="lb-carousel-dot {% if i == 0 %}is-active{% endif %}" data-goto-slide="{{ i }}" aria-label="Ir a promoción {{ i | plus: 1 }}"></button>
+            {%- endfor -%}
+            <span class="lb-carousel-swipe-hint">‹ Desliza para ver las {{ active_promos_count }} promociones ›</span>
           </div>
         {%- endif -%}
 
@@ -562,12 +625,12 @@
 
   <button type="button" id="lbComboFloatingPill" class="lb-combo-floating-pill" aria-label="Ver Carrusel de Combos Exclusivos">
     <span class="lb-combo-floating-dot"></span>
-    <span>{% if combo1_in_stock and combo2_in_stock %}2 PROMOS ACTIVAS &middot; DESDE $564.99{% elsif combo2_in_stock %}COMBO INICIALES 10K &middot; $564.99{% else %}COMBO 4 PRENDAS &middot; AHORRA +$300{% endif %}</span>
+    <span>{{ active_promos_count }} PROMOS ACTIVAS &middot; VER COMBOS</span>
   </button>
 
   <script>
     (function () {
-      var STORAGE_KEY = 'lb_carousel_combos_popup_seen_v5';
+      var STORAGE_KEY = 'lb_carousel_combos_popup_seen_v6';
       var popup = document.getElementById('lbComboPopup');
       var card = document.getElementById('lbComboPopupCard');
       var closeBtn = document.getElementById('lbComboPopupClose');
@@ -681,7 +744,6 @@
         });
       });
 
-      // Clicking a peeking (inactive) slide transitions directly to it instead of navigating away immediately
       slides.forEach(function (slide, idx) {
         slide.addEventListener('click', function (e) {
           if (idx !== currentIndex) {
@@ -692,7 +754,6 @@
         });
       });
 
-      // Touch / Swipe gesture support
       var touchStartX = 0;
       var touchDeltaX = 0;
       if (viewport && totalSlides > 1) {
@@ -731,7 +792,8 @@
       var isOnCombo2Page =
         path.indexOf('combo-argollas-oro-10k-cadena-fina-dije-inicial-corona') !== -1 ||
         path.indexOf('combo-argollas-oro-10k-cadena-cubana-dije-inicial-corona') !== -1;
-      var isOnAnyComboPage = isOnCombo1Page || isOnCombo2Page;
+      var isOnCombo3Page = path.indexOf('combo-cadena-cubana-capilla-oro-10k-reloj-hombre-1435') !== -1;
+      var isOnAnyComboPage = isOnCombo1Page || isOnCombo2Page || isOnCombo3Page;
 
       function openPopup() {
         popup.classList.add('is-open');
@@ -783,9 +845,11 @@
           var badge = document.createElement('div');
           badge.id = 'lbComboSaveBadge';
           badge.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#d4af37 0%,#f3d77d 50%,#b88917 100%);color:#120f0a;font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 14px rgba(212,175,55,0.3);';
-          badge.innerHTML = isOnCombo2Page
-            ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
-            : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>';
+          badge.innerHTML = isOnCombo3Page
+            ? '<span>★ OFERTA COMBO CAPILLA 10K + RELOJ &middot; AHORRA +$1,090</span>'
+            : (isOnCombo2Page
+              ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
+              : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>');
           priceEl.appendChild(badge);
         }
       }
