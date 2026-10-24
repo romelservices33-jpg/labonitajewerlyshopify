@@ -270,6 +270,15 @@
         } else if (pillBtn) {
           pillBtn.classList.add('is-visible');
         }
+      } else {
+        var priceEl = document.querySelector('.price__container, .product__price, [id^="price-"]');
+        if (priceEl && !document.getElementById('lbComboSaveBadge')) {
+          var badge = document.createElement('div');
+          badge.id = 'lbComboSaveBadge';
+          badge.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#d4af37 0%,#f3d77d 50%,#b88917 100%);color:#120f0a;font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 14px rgba(212,175,55,0.3);';
+          badge.innerHTML = '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>';
+          priceEl.appendChild(badge);
+        }
       }
     })();
   </script>
