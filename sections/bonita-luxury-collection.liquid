@@ -40,6 +40,7 @@
         <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes & Medallas</a>
         <a href="/collections/piercings" class="cat-tab-btn {% if collection.handle == 'piercings' %}active{% endif %}" style="text-decoration:none;">Piercings</a>
         <a href="/collections/relojes" class="cat-tab-btn {% if collection.handle == 'relojes' %}active{% endif %}" style="text-decoration:none;">Relojes</a>
+        <a href="/collections/combos" class="cat-tab-btn {% if collection.handle == 'combos' %}active{% endif %}" style="text-decoration:none;">Combos</a>
       </div>
 
       <div style="margin: 0 auto 16px; max-width: 560px; position: relative;">
@@ -123,7 +124,10 @@
         {%- assign ptitle_down = product.title | downcase -%}
         {%- assign cat_tag = product.type | default: collection.title | downcase -%}
         {%- assign cat_label = product.type | default: collection.title -%}
-        {%- if product.tags contains 'cat:relojes' -%}
+        {%- if product.tags contains 'cat:combos' or ptype_down contains 'combo' -%}
+          {%- assign cat_tag = 'combos' -%}
+          {%- assign cat_label = 'Combo Exclusivo' -%}
+        {%- elsif product.tags contains 'cat:relojes' -%}
           {%- assign cat_tag = 'relojes' -%}
           {%- assign cat_label = 'Relojes' -%}
         {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'dormilon' -%}
@@ -172,6 +176,7 @@
           {%- assign cat_tag = 'cadenas' -%}
           {%- assign cat_label = 'Cadenas' -%}
         {%- endif -%}
+        {%- if collection.handle != 'combos' and cat_tag == 'combos' -%}{%- continue -%}{%- endif -%}
         {%- assign karat_tag = '10k' -%}
         {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
           {%- assign karat_tag = '14k' -%}

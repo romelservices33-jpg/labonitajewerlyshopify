@@ -138,6 +138,7 @@
       <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
       <li><a href="/collections/piercings" class="hero-nav-link {% if collection.handle == 'piercings' %}active{% endif %}" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
       <li><a href="/collections/relojes" class="hero-nav-link {% if collection.handle == 'relojes' %}active{% endif %}" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
+      <li><a href="/collections/combos" class="hero-nav-link {% if collection.handle == 'combos' %}active{% endif %}" data-cat-nav="combos" onclick="handleNavCategory(event, 'combos')">Combos</a></li>
       <li><a href="{{ routes.root_url }}#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
       <li><a href="{{ routes.root_url }}#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
     </ul>
@@ -194,6 +195,7 @@
     <a href="/collections/dijes" onclick="closeMobileNotch('Dijes & Medallas'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
     <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
     <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
+    <a href="/collections/combos" onclick="closeMobileNotch('Combos'); handleNavCategory(event, 'combos');">Combos</a>
     <a href="{{ routes.root_url }}#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
     <a href="{{ routes.root_url }}#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
@@ -268,7 +270,7 @@
     var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
     if (!hash) return;
     
-    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'todos'];
+    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'combos', 'todos'];
     if (validCategories.indexOf(hash) !== -1) {
       if (typeof window.filterCatalog === 'function') {
         window.filterCatalog(hash);

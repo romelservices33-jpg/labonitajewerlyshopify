@@ -522,6 +522,7 @@
   <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
   <li><a href="/collections/piercings" class="hero-nav-link" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
   <li><a href="/collections/relojes" class="hero-nav-link" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
+  <li><a href="/collections/combos" class="hero-nav-link" data-cat-nav="combos" onclick="handleNavCategory(event, 'combos')">Combos</a></li>
   <li><a href="#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
   <li><a href="#contacto" class="hero-nav-link" onclick="handleNavContact(event)">Contacto</a></li>
   </ul>
@@ -577,6 +578,7 @@
   <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
   <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
   <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
+  <a href="/collections/combos" onclick="closeMobileNotch('Combos'); handleNavCategory(event, 'combos');">Combos</a>
   <a href="#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
   <a href="#contacto" onclick="closeMobileNotch('Contacto'); handleNavContact(event);">Contacto</a>
   </div>
@@ -889,6 +891,25 @@
   <div class="cat-card-footer">
   <span class="cat-pill-btn">
   <span>Ver Colección</span>
+  <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+  </span>
+  </div>
+  </a>
+
+  <!-- Card 10: Combos -->
+  <a href="#catalogo" onclick="handleNavCategory(event, 'combos')" class="cat-square-card" data-cat-link="combos" aria-label="Ver Colección de Combos">
+  <div class="cat-card-header">
+  <span class="cat-card-label">Ofertas Especiales</span>
+  <h3 class="cat-card-title">Combos</h3>
+  </div>
+  <div class="cat-card-img-wrap">
+  <img src="https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-cadena-cubana-capilla-10k-reloj-hombre-1.jpg?v=1792868053" alt="Combos Exclusivos en Oro 10K" class="cat-square-img" loading="lazy">
+  </div>
+  <div class="cat-card-footer">
+  <span class="cat-pill-btn">
+  <span>Ver Combos</span>
   <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
   <path d="M5 12h14M12 5l7 7-7 7"/>
   </svg>
@@ -1475,6 +1496,7 @@
   <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
   <button class="cat-tab-btn" data-cat="piercings" onclick="filterCatalog('piercings', this)">Piercings</button>
   <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
+  <button class="cat-tab-btn" data-cat="combos" onclick="filterCatalog('combos', this)">Combos</button>
   </nav>
 
   <!-- Seamless Filter Bar (No Box Container) -->
@@ -1605,7 +1627,7 @@
   <div class="catalog-products-grid" id="catalogProductsGrid">
   {%- assign rendered_ids = ',' -%}
   {%- assign card_order_idx = 0 -%}
-  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,relojes,anillos,dijes' | split: ',' -%}
+  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,relojes,anillos,dijes,combos' | split: ',' -%}
   {%- if catalog_collection != blank and catalog_collection.products_count > 0 -%}
   {%- for ch in cat_handles -%}
   {%- assign sub_col = collections[ch] -%}
@@ -1620,7 +1642,10 @@
   {%- assign ptitle_down = product.title | downcase -%}
   {%- assign cat_tag = ch -%}
   {%- assign cat_label = product.type | default: 'Joya' -%}
-  {%- if product.tags contains 'cat:relojes' -%}
+  {%- if product.tags contains 'cat:combos' or ptype_down contains 'combo' -%}
+  {%- assign cat_tag = 'combos' -%}
+  {%- assign cat_label = 'Combo Exclusivo' -%}
+  {%- elsif product.tags contains 'cat:relojes' -%}
   {%- assign cat_tag = 'relojes' -%}
   {%- assign cat_label = 'Relojes' -%}
   {%- elsif product.tags contains 'cat:aretes' -%}
@@ -1766,7 +1791,10 @@
   {%- assign ptitle_down = product.title | downcase -%}
   {%- assign cat_tag = 'anillos' -%}
   {%- assign cat_label = product.type | default: 'Joya' -%}
-  {%- if product.tags contains 'cat:relojes' -%}
+  {%- if product.tags contains 'cat:combos' or ptype_down contains 'combo' -%}
+  {%- assign cat_tag = 'combos' -%}
+  {%- assign cat_label = 'Combo Exclusivo' -%}
+  {%- elsif product.tags contains 'cat:relojes' -%}
   {%- assign cat_tag = 'relojes' -%}
   {%- assign cat_label = 'Relojes' -%}
   {%- elsif product.tags contains 'cat:aretes' -%}
@@ -2946,6 +2974,7 @@
   else if (cat === 'dijes') synonyms = 'dije dijes colgante colgantes';
   else if (cat === 'piercings') synonyms = 'piercing piercings broquel nariz oreja ombligo';
   else if (cat === 'relojes') synonyms = 'reloj relojes automatico rolex invicta seiko';
+  else if (cat === 'combos') synonyms = 'combo combos oferta ofertas paquete promocion';
 
   var haystack = normalizeSearchText([title, label, spec, cat, karat, weight ? weight + 'g' : '', size, searchExtra, synonyms, 'oro'].join(' '));
   return tokens.every(function(tok) {
@@ -2978,12 +3007,17 @@
   return false;
   }
 
-  // 1. Category Filtering
+  // 1. Category Filtering (Combos appear exclusively in the 'combos' category)
+  if (currentCatalogCategory === 'combos') {
+  if (cat !== 'combos') return false;
+  } else {
+  if (cat === 'combos') return false;
   if (currentCatalogCategory !== 'todos') {
   var target = currentCatalogCategory.toLowerCase();
   var catTokens = cat.split(/\s+/).filter(Boolean);
   var matched = (cat === target || catTokens.indexOf(target) !== -1);
   if (!matched) return false;
+  }
   }
 
   // 2. Karat Filtering
@@ -3074,8 +3108,8 @@
   // Update Results Counter
   var countText = document.getElementById('filterCount');
   if (countText) {
-  var unitSuffix = (currentCatalogCategory === 'relojes') ? 'relojes de colección' : 'piezas de oro auténtico';
-  var singleUnitSuffix = (currentCatalogCategory === 'relojes') ? 'reloj de colección' : 'pieza de oro auténtico';
+  var unitSuffix = (currentCatalogCategory === 'relojes') ? 'relojes de colección' : ((currentCatalogCategory === 'combos') ? 'combos exclusivos' : 'piezas de oro auténtico');
+  var singleUnitSuffix = (currentCatalogCategory === 'relojes') ? 'reloj de colección' : ((currentCatalogCategory === 'combos') ? 'combo exclusivo' : 'pieza de oro auténtico');
   if (total === 0) {
   countText.textContent = '0 piezas encontradas';
   } else if (total === 1) {
@@ -3268,6 +3302,9 @@
   } else if (category === 'relojes') {
   titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Precisión</span>';
   subtitleEl.textContent = 'Relojería automática y de colección en acero inoxidable con acabados dorados de lujo y garantía oficial.';
+  } else if (category === 'combos') {
+  titleEl.innerHTML = 'Combos & <span class="accent-gold">Ofertas Exclusivas</span>';
+  subtitleEl.textContent = 'Paquetes promocionales de varias prendas en oro 10K garantizado y relojería con descuentos especiales.';
   } else {
   titleEl.innerHTML = 'Catálogo <span class="accent-gold">Exclusivo</span>';
   subtitleEl.textContent = 'Oro 100% auténtico 10K y 14K con peso garantizado y financiamiento Affirm.';
@@ -3670,7 +3707,7 @@
   function checkStorefrontHashNavigation() {
   var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
   if (!hash) return;
-  var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'todos'];
+  var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'combos', 'todos'];
   if (validCategories.indexOf(hash) !== -1) {
   filterCatalog(hash);
   }
