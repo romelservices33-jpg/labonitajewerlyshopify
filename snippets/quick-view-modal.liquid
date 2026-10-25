@@ -1035,9 +1035,11 @@
     if (fullUrl.indexOf('http') !== 0) {
       fullUrl = window.location.origin + (fullUrl.charAt(0) === '/' ? '' : '/') + fullUrl;
     }
+    // Strip locale prefix (/es/products/ -> /products/) so URL matches Meta/Instagram Catalog canonical URL
+    fullUrl = fullUrl.replace(/\/[a-z]{2}(-[a-zA-Z]{2})?\/products\//, '/products/').split('?')[0];
     var shareTitle = title || 'La Bonita Joyería';
 
-    // Always copy link to clipboard first so user immediately has it
+    // Always copy clean URL to clipboard first so user immediately has it
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(fullUrl).catch(function() {
         copyTextToClipboardFallback(fullUrl);
@@ -1065,11 +1067,9 @@
 
     showBonitaShareToast('✓ Enlace copiado para compartir');
 
-    // On mobile/touch devices, also open native share sheet (WhatsApp, iMessage, etc.)
+    // On mobile/touch devices, open native share sheet with clean URL only (so iOS "Copy" copies only the URL)
     if (navigator.share && window.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
       navigator.share({
-        title: shareTitle,
-        text: shareTitle + ' — La Bonita Joyería',
         url: fullUrl
       }).catch(function() {});
     }

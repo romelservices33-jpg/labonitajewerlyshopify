@@ -6,6 +6,7 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
+    assign og_url = shop.url | append: '/products/' | append: product.handle
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'
@@ -27,8 +28,17 @@
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
-  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign clean_price = current_variant.price | divided_by: 100.0 -%}
+  <meta property="og:price:amount" content="{{ clean_price }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+  <meta property="product:price:amount" content="{{ clean_price }}">
+  <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+  <meta property="product:brand" content="{{ product.vendor | default: shop.name | escape }}">
+  <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+  <meta property="product:condition" content="new">
+  <meta property="product:retailer_item_id" content="{{ current_variant.id }}">
+  <meta property="product:item_group_id" content="{{ product.id }}">
 {%- endif -%}
 
 {%- if settings.social_twitter_link != blank -%}
