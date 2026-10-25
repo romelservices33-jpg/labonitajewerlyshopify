@@ -450,7 +450,7 @@
       display: flex !important;
       flex-direction: column !important;
       width: 100% !important;
-      aspect-ratio: 1 / 2 !important;
+      height: auto !important;
       border-radius: 22px !important;
       box-shadow: 0 16px 48px rgba(4, 12, 45, 0.4) !important;
       overflow: hidden !important;
@@ -458,10 +458,10 @@
       border: 1px solid rgba(209, 176, 84, 0.35) !important;
     }
 
-    /* Top Half: 1:1 Square Media (50% of card) */
+    /* Top Half: 1:1 Square Media */
     .pdp-card-media-col {
       width: 100% !important;
-      height: 50% !important;
+      height: auto !important;
       aspect-ratio: 1 / 1 !important;
       flex-shrink: 0 !important;
       background: #FFFFFF !important;
@@ -505,23 +505,17 @@
       border-radius: 6px !important;
     }
 
-    /* Bottom Half: Details Section (50% of card) */
+    /* Bottom Half: Details Section */
     .pdp-card-details-col {
       width: 100% !important;
-      height: 50% !important;
-      flex: 1 1 50% !important;
-      padding: 14px 16px 14px !important;
+      height: auto !important;
+      flex: 1 1 auto !important;
+      padding: 16px 16px 18px !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: space-between !important;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: none !important;
+      overflow: visible !important;
       background: #FFFFFF !important;
-    }
-
-    .pdp-card-details-col::-webkit-scrollbar {
-      display: none !important;
     }
 
     .pdp-title-main {
@@ -603,9 +597,15 @@
           <!-- Header Meta -->
           <div class="pdp-header-meta-row">
             <span class="pdp-category-kicker">COLECCIÓN {{ product.type | default: 'LA BONITA' | upcase }}</span>
-            <span class="pdp-stock-status">
-              <span class="pdp-stock-dot"></span> En Stock · Envío Hoy
-            </span>
+            {%- if selected_variant.available -%}
+              <span class="pdp-stock-status" id="pdpStockStatus">
+                <span class="pdp-stock-dot" id="pdpStockDot"></span> <span id="pdpStockText">En Stock · Envío Hoy</span>
+              </span>
+            {%- else -%}
+              <span class="pdp-stock-status" id="pdpStockStatus" style="color:#DC2626;">
+                <span class="pdp-stock-dot" id="pdpStockDot" style="background:#DC2626;box-shadow:0 0 8px rgba(220,38,38,0.4);"></span> <span id="pdpStockText">Sin Existencias · Agotado</span>
+              </span>
+            {%- endif -%}
           </div>
 
           <!-- Product Title -->
@@ -629,7 +629,7 @@
           </div>
 
           <!-- Option Selectors -->
-          <form method="post" action="/cart/add" id="pdpBuyForm-{{ section.id }}">
+          <form method="post" action="{{ routes.cart_add_url }}" id="pdpBuyForm-{{ section.id }}" onsubmit="return handlePdpAddToCart(event, this)">
             <input type="hidden" name="id" id="pdpSelectedVariantId" value="{{ selected_variant.id }}">
 
             {%- unless product.has_only_default_variant -%}
@@ -833,16 +833,92 @@
       if (sizeSpec) sizeSpec.textContent = matched.title;
 
       var subBtn = document.getElementById('pdpSubmitBtn');
+      var stockStatus = document.getElementById('pdpStockStatus');
+      var stockDot = document.getElementById('pdpStockDot');
+      var stockText = document.getElementById('pdpStockText');
       if (subBtn) {
         if (matched.available) {
           subBtn.removeAttribute('disabled');
           subBtn.querySelector('span').textContent = 'Agregar al Carrito';
+          if (stockStatus) stockStatus.style.color = '#059669';
+          if (stockDot) {
+            stockDot.style.background = '#10B981';
+            stockDot.style.boxShadow = '0 0 8px rgba(16, 185, 129, 0.4)';
+          }
+          if (stockText) stockText.textContent = 'En Stock · Envío Hoy';
         } else {
           subBtn.setAttribute('disabled', 'disabled');
           subBtn.querySelector('span').textContent = 'Agotado';
+          if (stockStatus) stockStatus.style.color = '#DC2626';
+          if (stockDot) {
+            stockDot.style.background = '#DC2626';
+            stockDot.style.boxShadow = '0 0 8px rgba(220, 38, 38, 0.4)';
+          }
+          if (stockText) stockText.textContent = 'Sin Existencias · Agotado';
         }
       }
     }
+  }
+
+  function handlePdpAddToCart(ev, formEl) {
+    if (!window.fetch) return true;
+    if (ev) ev.preventDefault();
+    var hid = document.getElementById('pdpSelectedVariantId');
+    var qtyEl = document.getElementById('pdpQuantityInput');
+    var subBtn = document.getElementById('pdpSubmitBtn');
+    var variantId = hid ? hid.value : '';
+    var qty = qtyEl ? (parseInt(qtyEl.value, 10) || 1) : 1;
+    if (!variantId) return true;
+
+    var origHtml = subBtn ? subBtn.innerHTML : '';
+    if (subBtn) {
+      subBtn.disabled = true;
+      subBtn.innerHTML = '<span>Agregando...</span>';
+    }
+
+    var cartAddUrl = '{{ routes.cart_add_url }}.js';
+    var cartUrl = '{{ routes.cart_url }}';
+
+    fetch(cartAddUrl, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({ id: Number(variantId), quantity: qty })
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function() {
+      if (subBtn) {
+        subBtn.innerHTML = '<span>✓ ¡Agregado al Carrito!</span>';
+        subBtn.style.background = '#059669';
+      }
+      setTimeout(function() {
+        if (typeof window.openCartDrawer === 'function') {
+          if (subBtn) {
+            subBtn.disabled = false;
+            subBtn.style.background = '';
+            subBtn.innerHTML = origHtml;
+          }
+          window.openCartDrawer();
+        } else {
+          window.location.href = cartUrl || '/cart';
+        }
+      }, 450);
+    })
+    .catch(function(err) {
+      console.warn('PDP fetch add-to-cart fallback:', err);
+      if (formEl) {
+        formEl.onsubmit = null;
+        formEl.submit();
+      }
+    });
+    return false;
   }
 </script>
 

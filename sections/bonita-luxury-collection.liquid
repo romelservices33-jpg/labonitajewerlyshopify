@@ -120,6 +120,7 @@
     <!-- Products Grid (8 on Desktop, 6 on Mobile) -->
     <div class="catalog-products-grid" id="collectionProductsGrid">
       {%- for product in collection.products -%}
+        {%- unless product.available -%}{%- continue -%}{%- endunless -%}
         {%- assign ptype_down = product.type | downcase -%}
         {%- assign ptitle_down = product.title | downcase -%}
         {%- assign cat_tag = product.type | default: collection.title | downcase -%}
@@ -199,7 +200,7 @@
         {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
           {%- assign product_size = product.variants.first.title -%}
         {%- endif -%}
-        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.variants.first.id }}" data-url="{{ product.url }}" data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}" data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}" onclick="openProductModalFromCard(this)">
+        <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}" data-url="{{ product.url }}" data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}" data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
               {%- if product.featured_image != blank -%}

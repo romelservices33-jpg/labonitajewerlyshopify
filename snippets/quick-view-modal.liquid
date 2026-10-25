@@ -927,13 +927,22 @@
       btn.innerHTML = '<span>Agregando...</span>';
     }
 
-    fetch('/cart/add.js', {
+    var cartAddJsUrl = '{{ routes.cart_add_url | default: "/cart/add" }}.js';
+    var cartAddPostUrl = '{{ routes.cart_add_url | default: "/cart/add" }}';
+    var cartPageUrl = '{{ routes.cart_url | default: "/cart" }}';
+
+    fetch(cartAddJsUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ id: parseInt(variantId), quantity: qty })
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({ id: Number(variantId), quantity: qty })
     })
     .then(function(res) {
-      if (!res.ok) throw new Error('Add to cart failed');
+      if (!res.ok) throw new Error('Add to cart failed: ' + res.status);
       return res.json();
     })
     .then(function(item) {
@@ -946,13 +955,32 @@
         if (typeof window.openCartDrawer === 'function') {
           window.openCartDrawer();
         } else {
-          window.location.href = '/cart';
+          window.location.href = cartPageUrl;
         }
-      }, 700);
+      }, 600);
     })
     .catch(function(err) {
-      console.warn('Direct add to cart fallback:', err);
-      window.location.href = '/cart/add?id=' + variantId + '&quantity=' + qty;
+      console.warn('Direct POST add to cart fallback:', err);
+      try {
+        var f = document.createElement('form');
+        f.method = 'POST';
+        f.action = cartAddPostUrl;
+        f.style.display = 'none';
+        var iId = document.createElement('input');
+        iId.type = 'hidden';
+        iId.name = 'id';
+        iId.value = String(variantId);
+        var iQty = document.createElement('input');
+        iQty.type = 'hidden';
+        iQty.name = 'quantity';
+        iQty.value = String(qty);
+        f.appendChild(iId);
+        f.appendChild(iQty);
+        document.body.appendChild(f);
+        f.submit();
+      } catch (e2) {
+        window.location.href = cartPageUrl;
+      }
     });
   }
 

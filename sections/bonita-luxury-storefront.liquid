@@ -1078,7 +1078,11 @@
   {%- assign bs_collection = collections['all'] -%}
   {%- endif -%}
   {%- if bs_collection != blank and bs_collection.products.size > 0 -%}
-  {%- for product in bs_collection.products limit: 4 -%}
+  {%- assign bs_rendered_count = 0 -%}
+  {%- for product in bs_collection.products limit: 30 -%}
+  {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- if bs_rendered_count >= 4 -%}{%- break -%}{%- endif -%}
+  {%- assign bs_rendered_count = bs_rendered_count | plus: 1 -%}
   {%- assign p_type = product.type | downcase -%}
   {%- assign p_title = product.title | downcase -%}
   {%- assign p_tags = product.tags | join: ',' | downcase -%}
@@ -1143,12 +1147,12 @@
   data-karat="{{ karat_tag }}" 
   data-price="{{ price_num }}" 
   data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
-  data-variant-id="{{ product.variants.first.id }}"
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
   data-url="{{ product.url }}"
   data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
   onclick="openProductModalFromCard(this)" 
   style="position:relative;">
-  <span class="badge-gold-bestseller">✦ Top #{{ forloop.index }} Mas Vendido</span>
+  <span class="badge-gold-bestseller">✦ Top #{{ bs_rendered_count }} Mas Vendido</span>
   <div class="cutout-card-media">
   {%- if product.featured_image != blank -%}
   <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
@@ -1355,7 +1359,11 @@
   {%- assign new_collection = collections['all'] -%}
   {%- endif -%}
   {%- if new_collection != blank and new_collection.products.size > 0 -%}
-  {%- for product in new_collection.products limit: 4 -%}
+  {%- assign new_rendered_count = 0 -%}
+  {%- for product in new_collection.products limit: 30 -%}
+  {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- if new_rendered_count >= 4 -%}{%- break -%}{%- endif -%}
+  {%- assign new_rendered_count = new_rendered_count | plus: 1 -%}
   {%- assign p_type = product.type | downcase -%}
   {%- assign p_title = product.title | downcase -%}
   {%- assign p_tags = product.tags | join: ',' | downcase -%}
@@ -1420,7 +1428,7 @@
   data-karat="{{ karat_tag }}" 
   data-price="{{ price_num }}" 
   data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
-  data-variant-id="{{ product.variants.first.id }}"
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
   data-url="{{ product.url }}"
   data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
   onclick="openProductModalFromCard(this)" 
@@ -1775,6 +1783,7 @@
   {%- if sub_col != blank and sub_col.products.size > 0 -%}
   {%- paginate sub_col.products by 250 -%}
   {%- for product in sub_col.products limit: 250 -%}
+  {%- unless product.available -%}{%- continue -%}{%- endunless -%}
   {%- assign pid_check = ',' | append: product.id | append: ',' -%}
   {%- unless rendered_ids contains pid_check -%}
   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
@@ -1865,7 +1874,7 @@
   data-price="{{ price_num }}" 
   data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
   data-default-order="{{ default_order_score }}"
-  data-variant-id="{{ product.variants.first.id }}"
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
   data-url="{{ product.url }}"
   data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}"
   data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
@@ -1924,6 +1933,7 @@
   {%- endfor -%}
   {%- paginate catalog_collection.products by 250 -%}
   {%- for product in catalog_collection.products -%}
+  {%- unless product.available -%}{%- continue -%}{%- endunless -%}
   {%- assign pid_check = ',' | append: product.id | append: ',' -%}
   {%- unless rendered_ids contains pid_check -%}
   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
@@ -2014,7 +2024,7 @@
   data-price="{{ price_num }}" 
   data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" 
   data-default-order="{{ fallback_order_score }}"
-  data-variant-id="{{ product.variants.first.id }}"
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
   data-url="{{ product.url }}"
   data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}"
   data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}"
