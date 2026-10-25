@@ -375,10 +375,6 @@
             <td class="spec-val" id="modalSpecSize">Estándar</td>
           </tr>
           <tr>
-            <td class="spec-name">Cierre / Acabado</td>
-            <td class="spec-val" id="modalSpecClasp">Caja con Doble Seguro de Presión</td>
-          </tr>
-          <tr>
             <td class="spec-name">Garantía Oficial</td>
             <td class="spec-val" style="color:#D1B054;">Certificado de Autenticidad de por Vida</td>
           </tr>
@@ -883,11 +879,6 @@
     var specSize = document.getElementById('modalSpecSize');
     if (specSize) {
       specSize.textContent = p.selectedSize || 'Estándar / Ajustable';
-    }
-
-    var specClasp = document.getElementById('modalSpecClasp');
-    if (specClasp) {
-      specClasp.textContent = isWatchModal ? 'Brazalete de Acero con Cierre Desplegable' : 'Caja con Doble Seguro de Presión';
     }
 
     // Reset Qty
