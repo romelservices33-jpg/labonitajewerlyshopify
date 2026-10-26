@@ -1,19 +1,27 @@
 {%- comment -%}
-  Push-Up / Pop-Up Promotional Banner Carousel 1:1 — Multi-Promo Peek Carousel (3 Promociones)
-  1) Combo Exclusivo ($1,699.00): Cadena Corte Brillo Curb Link Italiana (Size 22" o 24") con Dije Capilla Virgen de la Caridad 10K (17.94g) + Reloj de Hombre a Elegir (1435)
-  2) Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
-  3) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
-  Sincronizado en tiempo real con el inventario de las prendas individuales.
+  Push-Up / Pop-Up Promotional Banner Carousel 1:1 — Multi-Promo Peek Carousel (5 Combos Exclusivos)
+  1) Combo Set 3 Piezas Marco Ovalado Liso 10K ($999.00)
+  2) Combo Set 3 Piezas Marco Ovalado Pavé 10K ($999.00)
+  3) Combo Exclusivo ($1,699.00): Cadena Corte Brillo Curb Link Italiana (Size 22" o 24") con Dije Capilla Virgen de la Caridad 10K (17.94g) + Reloj de Hombre a Elegir (1435)
+  4) Combo Exclusivo 3 Prendas ($599.00): Argollas Torcidas Talla 1 (3480) + Cadena Fina 20" (4270) + Dije Inicial con Corona 10K
+  5) Combo Exclusivo 4 Prendas ($749.00): Reloj Seiko 5 Automático Dorado (2209) + 3 Pares de Argollas Torcidas Nevadas Oro 10K (3667, 3668, 3669)
 {%- endcomment -%}
 
-{%- assign combo1_product = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'] -%}
-{%- assign comp_watch = all_products['reloj-seiko-automatico-no-metal'] -%}
-{%- assign comp_hoop1 = all_products['aretes-hollow-10k-1x4mm-1-46'] -%}
-{%- assign comp_hoop2 = all_products['aretes-hollow-10k-2x4mm-1-76'] -%}
-{%- assign comp_hoop3 = all_products['aretes-hollow-10k-3x4mm-2-13'] -%}
+{%- assign combo_liso_product = all_products['combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k'] -%}
+{%- assign combo_liso_in_stock = false -%}
+{%- if combo_liso_product != blank and combo_liso_product.available -%}
+  {%- assign combo_liso_in_stock = true -%}
+{%- endif -%}
 
+{%- assign combo_pave_product = all_products['combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k'] -%}
+{%- assign combo_pave_in_stock = false -%}
+{%- if combo_pave_product != blank and combo_pave_product.available -%}
+  {%- assign combo_pave_in_stock = true -%}
+{%- endif -%}
+
+{%- assign combo1_product = all_products['combo-reloj-seiko-5-3-argollas-oro-10k'] -%}
 {%- assign combo1_in_stock = false -%}
-{%- if combo1_product != blank and combo1_product.available and comp_watch.available and comp_hoop1.available and comp_hoop2.available and comp_hoop3.available -%}
+{%- if combo1_product != blank and combo1_product.available -%}
   {%- assign combo1_in_stock = true -%}
 {%- endif -%}
 
@@ -28,16 +36,23 @@
 {%- endif -%}
 
 {%- assign combo3_product = all_products['combo-cadena-cubana-capilla-oro-10k-reloj-hombre-1435'] -%}
-{%- assign comp_capilla_chain = all_products['cadena-cubana-22-24-dije-capilla-virgen-caridad-oro-10k-4273'] -%}
 {%- assign combo3_in_stock = false -%}
-{%- if combo3_product != blank and combo3_product.available and comp_capilla_chain.available -%}
+{%- if combo3_product != blank and combo3_product.available -%}
   {%- assign combo3_in_stock = true -%}
 {%- endif -%}
 
 {%- assign active_promos_count = 0 -%}
+{%- if combo_liso_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
+{%- if combo_pave_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
 {%- if combo3_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
 {%- if combo2_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
 {%- if combo1_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
+
+{%- assign combo_liso_url = combo_liso_product.url | default: '/products/combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k' -%}
+{%- assign combo_liso_img = combo_liso_product.featured_image | image_url: width: 1024 | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k-v2-1.jpg?v=1792877564' -%}
+
+{%- assign combo_pave_url = combo_pave_product.url | default: '/products/combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k' -%}
+{%- assign combo_pave_img = combo_pave_product.featured_image | image_url: width: 1024 | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k-v2-1.jpg?v=1792877568' -%}
 
 {%- assign combo1_url = combo1_product.url | default: '/products/combo-reloj-seiko-5-3-argollas-oro-10k' -%}
 {%- assign combo1_img = 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/combo_seiko_argollas_banner_real_v4_1792854403956.jpg?v=1792866262' -%}
@@ -462,6 +477,48 @@
         <div class="lb-carousel-track" id="lbCarouselTrack">
           {%- assign slide_idx = 0 -%}
 
+          {%- if combo_liso_in_stock -%}
+            <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
+              <a href="{{ combo_liso_url }}" class="lb-combo-popup-image-link">
+                <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; Set 3 Piezas Liso 10K</span>
+                <img
+                  src="{{ combo_liso_img }}"
+                  alt="Combo Set 3 Piezas ($999): Collar + Pulsera + Aretes Marco Ovalado Liso con Piedras Móviles en Oro 10K (9.36g)"
+                  width="1024"
+                  height="1024"
+                  loading="eager"
+                >
+              </a>
+              <div class="lb-slide-body">
+                <a href="{{ combo_liso_url }}" class="lb-combo-popup-cta">
+                  Ver Set 3 Piezas Liso 10K &mdash; $999
+                </a>
+              </div>
+            </div>
+            {%- assign slide_idx = slide_idx | plus: 1 -%}
+          {%- endif -%}
+
+          {%- if combo_pave_in_stock -%}
+            <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
+              <a href="{{ combo_pave_url }}" class="lb-combo-popup-image-link">
+                <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; Set 3 Piezas Pavé 10K</span>
+                <img
+                  src="{{ combo_pave_img }}"
+                  alt="Combo Set 3 Piezas ($999): Collar + Pulsera + Aretes Marco Ovalado Pavé con Piedras Móviles en Oro 10K (9.63g)"
+                  width="1024"
+                  height="1024"
+                  loading="eager"
+                >
+              </a>
+              <div class="lb-slide-body">
+                <a href="{{ combo_pave_url }}" class="lb-combo-popup-cta">
+                  Ver Set 3 Piezas Pavé 10K &mdash; $999
+                </a>
+              </div>
+            </div>
+            {%- assign slide_idx = slide_idx | plus: 1 -%}
+          {%- endif -%}
+
           {%- if combo3_in_stock -%}
             <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
               <a href="{{ combo3_url }}" class="lb-combo-popup-image-link">
@@ -489,7 +546,7 @@
                 <span class="lb-slide-corner-pill">Promo #{{ slide_idx | plus: 1 }} &middot; 3 Prendas 10K</span>
                 <img
                   src="{{ combo2_img }}"
-                  alt="Combo Exclusivo 3 Prendas ($564.99): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
+                  alt="Combo Exclusivo 3 Prendas ($599): Argollas Torcidas Talla 1 + Cadena Fina 20 Pulgadas + Dije Inicial con Corona en Oro 10K"
                   width="1024"
                   height="1024"
                   loading="eager"
@@ -497,7 +554,7 @@
               </a>
               <div class="lb-slide-body">
                 <a href="{{ combo2_url }}" class="lb-combo-popup-cta">
-                  Elegir Mi Letra Inicial &mdash; Solo $564.99
+                  Elegir Mi Letra Inicial &mdash; Solo $599.00
                 </a>
               </div>
             </div>
@@ -530,7 +587,29 @@
       <div class="lb-carousel-footer">
         {%- if active_promos_count > 1 -%}
           {%- assign thumb_idx = 0 -%}
-          <div class="lb-carousel-thumbs">
+          <div class="lb-carousel-thumbs" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
+            {%- if combo_liso_in_stock -%}
+              <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
+                <img src="{{ combo_liso_img }}" alt="Combo Set Liso 10K">
+                <span class="lb-carousel-thumb-meta">
+                  <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Set Liso 10K</span>
+                  <span class="lb-carousel-thumb-price">$999 (-$406)</span>
+                </span>
+              </button>
+              {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if combo_pave_in_stock -%}
+              <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
+                <img src="{{ combo_pave_img }}" alt="Combo Set Pavé 10K">
+                <span class="lb-carousel-thumb-meta">
+                  <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Set Pavé 10K</span>
+                  <span class="lb-carousel-thumb-price">$999 (-$446)</span>
+                </span>
+              </button>
+              {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+            {%- endif -%}
+
             {%- if combo3_in_stock -%}
               <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
                 <img src="{{ combo3_img }}" alt="Combo Capilla 10K + Reloj">
@@ -547,7 +626,7 @@
                 <img src="{{ combo2_img }}" alt="Combo Iniciales 10K">
                 <span class="lb-carousel-thumb-meta">
                   <span class="lb-carousel-thumb-title">{{ thumb_idx | plus: 1 }}. Inicial + Argollas</span>
-                  <span class="lb-carousel-thumb-price">$564.99 (-$225)</span>
+                  <span class="lb-carousel-thumb-price">$599.00 (-$211)</span>
                 </span>
               </button>
               {%- assign thumb_idx = thumb_idx | plus: 1 -%}
