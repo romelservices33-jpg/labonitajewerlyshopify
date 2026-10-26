@@ -750,7 +750,7 @@
       ev.preventDefault();
       ev.stopPropagation();
     }
-    var fullUrl = window.location.href.replace(/\/[a-z]{2}(-[a-zA-Z]{2})?\/products\//, '/products/').split('?')[0];
+    var fullUrl = window.location.origin + '/es/products/' + {{ product.handle | json }};
     var title = {{ product.title | json }} || 'La Bonita Joyería';
     if (typeof window.copyAndShareProductUrl === 'function') {
       window.copyAndShareProductUrl(fullUrl, title, btnEl, ev);
@@ -983,7 +983,7 @@
   "@context": "https://schema.org/",
   "@type": "Product",
   "name": {{ product.title | json }},
-  "url": {{ shop.url | append: '/products/' | append: product.handle | json }},
+  "url": {{ canonical_url | default: product.url | json }},
   {%- if product.featured_image -%}
   "image": [
     {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }}
@@ -1001,11 +1001,11 @@
       {
         "@type": "Offer",
         "sku": {{ variant.sku | default: variant.id | json }},
-        "availability": "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
-        "price": {{ variant.price | divided_by: 100.0 | json }},
+        "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price": {{ variant.price | money_without_currency | strip_html | remove: ',' | strip | json }},
         "priceCurrency": {{ cart.currency.iso_code | json }},
-        "itemCondition": "http://schema.org/NewCondition",
-        "url": {{ shop.url | append: '/products/' | append: product.handle | json }}
+        "itemCondition": "https://schema.org/NewCondition",
+        "url": {{ canonical_url | default: product.url | json }}
       }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ]

@@ -1035,8 +1035,8 @@
     if (fullUrl.indexOf('http') !== 0) {
       fullUrl = window.location.origin + (fullUrl.charAt(0) === '/' ? '' : '/') + fullUrl;
     }
-    // Strip locale prefix (/es/products/ -> /products/) so URL matches Meta/Instagram Catalog canonical URL
-    fullUrl = fullUrl.replace(/\/[a-z]{2}(-[a-zA-Z]{2})?\/products\//, '/products/').split('?')[0];
+    // Normalize product URL to /es/products/<handle> to match Shopify onlineStoreUrl in Meta/Instagram Catalog
+    fullUrl = fullUrl.replace(/^(https?:\/\/[^\/]+)\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?products\//, '$1/es/products/').split('?')[0];
     var shareTitle = title || 'La Bonita Joyería';
 
     // Always copy clean URL to clipboard first so user immediately has it
