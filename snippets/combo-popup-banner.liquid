@@ -894,22 +894,6 @@
         }
       } else if (isOnAnyComboPage) {
         markPopupSeen();
-        var priceEl = document.querySelector('.price__container, .product__price, [id^="price-"], .pdp-pricing-row-single');
-        if (priceEl && !document.getElementById('lbComboSaveBadge')) {
-          var badge = document.createElement('div');
-          badge.id = 'lbComboSaveBadge';
-          badge.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#d4af37 0%,#f3d77d 50%,#b88917 100%);color:#120f0a;font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 14px rgba(212,175,55,0.3);';
-          badge.innerHTML = isOnComboLisoPage
-            ? '<span>★ OFERTA SET 3 PIEZAS LISO 10K &middot; AHORRA $406</span>'
-            : (isOnComboPavePage
-              ? '<span>★ OFERTA SET 3 PIEZAS PAVÉ 10K &middot; AHORRA $446</span>'
-              : (isOnCombo3Page
-                ? '<span>★ OFERTA COMBO CAPILLA 10K + RELOJ &middot; AHORRA +$1,090</span>'
-                : (isOnCombo2Page
-                  ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
-                  : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>')));
-          priceEl.appendChild(badge);
-        }
       }
     })();
   </script>
