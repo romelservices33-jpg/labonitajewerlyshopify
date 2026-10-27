@@ -819,26 +819,62 @@
       window.addEventListener('resize', updateTrackPosition);
 
       var path = window.location.pathname || '';
+      var isOnComboLisoPage = path.indexOf('combo-set-collar-pulsera-aretes-ovalado-liso-oro-10k') !== -1;
+      var isOnComboPavePage = path.indexOf('combo-set-collar-pulsera-aretes-ovalado-pave-oro-10k') !== -1;
       var isOnCombo1Page = path.indexOf('combo-reloj-seiko-5-3-argollas-oro-10k') !== -1;
       var isOnCombo2Page =
         path.indexOf('combo-argollas-oro-10k-cadena-fina-dije-inicial-corona') !== -1 ||
         path.indexOf('combo-argollas-oro-10k-cadena-cubana-dije-inicial-corona') !== -1;
       var isOnCombo3Page = path.indexOf('combo-cadena-cubana-capilla-oro-10k-reloj-hombre-1435') !== -1;
-      var isOnAnyComboPage = isOnCombo1Page || isOnCombo2Page || isOnCombo3Page;
+      var isOnAnyComboPage =
+        isOnComboLisoPage ||
+        isOnComboPavePage ||
+        isOnCombo1Page ||
+        isOnCombo2Page ||
+        isOnCombo3Page ||
+        path.indexOf('/products/combo-') !== -1;
+      var isCartOrCheckoutPage = path.indexOf('/cart') !== -1 || path.indexOf('/checkouts') !== -1;
+
+      function markPopupSeen() {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {}
+        try {
+          localStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {}
+      }
+
+      function hasSeenPopup() {
+        try {
+          if (sessionStorage.getItem(STORAGE_KEY) === '1') return true;
+        } catch (e) {}
+        try {
+          if (localStorage.getItem(STORAGE_KEY) === '1') return true;
+        } catch (e) {}
+        return false;
+      }
 
       function openPopup() {
+        markPopupSeen();
         popup.classList.add('is-open');
         setTimeout(updateTrackPosition, 30);
         startAutoplay();
       }
 
       function closePopup() {
+        markPopupSeen();
         popup.classList.remove('is-open');
         stopAutoplay();
-        try {
-          sessionStorage.setItem(STORAGE_KEY, '1');
-        } catch (e) {}
       }
+
+      var promoLinks = Array.prototype.slice.call(
+        popup.querySelectorAll('.lb-combo-popup-image-link, .lb-combo-popup-cta')
+      );
+      promoLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          markPopupSeen();
+        });
+      });
 
       if (closeBtn) closeBtn.addEventListener('click', closePopup);
       if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
@@ -852,25 +888,26 @@
         if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1, true);
       });
 
-      if (!isOnAnyComboPage) {
-        var alreadySeen = false;
-        try {
-          alreadySeen = sessionStorage.getItem(STORAGE_KEY) === '1';
-        } catch (e) {}
-        if (!alreadySeen) {
+      if (!isOnAnyComboPage && !isCartOrCheckoutPage) {
+        if (!hasSeenPopup()) {
           setTimeout(openPopup, 1500);
         }
-      } else {
-        var priceEl = document.querySelector('.price__container, .product__price, [id^="price-"]');
+      } else if (isOnAnyComboPage) {
+        markPopupSeen();
+        var priceEl = document.querySelector('.price__container, .product__price, [id^="price-"], .pdp-pricing-row-single');
         if (priceEl && !document.getElementById('lbComboSaveBadge')) {
           var badge = document.createElement('div');
           badge.id = 'lbComboSaveBadge';
           badge.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#d4af37 0%,#f3d77d 50%,#b88917 100%);color:#120f0a;font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 14px rgba(212,175,55,0.3);';
-          badge.innerHTML = isOnCombo3Page
-            ? '<span>★ OFERTA COMBO CAPILLA 10K + RELOJ &middot; AHORRA +$1,090</span>'
-            : (isOnCombo2Page
-              ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
-              : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>');
+          badge.innerHTML = isOnComboLisoPage
+            ? '<span>★ OFERTA SET 3 PIEZAS LISO 10K &middot; AHORRA $406</span>'
+            : (isOnComboPavePage
+              ? '<span>★ OFERTA SET 3 PIEZAS PAVÉ 10K &middot; AHORRA $446</span>'
+              : (isOnCombo3Page
+                ? '<span>★ OFERTA COMBO CAPILLA 10K + RELOJ &middot; AHORRA +$1,090</span>'
+                : (isOnCombo2Page
+                  ? '<span>★ OFERTA COMBO 3 PRENDAS &middot; AHORRA +$225</span>'
+                  : '<span>★ OFERTA COMBO 4 PRENDAS &middot; AHORRA +$300</span>')));
           priceEl.appendChild(badge);
         }
       }
