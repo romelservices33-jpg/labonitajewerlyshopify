@@ -1073,6 +1073,18 @@
   </div>
 
   <div class="editorial-vitrine-grid">
+  {%- assign available_dep_skus = ',' -%}
+  {%- if collections['componentes-combos'] != blank -%}
+  {%- for dep_p in collections['componentes-combos'].products -%}
+  {%- if dep_p.available -%}
+  {%- for dep_v in dep_p.variants -%}
+  {%- if dep_v.available and dep_v.sku != blank -%}
+  {%- assign available_dep_skus = available_dep_skus | append: dep_v.sku | strip | append: ',' -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
   {%- assign bs_collection = collections['cuban'] | default: section.settings.collection | default: collections['all'] -%}
   {%- if bs_collection == blank or bs_collection.products.size == 0 -%}
   {%- assign bs_collection = collections['all'] -%}
@@ -1081,6 +1093,17 @@
   {%- assign bs_rendered_count = 0 -%}
   {%- for product in bs_collection.products limit: 30 -%}
   {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- assign bs_deps_ok = true -%}
+  {%- for t in product.tags -%}
+  {%- if t contains 'deps:' -%}
+  {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+  {%- for rsku in req_skus -%}
+  {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+  {%- unless available_dep_skus contains rsku_token -%}{%- assign bs_deps_ok = false -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- unless bs_deps_ok -%}{%- continue -%}{%- endunless -%}
   {%- if bs_rendered_count >= 4 -%}{%- break -%}{%- endif -%}
   {%- assign bs_rendered_count = bs_rendered_count | plus: 1 -%}
   {%- assign p_type = product.type | downcase -%}
@@ -1362,6 +1385,17 @@
   {%- assign new_rendered_count = 0 -%}
   {%- for product in new_collection.products limit: 30 -%}
   {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- assign new_deps_ok = true -%}
+  {%- for t in product.tags -%}
+  {%- if t contains 'deps:' -%}
+  {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+  {%- for rsku in req_skus -%}
+  {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+  {%- unless available_dep_skus contains rsku_token -%}{%- assign new_deps_ok = false -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- unless new_deps_ok -%}{%- continue -%}{%- endunless -%}
   {%- if new_rendered_count >= 4 -%}{%- break -%}{%- endif -%}
   {%- assign new_rendered_count = new_rendered_count | plus: 1 -%}
   {%- assign p_type = product.type | downcase -%}
