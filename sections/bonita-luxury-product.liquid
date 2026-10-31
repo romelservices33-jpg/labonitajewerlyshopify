@@ -1,6 +1,32 @@
 {{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
 
 {%- assign selected_variant = product.selected_or_first_available_variant -%}
+{%- assign available_dep_skus = ',' -%}
+{%- if collections['componentes-combos'] != blank -%}
+  {%- for dep_p in collections['componentes-combos'].products -%}
+    {%- if dep_p.available -%}
+      {%- for dep_v in dep_p.variants -%}
+        {%- if dep_v.available and dep_v.sku != blank -%}
+          {%- assign available_dep_skus = available_dep_skus | append: dep_v.sku | strip | append: ',' -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign deps_ok = true -%}
+{%- for t in product.tags -%}
+  {%- if t contains 'deps:' -%}
+    {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+    {%- for rsku in req_skus -%}
+      {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+      {%- unless available_dep_skus contains rsku_token -%}{%- assign deps_ok = false -%}{%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign pdp_is_available = false -%}
+{%- if product.available and selected_variant.available and deps_ok -%}
+  {%- assign pdp_is_available = true -%}
+{%- endif -%}
 {%- assign karat_tag = '14K' -%}
 {%- if product.tags contains '10k' or product.title contains '10K' or product.title contains '10k' -%}
   {%- assign karat_tag = '10K' -%}
@@ -597,13 +623,13 @@
           <!-- Header Meta -->
           <div class="pdp-header-meta-row">
             <span class="pdp-category-kicker">COLECCIÓN {{ product.type | default: 'LA BONITA' | upcase }}</span>
-            {%- if selected_variant.available -%}
+            {%- if pdp_is_available -%}
               <span class="pdp-stock-status" id="pdpStockStatus">
                 <span class="pdp-stock-dot" id="pdpStockDot"></span> <span id="pdpStockText">En Stock · Envío Hoy</span>
               </span>
             {%- else -%}
               <span class="pdp-stock-status" id="pdpStockStatus" style="color:#DC2626;">
-                <span class="pdp-stock-dot" id="pdpStockDot" style="background:#DC2626;box-shadow:0 0 8px rgba(220,38,38,0.4);"></span> <span id="pdpStockText">Sin Existencias · Agotado</span>
+                <span class="pdp-stock-dot" id="pdpStockDot" style="background:#DC2626;box-shadow:0 0 8px rgba(220,38,38,0.4);"></span> <span id="pdpStockText">Sin Existencias · Vendido en Tienda</span>
               </span>
             {%- endif -%}
           </div>
@@ -690,14 +716,14 @@
                 type="submit"
                 class="pdp-btn-submit-cart"
                 id="pdpSubmitBtn"
-                {% unless selected_variant.available %}disabled{% endunless %}
+                {% unless pdp_is_available %}disabled{% endunless %}
               >
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span>{% if selected_variant.available %}Agregar al Carrito{% else %}Agotado{% endif %}</span>
+                <span>{% if pdp_is_available %}Agregar al Carrito{% else %}Agotado{% endif %}</span>
               </button>
 
               <button
@@ -792,6 +818,21 @@
   }
 
   var pdpProductVariants = {{ product.variants | json }};
+  var pdpDepsOk = {{ deps_ok | json }};
+  var pdpAvailableDepSkus = {{ available_dep_skus | json }};
+
+  function isVariantDepsAvailable(v) {
+    if (!pdpDepsOk) return false;
+    var sku = (v && v.sku) ? String(v.sku).trim() : '';
+    if (sku.indexOf('3480-4270-') === 0) {
+      var parts = sku.split('-');
+      var charmSku = parts[2] || '';
+      if (charmSku && pdpAvailableDepSkus.indexOf(',' + charmSku + ',') === -1) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   function onPdpVariantClick(optIdx, val, btn) {
     var label = document.getElementById('pdpOptVal-' + optIdx);
@@ -837,7 +878,7 @@
       var stockDot = document.getElementById('pdpStockDot');
       var stockText = document.getElementById('pdpStockText');
       if (subBtn) {
-        if (matched.available) {
+        if (matched.available && isVariantDepsAvailable(matched)) {
           subBtn.removeAttribute('disabled');
           subBtn.querySelector('span').textContent = 'Agregar al Carrito';
           if (stockStatus) stockStatus.style.color = '#059669';
@@ -854,7 +895,7 @@
             stockDot.style.background = '#DC2626';
             stockDot.style.boxShadow = '0 0 8px rgba(220, 38, 38, 0.4)';
           }
-          if (stockText) stockText.textContent = 'Sin Existencias · Agotado';
+          if (stockText) stockText.textContent = 'Sin Existencias · Vendido en Tienda';
         }
       }
     }

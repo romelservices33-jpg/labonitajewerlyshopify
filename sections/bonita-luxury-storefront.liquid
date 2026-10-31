@@ -1776,6 +1776,18 @@
   <div class="catalog-products-grid" id="catalogProductsGrid">
   {%- assign rendered_ids = ',' -%}
   {%- assign card_order_idx = 0 -%}
+  {%- assign available_dep_skus = ',' -%}
+  {%- if collections['componentes-combos'] != blank -%}
+  {%- for dep_p in collections['componentes-combos'].products -%}
+  {%- if dep_p.available -%}
+  {%- for dep_v in dep_p.variants -%}
+  {%- if dep_v.available and dep_v.sku != blank -%}
+  {%- assign available_dep_skus = available_dep_skus | append: dep_v.sku | strip | append: ',' -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
   {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,relojes,anillos,dijes,combos' | split: ',' -%}
   {%- if catalog_collection != blank and catalog_collection.products_count > 0 -%}
   {%- for ch in cat_handles -%}
@@ -1784,6 +1796,17 @@
   {%- paginate sub_col.products by 250 -%}
   {%- for product in sub_col.products limit: 250 -%}
   {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- assign deps_ok = true -%}
+  {%- for t in product.tags -%}
+  {%- if t contains 'deps:' -%}
+  {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+  {%- for rsku in req_skus -%}
+  {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+  {%- unless available_dep_skus contains rsku_token -%}{%- assign deps_ok = false -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- unless deps_ok -%}{%- continue -%}{%- endunless -%}
   {%- assign pid_check = ',' | append: product.id | append: ',' -%}
   {%- unless rendered_ids contains pid_check -%}
   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
@@ -1934,6 +1957,17 @@
   {%- paginate catalog_collection.products by 250 -%}
   {%- for product in catalog_collection.products -%}
   {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+  {%- assign deps_ok = true -%}
+  {%- for t in product.tags -%}
+  {%- if t contains 'deps:' -%}
+  {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+  {%- for rsku in req_skus -%}
+  {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+  {%- unless available_dep_skus contains rsku_token -%}{%- assign deps_ok = false -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- unless deps_ok -%}{%- continue -%}{%- endunless -%}
   {%- assign pid_check = ',' | append: product.id | append: ',' -%}
   {%- unless rendered_ids contains pid_check -%}
   {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}

@@ -118,9 +118,32 @@
     </div>
 
     <!-- Products Grid (8 on Desktop, 6 on Mobile) -->
+    {%- assign available_dep_skus = ',' -%}
+    {%- if collections['componentes-combos'] != blank -%}
+      {%- for dep_p in collections['componentes-combos'].products -%}
+        {%- if dep_p.available -%}
+          {%- for dep_v in dep_p.variants -%}
+            {%- if dep_v.available and dep_v.sku != blank -%}
+              {%- assign available_dep_skus = available_dep_skus | append: dep_v.sku | strip | append: ',' -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
     <div class="catalog-products-grid" id="collectionProductsGrid">
       {%- for product in collection.products -%}
         {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+        {%- assign deps_ok = true -%}
+        {%- for t in product.tags -%}
+          {%- if t contains 'deps:' -%}
+            {%- assign req_skus = t | remove: 'deps:' | split: ',' -%}
+            {%- for rsku in req_skus -%}
+              {%- assign rsku_token = ',' | append: rsku | strip | append: ',' -%}
+              {%- unless available_dep_skus contains rsku_token -%}{%- assign deps_ok = false -%}{%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless deps_ok -%}{%- continue -%}{%- endunless -%}
         {%- assign ptype_down = product.type | downcase -%}
         {%- assign ptitle_down = product.title | downcase -%}
         {%- assign cat_tag = product.type | default: collection.title | downcase -%}
