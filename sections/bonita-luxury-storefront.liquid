@@ -2021,7 +2021,7 @@
   <div class="cutout-card-content">
   <div class="cutout-title-row">
   <h4 class="cutout-product-title">{{ product.title }}</h4>
-  <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
+  <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- elsif product.tags contains 'Grabado Gratis' or product.title contains 'Manilla ID' -%}{{ karat_tag | upcase }} Oro Auténtico · ✦ Grabado del Nombre GRATIS{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
   </div>
   <div class="product-card-pricing-row">
   <div class="pricing-amounts">
@@ -2185,7 +2185,7 @@
   <div class="cutout-card-content">
   <div class="cutout-title-row">
   <h4 class="cutout-product-title">{{ product.title }}</h4>
-  <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
+  <span class="spec-weight-tag">{%- if cat_tag == 'relojes' -%}Acero Inoxidable · Envío Asegurado{%- elsif product.tags contains 'Grabado Gratis' or product.title contains 'Manilla ID' -%}{{ karat_tag | upcase }} Oro Auténtico · ✦ Grabado del Nombre GRATIS{%- else -%}{{ karat_tag | upcase }} Oro Auténtico · Envío Asegurado{%- endif -%}</span>
   </div>
   <div class="product-card-pricing-row">
   <div class="pricing-amounts">

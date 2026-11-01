@@ -653,6 +653,14 @@
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
             <span>O paga desde <strong id="pdpAffirmMonthly">${{ selected_variant.price | divided_by: 1200 | at_least: 35 }}/mes</strong> en cuotas con <strong>Affirm</strong></span>
           </div>
+          {%- assign pdp_tags_str = product.tags | join: ' ' | downcase -%}
+          {%- assign pdp_title_low = product.title | downcase -%}
+          {%- if pdp_tags_str contains 'grabado gratis' or pdp_title_low contains 'manilla id' or pdp_title_low contains 'placa lisa' -%}
+            <div style="margin:0 0 12px; padding:10px 14px; border-radius:10px; background:linear-gradient(135deg, rgba(209,176,84,0.16), rgba(209,176,84,0.06)); border:1px solid rgba(209,176,84,0.55); color:#08195B; font-size:0.84rem; font-weight:700; display:flex; align-items:center; gap:8px;">
+              <span style="color:#B8902E; font-size:1rem;">✦</span>
+              <span>Incluye el <strong>grabado del nombre del niño totalmente GRATIS</strong></span>
+            </div>
+          {%- endif -%}
 
           <!-- Option Selectors -->
           <form method="post" action="{{ routes.cart_add_url }}" id="pdpBuyForm-{{ section.id }}" onsubmit="return handlePdpAddToCart(event, this)">
@@ -697,6 +705,12 @@
                   <td class="spec-title">Medida / Dimensión</td>
                   <td class="spec-data" id="pdpSpecSize">{{ selected_variant.title | replace: 'Default Title', 'Estándar' }}</td>
                 </tr>
+                {%- if pdp_tags_str contains 'grabado gratis' or pdp_title_low contains 'manilla id' or pdp_title_low contains 'placa lisa' -%}
+                <tr>
+                  <td class="spec-title">Personalización</td>
+                  <td class="spec-data" style="color:#059669; font-weight:800;">✦ Grabado del nombre del niño GRATIS</td>
+                </tr>
+                {%- endif -%}
                 <tr>
                   <td class="spec-title">Garantía Oficial</td>
                   <td class="spec-data" style="color:#D1B054;">Certificado de Autenticidad de por Vida</td>

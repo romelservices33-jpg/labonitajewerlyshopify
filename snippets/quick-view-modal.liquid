@@ -338,6 +338,10 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
         <span>O paga desde <strong id="modalAffirmMo">$47/mes</strong> en cuotas con <strong>Affirm</strong></span>
       </div>
+      <div id="modalFreeEngravingBanner" style="display:none; margin:0 0 12px; padding:9px 13px; border-radius:10px; background:linear-gradient(135deg, rgba(209,176,84,0.16), rgba(209,176,84,0.06)); border:1px solid rgba(209,176,84,0.55); color:#08195B; font-size:0.82rem; font-weight:700; align-items:center; gap:7px;">
+        <span style="color:#B8902E; font-size:0.95rem;">✦</span>
+        <span>Incluye el <strong>grabado del nombre del niño totalmente GRATIS</strong></span>
+      </div>
 
       <!-- Variant Selector: Pureza / Metal (Real registered karat only, or options if real variants exist) -->
       <div class="pdp-option-group" id="modalKaratGroup">
@@ -373,6 +377,10 @@
           <tr>
             <td class="spec-name">Medida / Dimensión</td>
             <td class="spec-val" id="modalSpecSize">Estándar</td>
+          </tr>
+          <tr id="modalFreeEngravingRow" style="display:none;">
+            <td class="spec-name">Personalización</td>
+            <td class="spec-val" style="color:#059669; font-weight:800;">✦ Grabado del nombre del niño GRATIS</td>
           </tr>
           <tr>
             <td class="spec-name">Garantía Oficial</td>
@@ -880,6 +888,12 @@
     if (specSize) {
       specSize.textContent = p.selectedSize || 'Estándar / Ajustable';
     }
+
+    var isFreeEngraving = /manilla id|placa lisa|grabado gratis/i.test(p.title || '');
+    var engBanner = document.getElementById('modalFreeEngravingBanner');
+    var engRow = document.getElementById('modalFreeEngravingRow');
+    if (engBanner) engBanner.style.display = isFreeEngraving ? 'flex' : 'none';
+    if (engRow) engRow.style.display = isFreeEngraving ? 'table-row' : 'none';
 
     // Reset Qty
     var qtyInput = document.getElementById('modalQtyInput');
