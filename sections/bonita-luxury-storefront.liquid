@@ -521,6 +521,7 @@
   <li><a href="/collections/pulseras" class="hero-nav-link" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
   <li><a href="/collections/dijes" class="hero-nav-link" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
   <li><a href="/collections/piercings" class="hero-nav-link" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
+  <li><a href="/collections/ninos" class="hero-nav-link" data-cat-nav="ninos" onclick="handleNavCategory(event, 'ninos')">Niños</a></li>
   <li><a href="/collections/relojes" class="hero-nav-link" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
   <li><a href="/collections/combos" class="hero-nav-link" data-cat-nav="combos" onclick="handleNavCategory(event, 'combos')">Combos</a></li>
   <li><a href="#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
@@ -577,6 +578,7 @@
   <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
   <a href="/collections/dijes" onclick="closeMobileNotch('Dijes'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
   <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
+  <a href="/collections/ninos" onclick="closeMobileNotch('Niños'); handleNavCategory(event, 'ninos');">Niños & Bebés</a>
   <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
   <a href="/collections/combos" onclick="closeMobileNotch('Combos'); handleNavCategory(event, 'combos');">Combos</a>
   <a href="#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
@@ -969,6 +971,26 @@
   </div>
   <div class="cat-card-img-wrap">
   <img src="{{ 'collection-piercings.jpg' | asset_url }}" alt="Piercings de Oro 10K y 14K" class="cat-square-img" loading="lazy">
+  </div>
+  <div class="cat-card-footer">
+  <span class="cat-pill-btn">
+  <span>Ver Colección</span>
+  <svg class="cat-pill-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+  </span>
+  </div>
+  </a>
+
+  <!-- Card 8: Niños & Bebés -->
+  {%- assign ninos_card_img = collections['ninos'].products.first.featured_image | image_url: width: 600 -%}
+  <a href="#catalogo" onclick="handleNavCategory(event, 'ninos')" class="cat-square-card" data-cat-link="ninos" aria-label="Ver Colección de Niños y Bebés">
+  <div class="cat-card-header">
+  <span class="cat-card-label">Bautizo & Infantil</span>
+  <h3 class="cat-card-title">Niños & Bebés</h3>
+  </div>
+  <div class="cat-card-img-wrap">
+  <img src="{{ ninos_card_img | default: 'https://cdn.shopify.com/s/files/1/0621/5450/6336/files/prendedor-bebe-dios-me-bendiga-azabache-oro-10k-3528-1.jpg' }}" alt="Joyería para Niños y Bebés en Oro 10K y 14K" class="cat-square-img" loading="lazy">
   </div>
   <div class="cat-card-footer">
   <span class="cat-pill-btn">
@@ -1678,9 +1700,47 @@
   <button class="cat-tab-btn" data-cat="pulseras" onclick="filterCatalog('pulseras', this)">Pulseras</button>
   <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
   <button class="cat-tab-btn" data-cat="piercings" onclick="filterCatalog('piercings', this)">Piercings</button>
+  <button class="cat-tab-btn" data-cat="ninos" onclick="filterCatalog('ninos', this)">Niños</button>
   <button class="cat-tab-btn" data-cat="relojes" onclick="filterCatalog('relojes', this)">Relojes</button>
   <button class="cat-tab-btn" data-cat="combos" onclick="filterCatalog('combos', this)">Combos</button>
   </nav>
+
+  <!-- Subcategory Filter Pills for Niños (Shown dynamically when 'ninos' is active) -->
+  <div class="kids-subcat-pills-wrap" id="catalogKidsSubcats" role="region" aria-label="Subcategorías de Niños" style="display:none; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin: 4px auto 16px; padding: 12px 16px; background: linear-gradient(135deg, rgba(209,176,84,0.10), rgba(8,25,91,0.03)); border: 1px solid rgba(209,176,84,0.35); border-radius: 16px; max-width: 880px;">
+    <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#08195B; margin-right:4px;">✦ Subcategorías Niños:</span>
+    <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCatalogKidsSubcat('all', this)">Todo Niños</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="aretes" onclick="filterCatalogKidsSubcat('aretes', this)">Aretes & Abridores</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="pulseras" onclick="filterCatalogKidsSubcat('pulseras', this)">Pulseras & Esclavas</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="cadenas" onclick="filterCatalogKidsSubcat('cadenas', this)">Cadenas</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="anillos" onclick="filterCatalogKidsSubcat('anillos', this)">Anillos</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="dijes" onclick="filterCatalogKidsSubcat('dijes', this)">Dijes & Azabaches</button>
+  </div>
+  <style>
+    .kids-subcat-pill {
+      appearance: none;
+      border: 1px solid rgba(8, 25, 91, 0.14);
+      background: #FFFFFF;
+      color: #08195B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(8, 25, 91, 0.04);
+    }
+    .kids-subcat-pill:hover {
+      border-color: #D1B054;
+      transform: translateY(-1px);
+    }
+    .kids-subcat-pill.active {
+      background: #08195B;
+      color: #FFFFFF;
+      border-color: #08195B;
+      box-shadow: 0 4px 12px rgba(8, 25, 91, 0.18);
+    }
+  </style>
 
   <!-- Seamless Filter Bar (No Box Container) -->
   <div class="catalog-filter-bar" id="catalogFilterBar">
@@ -1822,7 +1882,7 @@
   {%- endif -%}
   {%- endfor -%}
   {%- endif -%}
-  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,relojes,anillos,dijes,combos' | split: ',' -%}
+  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,ninos,relojes,anillos,dijes,combos' | split: ',' -%}
   {%- if catalog_collection != blank and catalog_collection.products_count > 0 -%}
   {%- for ch in cat_handles -%}
   {%- assign sub_col = collections[ch] -%}
@@ -1900,6 +1960,9 @@
   {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
   {%- assign cat_tag = 'dijes' -%}
   {%- assign cat_label = 'Dijes' -%}
+  {%- endif -%}
+  {%- if product.tags contains 'cat:ninos' -%}
+  {%- assign cat_tag = cat_tag | append: ' ninos' -%}
   {%- endif -%}
   {%- assign karat_tag = '10k' -%}
   {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
@@ -2061,6 +2124,9 @@
   {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
   {%- assign cat_tag = 'dijes' -%}
   {%- assign cat_label = 'Dijes' -%}
+  {%- endif -%}
+  {%- if product.tags contains 'cat:ninos' -%}
+  {%- assign cat_tag = cat_tag | append: ' ninos' -%}
   {%- endif -%}
   {%- assign karat_tag = '10k' -%}
   {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
@@ -3123,6 +3189,7 @@
   return (window.innerWidth && window.innerWidth <= 860) ? 6 : 8;
   }
   var currentCatalogCategory = 'todos';
+  var activeCatalogKidsSubcat = 'all';
   var activeKaratFilter = 'all';
   var activeSizeFilter = 'all';
   var activeSortFilter = 'default';
@@ -3236,6 +3303,9 @@
   var catTokens = cat.split(/\s+/).filter(Boolean);
   var matched = (cat === target || catTokens.indexOf(target) !== -1);
   if (!matched) return false;
+  if (target === 'ninos' && activeCatalogKidsSubcat !== 'all') {
+  if (catTokens.indexOf(activeCatalogKidsSubcat) === -1) return false;
+  }
   }
   }
 
@@ -3428,8 +3498,25 @@
   paginateCatalogGrid();
   }
 
+  function filterCatalogKidsSubcat(subcat, btnEl) {
+  activeCatalogKidsSubcat = subcat || 'all';
+  document.querySelectorAll('#catalogKidsSubcats .kids-subcat-pill').forEach(function(b) {
+  b.classList.toggle('active', b.getAttribute('data-subcat') === activeCatalogKidsSubcat);
+  });
+  if (btnEl) btnEl.classList.add('active');
+  catalogPage = 1;
+  paginateCatalogGrid();
+  }
+  window.filterCatalogKidsSubcat = filterCatalogKidsSubcat;
+
   function resetCatalogFilters() {
   currentCatalogCategory = 'todos';
+  activeCatalogKidsSubcat = 'all';
+  var kidsBar = document.getElementById('catalogKidsSubcats');
+  if (kidsBar) kidsBar.style.display = 'none';
+  document.querySelectorAll('#catalogKidsSubcats .kids-subcat-pill').forEach(function(b) {
+  b.classList.toggle('active', b.getAttribute('data-subcat') === 'all');
+  });
   activeKaratFilter = 'all';
   activeSizeFilter = 'all';
   activeSortFilter = 'default';
@@ -3486,6 +3573,14 @@
 
   function filterCatalog(category, tabBtn) {
   currentCatalogCategory = category || 'todos';
+  activeCatalogKidsSubcat = 'all';
+  var kidsBar = document.getElementById('catalogKidsSubcats');
+  if (kidsBar) {
+  kidsBar.style.display = (currentCatalogCategory === 'ninos') ? 'flex' : 'none';
+  document.querySelectorAll('#catalogKidsSubcats .kids-subcat-pill').forEach(function(b) {
+  b.classList.toggle('active', b.getAttribute('data-subcat') === 'all');
+  });
+  }
   activeSearchQuery = '';
   var heroInput = document.getElementById('heroSearchInput');
   if (heroInput) heroInput.value = '';
@@ -3518,6 +3613,9 @@
   } else if (category === 'piercings') {
   titleEl.innerHTML = 'Piercings & <span class="accent-gold">Broqueles de Oro</span>';
   subtitleEl.textContent = 'Joyas hipoalergénicas en oro macizo 10K y 14K de máxima comodidad.';
+  } else if (category === 'ninos') {
+  titleEl.innerHTML = 'Joyería para <span class="accent-gold">Niños & Bebés</span>';
+  subtitleEl.textContent = 'Abridores, esclavas, semanarios, cadenas, anillos, medallas de bautizo y azabaches en oro 10K y 14K.';
   } else if (category === 'relojes') {
   titleEl.innerHTML = 'Relojes de <span class="accent-gold">Alta Gama & Precisión</span>';
   subtitleEl.textContent = 'Relojería automática y de colección en acero inoxidable con acabados dorados de lujo y garantía oficial.';
@@ -3926,7 +4024,7 @@
   function checkStorefrontHashNavigation() {
   var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
   if (!hash) return;
-  var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'combos', 'todos'];
+  var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'ninos', 'relojes', 'combos', 'todos'];
   if (validCategories.indexOf(hash) !== -1) {
   filterCatalog(hash);
   }

@@ -105,16 +105,16 @@
       padding: 0 40px !important;
     }
     .hero-nav-link {
-      font-size: 12px !important;
-      letter-spacing: 0.08em !important;
-      padding: 10px 10px !important;
+      font-size: 11.5px !important;
+      letter-spacing: 0.06em !important;
+      padding: 10px 8px !important;
     }
   }
   @media (min-width: 1680px) {
     .hero-nav-link {
-      font-size: 12.5px !important;
-      letter-spacing: 0.1em !important;
-      padding: 10px 13px !important;
+      font-size: 12px !important;
+      letter-spacing: 0.08em !important;
+      padding: 10px 10px !important;
     }
   }
 </style>
@@ -137,6 +137,7 @@
       <li><a href="/collections/pulseras" class="hero-nav-link {% if collection.handle == 'pulseras' %}active{% endif %}" data-cat-nav="pulseras" onclick="handleNavCategory(event, 'pulseras')">Pulseras</a></li>
       <li><a href="/collections/dijes" class="hero-nav-link {% if collection.handle == 'dijes' %}active{% endif %}" data-cat-nav="dijes" onclick="handleNavCategory(event, 'dijes')">Dijes & Medallas</a></li>
       <li><a href="/collections/piercings" class="hero-nav-link {% if collection.handle == 'piercings' %}active{% endif %}" data-cat-nav="piercings" onclick="handleNavCategory(event, 'piercings')">Piercings</a></li>
+      <li><a href="/collections/ninos" class="hero-nav-link {% if collection.handle == 'ninos' %}active{% endif %}" data-cat-nav="ninos" onclick="handleNavCategory(event, 'ninos')">Niños</a></li>
       <li><a href="/collections/relojes" class="hero-nav-link {% if collection.handle == 'relojes' %}active{% endif %}" data-cat-nav="relojes" onclick="handleNavCategory(event, 'relojes')">Relojes</a></li>
       <li><a href="/collections/combos" class="hero-nav-link {% if collection.handle == 'combos' %}active{% endif %}" data-cat-nav="combos" onclick="handleNavCategory(event, 'combos')">Combos</a></li>
       <li><a href="{{ routes.root_url }}#compra-oro" class="hero-nav-link" onclick="if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">Compramos Oro</a></li>
@@ -194,6 +195,7 @@
     <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
     <a href="/collections/dijes" onclick="closeMobileNotch('Dijes & Medallas'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
     <a href="/collections/piercings" onclick="closeMobileNotch('Piercings'); handleNavCategory(event, 'piercings');">Piercings</a>
+    <a href="/collections/ninos" onclick="closeMobileNotch('Niños'); handleNavCategory(event, 'ninos');">Niños & Bebés</a>
     <a href="/collections/relojes" onclick="closeMobileNotch('Relojes'); handleNavCategory(event, 'relojes');">Relojes</a>
     <a href="/collections/combos" onclick="closeMobileNotch('Combos'); handleNavCategory(event, 'combos');">Combos</a>
     <a href="{{ routes.root_url }}#compra-oro" onclick="closeMobileNotch('Compra de Oro'); if(document.getElementById('compra-oro')){event.preventDefault();document.getElementById('compra-oro').scrollIntoView({behavior:'smooth'});}" style="color:#D1B054; font-weight:700;">✦ Compramos tu Oro Hoy</a>
@@ -270,7 +272,7 @@
     var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
     if (!hash) return;
     
-    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'relojes', 'combos', 'todos'];
+    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'ninos', 'relojes', 'combos', 'todos'];
     if (validCategories.indexOf(hash) !== -1) {
       if (typeof window.filterCatalog === 'function') {
         window.filterCatalog(hash);

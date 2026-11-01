@@ -39,9 +39,48 @@
         <a href="/collections/pulseras" class="cat-tab-btn {% if collection.handle == 'pulseras' %}active{% endif %}" style="text-decoration:none;">Pulseras</a>
         <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes & Medallas</a>
         <a href="/collections/piercings" class="cat-tab-btn {% if collection.handle == 'piercings' %}active{% endif %}" style="text-decoration:none;">Piercings</a>
+        <a href="/collections/ninos" class="cat-tab-btn {% if collection.handle == 'ninos' %}active{% endif %}" style="text-decoration:none;">Niños</a>
         <a href="/collections/relojes" class="cat-tab-btn {% if collection.handle == 'relojes' %}active{% endif %}" style="text-decoration:none;">Relojes</a>
         <a href="/collections/combos" class="cat-tab-btn {% if collection.handle == 'combos' %}active{% endif %}" style="text-decoration:none;">Combos</a>
       </div>
+
+      {%- if collection.handle == 'ninos' -%}
+      <div class="kids-subcat-pills-wrap" id="collectionKidsSubcats" role="region" aria-label="Subcategorías de Niños" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin: -4px auto 18px; padding: 12px 16px; background: linear-gradient(135deg, rgba(209,176,84,0.10), rgba(8,25,91,0.03)); border: 1px solid rgba(209,176,84,0.35); border-radius: 16px; max-width: 880px;">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#08195B; margin-right:4px;">✦ Subcategorías Niños:</span>
+        <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">Todo Niños</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="aretes" onclick="filterCollectionBySubcat('aretes', this)">Aretes & Abridores</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="pulseras" onclick="filterCollectionBySubcat('pulseras', this)">Pulseras & Esclavas</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="cadenas" onclick="filterCollectionBySubcat('cadenas', this)">Cadenas</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="anillos" onclick="filterCollectionBySubcat('anillos', this)">Anillos</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="dijes" onclick="filterCollectionBySubcat('dijes', this)">Dijes & Azabaches</button>
+      </div>
+      <style>
+        .kids-subcat-pill {
+          appearance: none;
+          border: 1px solid rgba(8, 25, 91, 0.14);
+          background: #FFFFFF;
+          color: #08195B;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          padding: 7px 14px;
+          border-radius: 999px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: 0 2px 6px rgba(8, 25, 91, 0.04);
+        }
+        .kids-subcat-pill:hover {
+          border-color: #D1B054;
+          transform: translateY(-1px);
+        }
+        .kids-subcat-pill.active {
+          background: #08195B;
+          color: #FFFFFF;
+          border-color: #08195B;
+          box-shadow: 0 4px 12px rgba(8, 25, 91, 0.18);
+        }
+      </style>
+      {%- endif -%}
 
       <div style="margin: 0 auto 16px; max-width: 560px; position: relative;">
         <input
@@ -301,9 +340,20 @@
   var activeCollectionKarat = 'all';
   var activeCollectionSort = 'default';
   var activeCollectionSearch = '';
+  var activeCollectionSubcat = 'all';
 
   function normalizeCollectionSearchText(str) {
     return (str || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  }
+
+  function filterCollectionBySubcat(subcat, btnEl) {
+    activeCollectionSubcat = subcat || 'all';
+    document.querySelectorAll('#collectionKidsSubcats .kids-subcat-pill').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-subcat') === activeCollectionSubcat);
+    });
+    if (btnEl) btnEl.classList.add('active');
+    collectionPage = 1;
+    paginateCollectionGrid();
   }
 
   function initCollectionPagination() {
@@ -314,6 +364,13 @@
         activeCollectionSearch = qParam;
         var sInput = document.getElementById('collectionSearchInput');
         if (sInput) sInput.value = qParam;
+      }
+      var subParam = (params.get('subcat') || '').toLowerCase().trim();
+      if (subParam) {
+        activeCollectionSubcat = subParam;
+        document.querySelectorAll('#collectionKidsSubcats .kids-subcat-pill').forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-subcat') === activeCollectionSubcat);
+        });
       }
     } catch(e) {}
     paginateCollectionGrid();
@@ -332,6 +389,10 @@
     var filtered = cards.filter(function(card) {
       var karat = (card.getAttribute('data-karat') || '').toLowerCase();
       if (activeCollectionKarat !== 'all' && karat !== activeCollectionKarat) return false;
+      if (activeCollectionSubcat !== 'all') {
+        var cardCat = (card.getAttribute('data-category') || '').toLowerCase();
+        if (cardCat.indexOf(activeCollectionSubcat) === -1) return false;
+      }
       if (tokens.length > 0) {
         var titleEl = card.querySelector('.cutout-product-title');
         var title = titleEl ? titleEl.textContent : '';
@@ -469,6 +530,10 @@
     activeCollectionKarat = 'all';
     activeCollectionSort = 'default';
     activeCollectionSearch = '';
+    activeCollectionSubcat = 'all';
+    document.querySelectorAll('#collectionKidsSubcats .kids-subcat-pill').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-subcat') === 'all');
+    });
     var sInput = document.getElementById('collectionSearchInput');
     if (sInput) sInput.value = '';
     var kAll = document.getElementById('ckarat-all');
