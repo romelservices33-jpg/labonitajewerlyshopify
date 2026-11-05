@@ -191,6 +191,7 @@
     <a href="/collections/cadenas" onclick="closeMobileNotch('Cadenas'); handleNavCategory(event, 'cadenas');">Cadenas</a>
     <a href="/collections/cuban" onclick="closeMobileNotch('Cadenas Cubanas'); handleNavCategory(event, 'cuban');">Cadenas Cubanas</a>
     <a href="/collections/anillos" onclick="closeMobileNotch('Anillos'); handleNavCategory(event, 'anillos');">Anillos</a>
+    <a href="/collections/compromiso" onclick="closeMobileNotch('Compromiso'); handleNavCategory(event, 'compromiso');">💍 Anillos de Compromiso</a>
     <a href="/collections/aretes" onclick="closeMobileNotch('Aretes'); handleNavCategory(event, 'aretes');">Aretes</a>
     <a href="/collections/pulseras" onclick="closeMobileNotch('Pulseras'); handleNavCategory(event, 'pulseras');">Pulseras</a>
     <a href="/collections/dijes" onclick="closeMobileNotch('Dijes & Medallas'); handleNavCategory(event, 'dijes');">Dijes & Medallas</a>
@@ -272,7 +273,7 @@
     var hash = (window.location.hash || '').replace('#', '').toLowerCase().trim();
     if (!hash) return;
     
-    var validCategories = ['cadenas', 'anillos', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'ninos', 'relojes', 'combos', 'todos'];
+    var validCategories = ['cadenas', 'anillos', 'compromiso', 'aretes', 'pulseras', 'cuban', 'dijes', 'piercings', 'ninos', 'relojes', 'combos', 'todos'];
     if (validCategories.indexOf(hash) !== -1) {
       if (typeof window.filterCatalog === 'function') {
         window.filterCatalog(hash);

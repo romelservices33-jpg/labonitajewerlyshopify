@@ -35,6 +35,7 @@
         <a href="/collections/cadenas" class="cat-tab-btn {% if collection.handle == 'cadenas' %}active{% endif %}" style="text-decoration:none;">Cadenas</a>
         <a href="/collections/cuban" class="cat-tab-btn {% if collection.handle == 'cuban' or collection.handle == 'cadenas-cubanas' %}active{% endif %}" style="text-decoration:none;">Cadenas Cubanas</a>
         <a href="/collections/anillos" class="cat-tab-btn {% if collection.handle == 'anillos' %}active{% endif %}" style="text-decoration:none;">Anillos</a>
+        <a href="/collections/compromiso" class="cat-tab-btn {% if collection.handle == 'compromiso' %}active{% endif %}" style="text-decoration:none;">💍 Compromiso</a>
         <a href="/collections/aretes" class="cat-tab-btn {% if collection.handle == 'aretes' %}active{% endif %}" style="text-decoration:none;">Aretes</a>
         <a href="/collections/pulseras" class="cat-tab-btn {% if collection.handle == 'pulseras' %}active{% endif %}" style="text-decoration:none;">Pulseras</a>
         <a href="/collections/dijes" class="cat-tab-btn {% if collection.handle == 'dijes' %}active{% endif %}" style="text-decoration:none;">Dijes & Medallas</a>
@@ -53,6 +54,14 @@
         <button type="button" class="kids-subcat-pill" data-subcat="cadenas" onclick="filterCollectionBySubcat('cadenas', this)">Cadenas</button>
         <button type="button" class="kids-subcat-pill" data-subcat="anillos" onclick="filterCollectionBySubcat('anillos', this)">Anillos</button>
         <button type="button" class="kids-subcat-pill" data-subcat="dijes" onclick="filterCollectionBySubcat('dijes', this)">Dijes & Azabaches</button>
+      </div>
+      {%- elsif collection.handle == 'anillos' or collection.handle == 'compromiso' -%}
+      <div class="kids-subcat-pills-wrap" id="collectionKidsSubcats" role="region" aria-label="Subcategorías de Anillos" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin: -4px auto 18px; padding: 12px 16px; background: linear-gradient(135deg, rgba(209,176,84,0.10), rgba(8,25,91,0.03)); border: 1px solid rgba(209,176,84,0.35); border-radius: 16px; max-width: 880px;">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#08195B; margin-right:4px;">✦ Categoría de Anillos:</span>
+        <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">{% if collection.handle == 'compromiso' %}Todo Compromiso{% else %}Todos los Anillos{% endif %}</button>
+        {% if collection.handle == 'anillos' %}<button type="button" class="kids-subcat-pill" data-subcat="compromiso" onclick="filterCollectionBySubcat('compromiso', this)">💍 Compromiso & Matrimonio</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="caballero" onclick="filterCollectionBySubcat('caballero', this)">Caballero & Sello</button>
+        <button type="button" class="kids-subcat-pill" data-subcat="dama" onclick="filterCollectionBySubcat('dama', this)">Dama & Fantasía</button>{% else %}<a href="/collections/anillos" class="kids-subcat-pill" style="text-decoration:none;">Ver Todos los Anillos →</a>{% endif %}
       </div>
       <style>
         .kids-subcat-pill {
@@ -238,6 +247,16 @@
         {%- elsif ptype_down contains 'cadena' or ptitle_down contains 'cadena' or ptitle_down contains 'collar' or ptitle_down contains 'gargantilla' or ptitle_down contains 'rosario' -%}
           {%- assign cat_tag = 'cadenas' -%}
           {%- assign cat_label = 'Cadenas' -%}
+        {%- endif -%}
+        {%- if cat_tag contains 'anillos' -%}
+          {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
+            {%- assign cat_tag = 'anillos compromiso' -%}
+            {%- assign cat_label = 'Compromiso' -%}
+          {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' -%}
+            {%- assign cat_tag = 'anillos caballero' -%}
+          {%- else -%}
+            {%- assign cat_tag = 'anillos dama' -%}
+          {%- endif -%}
         {%- endif -%}
         {%- if collection.handle != 'combos' and cat_tag == 'combos' -%}{%- continue -%}{%- endif -%}
         {%- assign karat_tag = '10k' -%}

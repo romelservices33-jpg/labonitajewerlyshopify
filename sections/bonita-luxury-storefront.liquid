@@ -1696,6 +1696,7 @@
   <button class="cat-tab-btn" data-cat="cadenas" onclick="filterCatalog('cadenas', this)">Cadenas</button>
   <button class="cat-tab-btn" data-cat="cuban" onclick="filterCatalog('cuban', this)">Cadenas Cubanas</button>
   <button class="cat-tab-btn" data-cat="anillos" onclick="filterCatalog('anillos', this)">Anillos</button>
+  <button class="cat-tab-btn" data-cat="compromiso" onclick="filterCatalog('compromiso', this)">💍 Compromiso</button>
   <button class="cat-tab-btn" data-cat="aretes" onclick="filterCatalog('aretes', this)">Aretes</button>
   <button class="cat-tab-btn" data-cat="pulseras" onclick="filterCatalog('pulseras', this)">Pulseras</button>
   <button class="cat-tab-btn" data-cat="dijes" onclick="filterCatalog('dijes', this)">Dijes & Medallas</button>
@@ -1714,6 +1715,14 @@
     <button type="button" class="kids-subcat-pill" data-subcat="cadenas" onclick="filterCatalogKidsSubcat('cadenas', this)">Cadenas</button>
     <button type="button" class="kids-subcat-pill" data-subcat="anillos" onclick="filterCatalogKidsSubcat('anillos', this)">Anillos</button>
     <button type="button" class="kids-subcat-pill" data-subcat="dijes" onclick="filterCatalogKidsSubcat('dijes', this)">Dijes & Azabaches</button>
+  </div>
+  <!-- Subcategory Filter Pills for Anillos (Shown dynamically when 'anillos' is active) -->
+  <div class="kids-subcat-pills-wrap" id="catalogRingsSubcats" role="region" aria-label="Subcategorías de Anillos" style="display:none; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin: 4px auto 16px; padding: 12px 16px; background: linear-gradient(135deg, rgba(209,176,84,0.10), rgba(8,25,91,0.03)); border: 1px solid rgba(209,176,84,0.35); border-radius: 16px; max-width: 880px;">
+    <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#08195B; margin-right:4px;">✦ Categoría de Anillos:</span>
+    <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCatalogRingsSubcat('all', this)">Todos los Anillos</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="compromiso" onclick="filterCatalogRingsSubcat('compromiso', this)">💍 Compromiso & Matrimonio</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="caballero" onclick="filterCatalogRingsSubcat('caballero', this)">Caballero & Sello</button>
+    <button type="button" class="kids-subcat-pill" data-subcat="dama" onclick="filterCatalogRingsSubcat('dama', this)">Dama & Fantasía</button>
   </div>
   <style>
     .kids-subcat-pill {
@@ -1882,7 +1891,7 @@
   {%- endif -%}
   {%- endfor -%}
   {%- endif -%}
-  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,ninos,relojes,anillos,dijes,combos' | split: ',' -%}
+  {%- assign cat_handles = 'cuban,cadenas,pulseras,aretes,piercings,ninos,relojes,compromiso,anillos,dijes,combos' | split: ',' -%}
   {%- if catalog_collection != blank and catalog_collection.products_count > 0 -%}
   {%- for ch in cat_handles -%}
   {%- assign sub_col = collections[ch] -%}
@@ -1960,6 +1969,16 @@
   {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
   {%- assign cat_tag = 'dijes' -%}
   {%- assign cat_label = 'Dijes' -%}
+  {%- endif -%}
+  {%- if cat_tag contains 'anillos' or product.tags contains 'cat:compromiso' -%}
+  {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
+  {%- assign cat_tag = 'anillos compromiso' -%}
+  {%- assign cat_label = 'Compromiso' -%}
+  {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' -%}
+  {%- assign cat_tag = 'anillos caballero' -%}
+  {%- else -%}
+  {%- assign cat_tag = 'anillos dama' -%}
+  {%- endif -%}
   {%- endif -%}
   {%- if product.tags contains 'cat:ninos' -%}
   {%- assign cat_tag = cat_tag | append: ' ninos' -%}
@@ -2124,6 +2143,16 @@
   {%- elsif ptype_down contains 'dije' or ptitle_down contains 'medalla' or ptitle_down contains 'guardapelo' or ptitle_down contains 'relicario' or ptitle_down contains 'charm' or ptitle_down contains 'prendedor' -%}
   {%- assign cat_tag = 'dijes' -%}
   {%- assign cat_label = 'Dijes' -%}
+  {%- endif -%}
+  {%- if cat_tag contains 'anillos' or product.tags contains 'cat:compromiso' -%}
+  {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
+  {%- assign cat_tag = 'anillos compromiso' -%}
+  {%- assign cat_label = 'Compromiso' -%}
+  {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' -%}
+  {%- assign cat_tag = 'anillos caballero' -%}
+  {%- else -%}
+  {%- assign cat_tag = 'anillos dama' -%}
+  {%- endif -%}
   {%- endif -%}
   {%- if product.tags contains 'cat:ninos' -%}
   {%- assign cat_tag = cat_tag | append: ' ninos' -%}
@@ -3190,6 +3219,7 @@
   }
   var currentCatalogCategory = 'todos';
   var activeCatalogKidsSubcat = 'all';
+  var activeCatalogRingsSubcat = 'all';
   var activeKaratFilter = 'all';
   var activeSizeFilter = 'all';
   var activeSortFilter = 'default';
@@ -3508,6 +3538,17 @@
   paginateCatalogGrid();
   }
   window.filterCatalogKidsSubcat = filterCatalogKidsSubcat;
+
+  function filterCatalogRingsSubcat(subcat, btnEl) {
+  activeCatalogRingsSubcat = subcat || 'all';
+  document.querySelectorAll('#catalogRingsSubcats .kids-subcat-pill').forEach(function(b) {
+  b.classList.toggle('active', b.getAttribute('data-subcat') === activeCatalogRingsSubcat);
+  });
+  if (btnEl) btnEl.classList.add('active');
+  catalogPage = 1;
+  paginateCatalogGrid();
+  }
+  window.filterCatalogRingsSubcat = filterCatalogRingsSubcat;
 
   function resetCatalogFilters() {
   currentCatalogCategory = 'todos';
