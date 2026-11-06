@@ -31,14 +31,15 @@
   }
   .modal-gallery-arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: auto;
+    bottom: 10px;
+    transform: none;
     z-index: 30 !important;
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    border: 1px solid rgba(8, 25, 91, 0.14);
-    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(8, 25, 91, 0.16);
+    background: rgba(255, 255, 255, 0.92);
     color: #08195B;
     display: none;
     align-items: center;
@@ -46,24 +47,24 @@
     cursor: pointer;
     backdrop-filter: blur(6px);
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
   }
   .modal-gallery-arrow:hover {
     background: #FFFFFF;
     border-color: #D1B054;
-    transform: translateY(-50%) scale(1.08);
+    transform: scale(1.08);
   }
-  .modal-gallery-arrow.prev { left: 12px; }
-  .modal-gallery-arrow.next { right: 12px; }
+  .modal-gallery-arrow.prev { left: 14px; }
+  .modal-gallery-arrow.next { right: 14px; }
   .modal-thumbs-row {
     position: absolute;
-    bottom: 14px;
+    bottom: 9px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 30 !important;
     display: none;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     padding: 0 !important;
     background: transparent !important;
     border: none !important;
@@ -71,9 +72,9 @@
     backdrop-filter: none !important;
   }
   .modal-thumb-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     overflow: hidden;
     border: 2px solid #FFFFFF;
     padding: 0;
@@ -81,7 +82,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
   }
   .modal-thumb-btn img {
     width: 100%;
@@ -91,15 +92,16 @@
   }
   .modal-thumb-btn.active {
     border-color: #D1B054;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24), 0 0 0 2px rgba(209, 176, 84, 0.55);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22), 0 0 0 2px rgba(209, 176, 84, 0.55);
     transform: scale(1.06);
   }
-  /* Card-level interactive image switcher on catalog/collection cards (no background container) */
+  /* Card-level interactive image switcher on catalog/collection cards (bottom-right away from center rings) */
   .card-inline-gallery-nav {
     position: absolute;
-    inset-inline: 8px;
-    top: 50%;
-    transform: translateY(-50%);
+    inset-inline: 7px;
+    top: auto;
+    bottom: 34px;
+    transform: none;
     display: flex;
     justify-content: space-between;
     pointer-events: none;
@@ -107,11 +109,11 @@
   }
   .card-inline-arrow {
     pointer-events: auto;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 1px solid rgba(8, 25, 91, 0.12);
-    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(8, 25, 91, 0.14);
+    background: rgba(255, 255, 255, 0.88);
     color: #08195B;
     display: inline-flex;
     align-items: center;
@@ -253,20 +255,32 @@
   }
   @media (max-width: 768px) {
     #productModal .modal-media-col {
-      height: 250px !important;
-      max-height: 250px !important;
-      min-height: 250px !important;
+      height: 300px !important;
+      max-height: 300px !important;
+      min-height: 300px !important;
       border-radius: 21px 21px 0 0 !important;
     }
     #productModal #modalMainImg.modal-main-img {
       border-radius: 21px 21px 0 0 !important;
     }
     #productModal .modal-details-col {
-      max-height: calc(84vh - 250px) !important;
+      max-height: calc(86vh - 300px) !important;
+    }
+    .modal-gallery-arrow {
+      bottom: 7px;
+      width: 30px;
+      height: 30px;
+    }
+    .modal-gallery-arrow.prev { left: 10px; }
+    .modal-gallery-arrow.next { right: 10px; }
+    .modal-thumbs-row {
+      bottom: 6px;
+      gap: 6px;
     }
     .modal-thumb-btn {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
     }
     .btn-share-product-pill {
       width: 32px;

@@ -202,7 +202,7 @@
         {%- elsif product.tags contains 'cat:relojes' -%}
           {%- assign cat_tag = 'relojes' -%}
           {%- assign cat_label = 'Relojes' -%}
-        {%- elsif product.tags contains 'cat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'dormilon' -%}
+        {%- elsif product.tags contains 'cat:aretes' or product.tags contains 'subcat:aretes' or ptype_down contains 'arete' or ptitle_down contains 'arete' or ptitle_down contains 'dormilon' -%}
           {%- assign cat_tag = 'aretes' -%}
           {%- assign cat_label = 'Aretes' -%}
         {%- elsif product.tags contains 'cat:piercings' -%}
@@ -258,6 +258,12 @@
             {%- assign cat_tag = 'anillos dama' -%}
           {%- endif -%}
         {%- endif -%}
+        {%- assign is_kids_item = false -%}
+        {%- if product.tags contains 'cat:ninos' or product.tags contains 'subcat:aretes' or ptitle_down contains 'niña' or ptitle_down contains 'nina' or ptitle_down contains 'niño' or ptitle_down contains 'nino' or ptitle_down contains 'bebé' or ptitle_down contains 'bebe' or ptitle_down contains 'infantil' -%}
+          {%- assign is_kids_item = true -%}
+          {%- if cat_tag contains 'aretes' -%}{%- assign cat_label = 'Aretes Niños' -%}{%- endif -%}
+        {%- endif -%}
+        {%- if collection.handle == 'aretes' and is_kids_item -%}{%- continue -%}{%- endif -%}
         {%- if collection.handle != 'combos' and cat_tag == 'combos' -%}{%- continue -%}{%- endif -%}
         {%- assign karat_tag = '10k' -%}
         {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}

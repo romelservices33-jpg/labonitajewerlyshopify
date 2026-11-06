@@ -1980,8 +1980,9 @@
   {%- assign cat_tag = 'anillos dama' -%}
   {%- endif -%}
   {%- endif -%}
-  {%- if product.tags contains 'cat:ninos' -%}
-  {%- assign cat_tag = cat_tag | append: ' ninos' -%}
+  {%- if product.tags contains 'cat:ninos' or product.tags contains 'subcat:aretes' or ptitle_down contains 'niña' or ptitle_down contains 'nina' or ptitle_down contains 'niño' or ptitle_down contains 'nino' or ptitle_down contains 'bebé' or ptitle_down contains 'bebe' or ptitle_down contains 'infantil' -%}
+  {%- unless cat_tag contains 'ninos' -%}{%- assign cat_tag = cat_tag | append: ' ninos' -%}{%- endunless -%}
+  {%- if cat_tag contains 'aretes' -%}{%- assign cat_label = 'Aretes Niños' -%}{%- endif -%}
   {%- endif -%}
   {%- assign karat_tag = '10k' -%}
   {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
@@ -2154,8 +2155,9 @@
   {%- assign cat_tag = 'anillos dama' -%}
   {%- endif -%}
   {%- endif -%}
-  {%- if product.tags contains 'cat:ninos' -%}
-  {%- assign cat_tag = cat_tag | append: ' ninos' -%}
+  {%- if product.tags contains 'cat:ninos' or product.tags contains 'subcat:aretes' or ptitle_down contains 'niña' or ptitle_down contains 'nina' or ptitle_down contains 'niño' or ptitle_down contains 'nino' or ptitle_down contains 'bebé' or ptitle_down contains 'bebe' or ptitle_down contains 'infantil' -%}
+  {%- unless cat_tag contains 'ninos' -%}{%- assign cat_tag = cat_tag | append: ' ninos' -%}{%- endunless -%}
+  {%- if cat_tag contains 'aretes' -%}{%- assign cat_label = 'Aretes Niños' -%}{%- endif -%}
   {%- endif -%}
   {%- assign karat_tag = '10k' -%}
   {%- if product.tags contains '14k' or product.tags contains '14K' or product.title contains '14K' or product.title contains '14k' -%}
@@ -3333,6 +3335,7 @@
   var catTokens = cat.split(/\s+/).filter(Boolean);
   var matched = (cat === target || catTokens.indexOf(target) !== -1);
   if (!matched) return false;
+  if (target === 'aretes' && catTokens.indexOf('ninos') !== -1) return false;
   if (target === 'ninos' && activeCatalogKidsSubcat !== 'all') {
   if (catTokens.indexOf(activeCatalogKidsSubcat) === -1) return false;
   }

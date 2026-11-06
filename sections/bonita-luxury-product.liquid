@@ -120,9 +120,10 @@
 
   .pdp-thumbs-row {
     position: absolute;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
+    bottom: 8px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
     display: flex;
     gap: 6px;
     overflow-x: auto;
@@ -131,8 +132,8 @@
   }
 
   .pdp-thumb-item {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     border-radius: 8px;
     border: 1.5px solid rgba(8, 25, 91, 0.15);
     padding: 0;
@@ -519,15 +520,16 @@
     }
 
     .pdp-thumbs-row {
-      bottom: 8px !important;
-      left: 8px !important;
-      right: 8px !important;
+      bottom: 6px !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%) !important;
       gap: 5px !important;
     }
 
     .pdp-thumb-item {
-      width: 32px !important;
-      height: 32px !important;
+      width: 28px !important;
+      height: 28px !important;
       border-radius: 6px !important;
     }
 

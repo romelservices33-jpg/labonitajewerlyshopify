@@ -735,7 +735,7 @@ html {
   border-radius: 22px;
   box-shadow: 0 8px 26px rgba(8, 25, 91, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(209, 176, 84, 0.35);
-  padding: 24px 22px 30px;
+  padding: 20px 20px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -794,11 +794,11 @@ html {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(255, 255, 255, 0.5) 24%,
-    rgba(255, 255, 255, 0) 48%,
-    rgba(255, 255, 255, 0.15) 72%,
-    rgba(255, 255, 255, 0.88) 100%
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.38) 22%,
+    rgba(255, 255, 255, 0) 44%,
+    rgba(255, 255, 255, 0.04) 76%,
+    rgba(255, 255, 255, 0.72) 100%
   );
   pointer-events: none;
   z-index: 2;
@@ -847,8 +847,8 @@ html {
   align-items: center;
   justify-content: flex-start;
   margin-top: auto;
-  margin-bottom: 6px;
-  padding-bottom: 2px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .cat-pill-btn {
