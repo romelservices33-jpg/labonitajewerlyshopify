@@ -6,7 +6,7 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
-    assign og_url = canonical_url | default: request.origin
+    assign og_url = shop.url | append: '/products/' | append: product.handle
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'
