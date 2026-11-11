@@ -1720,7 +1720,6 @@
     <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#08195B; margin-right:4px;">✦ Subcategorías Anillos:</span>
     <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCatalogRingsSubcat('all', this)">Todo Anillos</button>
     <button type="button" class="kids-subcat-pill" data-subcat="compromiso" onclick="filterCatalogRingsSubcat('compromiso', this)">Anillos de Compromiso</button>
-    <button type="button" class="kids-subcat-pill" data-subcat="caballero" onclick="filterCatalogRingsSubcat('caballero', this)">Caballero & Sello</button>
   </div>
   <style>
     .kids-subcat-pill {
@@ -1972,9 +1971,6 @@
   {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
   {%- assign cat_tag = 'anillos compromiso' -%}
   {%- assign cat_label = 'Compromiso' -%}
-  {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' or ptitle_down contains 'estrella de david' or ptitle_down contains 'talla 10' or ptitle_down contains 'talla 11' or ptitle_down contains 'talla 12' -%}
-  {%- assign cat_tag = 'anillos caballero' -%}
-  {%- assign cat_label = 'Anillos Caballero' -%}
   {%- else -%}
   {%- assign cat_tag = 'anillos' -%}
   {%- assign cat_label = 'Anillos' -%}
@@ -2149,9 +2145,6 @@
   {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
   {%- assign cat_tag = 'anillos compromiso' -%}
   {%- assign cat_label = 'Compromiso' -%}
-  {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' or ptitle_down contains 'estrella de david' or ptitle_down contains 'talla 10' or ptitle_down contains 'talla 11' or ptitle_down contains 'talla 12' -%}
-  {%- assign cat_tag = 'anillos caballero' -%}
-  {%- assign cat_label = 'Anillos Caballero' -%}
   {%- else -%}
   {%- assign cat_tag = 'anillos' -%}
   {%- assign cat_label = 'Anillos' -%}
@@ -3549,7 +3542,7 @@
   window.filterCatalogKidsSubcat = filterCatalogKidsSubcat;
 
   function filterCatalogRingsSubcat(subcat, btnEl) {
-  activeCatalogRingsSubcat = (subcat === 'compromiso' || subcat === 'caballero') ? subcat : 'all';
+  activeCatalogRingsSubcat = (subcat === 'compromiso') ? 'compromiso' : 'all';
   document.querySelectorAll('#catalogRingsSubcats .kids-subcat-pill').forEach(function(b) {
   b.classList.toggle('active', b.getAttribute('data-subcat') === activeCatalogRingsSubcat);
   });
@@ -3560,11 +3553,8 @@
   if (activeCatalogRingsSubcat === 'compromiso') {
   titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Matrimonio</span>';
   subtitleEl.textContent = 'Solitarios, dúos, tríos nupciales y alianzas de boda en oro auténtico 10K y 14K.';
-  } else if (activeCatalogRingsSubcat === 'caballero') {
-  titleEl.innerHTML = 'Anillos de <span class="accent-gold">Caballero & Sello</span>';
-  subtitleEl.textContent = 'Anillos sello, eslabón cubano y diseños masculinos macizos en oro 10K y 14K.';
   } else {
-  titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Sello</span>';
+  titleEl.innerHTML = 'Anillos en <span class="accent-gold">Oro 10K & 14K</span>';
   subtitleEl.textContent = 'Piezas forjadas con acabados de alta orfebrería y piedras engastadas a mano.';
   }
   }
@@ -3681,8 +3671,11 @@
   } else if (category === 'cuban') {
   titleEl.innerHTML = 'Especialidad <span class="accent-gold">Cadenas Cubanas</span>';
   subtitleEl.textContent = 'Nuestra firma insignia: eslabones Miami Cuban macizos de alto gramaje en oro auténtico.';
+  } else if (category === 'compromiso') {
+  titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Matrimonio</span>';
+  subtitleEl.textContent = 'Solitarios, dúos, tríos nupciales y alianzas de boda en oro auténtico 10K y 14K.';
   } else if (category === 'anillos') {
-  titleEl.innerHTML = 'Anillos de <span class="accent-gold">Compromiso & Sello</span>';
+  titleEl.innerHTML = 'Anillos en <span class="accent-gold">Oro 10K & 14K</span>';
   subtitleEl.textContent = 'Piezas forjadas con acabados de alta orfebrería y piedras engastadas a mano.';
   } else if (category === 'aretes') {
   titleEl.innerHTML = 'Aretes & <span class="accent-gold">Arracadas de Lujo</span>';
@@ -3711,7 +3704,7 @@
   }
   }
 
-  var targetBtn = tabBtn || document.querySelector('.cat-tab-btn[data-cat="' + category + '"]');
+  var targetBtn = tabBtn || document.querySelector('.cat-tab-btn[data-cat="' + currentCatalogCategory + '"]');
   document.querySelectorAll('.cat-tab-btn').forEach(function(b) { b.classList.remove('active'); });
   if (targetBtn) {
   targetBtn.classList.add('active');

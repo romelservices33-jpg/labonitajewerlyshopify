@@ -60,11 +60,9 @@
         {%- if collection.handle == 'anillos' -%}
         <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">Todo Anillos</button>
         <button type="button" class="kids-subcat-pill" data-subcat="compromiso" onclick="filterCollectionBySubcat('compromiso', this)">Anillos de Compromiso</button>
-        <button type="button" class="kids-subcat-pill" data-subcat="caballero" onclick="filterCollectionBySubcat('caballero', this)">Caballero & Sello</button>
         {%- else -%}
         <a href="/collections/anillos" class="kids-subcat-pill" style="text-decoration:none;">Todo Anillos</a>
         <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">Anillos de Compromiso</button>
-        <a href="/collections/anillos?subcat=caballero" class="kids-subcat-pill" style="text-decoration:none;">Caballero & Sello</a>
         {%- endif -%}
       </div>
       <style>
@@ -256,9 +254,6 @@
           {%- if product.tags contains 'cat:compromiso' or ptitle_down contains 'compromiso' or ptitle_down contains 'matrimonio' or ptitle_down contains 'nupcial' or ptitle_down contains 'alianza' or ptitle_down contains 'solitario' or ptitle_down contains 'trío de anillos' or ptitle_down contains 'trio de anillos' or ptitle_down contains 'dúo de anillos' or ptitle_down contains 'duo de anillos' -%}
             {%- assign cat_tag = 'anillos compromiso' -%}
             {%- assign cat_label = 'Compromiso' -%}
-          {%- elsif ptitle_down contains 'sello' or ptitle_down contains 'caballero' or ptitle_down contains 'hombre' or ptitle_down contains 'rolex' or ptitle_down contains 'san lázaro' or ptitle_down contains 'san lazaro' or ptitle_down contains 'pirámide' or ptitle_down contains 'herradura' or ptitle_down contains 'ancla' or ptitle_down contains 'rosa de los vientos' or ptitle_down contains 'estrella de david' or ptitle_down contains 'talla 10' or ptitle_down contains 'talla 11' or ptitle_down contains 'talla 12' -%}
-            {%- assign cat_tag = 'anillos caballero' -%}
-            {%- assign cat_label = 'Anillos Caballero' -%}
           {%- else -%}
             {%- assign cat_tag = 'anillos' -%}
             {%- assign cat_label = 'Anillos' -%}
