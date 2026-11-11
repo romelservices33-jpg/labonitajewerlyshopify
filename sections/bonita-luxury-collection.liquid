@@ -61,12 +61,10 @@
         <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">Todo Anillos</button>
         <button type="button" class="kids-subcat-pill" data-subcat="compromiso" onclick="filterCollectionBySubcat('compromiso', this)">Anillos de Compromiso</button>
         <button type="button" class="kids-subcat-pill" data-subcat="caballero" onclick="filterCollectionBySubcat('caballero', this)">Caballero & Sello</button>
-        <button type="button" class="kids-subcat-pill" data-subcat="dama" onclick="filterCollectionBySubcat('dama', this)">Dama & Fantasía</button>
         {%- else -%}
         <a href="/collections/anillos" class="kids-subcat-pill" style="text-decoration:none;">Todo Anillos</a>
         <button type="button" class="kids-subcat-pill active" data-subcat="all" onclick="filterCollectionBySubcat('all', this)">Anillos de Compromiso</button>
         <a href="/collections/anillos?subcat=caballero" class="kids-subcat-pill" style="text-decoration:none;">Caballero & Sello</a>
-        <a href="/collections/anillos?subcat=dama" class="kids-subcat-pill" style="text-decoration:none;">Dama & Fantasía</a>
         {%- endif -%}
       </div>
       <style>
@@ -262,8 +260,8 @@
             {%- assign cat_tag = 'anillos caballero' -%}
             {%- assign cat_label = 'Anillos Caballero' -%}
           {%- else -%}
-            {%- assign cat_tag = 'anillos dama' -%}
-            {%- assign cat_label = 'Anillos Dama' -%}
+            {%- assign cat_tag = 'anillos' -%}
+            {%- assign cat_label = 'Anillos' -%}
           {%- endif -%}
         {%- endif -%}
         {%- assign is_kids_item = false -%}
@@ -400,10 +398,13 @@
       }
       var subParam = (params.get('subcat') || '').toLowerCase().trim();
       if (subParam) {
-        activeCollectionSubcat = subParam;
-        document.querySelectorAll('#collectionKidsSubcats .kids-subcat-pill').forEach(function(b) {
-          b.classList.toggle('active', b.getAttribute('data-subcat') === activeCollectionSubcat);
-        });
+        var matchingSubBtn = document.querySelector('#collectionKidsSubcats .kids-subcat-pill[data-subcat="' + subParam + '"]');
+        if (matchingSubBtn) {
+          activeCollectionSubcat = subParam;
+          document.querySelectorAll('#collectionKidsSubcats .kids-subcat-pill').forEach(function(b) {
+            b.classList.toggle('active', b.getAttribute('data-subcat') === activeCollectionSubcat);
+          });
+        }
       }
     } catch(e) {}
     paginateCollectionGrid();
