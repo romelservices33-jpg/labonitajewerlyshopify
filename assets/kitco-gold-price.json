@@ -5,20 +5,20 @@
   "troy_ounce_grams": 31.1034768,
   "store_buyback_percentage": 93,
   "store_buyback_factor": 0.93,
-  "updated_at_iso": "2026-11-16T17:00:00Z",
-  "synced_at_iso": "2026-11-16T22:48:03.102Z",
+  "updated_at_iso": "2026-11-17T16:35:56.61Z",
+  "synced_at_iso": "2026-11-17T21:36:37.025Z",
   "official_spot": {
-    "bid_oz_usd": 3855.5,
-    "ask_oz_usd": 3857.5,
-    "mid_oz_usd": 3856.5,
+    "bid_oz_usd": 3855.6,
+    "ask_oz_usd": 3857.6,
+    "mid_oz_usd": 3856.6,
     "gram_24k_usd": 123.96,
-    "change_usd": -27.9,
-    "change_percentage": -0.72,
-    "high_oz_usd": 3902.3,
-    "low_oz_usd": 3832.2
+    "change_usd": 0.1,
+    "change_percentage": 0,
+    "high_oz_usd": 3891.6,
+    "low_oz_usd": 3836
   },
   "store_buyback_93": {
-    "oz_24k_usd": 3585.62,
+    "oz_24k_usd": 3585.71,
     "gram_24k_usd": 115.28,
     "gram_18k_usd": 86.46,
     "gram_14k_usd": 67.25,
@@ -29,36 +29,36 @@
         "purity": 100,
         "purityLabel": "99.9%",
         "official_per_gram_usd": 123.96,
-        "official_per_oz_usd": 3855.5,
+        "official_per_oz_usd": 3855.6,
         "store_buyback_per_gram_usd": 115.28,
-        "store_buyback_per_oz_usd": 3585.62
+        "store_buyback_per_oz_usd": 3585.71
       },
       "18k": {
         "karat": "18K",
         "purity": 75,
         "purityLabel": "75.0%",
         "official_per_gram_usd": 92.97,
-        "official_per_oz_usd": 2891.63,
+        "official_per_oz_usd": 2891.7,
         "store_buyback_per_gram_usd": 86.46,
-        "store_buyback_per_oz_usd": 2689.21
+        "store_buyback_per_oz_usd": 2689.28
       },
       "14k": {
         "karat": "14K",
         "purity": 58.33,
         "purityLabel": "58.33%",
         "official_per_gram_usd": 72.31,
-        "official_per_oz_usd": 2249.04,
+        "official_per_oz_usd": 2249.1,
         "store_buyback_per_gram_usd": 67.25,
-        "store_buyback_per_oz_usd": 2091.61
+        "store_buyback_per_oz_usd": 2091.66
       },
       "10k": {
         "karat": "10K",
         "purity": 41.67,
         "purityLabel": "41.67%",
         "official_per_gram_usd": 51.65,
-        "official_per_oz_usd": 1606.46,
+        "official_per_oz_usd": 1606.5,
         "store_buyback_per_gram_usd": 48.03,
-        "store_buyback_per_oz_usd": 1494.01
+        "store_buyback_per_oz_usd": 1494.05
       }
     }
   }
