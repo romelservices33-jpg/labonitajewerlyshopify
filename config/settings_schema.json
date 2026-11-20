@@ -1483,6 +1483,12 @@
       },
       {
         "type": "text",
+        "id": "gtm_tag_id",
+        "label": "Google Tag / Tag Manager ID (GTM-XXXXXXX)",
+        "info": "Etiqueta unificada de Google (ej. GTM-MPK2N699). Si usas también la app Google & YouTube para GA4, deja solo uno activo."
+      },
+      {
+        "type": "text",
         "id": "ga4_measurement_id",
         "label": "Google Analytics 4 (G-XXXXXXXXXX)",
         "info": "Déjalo vacío si aún no se configura GA4."
