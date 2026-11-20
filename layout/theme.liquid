@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="facebook-domain-verification" content="j29jgzkc5o4rkrx5e19usygzrbvcrl" />
+    {%- if settings.google_site_verification != blank -%}
+      <meta name="google-site-verification" content="{{ settings.google_site_verification | strip | escape }}" />
+    {%- endif -%}
     <meta name="theme-color" content="">
     {%- if request.page_type == 'page' and page.template_suffix == 'vendedores' -%}
       <meta name="robots" content="noindex, nofollow">
@@ -24,18 +27,61 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    {%- liquid
+      assign clean_shop_name = shop.name | strip
+      assign clean_page_title = page_title | strip
+      assign default_home_title = settings.seo_home_title | default: 'La Bonita Joyería | Oro Sólido 10K y 14K en Louisville, KY y Envíos a EE. UU.' | strip
+      assign default_home_desc = settings.seo_home_description | default: 'Joyería en oro sólido 10K y 14K en Louisville, KY con envío asegurado a todo EE. UU. y Puerto Rico. Cadenas cubanas, anillos, aretes, pulseras, dijes y financiamiento Affirm.' | strip
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+      assign is_generic_home_title = false
+      if request.page_type == 'index'
+        if clean_page_title == blank or clean_page_title == clean_shop_name
+          assign is_generic_home_title = true
+        endif
+      endif
 
-    {% render 'meta-tags' %}
+      if is_generic_home_title
+        assign rendered_title = default_home_title
+      elsif request.page_type == 'product' and product != blank
+        assign prod_title_clean = product.title | strip | truncatewords: 12, ''
+        assign rendered_title = prod_title_clean | append: ' – ' | append: clean_shop_name
+      else
+        assign rendered_title = clean_page_title
+        if current_tags
+          assign tags_joined = current_tags | join: ', '
+          assign rendered_title = rendered_title | append: ' – tagged "' | append: tags_joined | append: '"'
+        endif
+        if current_page != 1
+          assign rendered_title = rendered_title | append: ' – Page ' | append: current_page
+        endif
+        unless clean_page_title contains clean_shop_name
+          assign rendered_title = rendered_title | append: ' – ' | append: clean_shop_name
+        endunless
+      endif
+
+      assign rendered_description = page_description | strip_html | strip_newlines | strip
+      if rendered_description == blank
+        if request.page_type == 'index'
+          assign rendered_description = default_home_desc
+        elsif request.page_type == 'collection' and collection != blank
+          assign rendered_description = 'Explora ' | append: collection.title | append: ' en oro auténtico 10K y 14K certificado en La Bonita Joyería (Louisville, KY). Envío asegurado a EE. UU. y Puerto Rico y financiamiento con Affirm.'
+        elsif request.page_type == 'product' and product != blank
+          assign rendered_description = product.title | strip | append: ' en La Bonita Joyería. Oro genuino certificado, garantía de por vida, financiamiento con Affirm y envío asegurado a EE. UU. y Puerto Rico.'
+        else
+          assign rendered_description = default_home_desc
+        endif
+      else
+        assign rendered_description = rendered_description | truncate: 158
+      endif
+    -%}
+
+    <title>{{ rendered_title | escape }}</title>
+
+    <meta name="description" content="{{ rendered_description | escape }}">
+
+    {% render 'meta-tags', seo_title: rendered_title, seo_description: rendered_description %}
+    {% render 'bonita-seo-schema' %}
+    {% render 'bonita-tracking-pixels' %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
