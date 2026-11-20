@@ -1,0 +1,1242 @@
+{{ 'editorial-luxury.css' | asset_url | stylesheet_tag }}
+
+{%- assign _vendedores = shop.metaobjects.bonita_vendedor.values -%}
+{%- assign store_origin = shop.url | default: 'https://www.labonitajewelry.com' -%}
+
+<section class="brp-wrapper" id="bonitaReferralPortal" aria-label="Portal de Vendedores y Referidos">
+  <div class="brp-container">
+
+    <header class="brp-hero">
+      <span class="brp-eyebrow">PROGRAMA INTERNO · LA BONITA JEWELRY</span>
+      <h1 class="brp-title">Portal de <span>Referidos & Vendedores</span></h1>
+      <p class="brp-subtitle">
+        Genera tus enlaces personales para redes sociales y WhatsApp, activa el modo vendedor al navegar el catálogo y consulta tu comisión aprobada del <strong>{{ section.settings.commission_rate | default: 7 }}% neto después de impuestos</strong>.
+      </p>
+    </header>
+
+    <!-- LOGIN / PROFILE PICKER VIEW -->
+    <div id="brpPickerView" class="brp-card brp-picker-card">
+      <div class="brp-section-head">
+        <h2>Selecciona tu perfil de vendedor</h2>
+        <p>Elige tu perfil e ingresa tu PIN de 4 dígitos para abrir tu generador personal de enlaces y estadísticas.</p>
+      </div>
+
+      <div id="brpProfilesGrid" class="brp-profiles-grid"></div>
+
+      <div id="brpPinPanel" class="brp-pin-panel" style="display:none;">
+        <div class="brp-pin-box">
+          <div class="brp-pin-header">
+            <span id="brpSelectedBadge" class="brp-badge-gold">VEND1</span>
+            <strong id="brpSelectedName">Vendedor 1</strong>
+          </div>
+          <label for="brpPinInput" class="brp-label">PIN de acceso (4 dígitos)</label>
+          <div class="brp-pin-row">
+            <input
+              type="password"
+              inputmode="numeric"
+              maxlength="12"
+              id="brpPinInput"
+              class="brp-input"
+              placeholder="Ej: 1101"
+              autocomplete="off"
+            >
+            <button type="button" id="brpUnlockBtn" class="brp-btn brp-btn-navy">Entrar a mi Perfil</button>
+          </div>
+          <p id="brpPinError" class="brp-error" role="alert" style="display:none;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVE SALESPERSON DASHBOARD VIEW -->
+    <div id="brpDashboardView" style="display:none;">
+
+      <!-- Profile Header & Official Synced Stats -->
+      <div class="brp-card brp-profile-banner">
+        <div class="brp-banner-top">
+          <div class="brp-seller-id">
+            <span class="brp-avatar" id="brpDashAvatar">V1</span>
+            <div>
+              <div class="brp-code-row">
+                <span class="brp-badge-gold" id="brpDashCode">VEND1</span>
+                <span class="brp-social-tag" id="brpDashSocial">Perfil Tienda</span>
+              </div>
+              <h2 class="brp-dash-name" id="brpDashName">Vendedor 1</h2>
+            </div>
+          </div>
+
+          <div class="brp-banner-actions">
+            <button type="button" id="brpSellerModeToggle" class="brp-btn brp-btn-gold">
+              <span>Activar Modo Vendedor en Este Teléfono</span>
+            </button>
+            <button type="button" id="brpSwitchProfileBtn" class="brp-btn brp-btn-outline">Cambiar Perfil</button>
+          </div>
+        </div>
+
+        <div class="brp-stats-grid">
+          <div class="brp-stat-box">
+            <span class="brp-stat-label">Comisión Aprobada</span>
+            <strong class="brp-stat-value">{{ section.settings.commission_rate | default: 7 }}%</strong>
+            <span class="brp-stat-hint">Sobre venta neta (sin tax)</span>
+          </div>
+          <div class="brp-stat-box">
+            <span class="brp-stat-label">Pedidos Pagados</span>
+            <strong class="brp-stat-value" id="brpStatOrders">0</strong>
+            <span class="brp-stat-hint">Atribución 30 días</span>
+          </div>
+          <div class="brp-stat-box">
+            <span class="brp-stat-label">Ventas Netas</span>
+            <strong class="brp-stat-value" id="brpStatSales">$0.00</strong>
+            <span class="brp-stat-hint">Subtotal tras descuentos</span>
+          </div>
+          <div class="brp-stat-box brp-stat-highlight">
+            <span class="brp-stat-label">Comisión Acumulada</span>
+            <strong class="brp-stat-value" id="brpStatCommission">$0.00</strong>
+            <span class="brp-stat-hint" id="brpStatUpdated">Sincronizado vía Shopify</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main 2-Column Workspace -->
+      <div class="brp-grid-2">
+
+        <!-- CARD 1: PRIMARY PERSONAL LINK + COLLECTION CHIPS -->
+        <div class="brp-card">
+          <h3 class="brp-card-title">1. Tu Enlace Personal Principal</h3>
+          <p class="brp-card-desc">
+            Coloca este enlace en tu <strong>Bio de Instagram, perfil de TikTok, Facebook o estado de WhatsApp</strong>. Todo cliente que entre y compre dentro de 30 días queda registrado a tu nombre.
+          </p>
+
+          <div class="brp-link-display">
+            <input type="text" readonly id="brpMainLinkInput" class="brp-input brp-mono" aria-label="Enlace personal principal">
+            <button type="button" id="brpCopyMainBtn" class="brp-btn brp-btn-navy">Copiar Link</button>
+          </div>
+
+          <div class="brp-action-strip">
+            <a id="brpTestMainLink" href="#" target="_blank" rel="noopener" class="brp-btn brp-btn-outline brp-btn-sm">Probar en Tienda</a>
+            <button type="button" id="brpWaMainBtn" class="brp-btn brp-btn-whatsapp brp-btn-sm">Enviar Link por WhatsApp</button>
+          </div>
+
+          <div class="brp-divider"></div>
+
+          <span class="brp-label">Enlaces Rápidos por Colección (clic para copiar):</span>
+          <div class="brp-chips-wrap" id="brpCollectionChips">
+            <button type="button" class="brp-chip" data-path="/collections/cuban">Cadenas Cubanas</button>
+            <button type="button" class="brp-chip" data-path="/collections/compromiso">Anillos de Compromiso</button>
+            <button type="button" class="brp-chip" data-path="/collections/anillos">Anillos</button>
+            <button type="button" class="brp-chip" data-path="/collections/pulseras">Pulseras</button>
+            <button type="button" class="brp-chip" data-path="/collections/aretes">Aretes & Broqueles</button>
+            <button type="button" class="brp-chip" data-path="/collections/dijes">Dijes</button>
+            <button type="button" class="brp-chip" data-path="/collections/relojes">Relojes</button>
+            <button type="button" class="brp-chip" data-path="/collections/combos">Combos</button>
+          </div>
+        </div>
+
+        <!-- CARD 2: LIVE PRODUCT & CUSTOM URL LINK BUILDER -->
+        <div class="brp-card">
+          <h3 class="brp-card-title">2. Generar Link para Cualquier Joya</h3>
+          <p class="brp-card-desc">
+            Busca una prenda por nombre, SKU o kilataje, o pega cualquier link de la tienda para obtener tu enlace rastreable al instante.
+          </p>
+
+          <label for="brpProductSearch" class="brp-label">Buscar en el catálogo real (nombre o SKU)</label>
+          <div class="brp-search-box">
+            <input
+              type="search"
+              id="brpProductSearch"
+              class="brp-input"
+              placeholder="Ej: cubana, 4563, compromiso, 2519, invicta..."
+              autocomplete="off"
+            >
+          </div>
+          <div id="brpSearchResults" class="brp-search-results" style="display:none;"></div>
+
+          <label for="brpCustomUrlInput" class="brp-label" style="margin-top:14px;">O pega cualquier enlace de labonitajewelry.com</label>
+          <div class="brp-link-display">
+            <input type="text" id="brpCustomUrlInput" class="brp-input" placeholder="https://www.labonitajewelry.com/products/...">
+            <button type="button" id="brpBuildCustomBtn" class="brp-btn brp-btn-gold">Armar Link</button>
+          </div>
+
+          <div id="brpGeneratedBox" class="brp-generated-box" style="display:none;">
+            <div class="brp-gen-meta">
+              <strong id="brpGenTitle">Enlace Listo</strong>
+              <span id="brpGenComm" class="brp-badge-green"></span>
+            </div>
+            <div class="brp-link-display">
+              <input type="text" readonly id="brpGenUrlInput" class="brp-input brp-mono" aria-label="Enlace de producto generado">
+              <button type="button" id="brpCopyGenBtn" class="brp-btn brp-btn-navy">Copiar</button>
+            </div>
+            <div class="brp-action-strip">
+              <button type="button" id="brpCopyGenWithMsgBtn" class="brp-btn brp-btn-outline brp-btn-sm">Copiar con Mensaje de Venta</button>
+              <button type="button" id="brpWaGenBtn" class="brp-btn brp-btn-whatsapp brp-btn-sm">Enviar por WhatsApp</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Row: 7% Calculator + Ready Scripts -->
+      <div class="brp-grid-2" style="margin-top:24px;">
+
+        <!-- CARD 3: 7% COMMISSION CALCULATOR & RULES -->
+        <div class="brp-card">
+          <h3 class="brp-card-title">3. Simulador de Ganancia ({{ section.settings.commission_rate | default: 7 }}% Después de Impuestos)</h3>
+          <p class="brp-card-desc">
+            Calcula al instante tu ganancia real por cada venta. Recuerda que los pedidos mayores a <strong>$2,500</strong> ya tienen aplicado un <strong>20% de descuento</strong> en la web; tu comisión se calcula sobre el precio final neto pagado (sin impuesto estatal).
+          </p>
+
+          <label for="brpCalcAmount" class="brp-label">Precio de venta neto de la joya ($ USD)</label>
+          <input type="number" min="1" step="1" id="brpCalcAmount" class="brp-input" value="1185">
+
+          <div class="brp-calc-breakdown">
+            <div class="brp-calc-row">
+              <span>Base Neta Comisionable (después de impuestos):</span>
+              <strong id="brpCalcBase">$1,185.00</strong>
+            </div>
+            <div class="brp-calc-row brp-muted">
+              <span>Impuesto estatal ref. KY (6%, pagado al Estado):</span>
+              <span id="brpCalcTax">+$71.10 (Total cliente: $1,256.10)</span>
+            </div>
+            <div class="brp-calc-row brp-calc-total">
+              <span>Tu Comisión ({{ section.settings.commission_rate | default: 7 }}%):</span>
+              <strong id="brpCalcResult">$82.95 USD</strong>
+            </div>
+          </div>
+
+          <ul class="brp-rules-list">
+            <li><strong>Ventana de 30 días:</strong> Si el cliente entra por tu enlace hoy y compra después dentro de 30 días en ese dispositivo, la venta es tuya.</li>
+            <li><strong>Consultas por WhatsApp:</strong> Si el cliente toca "Consultar por WhatsApp" tras entrar por tu link, su mensaje incluye <code>[Ref: <span class="js-seller-code-inline">VEND1</span>]</code> para respaldar cierres asistidos.</li>
+            <li><strong>Todos los métodos de pago válidos:</strong> Tarjeta, Shop Pay, Apple/Google Pay, <strong>Affirm</strong> y Afterpay cuentan igual al marcarse como Pagado.</li>
+            <li><strong>Órdenes válidas:</strong> Solo liquidan pedidos pagados y no cancelados/reembolsados.</li>
+          </ul>
+        </div>
+
+        <!-- CARD 4: READY-TO-USE SALES SCRIPTS -->
+        <div class="brp-card">
+          <h3 class="brp-card-title">4. Guiones Listos Para Copiar y Enviar</h3>
+          <p class="brp-card-desc">
+            Textos probados con tu enlace personal ya insertado. Toca copiar y pégalos directo en Instagram, TikTok o WhatsApp.
+          </p>
+          <div id="brpScriptsList" class="brp-scripts-list"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="brpToast" class="brp-toast" role="status" aria-live="polite"></div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  var RATE = {{ section.settings.commission_rate | default: 7 }} / 100;
+  var STORE_ORIGIN = ({{ store_origin | json }} || window.location.origin).replace(/\/+$/, '');
+  var SELLER_MODE_KEY = 'bonita_salesperson_mode_v1';
+  var SESSION_PREFIX = 'bonita_portal_unlocked_';
+
+  var PROFILES = [];
+  {%- for s in _vendedores -%}
+    {%- assign s_code = s.codigo.value | strip | upcase -%}
+    {%- if s_code != blank and s.activo.value != false -%}
+      {%- assign raw_pin = s.pin.value | strip -%}
+      PROFILES.push({
+        code: {{ s_code | json }},
+        name: {{ s.nombre.value | default: s_code | json }},
+        social: {{ s.perfil_social.value | default: 'Perfil Personal' | json }},
+        pinHash: {% if raw_pin != blank %}{{ raw_pin | sha256 | json }}{% else %}""{% endif %},
+        hasPin: {% if raw_pin != blank %}true{% else %}false{% endif %},
+        orders: {{ s.pedidos_pagados.value | default: 0 | plus: 0 }},
+        sales: {{ s.ventas_netas.value | default: '$0.00' | json }},
+        commission: {{ s.comision_acumulada.value | default: '$0.00' | json }},
+        updated: {{ s.ultima_actualizacion.value | default: 'Pendiente de corte' | json }}
+      });
+    {%- endif -%}
+  {%- endfor -%}
+
+  if (!PROFILES.length) {
+    PROFILES = [
+      { code: 'VEND1', name: 'Vendedor 1', social: 'Perfil Tienda #1', pinHash: {{ '1101' | sha256 | json }}, hasPin: true, orders: 0, sales: '$0.00', commission: '$0.00', updated: 'Listo para pruebas' },
+      { code: 'VEND2', name: 'Vendedor 2', social: 'Perfil Tienda #2', pinHash: {{ '2202' | sha256 | json }}, hasPin: true, orders: 0, sales: '$0.00', commission: '$0.00', updated: 'Listo para pruebas' },
+      { code: 'VEND3', name: 'Vendedor 3', social: 'Perfil Tienda #3', pinHash: {{ '3303' | sha256 | json }}, hasPin: true, orders: 0, sales: '$0.00', commission: '$0.00', updated: 'Listo para pruebas' }
+    ];
+  }
+
+  var selectedProfile = null;
+  var activeProfile = null;
+  var lastProductUrl = '';
+  var lastProductTitle = '';
+
+  function showToast(msg) {
+    var el = document.getElementById('brpToast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(function() { el.classList.remove('show'); }, 2600);
+  }
+
+  function copyStr(text, label) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast(label || '✓ Copiado al portapapeles');
+      }).catch(function() {
+        fallbackCopy(text, label);
+      });
+    } else {
+      fallbackCopy(text, label);
+    }
+  }
+
+  function fallbackCopy(text, label) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast(label || '✓ Copiado al portapapeles');
+    } catch (e) {}
+  }
+
+  function sha256Hex(str) {
+    if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+      return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf) {
+        var bytes = new Uint8Array(buf);
+        var hex = '';
+        for (var i = 0; i < bytes.length; i++) {
+          hex += ('0' + bytes[i].toString(16)).slice(-2);
+        }
+        return hex;
+      });
+    }
+    return Promise.resolve('');
+  }
+
+  function formatRefUrl(rawPathOrUrl, code) {
+    var base = rawPathOrUrl || '/';
+    if (base.indexOf('http') !== 0) {
+      base = STORE_ORIGIN + (base.charAt(0) === '/' ? '' : '/') + base;
+    }
+    try {
+      var u = new URL(base);
+      if (u.hostname.indexOf('labonitajewelry.com') === -1 && u.hostname.indexOf('myshopify.com') === -1 && u.hostname !== window.location.hostname) {
+        u = new URL(STORE_ORIGIN + '/');
+      }
+      u.pathname = u.pathname.replace(/^\/[a-z]{2}(?:-[a-zA-Z]{2})?\/products\//, '/products/');
+      u.searchParams.set('ref', code);
+      return u.toString();
+    } catch (e) {
+      return STORE_ORIGIN + '/?ref=' + encodeURIComponent(code);
+    }
+  }
+
+  function getSellerMode() {
+    try {
+      var raw = window.localStorage.getItem(SELLER_MODE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function updateSellerModeBtn() {
+    var btn = document.getElementById('brpSellerModeToggle');
+    if (!btn || !activeProfile) return;
+    var mode = getSellerMode();
+    var isOn = mode && mode.code === activeProfile.code;
+    if (isOn) {
+      btn.classList.add('is-active');
+      btn.innerHTML = '<span>✓ Modo Vendedor Activo (' + activeProfile.code + ') · Desactivar</span>';
+    } else {
+      btn.classList.remove('is-active');
+      btn.innerHTML = '<span>Activar Modo Vendedor en Este Teléfono</span>';
+    }
+  }
+
+  function renderScripts() {
+    if (!activeProfile) return;
+    var code = activeProfile.code;
+    var storeLink = formatRefUrl('/', code);
+    var cubanLink = formatRefUrl('/collections/cuban', code);
+    var compLink = formatRefUrl('/collections/compromiso', code);
+
+    var scripts = [
+      {
+        title: 'Instagram / TikTok Bio & Stories (Enlace General)',
+        body: 'Oro sólido 10K y 14K garantizado de por vida en La Bonita Jewelry ✨ Financiamiento disponible con Affirm y envíos asegurados a todo EE. UU. y Puerto Rico. Compra aquí 👇 ' + storeLink
+      },
+      {
+        title: 'Oferta 20% OFF en Cadenas y Piezas > $2,500',
+        body: '¡Aprovecha! Todas nuestras cadenas cubanas y piezas de alto gramaje mayores a $2,500 tienen 20% de descuento directo hoy en la tienda online 🔥 Además puedes pagarlo a plazos con Affirm. Mira el catálogo aquí: ' + cubanLink
+      },
+      {
+        title: 'Anillos de Compromiso & Matrimonio',
+        body: '¿Buscas el anillo perfecto? Ya tenemos organizada nuestra colección exclusiva de Anillos de Compromiso y Matrimonio en oro 10K y 14K certificado 💍 Envío asegurado a todo USA. Míralos aquí: ' + compLink
+      },
+      {
+        title: 'Seguimiento Directo por WhatsApp',
+        body: '¡Hola! Soy ' + activeProfile.name + ' de La Bonita Jewelry. Aquí te comparto nuestro catálogo directo con precios actualizados, peso real en gramos y garantía de autenticidad. Si ves una pieza que te encante me escribes y te asesoro: ' + storeLink
+      }
+    ];
+
+    var container = document.getElementById('brpScriptsList');
+    container.innerHTML = '';
+    scripts.forEach(function(sc) {
+      var box = document.createElement('div');
+      box.className = 'brp-script-item';
+      box.innerHTML =
+        '<div class="brp-script-head">' +
+          '<strong>' + sc.title + '</strong>' +
+          '<button type="button" class="brp-btn brp-btn-outline brp-btn-xs">Copiar Guion</button>' +
+        '</div>' +
+        '<p class="brp-script-text"></p>';
+      box.querySelector('.brp-script-text').textContent = sc.body;
+      box.querySelector('button').addEventListener('click', function() {
+        copyStr(sc.body, '✓ Guion copiado con tu enlace (?ref=' + code + ')');
+      });
+      container.appendChild(box);
+    });
+  }
+
+  function updateCalc() {
+    var inp = document.getElementById('brpCalcAmount');
+    var val = parseFloat(inp && inp.value ? inp.value : 0) || 0;
+    if (val < 0) val = 0;
+    var tax = val * 0.06;
+    var totalClient = val + tax;
+    var comm = val * RATE;
+    document.getElementById('brpCalcBase').textContent = '$' + val.toFixed(2);
+    document.getElementById('brpCalcTax').textContent = '+$' + tax.toFixed(2) + ' (Total cliente: $' + totalClient.toFixed(2) + ')';
+    document.getElementById('brpCalcResult').textContent = '$' + comm.toFixed(2) + ' USD';
+  }
+
+  function openDashboard(prof) {
+    activeProfile = prof;
+    document.getElementById('brpPickerView').style.display = 'none';
+    document.getElementById('brpDashboardView').style.display = 'block';
+
+    var initials = prof.name.split(/\s+/).map(function(w) { return w.charAt(0); }).join('').slice(0, 2).toUpperCase() || prof.code.slice(0, 2);
+    document.getElementById('brpDashAvatar').textContent = initials;
+    document.getElementById('brpDashCode').textContent = prof.code;
+    document.getElementById('brpDashSocial').textContent = prof.social || 'Perfil Personal';
+    document.getElementById('brpDashName').textContent = prof.name;
+
+    document.getElementById('brpStatOrders').textContent = String(prof.orders || 0);
+    document.getElementById('brpStatSales').textContent = prof.sales || '$0.00';
+    document.getElementById('brpStatCommission').textContent = prof.commission || '$0.00';
+    document.getElementById('brpStatUpdated').textContent = prof.updated || 'Listo para ventas';
+
+    var mainUrl = formatRefUrl('/', prof.code);
+    document.getElementById('brpMainLinkInput').value = mainUrl;
+    document.getElementById('brpTestMainLink').href = mainUrl;
+
+    document.querySelectorAll('.js-seller-code-inline').forEach(function(el) {
+      el.textContent = prof.code;
+    });
+
+    updateSellerModeBtn();
+    renderScripts();
+    updateCalc();
+  }
+
+  function renderProfileCards() {
+    var grid = document.getElementById('brpProfilesGrid');
+    grid.innerHTML = '';
+    PROFILES.forEach(function(p) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'brp-profile-tile';
+      btn.innerHTML =
+        '<span class="brp-tile-code">' + p.code + '</span>' +
+        '<strong class="brp-tile-name"></strong>' +
+        '<span class="brp-tile-social"></span>' +
+        '<span class="brp-tile-action">Seleccionar perfil →</span>';
+      btn.querySelector('.brp-tile-name').textContent = p.name;
+      btn.querySelector('.brp-tile-social').textContent = p.social || 'Vendedor Tienda';
+      btn.addEventListener('click', function() {
+        selectedProfile = p;
+        document.querySelectorAll('.brp-profile-tile').forEach(function(t) { t.classList.remove('active'); });
+        btn.classList.add('active');
+
+        try {
+          if (!p.hasPin || window.sessionStorage.getItem(SESSION_PREFIX + p.code) === '1') {
+            openDashboard(p);
+            return;
+          }
+        } catch (e) {}
+
+        document.getElementById('brpSelectedBadge').textContent = p.code;
+        document.getElementById('brpSelectedName').textContent = p.name;
+        document.getElementById('brpPinPanel').style.display = 'block';
+        document.getElementById('brpPinError').style.display = 'none';
+        var inp = document.getElementById('brpPinInput');
+        inp.value = '';
+        setTimeout(function() { inp.focus(); }, 60);
+      });
+      grid.appendChild(btn);
+    });
+  }
+
+  function attemptUnlock() {
+    if (!selectedProfile) return;
+    var entered = (document.getElementById('brpPinInput').value || '').trim();
+    var errEl = document.getElementById('brpPinError');
+    if (!entered) {
+      errEl.textContent = 'Ingresa tu PIN de acceso.';
+      errEl.style.display = 'block';
+      return;
+    }
+    sha256Hex(entered).then(function(digest) {
+      if (digest && digest === selectedProfile.pinHash) {
+        try { window.sessionStorage.setItem(SESSION_PREFIX + selectedProfile.code, '1'); } catch (e) {}
+        openDashboard(selectedProfile);
+      } else {
+        errEl.textContent = 'PIN incorrecto. Verifica el código con el administrador de la tienda.';
+        errEl.style.display = 'block';
+      }
+    });
+  }
+
+  function showGeneratedUrl(url, title, priceNum) {
+    lastProductUrl = url;
+    lastProductTitle = title || 'La Bonita Jewelry';
+    document.getElementById('brpGeneratedBox').style.display = 'block';
+    document.getElementById('brpGenTitle').textContent = lastProductTitle;
+    document.getElementById('brpGenUrlInput').value = url;
+    var commEl = document.getElementById('brpGenComm');
+    if (priceNum && priceNum > 0) {
+      commEl.textContent = 'Tu 7%: $' + (priceNum * RATE).toFixed(2);
+      commEl.style.display = 'inline-block';
+      document.getElementById('brpCalcAmount').value = priceNum.toFixed(2);
+      updateCalc();
+    } else {
+      commEl.style.display = 'none';
+    }
+  }
+
+  var searchTimer = null;
+  function runCatalogSearch(q) {
+    var box = document.getElementById('brpSearchResults');
+    q = (q || '').trim();
+    if (q.length < 2) {
+      box.style.display = 'none';
+      box.innerHTML = '';
+      return;
+    }
+    fetch('/search/suggest.json?q=' + encodeURIComponent(q) + '&resources[type]=product&resources[limit]=8')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var prods = (data && data.resources && data.resources.results && data.resources.results.products) || [];
+        if (!prods.length) {
+          box.innerHTML = '<div class="brp-search-empty">No se encontraron joyas para "' + q.replace(/</g, '') + '".</div>';
+          box.style.display = 'block';
+          return;
+        }
+        box.innerHTML = '';
+        prods.forEach(function(item) {
+          var row = document.createElement('button');
+          row.type = 'button';
+          row.className = 'brp-search-item';
+          var pVal = parseFloat(item.price || 0) || 0;
+          var est = pVal > 0 ? ' · Tu 7%: $' + (pVal * RATE).toFixed(2) : '';
+          var imgSrc = item.featured_image && item.featured_image.url ? item.featured_image.url : (item.image || '');
+          row.innerHTML =
+            (imgSrc ? '<img src="' + imgSrc + '" alt="">' : '<span class="brp-img-ph"></span>') +
+            '<div class="brp-search-meta">' +
+              '<strong></strong>' +
+              '<span>$' + pVal.toFixed(2) + ' USD' + est + '</span>' +
+            '</div>' +
+            '<span class="brp-pick-tag">Elegir →</span>';
+          row.querySelector('strong').textContent = item.title || '';
+          row.addEventListener('click', function() {
+            var refLink = formatRefUrl(item.url || '/', activeProfile.code);
+            showGeneratedUrl(refLink, item.title, pVal);
+            copyStr(refLink, '✓ Enlace de joya generado y copiado');
+            box.style.display = 'none';
+          });
+          box.appendChild(row);
+        });
+        box.style.display = 'block';
+      })
+      .catch(function() {
+        box.style.display = 'none';
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    renderProfileCards();
+
+    var unlockBtn = document.getElementById('brpUnlockBtn');
+    if (unlockBtn) unlockBtn.addEventListener('click', attemptUnlock);
+    var pinInp = document.getElementById('brpPinInput');
+    if (pinInp) {
+      pinInp.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') attemptUnlock();
+      });
+    }
+
+    document.getElementById('brpSwitchProfileBtn').addEventListener('click', function() {
+      document.getElementById('brpDashboardView').style.display = 'none';
+      document.getElementById('brpPickerView').style.display = 'block';
+    });
+
+    document.getElementById('brpSellerModeToggle').addEventListener('click', function() {
+      if (!activeProfile) return;
+      var cur = getSellerMode();
+      if (cur && cur.code === activeProfile.code) {
+        try { window.localStorage.removeItem(SELLER_MODE_KEY); } catch (e) {}
+        showToast('Modo Vendedor desactivado');
+      } else {
+        try {
+          window.localStorage.setItem(SELLER_MODE_KEY, JSON.stringify({ code: activeProfile.code, name: activeProfile.name }));
+        } catch (e) {}
+        showToast('✓ Modo Vendedor activado: al navegar y tocar Compartir se incluirá ?ref=' + activeProfile.code);
+      }
+      updateSellerModeBtn();
+      if (typeof window.bonitaRenderSellerFloatingBar === 'function') window.bonitaRenderSellerFloatingBar();
+    });
+
+    document.getElementById('brpCopyMainBtn').addEventListener('click', function() {
+      copyStr(document.getElementById('brpMainLinkInput').value, '✓ Enlace personal copiado (?ref=' + activeProfile.code + ')');
+    });
+
+    document.getElementById('brpWaMainBtn').addEventListener('click', function() {
+      var u = document.getElementById('brpMainLinkInput').value;
+      var txt = 'Hola, te comparto el catálogo oficial de La Bonita Jewelry (Oro 10K y 14K con garantía de por vida y financiamiento Affirm): ' + u;
+      window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+    });
+
+    document.querySelectorAll('#brpCollectionChips .brp-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        if (!activeProfile) return;
+        var url = formatRefUrl(chip.getAttribute('data-path'), activeProfile.code);
+        showGeneratedUrl(url, 'Colección: ' + chip.textContent.trim(), 0);
+        copyStr(url, '✓ Enlace de ' + chip.textContent.trim() + ' copiado');
+      });
+    });
+
+    document.getElementById('brpProductSearch').addEventListener('input', function(e) {
+      clearTimeout(searchTimer);
+      var q = e.target.value;
+      searchTimer = setTimeout(function() { runCatalogSearch(q); }, 250);
+    });
+
+    document.getElementById('brpBuildCustomBtn').addEventListener('click', function() {
+      if (!activeProfile) return;
+      var raw = (document.getElementById('brpCustomUrlInput').value || '').trim();
+      var url = formatRefUrl(raw || '/', activeProfile.code);
+      showGeneratedUrl(url, 'Enlace Personalizado', 0);
+      copyStr(url, '✓ Enlace generado y copiado');
+    });
+
+    document.getElementById('brpCopyGenBtn').addEventListener('click', function() {
+      copyStr(document.getElementById('brpGenUrlInput').value, '✓ Enlace copiado');
+    });
+
+    document.getElementById('brpCopyGenWithMsgBtn').addEventListener('click', function() {
+      var u = document.getElementById('brpGenUrlInput').value;
+      var msg = 'Mira esta pieza de oro sólido en La Bonita Jewelry ✨ ' + (lastProductTitle ? lastProductTitle + ': ' : '') + u;
+      copyStr(msg, '✓ Mensaje + enlace copiado');
+    });
+
+    document.getElementById('brpWaGenBtn').addEventListener('click', function() {
+      var u = document.getElementById('brpGenUrlInput').value;
+      var msg = 'Mira esta joya de oro auténtico en La Bonita Jewelry ✨ ' + (lastProductTitle ? lastProductTitle + ': ' : '') + u;
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+
+    document.getElementById('brpCalcAmount').addEventListener('input', updateCalc);
+
+    // Preselect seller if ?vendedor=CODE passed in URL
+    try {
+      var qp = new URLSearchParams(window.location.search || '');
+      var pre = (qp.get('vendedor') || qp.get('code') || '').trim().toUpperCase();
+      if (pre) {
+        var found = PROFILES.find(function(x) { return x.code === pre; });
+        if (found) {
+          var idx = PROFILES.indexOf(found);
+          var tile = document.querySelectorAll('.brp-profile-tile')[idx];
+          if (tile) tile.click();
+        }
+      }
+    } catch (e) {}
+  });
+})();
+</script>
+
+<style>
+  .brp-wrapper {
+    background: #FAF9F6;
+    min-height: 100vh;
+    padding: 36px 18px 80px;
+    font-family: 'Plus Jakarta Sans', var(--font-sans), sans-serif;
+    color: #08195B;
+  }
+  .brp-container {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .brp-hero {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .brp-eyebrow {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #B48E2F;
+    background: rgba(209, 176, 84, 0.14);
+    border: 1px solid rgba(209, 176, 84, 0.4);
+    padding: 5px 14px;
+    border-radius: 9999px;
+    margin-bottom: 10px;
+  }
+  .brp-title {
+    font-family: 'Sentient', Georgia, serif;
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #08195B;
+    line-height: 1.15;
+  }
+  .brp-title span {
+    color: #D1B054;
+    font-style: italic;
+  }
+  .brp-subtitle {
+    font-size: 0.94rem;
+    color: #475569;
+    max-width: 660px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .brp-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 26px;
+    border: 1px solid rgba(209, 176, 84, 0.35);
+    box-shadow: 0 10px 28px rgba(8, 25, 91, 0.06);
+  }
+  .brp-section-head h2 {
+    font-family: 'Sentient', Georgia, serif;
+    font-size: 1.55rem;
+    margin: 0 0 6px;
+    color: #08195B;
+  }
+  .brp-section-head p {
+    margin: 0 0 20px;
+    color: #64748B;
+    font-size: 0.9rem;
+  }
+  .brp-profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .brp-profile-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 18px;
+    border-radius: 16px;
+    background: #FAF9F6;
+    border: 1.5px solid rgba(8, 25, 91, 0.12);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    color: #08195B;
+    min-height: 44px;
+  }
+  .brp-profile-tile:hover,
+  .brp-profile-tile.active {
+    background: #FFFFFF;
+    border-color: #D1B054;
+    box-shadow: 0 8px 20px rgba(209, 176, 84, 0.22);
+    transform: translateY(-2px);
+  }
+  .brp-tile-code,
+  .brp-badge-gold {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #08195B;
+    background: linear-gradient(135deg, #F5D77F, #D1B054);
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+  .brp-badge-green {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #047857;
+    background: rgba(5, 150, 105, 0.12);
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+  .brp-tile-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+  .brp-tile-social {
+    font-size: 0.8rem;
+    color: #64748B;
+  }
+  .brp-tile-action {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #B48E2F;
+  }
+  .brp-pin-panel {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(8, 25, 91, 0.15);
+  }
+  .brp-pin-box {
+    max-width: 440px;
+  }
+  .brp-pin-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .brp-pin-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .brp-pin-row .brp-input {
+    flex: 1 1 160px;
+  }
+  .brp-error {
+    color: #DC2626;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin: 8px 0 0;
+  }
+  .brp-profile-banner {
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #08195B 0%, #0E2982 100%);
+    color: #FFFFFF;
+    border-color: rgba(209, 176, 84, 0.55);
+  }
+  .brp-banner-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .brp-seller-id {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brp-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F5D77F, #D1B054);
+    color: #08195B;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .brp-code-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .brp-social-tag {
+    font-size: 0.78rem;
+    color: #CBD5E1;
+  }
+  .brp-dash-name {
+    font-family: 'Sentient', Georgia, serif;
+    font-size: 1.6rem;
+    margin: 0;
+    color: #FFFFFF;
+  }
+  .brp-banner-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .brp-profile-banner .brp-btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .brp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+  }
+  .brp-stat-box {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .brp-stat-highlight {
+    background: rgba(209, 176, 84, 0.18);
+    border-color: rgba(245, 215, 127, 0.55);
+  }
+  .brp-stat-label {
+    font-size: 0.74rem;
+    color: #CBD5E1;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+  .brp-stat-value {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.2;
+  }
+  .brp-stat-highlight .brp-stat-value {
+    color: #F5D77F;
+  }
+  .brp-stat-hint {
+    font-size: 0.72rem;
+    color: #94A3B8;
+  }
+  .brp-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+  .brp-card-title {
+    font-family: 'Sentient', Georgia, serif;
+    font-size: 1.3rem;
+    margin: 0 0 8px;
+    color: #08195B;
+  }
+  .brp-card-desc {
+    font-size: 0.85rem;
+    color: #64748B;
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+  .brp-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #08195B;
+    margin-bottom: 6px;
+  }
+  .brp-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(8, 25, 91, 0.18);
+    background: #FAF9F6;
+    color: #08195B;
+    font-size: 0.88rem;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  .brp-input:focus {
+    outline: 2px solid #D1B054;
+    border-color: #D1B054;
+    background: #FFFFFF;
+  }
+  .brp-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+  }
+  .brp-link-display {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .brp-link-display .brp-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .brp-action-strip {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .brp-divider {
+    height: 1px;
+    background: rgba(8, 25, 91, 0.08);
+    margin: 18px 0 14px;
+  }
+  .brp-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .brp-chip {
+    min-height: 36px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(8, 25, 91, 0.18);
+    background: #FAF9F6;
+    color: #08195B;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .brp-chip:hover {
+    background: #08195B;
+    color: #FFFFFF;
+    border-color: #08195B;
+  }
+  .brp-btn {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.84rem;
+    font-weight: 800;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .brp-btn-sm {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 0.78rem;
+  }
+  .brp-btn-xs {
+    min-height: 32px;
+    padding: 0 11px;
+    font-size: 0.74rem;
+    border-radius: 8px;
+  }
+  .brp-btn-navy {
+    background: #08195B;
+    color: #FFFFFF;
+  }
+  .brp-btn-navy:hover { background: #05103B; }
+  .brp-btn-gold {
+    background: linear-gradient(135deg, #F5D77F, #D1B054);
+    color: #08195B;
+  }
+  .brp-btn-gold.is-active {
+    background: #10B981;
+    color: #FFFFFF;
+  }
+  .brp-btn-outline {
+    background: #FFFFFF;
+    color: #08195B;
+    border-color: rgba(8, 25, 91, 0.22);
+  }
+  .brp-btn-whatsapp {
+    background: rgba(5, 150, 105, 0.12);
+    color: #047857;
+    border-color: rgba(5, 150, 105, 0.35);
+  }
+  .brp-search-results {
+    margin-top: 8px;
+    border: 1px solid rgba(8, 25, 91, 0.15);
+    border-radius: 12px;
+    background: #FFFFFF;
+    max-height: 290px;
+    overflow-y: auto;
+  }
+  .brp-search-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(8, 25, 91, 0.06);
+    cursor: pointer;
+    text-align: left;
+    color: #08195B;
+  }
+  .brp-search-item:hover { background: #FAF9F6; }
+  .brp-search-item img,
+  .brp-img-ph {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #F1F5F9;
+    flex-shrink: 0;
+  }
+  .brp-search-meta {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .brp-search-meta strong {
+    font-size: 0.82rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brp-search-meta span {
+    font-size: 0.74rem;
+    color: #64748B;
+  }
+  .brp-pick-tag {
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #B48E2F;
+    flex-shrink: 0;
+  }
+  .brp-search-empty {
+    padding: 14px;
+    font-size: 0.82rem;
+    color: #64748B;
+    text-align: center;
+  }
+  .brp-generated-box {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(209, 176, 84, 0.10);
+    border: 1px solid rgba(209, 176, 84, 0.45);
+  }
+  .brp-gen-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    font-size: 0.84rem;
+  }
+  .brp-calc-breakdown {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: #FAF9F6;
+    border-radius: 12px;
+    border: 1px solid rgba(8, 25, 91, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .brp-calc-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.82rem;
+    flex-wrap: wrap;
+  }
+  .brp-muted { color: #64748B; }
+  .brp-calc-total {
+    border-top: 1px dashed rgba(8, 25, 91, 0.16);
+    padding-top: 10px;
+    margin-top: 2px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #047857;
+  }
+  .brp-rules-list {
+    margin: 16px 0 0;
+    padding-left: 18px;
+    font-size: 0.8rem;
+    color: #475569;
+    line-height: 1.55;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .brp-scripts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .brp-script-item {
+    background: #FAF9F6;
+    border: 1px solid rgba(8, 25, 91, 0.1);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .brp-script-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .brp-script-head strong { font-size: 0.84rem; }
+  .brp-script-text {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #475569;
+    line-height: 1.48;
+  }
+  .brp-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #08195B;
+    color: #FFFFFF;
+    border: 1px solid #D1B054;
+    padding: 12px 18px;
+    border-radius: 9999px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(8, 25, 91, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 9999;
+  }
+  .brp-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (max-width: 860px) {
+    .brp-grid-2 {
+      grid-template-columns: 1fr;
+    }
+    .brp-card { padding: 18px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Portal de Referidos",
+  "settings": [
+    {
+      "type": "number",
+      "id": "commission_rate",
+      "label": "Porcentaje de comisión (%)",
+      "default": 7
+    }
+  ],
+  "presets": [
+    {
+      "name": "Portal de Referidos"
+    }
+  ]
+}
+{% endschema %}

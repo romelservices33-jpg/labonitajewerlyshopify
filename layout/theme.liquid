@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="facebook-domain-verification" content="j29jgzkc5o4rkrx5e19usygzrbvcrl" />
     <meta name="theme-color" content="">
+    {%- if request.page_type == 'page' and page.template_suffix == 'vendedores' -%}
+      <meta name="robots" content="noindex, nofollow">
+    {%- endif -%}
     <link rel="canonical" href="{% if request.page_type == 'product' %}{{ shop.url }}/products/{{ product.handle }}{% else %}{{ canonical_url }}{% endif %}">
     <script>
       if (window.location.pathname === '/es' || window.location.pathname.indexOf('/es/') === 0) {
@@ -904,5 +907,6 @@
 
     {% render 'quick-view-modal' %}
     {% render 'combo-popup-banner' %}
+    {% render 'bonita-referral-tracker' %}
   </body>
 </html>

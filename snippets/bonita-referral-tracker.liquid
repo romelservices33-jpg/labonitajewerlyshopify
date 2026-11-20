@@ -1,0 +1,441 @@
+{%- comment -%}
+  La Bonita Joyería — Referral Attribution & Salesperson Mode Tracker
+  Captures ?ref=CODIGO (30-day persistence), syncs Shopify Cart attributes,
+  appends ref tag on WhatsApp inquiries, and powers Seller Mode on share links.
+{%- endcomment -%}
+{%- assign _vendedores = shop.metaobjects.bonita_vendedor.values -%}
+{%- assign _current_cart_ref = cart.attributes['Codigo Referido'] | default: '' | strip -%}
+<script>
+(function() {
+  if (window.__bonitaRefInitialized) return;
+  window.__bonitaRefInitialized = true;
+
+  var ATTR_KEY = 'bonita_ref_attribution_v1';
+  var SELLER_MODE_KEY = 'bonita_salesperson_mode_v1';
+  var COOKIE_NAME = 'bonita_ref';
+  var TTL_MS = 30 * 24 * 60 * 60 * 1000;
+  var RESERVED = { FACEBOOK: 1, INSTAGRAM: 1, GOOGLE: 1, TIKTOK: 1, EMAIL: 1, SHOPIFY: 1, NEWSLETTER: 1 };
+
+  var SELLERS = {};
+  {%- for s in _vendedores -%}
+    {%- assign s_code = s.codigo.value | strip | upcase -%}
+    {%- if s_code != blank -%}
+  SELLERS[{{ s_code | json }}] = {
+    code: {{ s_code | json }},
+    name: {{ s.nombre.value | default: s_code | json }},
+    active: {% if s.activo.value == false %}false{% else %}true{% endif %}
+  };
+    {%- endif -%}
+  {%- endfor -%}
+
+  var NATIVE_FETCH = (typeof window.fetch === 'function') ? window.fetch.bind(window) : null;
+  var CART_UPDATE_URL = {{ routes.cart_update_url | default: '/cart/update' | append: '.js' | json }};
+  var INITIAL_CART_COUNT = {{ cart.item_count | default: 0 }};
+  var INITIAL_CART_REF = {{ _current_cart_ref | json }};
+  var lastSyncedCode = INITIAL_CART_REF || '';
+  var syncPromise = null;
+
+  function normalizeCode(raw) {
+    if (!raw) return '';
+    var c = String(raw).trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+    if (c.length < 2 || c.length > 24) return '';
+    if (!/^[A-Z0-9]/.test(c)) return '';
+    if (RESERVED[c] && !SELLERS[c]) return '';
+    if (SELLERS[c] && SELLERS[c].active === false) return '';
+    return c;
+  }
+
+  function resolveSellerName(code) {
+    if (SELLERS[code] && SELLERS[code].name) return SELLERS[code].name;
+    return code;
+  }
+
+  function setCookie(name, val, days) {
+    try {
+      var d = new Date(Date.now() + days * 86400000).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(val) + '; expires=' + d + '; path=/; SameSite=Lax';
+    } catch (e) {}
+  }
+
+  function getCookie(name) {
+    try {
+      var prefix = name + '=';
+      var parts = document.cookie.split(';');
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].trim();
+        if (part.indexOf(prefix) === 0) return decodeURIComponent(part.slice(prefix.length));
+      }
+    } catch (e) {}
+    return '';
+  }
+
+  function readAttribution() {
+    var now = Date.now();
+    try {
+      var raw = window.localStorage.getItem(ATTR_KEY);
+      if (raw) {
+        var obj = JSON.parse(raw);
+        if (obj && obj.code && (!obj.exp || obj.exp > now)) {
+          var norm = normalizeCode(obj.code);
+          if (norm) {
+            obj.code = norm;
+            obj.name = resolveSellerName(norm);
+            return obj;
+          }
+        } else if (obj && obj.exp && obj.exp <= now) {
+          window.localStorage.removeItem(ATTR_KEY);
+        }
+      }
+    } catch (e) {}
+    var ck = normalizeCode(getCookie(COOKIE_NAME));
+    if (ck) {
+      return {
+        code: ck,
+        name: resolveSellerName(ck),
+        date: new Date().toISOString().slice(0, 10),
+        landing: window.location.pathname || '/',
+        exp: now + TTL_MS
+      };
+    }
+    return null;
+  }
+
+  function saveAttribution(code) {
+    var norm = normalizeCode(code);
+    if (!norm) return null;
+    var payload = {
+      code: norm,
+      name: resolveSellerName(norm),
+      date: new Date().toISOString().slice(0, 10),
+      landing: (window.location.pathname + window.location.search).slice(0, 160),
+      exp: Date.now() + TTL_MS
+    };
+    try {
+      window.localStorage.setItem(ATTR_KEY, JSON.stringify(payload));
+    } catch (e) {}
+    setCookie(COOKIE_NAME, norm, 30);
+    return payload;
+  }
+
+  function captureUrlRef() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var candidate = params.get('ref') || params.get('r') || params.get('vendedor') || params.get('referido');
+      if (candidate) {
+        saveAttribution(candidate);
+      }
+    } catch (e) {}
+  }
+
+  captureUrlRef();
+
+  function syncCartReferral(force) {
+    var attr = readAttribution();
+    if (!attr || !attr.code || !NATIVE_FETCH) return Promise.resolve(false);
+    if (!force && lastSyncedCode === attr.code) return Promise.resolve(true);
+    if (syncPromise) return syncPromise;
+
+    syncPromise = NATIVE_FETCH(CART_UPDATE_URL, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        attributes: {
+          'Codigo Referido': attr.code,
+          'Vendedor Referido': attr.name,
+          'Referido Fecha': attr.date || new Date().toISOString().slice(0, 10),
+          'Referido Landing': attr.landing || '/'
+        }
+      })
+    })
+    .then(function(res) {
+      if (res && res.ok) lastSyncedCode = attr.code;
+      syncPromise = null;
+      return true;
+    })
+    .catch(function() {
+      syncPromise = null;
+      return false;
+    });
+    return syncPromise;
+  }
+
+  window.bonitaGetReferralAttribution = readAttribution;
+  window.bonitaSyncCartReferral = syncCartReferral;
+  window.BONITA_SELLERS_REGISTRY = SELLERS;
+
+  function ensureFormHiddenInputs(formEl) {
+    var attr = readAttribution();
+    if (!attr || !attr.code || !formEl) return;
+    var pairs = {
+      'attributes[Codigo Referido]': attr.code,
+      'attributes[Vendedor Referido]': attr.name,
+      'attributes[Referido Fecha]': attr.date || new Date().toISOString().slice(0, 10),
+      'attributes[Referido Landing]': attr.landing || '/'
+    };
+    Object.keys(pairs).forEach(function(key) {
+      var input = formEl.querySelector('input[name="' + key + '"]');
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        formEl.appendChild(input);
+      }
+      input.value = pairs[key];
+    });
+  }
+
+  function injectAllCartForms() {
+    var forms = document.querySelectorAll('#CartDrawer-Form, #cart-checkout-form, form[action="/cart"], form[action^="/cart?"]');
+    for (var i = 0; i < forms.length; i++) {
+      ensureFormHiddenInputs(forms[i]);
+    }
+  }
+
+  if (NATIVE_FETCH) {
+    window.fetch = function(input, init) {
+      var url = '';
+      if (typeof input === 'string') url = input;
+      else if (input && typeof input.url === 'string') url = input.url;
+
+      var resultPromise = NATIVE_FETCH.apply(this, arguments);
+      if (url && (url.indexOf('/cart/add') !== -1 || url.indexOf('/cart/change') !== -1)) {
+        resultPromise.then(function(res) {
+          if (res && res.ok) {
+            setTimeout(function() {
+              syncCartReferral(true);
+              injectAllCartForms();
+            }, 60);
+          }
+        }).catch(function() {});
+      }
+      return resultPromise;
+    };
+  }
+
+  function readSalespersonMode() {
+    try {
+      var raw = window.localStorage.getItem(SELLER_MODE_KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      if (obj && obj.code) {
+        var c = normalizeCode(obj.code);
+        if (c) return { code: c, name: obj.name || resolveSellerName(c) };
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function buildSellerUrl(rawUrl, code) {
+    var u = rawUrl || window.location.href;
+    if (u.indexOf('http') !== 0) {
+      u = window.location.origin + (u.charAt(0) === '/' ? '' : '/') + u;
+    }
+    try {
+      var parsed = new URL(u);
+      parsed.pathname = parsed.pathname.replace(/^\/[a-z]{2}(?:-[a-zA-Z]{2})?\/products\//, '/products/');
+      parsed.searchParams.set('ref', code);
+      return parsed.toString();
+    } catch (e) {
+      return u.split('?')[0] + '?ref=' + encodeURIComponent(code);
+    }
+  }
+
+  function copySellerText(urlText, btnEl, sellerCode) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(urlText).catch(function() {});
+    } else {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = urlText;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (e) {}
+    }
+    if (btnEl) {
+      var orig = btnEl._origShareHtml || btnEl.innerHTML;
+      btnEl._origShareHtml = orig;
+      btnEl.classList.add('copied');
+      if (btnEl.classList.contains('btn-share-product-pill')) {
+        btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      } else {
+        btnEl.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¡Copiado (' + sellerCode + ')!</span>';
+      }
+      clearTimeout(btnEl._shareRefTimer);
+      btnEl._shareRefTimer = setTimeout(function() {
+        btnEl.classList.remove('copied');
+        btnEl.innerHTML = orig;
+      }, 2200);
+    }
+    var toast = document.getElementById('bonitaShareToast');
+    var msgEl = document.getElementById('toastMsg');
+    var toastPill = document.getElementById('toastPill');
+    var toastMsg = '✓ Enlace copiado con tu código (?ref=' + sellerCode + ')';
+    if (toastPill && msgEl) {
+      msgEl.textContent = toastMsg;
+      toastPill.classList.add('show');
+      clearTimeout(window._bonitaToastTimer);
+      window._bonitaToastTimer = setTimeout(function() { toastPill.classList.remove('show'); }, 2800);
+    } else {
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'bonitaShareToast';
+        toast.className = 'bonita-share-toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = toastMsg;
+      toast.classList.add('show');
+      clearTimeout(window._bonitaToastTimer);
+      window._bonitaToastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2800);
+    }
+    if (navigator.share && window.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+      navigator.share({ url: urlText }).catch(function() {});
+    }
+  }
+
+  function renderSellerFloatingBar() {
+    var mode = readSalespersonMode();
+    var existing = document.getElementById('bonitaSellerFloatingPill');
+    if (existing) existing.remove();
+    if (!mode || window.location.pathname.indexOf('/pages/vendedores') !== -1) return;
+
+    var bar = document.createElement('div');
+    bar.id = 'bonitaSellerFloatingPill';
+    bar.style.cssText = 'position:fixed;bottom:14px;left:14px;z-index:9990;display:flex;align-items:center;gap:8px;background:rgba(8,25,91,0.95);color:#FFFFFF;border:1px solid rgba(209,176,84,0.65);border-radius:9999px;padding:7px 12px;font-family:"Plus Jakarta Sans",sans-serif;font-size:12px;font-weight:600;box-shadow:0 10px 26px rgba(8,25,91,0.32);backdrop-filter:blur(8px);max-width:calc(100vw - 28px);';
+    bar.innerHTML =
+      '<span style="color:#F5D77F;font-weight:800;">✦ ' + mode.code + '</span>' +
+      '<button type="button" id="bonitaSellerCopyHereBtn" style="background:#D1B054;color:#08195B;border:none;border-radius:9999px;padding:4px 10px;font-size:11px;font-weight:800;cursor:pointer;">Copiar Link Aquí</button>' +
+      '<a href="/pages/vendedores" style="color:#E2E8F0;text-decoration:underline;font-size:11px;">Portal</a>' +
+      '<button type="button" id="bonitaSellerExitBtn" aria-label="Salir Modo Vendedor" style="background:transparent;border:none;color:#CBD5E1;cursor:pointer;font-size:13px;line-height:1;padding:0 2px;">✕</button>';
+    document.body.appendChild(bar);
+
+    var copyBtn = document.getElementById('bonitaSellerCopyHereBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        var url = buildSellerUrl(window.location.href, mode.code);
+        copySellerText(url, null, mode.code);
+      });
+    }
+    var exitBtn = document.getElementById('bonitaSellerExitBtn');
+    if (exitBtn) {
+      exitBtn.addEventListener('click', function() {
+        try { window.localStorage.removeItem(SELLER_MODE_KEY); } catch (e) {}
+        bar.remove();
+      });
+    }
+  }
+
+  window.bonitaRenderSellerFloatingBar = renderSellerFloatingBar;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var attr = readAttribution();
+    if (attr && attr.code) {
+      injectAllCartForms();
+      if (INITIAL_CART_COUNT > 0 && INITIAL_CART_REF !== attr.code) {
+        syncCartReferral(true);
+      }
+    }
+
+    renderSellerFloatingBar();
+
+    // Wrap product share handlers cleanly so Seller Mode adds ?ref=CODIGO automatically
+    var origShareCard = window.shareCardProduct;
+    if (typeof origShareCard === 'function' && !origShareCard.__bonitaRefWrapped) {
+      window.shareCardProduct = function(btnEl, ev) {
+        var mode = readSalespersonMode();
+        if (mode && mode.code) {
+          if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+          var card = btnEl && btnEl.closest ? btnEl.closest('.product-shop-card') : null;
+          if (card) {
+            var linkEl = card.querySelector('a[href*="/products/"]');
+            var rawUrl = card.getAttribute('data-url') || (linkEl ? linkEl.getAttribute('href') : '') || window.location.pathname;
+            copySellerText(buildSellerUrl(rawUrl, mode.code), btnEl, mode.code);
+            return;
+          }
+        }
+        return origShareCard.apply(this, arguments);
+      };
+      window.shareCardProduct.__bonitaRefWrapped = true;
+    }
+
+    var origShareModal = window.shareModalProduct;
+    if (typeof origShareModal === 'function' && !origShareModal.__bonitaRefWrapped) {
+      window.shareModalProduct = function(btnEl, ev) {
+        var mode = readSalespersonMode();
+        if (mode && mode.code && window.currentModalProduct && window.currentModalProduct.url) {
+          if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+          copySellerText(buildSellerUrl(window.currentModalProduct.url, mode.code), btnEl, mode.code);
+          return;
+        }
+        return origShareModal.apply(this, arguments);
+      };
+      window.shareModalProduct.__bonitaRefWrapped = true;
+    }
+
+    var origSharePdp = window.sharePdpProduct;
+    if (typeof origSharePdp === 'function' && !origSharePdp.__bonitaRefWrapped) {
+      window.sharePdpProduct = function(btnEl, ev) {
+        var mode = readSalespersonMode();
+        if (mode && mode.code) {
+          if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+          copySellerText(buildSellerUrl(window.location.href, mode.code), btnEl, mode.code);
+          return;
+        }
+        return origSharePdp.apply(this, arguments);
+      };
+      window.sharePdpProduct.__bonitaRefWrapped = true;
+    }
+  });
+
+  // Ensure hidden attributes exist right before any cart form submits
+  document.addEventListener('submit', function(ev) {
+    var form = ev.target;
+    if (!form || !form.getAttribute) return;
+    var act = form.getAttribute('action') || '';
+    if (act.indexOf('/cart') !== -1 || form.id === 'CartDrawer-Form' || form.id === 'cart-checkout-form') {
+      ensureFormHiddenInputs(form);
+    }
+  }, true);
+
+  // Sync before direct /checkout link navigation + tag WhatsApp concierge clicks
+  document.addEventListener('click', function(ev) {
+    if (!ev.target || !ev.target.closest) return;
+    var attr = readAttribution();
+    if (!attr || !attr.code) return;
+
+    var waLink = ev.target.closest('a[href*="wa.me/"]');
+    if (waLink) {
+      try {
+        var u = new URL(waLink.href);
+        var txt = u.searchParams.get('text') || 'Hola La Bonita Joyería, me gustaría consultar por una joya.';
+        if (txt.indexOf('[Ref:') === -1) {
+          u.searchParams.set('text', txt + ' [Ref: ' + attr.code + ']');
+          waLink.href = u.toString();
+        }
+      } catch (e) {}
+      return;
+    }
+
+    var coLink = ev.target.closest('a[href*="/checkout"]');
+    if (coLink && lastSyncedCode !== attr.code) {
+      ev.preventDefault();
+      var dest = coLink.href;
+      var done = false;
+      var go = function() {
+        if (done) return;
+        done = true;
+        window.location.href = dest;
+      };
+      setTimeout(go, 1200);
+      syncCartReferral(true).then(go, go);
+    }
+  }, true);
+})();
+</script>
