@@ -327,6 +327,7 @@
         u = new URL(STORE_ORIGIN + '/');
       }
       u.pathname = u.pathname.replace(/^\/[a-z]{2}(?:-[a-zA-Z]{2})?\/products\//, '/products/');
+      ['_pos', '_psq', '_psid', '_sid', '_ss', '_v'].forEach(function(k) { u.searchParams.delete(k); });
       u.searchParams.set('ref', code);
       return u.toString();
     } catch (e) {
