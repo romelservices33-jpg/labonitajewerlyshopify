@@ -43,7 +43,7 @@
       if is_generic_home_title
         assign rendered_title = default_home_title
       elsif request.page_type == 'product' and product != blank
-        assign prod_title_clean = product.title | strip | truncatewords: 12, ''
+        assign prod_title_clean = product.title | strip
         assign rendered_title = prod_title_clean | append: ' – ' | append: clean_shop_name
       else
         assign rendered_title = clean_page_title
@@ -75,7 +75,7 @@
       endif
     -%}
 
-    <title>{{ rendered_title | escape }}</title>
+    <title>{{ rendered_title | replace: '&amp;', '&' | escape }}</title>
 
     <meta name="description" content="{{ rendered_description | escape }}">
 
