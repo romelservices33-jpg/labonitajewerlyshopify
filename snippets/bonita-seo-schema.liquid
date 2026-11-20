@@ -1,0 +1,126 @@
+{%- comment -%}
+  La Bonita Joyería — Structured Data (JSON-LD)
+  Emits JewelryStore, WebSite (+ SearchAction), and BreadcrumbList schemas.
+{%- endcomment -%}
+{%- assign lb_logo_url = 'logo-completo.svg' | asset_url | prepend: 'https:' -%}
+{%- assign lb_hero_img_url = 'luxury-hero-poster.jpg' | asset_url | prepend: 'https:' -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "JewelryStore",
+      "@id": {{ shop.url | append: '/#store' | json }},
+      "name": "La Bonita Joyería",
+      "alternateName": {{ shop.name | strip | json }},
+      "description": "Joyería en oro sólido 10K y 14K certificado en Louisville, Kentucky con envío asegurado a todo Estados Unidos y Puerto Rico. Cadenas cubanas, anillos, aretes, pulseras, dijes, relojes y compra de oro al 93% Kitco.",
+      "url": {{ shop.url | json }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ lb_logo_url | json }}
+      },
+      "image": {{ lb_hero_img_url | json }},
+      "telephone": "+1-502-698-0759",
+      "email": "romelservices33@gmail.com",
+      "priceRange": "$$-$$$",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Credit Card, Debit Card, Affirm, PayPal, Shop Pay",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Louisville",
+        "addressRegion": "KY",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Louisville" },
+        { "@type": "State", "name": "Kentucky" },
+        { "@type": "Country", "name": "United States" },
+        { "@type": "AdministrativeArea", "name": "Puerto Rico" }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/labonitajoyeriaky",
+        "https://www.facebook.com/share/1GGnnS2KGK/",
+        "https://www.tiktok.com/@labonitajoyeriaky"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ shop.url | append: '/#website' | json }},
+      "url": {{ shop.url | json }},
+      "name": "La Bonita Joyería",
+      "publisher": {
+        "@id": {{ shop.url | append: '/#store' | json }}
+      },
+      "inLanguage": {{ request.locale.iso_code | default: 'es' | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+{%- if request.page_type == 'collection' and collection != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": {{ shop.url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Colecciones",
+      "item": {{ shop.url | append: '/collections/all' | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ collection.title | strip | json }},
+      "item": {{ shop.url | append: collection.url | json }}
+    }
+  ]
+}
+</script>
+{%- elsif request.page_type == 'product' and product != blank -%}
+{%- assign pdp_primary_col = product.collections.first -%}
+{%- assign pdp_col_title = pdp_primary_col.title | default: 'Catálogo' | strip -%}
+{%- assign pdp_col_url = pdp_primary_col.url | default: '/collections/all' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": {{ shop.url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ pdp_col_title | json }},
+      "item": {{ shop.url | append: pdp_col_url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | strip | json }},
+      "item": {{ shop.url | append: '/products/' | append: product.handle | json }}
+    }
+  ]
+}
+</script>
+{%- endif -%}

@@ -1451,5 +1451,62 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Analítica, Píxeles y SEO",
+    "settings": [
+      {
+        "type": "header",
+        "content": "SEO de Página de Inicio (Fallback)"
+      },
+      {
+        "type": "text",
+        "id": "seo_home_title",
+        "label": "Título SEO del Home",
+        "default": "La Bonita Joyería | Oro Sólido 10K y 14K en Louisville, KY y Envíos a EE. UU."
+      },
+      {
+        "type": "textarea",
+        "id": "seo_home_description",
+        "label": "Meta descripción del Home",
+        "default": "Joyería en oro sólido 10K y 14K en Louisville, KY con envío asegurado a todo EE. UU. y Puerto Rico. Cadenas cubanas, anillos, aretes, pulseras, dijes y financiamiento Affirm."
+      },
+      {
+        "type": "header",
+        "content": "Píxeles y Analítica (Opcional)"
+      },
+      {
+        "type": "text",
+        "id": "google_site_verification",
+        "label": "Google Search Console (Token meta HTML)",
+        "info": "Pega solo el código content=... de la etiqueta HTML de Search Console si verificas por etiqueta."
+      },
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "Google Analytics 4 (G-XXXXXXXXXX)",
+        "info": "Déjalo vacío si aún no se configura GA4."
+      },
+      {
+        "type": "text",
+        "id": "google_ads_id",
+        "label": "Google Ads Tag ID (AW-XXXXXXXXXX)"
+      },
+      {
+        "type": "text",
+        "id": "tiktok_pixel_id",
+        "label": "TikTok Pixel ID"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_tag_id",
+        "label": "Pinterest Tag ID"
+      },
+      {
+        "type": "text",
+        "id": "clarity_project_id",
+        "label": "Microsoft Clarity Project ID"
+      }
+    ]
   }
 ]

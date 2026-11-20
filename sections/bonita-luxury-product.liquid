@@ -651,9 +651,10 @@
           </div>
 
           <!-- Affirm Monthly Calc -->
+          {%- assign pdp_affirm_mo = selected_variant.price | divided_by: 1200.0 | round | at_least: 35 -%}
           <div class="pdp-affirm-banner">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-            <span>O paga desde <strong id="pdpAffirmMonthly">${{ selected_variant.price | divided_by: 1200 | at_least: 35 }}/mes</strong> en cuotas con <strong>Affirm</strong></span>
+            <span>O paga desde <strong id="pdpAffirmMonthly">${{ pdp_affirm_mo }}/mes</strong> en cuotas con <strong>Affirm</strong></span>
           </div>
           {%- assign pdp_tags_str = product.tags | join: ' ' | downcase -%}
           {%- assign pdp_title_low = product.title | downcase -%}
@@ -760,6 +761,30 @@
                 <span>Compartir</span>
               </button>
             </div>
+
+            <!-- Post-Add-To-Cart Quick Action Bar -->
+            <div id="pdpPostAtcBar" style="display:none; margin-top:10px; padding:10px 12px; border-radius:10px; background:rgba(5,150,105,0.08); border:1px solid rgba(5,150,105,0.35); align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+              <span style="font-size:0.78rem; font-weight:700; color:#047857;">✓ Joya agregada a tu bolsa</span>
+              <div style="display:flex; gap:8px;">
+                <a href="{{ routes.cart_url }}" style="padding:6px 12px; border-radius:6px; background:#08195B; color:#FFFFFF; font-size:0.76rem; font-weight:700; text-decoration:none;">Ver Carrito</a>
+                <a href="/checkout" style="padding:6px 12px; border-radius:6px; background:linear-gradient(135deg,#D1B054,#B8923A); color:#08195B; font-size:0.76rem; font-weight:800; text-decoration:none;">Pagar Ahora</a>
+              </div>
+            </div>
+
+            <!-- Direct WhatsApp Concierge CTA -->
+            {%- capture wa_pdp_msg -%}Hola La Bonita Joyería, me interesa esta pieza: {{ product.title | strip }} (SKU: {{ selected_variant.sku | default: product.id }} · {{ selected_variant.price | money_without_trailing_zeros }}) — {{ shop.url }}/products/{{ product.handle }}{%- endcapture -%}
+            <a
+              href="https://wa.me/15026980759?text={{ wa_pdp_msg | url_encode }}"
+              target="_blank"
+              rel="noopener"
+              data-wa-context="PDP: {{ product.title | escape }}"
+              style="margin-top:10px; width:100%; height:38px; border-radius:8px; border:1px solid rgba(5,150,105,0.35); background:rgba(5,150,105,0.06); color:#047857; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.78rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:7px; text-decoration:none; transition:all 0.2s ease;"
+              onmouseover="this.style.background='rgba(5,150,105,0.14)'; this.style.borderColor='#059669';"
+              onmouseout="this.style.background='rgba(5,150,105,0.06)'; this.style.borderColor='rgba(5,150,105,0.35)';"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12.031 2C6.502 2 2.004 6.498 2.004 12.027c0 1.766.462 3.49 1.339 5.01L2 22l5.086-1.333a9.978 9.978 0 0 0 4.945 1.307h.004c5.528 0 10.026-4.499 10.026-10.027 0-2.679-1.044-5.197-2.94-7.093A9.96 9.96 0 0 0 12.031 2zm5.847 14.236c-.248.698-1.448 1.335-2.008 1.416-.527.077-1.196.109-1.93-.123-.444-.141-1.015-.33-1.744-.645-3.068-1.324-5.072-4.41-5.225-4.614-.152-.203-1.246-1.658-1.246-3.163 0-1.505.788-2.244 1.068-2.55.28-.306.611-.383.815-.383.204 0 .408.002.586.011.188.009.44-.071.688.526.255.612.866 2.115.943 2.268.076.153.127.331.025.535-.102.204-.153.331-.306.51-.153.178-.321.398-.458.535-.153.153-.312.319-.134.625.178.306.792 1.307 1.701 2.118 1.169 1.042 2.154 1.365 2.46 1.518.306.153.484.128.662-.076.178-.204.764-.892.968-1.198.204-.306.408-.255.688-.153.28.102 1.784.841 2.09.994.306.153.51.229.586.357.076.127.076.739-.172 1.437z"/></svg>
+              <span>Consultar esta joya por WhatsApp</span>
+            </a>
           </form>
         </div>
 
@@ -950,11 +975,20 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     })
-    .then(function() {
+    .then(function(addedItem) {
+      if (typeof window.bonitaTrackEvent === 'function') {
+        window.bonitaTrackEvent('add_to_cart', {
+          currency: 'USD',
+          value: ((addedItem && addedItem.final_price ? addedItem.final_price : {{ selected_variant.price | default: 0 }}) / 100) * qty,
+          items: [{ item_id: String(variantId), item_name: {{ product.title | json }}, quantity: qty }]
+        });
+      }
       if (subBtn) {
         subBtn.innerHTML = '<span>✓ ¡Agregado al Carrito!</span>';
         subBtn.style.background = '#059669';
       }
+      var postBar = document.getElementById('pdpPostAtcBar');
+      if (postBar) postBar.style.display = 'flex';
       setTimeout(function() {
         if (typeof window.openCartDrawer === 'function') {
           if (subBtn) {
@@ -963,10 +997,12 @@
             subBtn.innerHTML = origHtml;
           }
           window.openCartDrawer();
-        } else {
-          window.location.href = cartUrl || '/cart';
+        } else if (subBtn) {
+          subBtn.disabled = false;
+          subBtn.style.background = '';
+          subBtn.innerHTML = origHtml;
         }
-      }, 450);
+      }, 900);
     })
     .catch(function(err) {
       console.warn('PDP fetch add-to-cart fallback:', err);

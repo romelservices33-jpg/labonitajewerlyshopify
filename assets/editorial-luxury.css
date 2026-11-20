@@ -1584,7 +1584,7 @@ html {
   width: 100%;
 }
 
-.options label::before {
+.options label:empty::before {
   content: attr(data-txt);
 }
 

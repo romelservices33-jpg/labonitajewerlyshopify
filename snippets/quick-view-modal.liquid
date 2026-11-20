@@ -444,6 +444,12 @@
           <span>Pago Seguro Cifrado</span>
         </span>
       </div>
+      <div id="modalFullPdpWrap" style="margin-top:10px; text-align:center; display:none;">
+        <a id="modalFullPdpLink" href="#" style="display:inline-flex; align-items:center; gap:6px; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.78rem; font-weight:700; color:#08195B; text-decoration:none; border-bottom:1px solid rgba(209,176,84,0.65); padding-bottom:2px; transition:color 0.2s ease;">
+          <span>Ver ficha completa del producto</span>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -920,6 +926,18 @@
       var shareSpan = shareBtn.querySelector('span');
       if (shareSpan) shareSpan.textContent = 'Compartir';
     }
+
+    // Populate Full PDP Link
+    var fullPdpWrap = document.getElementById('modalFullPdpWrap');
+    var fullPdpLink = document.getElementById('modalFullPdpLink');
+    if (fullPdpWrap && fullPdpLink) {
+      if (p.url && p.url.indexOf('/products/') !== -1) {
+        fullPdpLink.setAttribute('href', p.url.replace(/^\/es\/products\//, '/products/'));
+        fullPdpWrap.style.display = 'block';
+      } else {
+        fullPdpWrap.style.display = 'none';
+      }
+    }
   }
 
   function selectModalKarat(k) {
@@ -974,6 +992,13 @@
       return res.json();
     })
     .then(function(item) {
+      if (typeof window.bonitaTrackEvent === 'function') {
+        window.bonitaTrackEvent('add_to_cart', {
+          currency: 'USD',
+          value: (p.basePrice || 0) * qty,
+          items: [{ item_id: String(variantId), item_name: p.title || '', quantity: qty, price: p.basePrice || 0 }]
+        });
+      }
       if (btn) {
         btn.innerHTML = '<span>✓ ¡Agregado con Éxito!</span>';
         btn.style.background = '#059669';

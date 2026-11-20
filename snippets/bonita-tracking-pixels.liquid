@@ -1,0 +1,88 @@
+{%- comment -%}
+  La Bonita Joyería — Optional Multi-Platform Analytics & Ad Pixels
+  Configured cleanly via Theme Settings (Analítica, Píxeles y SEO).
+  Outputs zero external scripts when IDs are blank.
+{%- endcomment -%}
+{%- assign ga4_id = settings.ga4_measurement_id | strip -%}
+{%- assign gads_id = settings.google_ads_id | strip -%}
+{%- assign tt_id = settings.tiktok_pixel_id | strip -%}
+{%- assign pin_id = settings.pinterest_tag_id | strip -%}
+{%- assign clarity_id = settings.clarity_project_id | strip -%}
+
+{%- if ga4_id != blank or gads_id != blank -%}
+  {%- assign primary_gtag_id = ga4_id | default: gads_id -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ primary_gtag_id | escape }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    {%- if ga4_id != blank -%}
+    gtag('config', {{ ga4_id | json }}, { send_page_view: true });
+    {%- endif -%}
+    {%- if gads_id != blank -%}
+    gtag('config', {{ gads_id | json }});
+    {%- endif -%}
+  </script>
+{%- endif -%}
+
+{%- if tt_id != blank -%}
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+      ttq.load({{ tt_id | json }});
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+{%- endif -%}
+
+{%- if pin_id != blank -%}
+  <script>
+    !function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+    pintrk('load', {{ pin_id | json }});
+    pintrk('page');
+  </script>
+{%- endif -%}
+
+{%- if clarity_id != blank -%}
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", {{ clarity_id | json }});
+  </script>
+{%- endif -%}
+
+<script>
+  window.bonitaTrackEvent = function(eventName, params) {
+    try {
+      var p = params || {};
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, p);
+      }
+      if (typeof window.fbq === 'function') {
+        if (eventName === 'whatsapp_click') {
+          window.fbq('track', 'Contact', p);
+        }
+      }
+      if (typeof window.ttq === 'object' && typeof window.ttq.track === 'function') {
+        if (eventName === 'add_to_cart') window.ttq.track('AddToCart', p);
+        else if (eventName === 'whatsapp_click') window.ttq.track('Contact', p);
+      }
+      if (typeof window.pintrk === 'function') {
+        if (eventName === 'add_to_cart') window.pintrk('track', 'addtocart', p);
+        else if (eventName === 'whatsapp_click') window.pintrk('track', 'lead', p);
+      }
+    } catch (e) {}
+  };
+  document.addEventListener('click', function(ev) {
+    var waLink = ev.target && ev.target.closest ? ev.target.closest('a[href*="wa.me/"]') : null;
+    if (waLink) {
+      window.bonitaTrackEvent('whatsapp_click', {
+        event_category: 'engagement',
+        event_label: (waLink.getAttribute('data-wa-context') || waLink.textContent || 'WhatsApp').trim().slice(0, 80),
+        page_path: window.location.pathname
+      });
+    }
+  });
+</script>

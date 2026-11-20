@@ -24,7 +24,7 @@
       {%- endif -%}
       <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; color:#059669; font-weight:700;">
         <span style="width:6px; height:6px; background:#059669; border-radius:50%;"></span>
-        <span>{{ collection.products_count | default: collection.products.size }} Joyas Disponibles · Envío Inmediato</span>
+        <span><span id="collectionHeroAvailCount">{{ collection.products | where: 'available', true | size }}</span> Joyas Disponibles · Envío Inmediato</span>
       </div>
     </header>
 
@@ -120,15 +120,15 @@
             <div class="options">
               <div title="all">
                 <input id="ckarat-all" name="cfilter-karat" type="radio" value="all" checked onchange="filterCollectionProducts('karat', 'all', 'Todas las purezas')">
-                <label class="option" for="ckarat-all" data-txt="Todas las purezas"></label>
+                <label class="option" for="ckarat-all" data-txt="Todas las purezas">Todas las purezas</label>
               </div>
               <div title="14k">
                 <input id="ckarat-14k" name="cfilter-karat" type="radio" value="14k" onchange="filterCollectionProducts('karat', '14k', 'Oro 14K Auténtico')">
-                <label class="option" for="ckarat-14k" data-txt="Oro 14K Auténtico"></label>
+                <label class="option" for="ckarat-14k" data-txt="Oro 14K Auténtico">Oro 14K Auténtico</label>
               </div>
               <div title="10k">
                 <input id="ckarat-10k" name="cfilter-karat" type="radio" value="10k" onchange="filterCollectionProducts('karat', '10k', 'Oro 10K Auténtico')">
-                <label class="option" for="ckarat-10k" data-txt="Oro 10K Auténtico"></label>
+                <label class="option" for="ckarat-10k" data-txt="Oro 10K Auténtico">Oro 10K Auténtico</label>
               </div>
             </div>
           </div>
@@ -145,15 +145,15 @@
             <div class="options">
               <div title="default">
                 <input id="csort-default" name="cfilter-sort" type="radio" value="default" checked onchange="filterCollectionProducts('sort', 'default', 'Destacados')">
-                <label class="option" for="csort-default" data-txt="Destacados"></label>
+                <label class="option" for="csort-default" data-txt="Destacados">Destacados</label>
               </div>
               <div title="price-asc">
                 <input id="csort-price-asc" name="cfilter-sort" type="radio" value="price-asc" onchange="filterCollectionProducts('sort', 'price-asc', 'Precio: Menor a Mayor')">
-                <label class="option" for="csort-price-asc" data-txt="Precio: Menor a Mayor"></label>
+                <label class="option" for="csort-price-asc" data-txt="Precio: Menor a Mayor">Precio: Menor a Mayor</label>
               </div>
               <div title="price-desc">
                 <input id="csort-price-desc" name="cfilter-sort" type="radio" value="price-desc" onchange="filterCollectionProducts('sort', 'price-desc', 'Precio: Mayor a Menor')">
-                <label class="option" for="csort-price-desc" data-txt="Precio: Mayor a Menor"></label>
+                <label class="option" for="csort-price-desc" data-txt="Precio: Mayor a Menor">Precio: Mayor a Menor</label>
               </div>
             </div>
           </div>
@@ -292,9 +292,9 @@
           <div class="cutout-card-media">
             <a href="{{ product.url }}" onclick="event.preventDefault(); openProductModalFromCard(this.closest('.product-shop-card'));">
               {%- if product.featured_image != blank -%}
-                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="cutout-card-img" width="600" height="600" loading="lazy" decoding="async">
               {%- else -%}
-                <img src="{{ 'collection-cadenas.jpg' | asset_url }}" alt="{{ product.title | escape }}" class="cutout-card-img" loading="lazy">
+                <img src="{{ 'collection-cadenas.jpg' | asset_img_url: '600x600' }}" alt="{{ product.title | escape }}" class="cutout-card-img" width="600" height="600" loading="lazy" decoding="async">
               {%- endif -%}
             </a>
             {%- if product.compare_at_price > product.price -%}
@@ -402,6 +402,10 @@
         }
       }
     } catch(e) {}
+    var heroCountEl = document.getElementById('collectionHeroAvailCount');
+    if (heroCountEl) {
+      heroCountEl.textContent = String(document.querySelectorAll('#collectionProductsGrid .product-shop-card').length);
+    }
     paginateCollectionGrid();
   }
 
