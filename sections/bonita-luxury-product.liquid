@@ -457,10 +457,115 @@
     gap: 4px;
   }
 
+  /* Editorial Description Card below Hero Card */
+  .pdp-editorial-desc-card {
+    margin-top: 18px;
+    background: #FFFFFF;
+    border-radius: 22px;
+    border: 1px solid rgba(209, 176, 84, 0.35);
+    box-shadow: 0 18px 46px rgba(4, 12, 45, 0.35);
+    padding: 24px 28px;
+    color: #1E293B;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .pdp-editorial-desc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(8, 25, 91, 0.08);
+  }
+
+  .pdp-editorial-desc-kicker {
+    font-size: 0.70rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B8923A;
+  }
+
+  .pdp-editorial-desc-sub {
+    font-family: 'Sentient', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #08195B;
+    margin: 4px 0 0;
+  }
+
+  .pdp-editorial-desc-store-pill {
+    font-size: 0.70rem;
+    font-weight: 700;
+    color: #08195B;
+    background: #FAF9F6;
+    border: 1px solid rgba(209, 176, 84, 0.45);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .pdp-editorial-desc-body {
+    font-size: 0.90rem;
+    line-height: 1.65;
+    color: #334155;
+  }
+
+  .pdp-editorial-desc-body p {
+    margin: 0 0 10px;
+  }
+
+  .pdp-editorial-desc-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .pdp-editorial-desc-body strong {
+    color: #08195B;
+  }
+
+  .pdp-editorial-desc-body ul {
+    list-style: none;
+    padding: 12px 14px;
+    margin: 12px 0;
+    background: #FAF9F6;
+    border: 1px solid rgba(209, 176, 84, 0.28);
+    border-radius: 12px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .pdp-editorial-desc-body ul li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    color: #1E293B;
+  }
+
+  .pdp-editorial-desc-body ul li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #B8923A;
+    font-size: 0.78rem;
+  }
+
   /* ==========================================================================
      MOBILE SPECIFIC RULES (< 860px) - 1:2 LUXURY CARD PROPORTION (1 ANCHO : 2 ALTO)
      ========================================================================== */
   @media (max-width: 860px) {
+    .pdp-editorial-desc-card {
+      margin-top: 14px !important;
+      padding: 18px 16px !important;
+      border-radius: 20px !important;
+    }
+    .pdp-editorial-desc-sub {
+      font-size: 1.02rem !important;
+    }
+    .pdp-editorial-desc-body {
+      font-size: 0.84rem !important;
+    }
     .pdp-floating-page-backdrop {
       padding: 16px 12px 32px !important;
       min-height: auto !important;
@@ -807,6 +912,21 @@
       </div>
 
     </div>
+
+    {%- if product.description != blank -%}
+      <article class="pdp-editorial-desc-card" aria-label="Descripción de la pieza">
+        <div class="pdp-editorial-desc-head">
+          <div>
+            <span class="pdp-editorial-desc-kicker">Detalles y Garantía</span>
+            <h2 class="pdp-editorial-desc-sub">Por qué elegir esta joya hoy</h2>
+          </div>
+          <span class="pdp-editorial-desc-store-pill">5638 Bardstown Rd · Louisville, KY</span>
+        </div>
+        <div class="pdp-editorial-desc-body">
+          {{ product.description }}
+        </div>
+      </article>
+    {%- endif -%}
   </div>
 </section>
 
