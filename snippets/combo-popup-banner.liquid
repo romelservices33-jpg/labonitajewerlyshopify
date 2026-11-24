@@ -61,7 +61,7 @@
   {%- assign combo3_thumb = combo3_product.featured_image | image_url: width: 120 -%}
 {%- endif -%}
 
-{%- assign active_promos_count = 1 -%}
+{%- assign active_promos_count = 0 -%}
 {%- if combo_liso_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
 {%- if combo_pave_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
 {%- if combo3_in_stock -%}{%- assign active_promos_count = active_promos_count | plus: 1 -%}{%- endif -%}
@@ -488,26 +488,6 @@
         <div class="lb-carousel-track" id="lbCarouselTrack">
           {%- assign slide_idx = 0 -%}
 
-          <div class="lb-carousel-slide is-active" data-slide-index="{{ slide_idx }}">
-            <a href="/collections/all" class="lb-combo-popup-image-link" style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:26px 20px; text-align:center; background: radial-gradient(circle at 50% 20%, #102A83 0%, #08195B 65%, #040D32 100%); box-sizing:border-box;">
-              <span class="lb-slide-corner-pill">Promo #1 &middot; Autom&aacute;tico en Bolsa</span>
-              <span style="font-size:11px; font-weight:800; letter-spacing:0.14em; color:#F5D77F; text-transform:uppercase; margin-bottom:8px;">Oro Aut&eacute;ntico 10K &amp; 14K</span>
-              <h3 style="font-family:'Sentient',Georgia,serif; font-size:clamp(22px,5vw,28px); line-height:1.15; color:#FFFFFF; margin:0 0 10px; font-weight:600;">Arma Tu Combo <span style="color:#F5D77F; font-style:italic;">Progresivo</span></h3>
-              <p style="font-size:12.5px; color:rgba(255,255,255,0.86); margin:0 0 18px; max-width:290px; line-height:1.45;">Combina tus joyas favoritas del cat&aacute;logo y tu descuento sube autom&aacute;ticamente al pagar:</p>
-              <div style="width:100%; max-width:290px; display:flex; flex-direction:column; gap:8px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.08); border:1px solid rgba(212,175,55,0.35); border-radius:10px; padding:9px 14px; font-size:13px; color:#FFFFFF; font-weight:700;"><span>2 Prendas en tu bolsa</span><span style="color:#F5D77F; font-weight:800;">5% OFF</span></div>
-                <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.12); border:1px solid rgba(212,175,55,0.55); border-radius:10px; padding:9px 14px; font-size:13px; color:#FFFFFF; font-weight:700;"><span>3 Prendas en tu bolsa</span><span style="color:#F7E39C; font-weight:800;">10% OFF</span></div>
-                <div style="display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg, rgba(245,215,127,0.28), rgba(212,175,55,0.18)); border:1.5px solid #F5D77F; border-radius:10px; padding:10px 14px; font-size:13.5px; color:#F7E39C; font-weight:800;"><span>4+ Prendas en tu bolsa</span><span>15% OFF VIP</span></div>
-              </div>
-            </a>
-            <div class="lb-slide-body">
-              <a href="/collections/all" class="lb-combo-popup-cta">
-                Armar Mi Combo Progresivo &rarr;
-              </a>
-            </div>
-          </div>
-          {%- assign slide_idx = slide_idx | plus: 1 -%}
-
           {%- if combo_liso_in_stock -%}
             <div class="lb-carousel-slide {% if slide_idx == 0 %}is-active{% endif %}" data-slide-index="{{ slide_idx }}">
               <a href="{{ combo_liso_url }}" class="lb-combo-popup-image-link">
@@ -622,16 +602,8 @@
 
       <div class="lb-carousel-footer">
         {%- if active_promos_count > 1 -%}
+          {%- assign thumb_idx = 0 -%}
           <div class="lb-carousel-thumbs" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
-            <button type="button" class="lb-carousel-thumb is-active" data-goto-slide="0">
-              <span style="width:30px;height:30px;border-radius:6px;background:linear-gradient(135deg,#08195B,#102A83);border:1px solid #F5D77F;color:#F5D77F;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">15%</span>
-              <span class="lb-carousel-thumb-meta">
-                <span class="lb-carousel-thumb-title">1. Combo Progresivo</span>
-                <span class="lb-carousel-thumb-price">5% &rarr; 10% &rarr; 15%</span>
-              </span>
-            </button>
-            {%- assign thumb_idx = 1 -%}
-
             {%- if combo_liso_in_stock -%}
               <button type="button" class="lb-carousel-thumb {% if thumb_idx == 0 %}is-active{% endif %}" data-goto-slide="{{ thumb_idx }}">
                 <img src="{{ combo_liso_thumb }}" alt="Combo Set Liso 10K" width="30" height="30" loading="lazy" decoding="async">
@@ -706,7 +678,7 @@
 
   <script>
     (function () {
-      var STORAGE_KEY = 'lb_carousel_combos_popup_seen_v7';
+      var STORAGE_KEY = 'lb_carousel_combos_popup_seen_v6';
       var popup = document.getElementById('lbComboPopup');
       var card = document.getElementById('lbComboPopupCard');
       var closeBtn = document.getElementById('lbComboPopupClose');
