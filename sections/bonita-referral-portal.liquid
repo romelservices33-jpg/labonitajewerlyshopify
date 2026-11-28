@@ -7,44 +7,93 @@
   <div class="brp-container">
 
     <header class="brp-hero">
-      <span class="brp-eyebrow">PROGRAMA INTERNO · LA BONITA JEWELRY</span>
-      <h1 class="brp-title">Portal de <span>Referidos & Vendedores</span></h1>
+      <span class="brp-eyebrow">PROGRAMA ABIERTO DE REFERIDOS · LA BONITA JEWELRY</span>
+      <h1 class="brp-title">Gana el <span>{{ section.settings.commission_rate | default: 7 }}% Neto</span> Refiriendo</h1>
       <p class="brp-subtitle">
-        Genera tus enlaces personales para redes sociales y WhatsApp, activa el modo vendedor al navegar el catálogo y consulta tu comisión aprobada del <strong>{{ section.settings.commission_rate | default: 7 }}% neto después de impuestos</strong>.
+        Regístrate gratis en segundos, comparte tu enlace personal en redes o WhatsApp y gana el <strong>{{ section.settings.commission_rate | default: 7 }}% neto después de impuestos</strong> por cada persona que traigas y compre. <strong>No necesitas cerrar la venta</strong>: si preguntan por WhatsApp, nuestra IA y equipo los atienden y tu comisión queda protegida.
       </p>
     </header>
 
-    <!-- LOGIN / PROFILE PICKER VIEW -->
+    <!-- OPEN SELF-SIGNUP & LOGIN VIEW -->
     <div id="brpPickerView" class="brp-card brp-picker-card">
-      <div class="brp-section-head">
-        <h2>Selecciona tu perfil de vendedor</h2>
-        <p>Elige tu perfil e ingresa tu PIN de 4 dígitos para abrir tu generador personal de enlaces y estadísticas.</p>
+      <div class="brp-auth-tabs" role="tablist">
+        <button type="button" id="brpTabRegister" class="brp-auth-tab is-active" role="tab" aria-selected="true">
+          ✦ Crear Mi Link Gratis (7%)
+        </button>
+        <button type="button" id="brpTabLogin" class="brp-auth-tab" role="tab" aria-selected="false">
+          Ya Tengo Cuenta (Entrar)
+        </button>
       </div>
 
-      <div id="brpProfilesGrid" class="brp-profiles-grid"></div>
-
-      <div id="brpPinPanel" class="brp-pin-panel" style="display:none;">
-        <div class="brp-pin-box">
-          <div class="brp-pin-header">
-            <span id="brpSelectedBadge" class="brp-badge-gold">VEND1</span>
-            <strong id="brpSelectedName">Vendedor 1</strong>
-          </div>
-          <label for="brpPinInput" class="brp-label">PIN de acceso (4 dígitos)</label>
-          <div class="brp-pin-row">
-            <input
-              type="password"
-              inputmode="numeric"
-              maxlength="12"
-              id="brpPinInput"
-              class="brp-input"
-              placeholder="Ej: 1101"
-              autocomplete="off"
-            >
-            <button type="button" id="brpUnlockBtn" class="brp-btn brp-btn-navy">Entrar a mi Perfil</button>
-          </div>
-          <p id="brpPinError" class="brp-error" role="alert" style="display:none;"></p>
+      <!-- REGISTER FORM -->
+      <form id="brpRegisterForm" class="brp-auth-panel" autocomplete="on">
+        <div class="brp-section-head">
+          <h2>Obtén tu enlace personal al instante</h2>
+          <p>Comparte tus joyas favoritas con amigos, seguidores o clientes. Cada compra dentro de 30 días te acredita el {{ section.settings.commission_rate | default: 7 }}% neto.</p>
         </div>
-      </div>
+
+        <div class="brp-form-grid">
+          <div>
+            <label for="brpRegName" class="brp-label">Nombre completo *</label>
+            <input type="text" id="brpRegName" class="brp-input" placeholder="Ej: María López" required>
+          </div>
+          <div>
+            <label for="brpRegPhone" class="brp-label">WhatsApp / Teléfono *</label>
+            <input type="tel" id="brpRegPhone" class="brp-input" placeholder="Ej: 502-555-1234" required>
+          </div>
+          <div>
+            <label for="brpRegPayout" class="brp-label">¿Cómo deseas cobrar? (Zelle, CashApp, Banco)</label>
+            <input type="text" id="brpRegPayout" class="brp-input" placeholder="Ej: Zelle 502-555-1234 o correo">
+          </div>
+          <div>
+            <label for="brpRegSocial" class="brp-label">Tu Instagram / TikTok (opcional)</label>
+            <input type="text" id="brpRegSocial" class="brp-input" placeholder="Ej: @marialopez">
+          </div>
+          <div>
+            <label for="brpRegCode" class="brp-label">Código deseado (opcional)</label>
+            <input type="text" id="brpRegCode" class="brp-input" maxlength="20" placeholder="Ej: MARIA26 (si lo dejas vacío se crea solo)">
+          </div>
+          <div>
+            <label for="brpRegPin" class="brp-label">Crea tu PIN de acceso (4 a 8 dígitos) *</label>
+            <input type="password" inputmode="numeric" id="brpRegPin" class="brp-input" maxlength="8" placeholder="Ej: 4821" required>
+          </div>
+        </div>
+
+        <p id="brpRegError" class="brp-error" role="alert" style="display:none;"></p>
+
+        <div class="brp-auth-actions">
+          <button type="submit" id="brpRegSubmitBtn" class="brp-btn brp-btn-gold">
+            Crear Mi Enlace Personal Ahora →
+          </button>
+        </div>
+      </form>
+
+      <!-- LOGIN FORM -->
+      <form id="brpLoginForm" class="brp-auth-panel" style="display:none;" autocomplete="on">
+        <div class="brp-section-head">
+          <h2>Entra a tu panel de referidos</h2>
+          <p>Consulta tus ventas en tiempo real, copia tus enlaces con <code>?ref=</code> y activa tu Modo Vendedor.</p>
+        </div>
+
+        <div class="brp-form-grid">
+          <div>
+            <label for="brpLoginId" class="brp-label">Tu Código o Teléfono *</label>
+            <input type="text" id="brpLoginId" class="brp-input" placeholder="Ej: MARIA26 o 5025551234" required>
+          </div>
+          <div>
+            <label for="brpLoginPin" class="brp-label">Tu PIN *</label>
+            <input type="password" inputmode="numeric" id="brpLoginPin" class="brp-input" maxlength="8" placeholder="Ej: 4821" required>
+          </div>
+        </div>
+
+        <p id="brpPinError" class="brp-error" role="alert" style="display:none;"></p>
+
+        <div class="brp-auth-actions">
+          <button type="submit" id="brpUnlockBtn" class="brp-btn brp-btn-navy">
+            Entrar a Mi Panel →
+          </button>
+        </div>
+      </form>
     </div>
 
     <!-- ACTIVE SALESPERSON DASHBOARD VIEW -->
@@ -203,10 +252,10 @@
           </div>
 
           <ul class="brp-rules-list">
-            <li><strong>Ventana de 30 días:</strong> Si el cliente entra por tu enlace hoy y compra después dentro de 30 días en ese dispositivo, la venta es tuya.</li>
-            <li><strong>Consultas por WhatsApp:</strong> Si el cliente toca "Consultar por WhatsApp" tras entrar por tu link, su mensaje incluye <code>[Ref: <span class="js-seller-code-inline">VEND1</span>]</code> para respaldar cierres asistidos.</li>
-            <li><strong>Todos los métodos de pago válidos:</strong> Tarjeta, Shop Pay, Apple/Google Pay, <strong>Affirm</strong> y Afterpay cuentan igual al marcarse como Pagado.</li>
-            <li><strong>Órdenes válidas:</strong> Solo liquidan pedidos pagados y no cancelados/reembolsados.</li>
+            <li><strong>Solo necesitas traer compradores:</strong> Si tu referido escribe por WhatsApp, Instagram o Facebook y nuestra IA o equipo cierra la venta y le guía el financiamiento, el <strong>7% sigue siendo tuyo</strong>.</li>
+            <li><strong>Ventana de 30 días:</strong> Si el cliente entra por tu enlace hoy y compra después dentro de 30 días, la venta queda registrada a tu código <code><span class="js-seller-code-inline">VEND1</span></code>.</li>
+            <li><strong>Todos los métodos de pago válidos:</strong> Tarjeta, Shop Pay, Apple/Google Pay, <strong>Affirm, Klarna, Afterpay, Acima y Snap! Finance</strong> cuentan igual al marcarse como Pagado.</li>
+            <li><strong>Órdenes válidas:</strong> Solo liquidan pedidos pagados y no cancelados/reembolsados (sin tax ni envío).</li>
           </ul>
         </div>
 
@@ -232,8 +281,9 @@
 (function() {
   var RATE = {{ section.settings.commission_rate | default: 7 }} / 100;
   var STORE_ORIGIN = ({{ store_origin | json }} || window.location.origin).replace(/\/+$/, '');
+  var CRM_REFERRAL_API = 'https://la-bonita-crm.vercel.app/api/referrals/public';
   var SELLER_MODE_KEY = 'bonita_salesperson_mode_v1';
-  var SESSION_PREFIX = 'bonita_portal_unlocked_';
+  var SESSION_STORAGE_KEY = 'bonita_portal_active_seller_v2';
 
   var PROFILES = [];
   {%- for s in _vendedores -%}
@@ -442,62 +492,142 @@
     updateCalc();
   }
 
-  function renderProfileCards() {
-    var grid = document.getElementById('brpProfilesGrid');
-    grid.innerHTML = '';
-    PROFILES.forEach(function(p) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'brp-profile-tile';
-      btn.innerHTML =
-        '<span class="brp-tile-code">' + p.code + '</span>' +
-        '<strong class="brp-tile-name"></strong>' +
-        '<span class="brp-tile-social"></span>' +
-        '<span class="brp-tile-action">Seleccionar perfil →</span>';
-      btn.querySelector('.brp-tile-name').textContent = p.name;
-      btn.querySelector('.brp-tile-social').textContent = p.social || 'Vendedor Tienda';
-      btn.addEventListener('click', function() {
-        selectedProfile = p;
-        document.querySelectorAll('.brp-profile-tile').forEach(function(t) { t.classList.remove('active'); });
-        btn.classList.add('active');
-
-        try {
-          if (!p.hasPin || window.sessionStorage.getItem(SESSION_PREFIX + p.code) === '1') {
-            openDashboard(p);
-            return;
-          }
-        } catch (e) {}
-
-        document.getElementById('brpSelectedBadge').textContent = p.code;
-        document.getElementById('brpSelectedName').textContent = p.name;
-        document.getElementById('brpPinPanel').style.display = 'block';
-        document.getElementById('brpPinError').style.display = 'none';
-        var inp = document.getElementById('brpPinInput');
-        inp.value = '';
-        setTimeout(function() { inp.focus(); }, 60);
-      });
-      grid.appendChild(btn);
-    });
+  function formatUsd(num) {
+    var n = Number(num || 0);
+    return '$' + (isFinite(n) ? n : 0).toFixed(2);
   }
 
-  function attemptUnlock() {
-    if (!selectedProfile) return;
-    var entered = (document.getElementById('brpPinInput').value || '').trim();
+  function mapApiResponseToProfile(data) {
+    var s = data.seller || {};
+    var st = data.stats || {};
+    return {
+      code: s.code,
+      name: s.name || s.code,
+      social: s.social || 'Referidor La Bonita',
+      orders: st.orders || 0,
+      sales: formatUsd(st.netSales || 0),
+      commission: formatUsd(st.commissionTotal || 0),
+      updated: st.updatedLabel || 'En vivo vía CRM'
+    };
+  }
+
+  function switchAuthTab(mode) {
+    var tabReg = document.getElementById('brpTabRegister');
+    var tabLog = document.getElementById('brpTabLogin');
+    var formReg = document.getElementById('brpRegisterForm');
+    var formLog = document.getElementById('brpLoginForm');
+    if (mode === 'login') {
+      tabReg.classList.remove('is-active');
+      tabLog.classList.add('is-active');
+      formReg.style.display = 'none';
+      formLog.style.display = 'block';
+    } else {
+      tabLog.classList.remove('is-active');
+      tabReg.classList.add('is-active');
+      formLog.style.display = 'none';
+      formReg.style.display = 'block';
+    }
+  }
+
+  function handlePublicRegister(e) {
+    if (e) e.preventDefault();
+    var errEl = document.getElementById('brpRegError');
+    var btn = document.getElementById('brpRegSubmitBtn');
+    errEl.style.display = 'none';
+
+    var payload = {
+      action: 'register',
+      name: (document.getElementById('brpRegName').value || '').trim(),
+      phone: (document.getElementById('brpRegPhone').value || '').trim(),
+      payoutMethod: (document.getElementById('brpRegPayout').value || '').trim(),
+      socialHandle: (document.getElementById('brpRegSocial').value || '').trim(),
+      desiredCode: (document.getElementById('brpRegCode').value || '').trim(),
+      pin: (document.getElementById('brpRegPin').value || '').trim()
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Creando tu enlace...';
+
+    fetch(CRM_REFERRAL_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, data: j }; }); })
+      .then(function(res) {
+        if (!res.ok || !res.data.ok) {
+          errEl.textContent = (res.data && res.data.error) || 'No se pudo completar el registro.';
+          errEl.style.display = 'block';
+          return;
+        }
+        var prof = mapApiResponseToProfile(res.data);
+        try { window.sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(prof)); } catch (err) {}
+        openDashboard(prof);
+        showToast('¡Listo! Tu código es ' + prof.code + '. Ya puedes compartir tu enlace.');
+      })
+      .catch(function() {
+        errEl.textContent = 'Error de conexión. Intenta nuevamente en unos segundos.';
+        errEl.style.display = 'block';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = 'Crear Mi Enlace Personal Ahora →';
+      });
+  }
+
+  function attemptUnlock(e) {
+    if (e) e.preventDefault();
+    var identifier = (document.getElementById('brpLoginId').value || '').trim();
+    var enteredPin = (document.getElementById('brpLoginPin').value || '').trim();
     var errEl = document.getElementById('brpPinError');
-    if (!entered) {
-      errEl.textContent = 'Ingresa tu PIN de acceso.';
+    var btn = document.getElementById('brpUnlockBtn');
+    errEl.style.display = 'none';
+
+    if (!identifier || !enteredPin) {
+      errEl.textContent = 'Ingresa tu código (o teléfono) y tu PIN.';
       errEl.style.display = 'block';
       return;
     }
-    sha256Hex(entered).then(function(digest) {
-      if (digest && digest === selectedProfile.pinHash) {
-        try { window.sessionStorage.setItem(SESSION_PREFIX + selectedProfile.code, '1'); } catch (e) {}
-        openDashboard(selectedProfile);
-      } else {
-        errEl.textContent = 'PIN incorrecto. Verifica el código con el administrador de la tienda.';
+
+    btn.disabled = true;
+    btn.textContent = 'Verificando...';
+
+    fetch(CRM_REFERRAL_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'login', identifier: identifier, pin: enteredPin })
+    })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, data: j }; }); })
+      .then(function(res) {
+        if (res.ok && res.data && res.data.ok) {
+          var prof = mapApiResponseToProfile(res.data);
+          try { window.sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(prof)); } catch (err) {}
+          openDashboard(prof);
+          return;
+        }
+        // Fallback to Shopify metaobjects if present
+        var localMatch = PROFILES.find(function(x) { return x.code === identifier.toUpperCase(); });
+        if (localMatch) {
+          return sha256Hex(enteredPin).then(function(digest) {
+            if (digest && digest === localMatch.pinHash) {
+              openDashboard(localMatch);
+              return;
+            }
+            errEl.textContent = (res.data && res.data.error) || 'Código o PIN incorrecto.';
+            errEl.style.display = 'block';
+          });
+        }
+        errEl.textContent = (res.data && res.data.error) || 'Código o PIN incorrecto.';
         errEl.style.display = 'block';
-      }
-    });
+      })
+      .catch(function() {
+        errEl.textContent = 'Error de conexión. Intenta nuevamente.';
+        errEl.style.display = 'block';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = 'Entrar a Mi Panel →';
+      });
   }
 
   function showGeneratedUrl(url, title, priceNum) {
@@ -567,20 +697,31 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    renderProfileCards();
+    var tabReg = document.getElementById('brpTabRegister');
+    var tabLog = document.getElementById('brpTabLogin');
+    if (tabReg) tabReg.addEventListener('click', function() { switchAuthTab('register'); });
+    if (tabLog) tabLog.addEventListener('click', function() { switchAuthTab('login'); });
 
-    var unlockBtn = document.getElementById('brpUnlockBtn');
-    if (unlockBtn) unlockBtn.addEventListener('click', attemptUnlock);
-    var pinInp = document.getElementById('brpPinInput');
-    if (pinInp) {
-      pinInp.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') attemptUnlock();
-      });
-    }
+    var regForm = document.getElementById('brpRegisterForm');
+    if (regForm) regForm.addEventListener('submit', handlePublicRegister);
+
+    var loginForm = document.getElementById('brpLoginForm');
+    if (loginForm) loginForm.addEventListener('submit', attemptUnlock);
+
+    // Restore unlocked session if still in current tab
+    try {
+      var saved = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
+      if (saved) {
+        var parsedProf = JSON.parse(saved);
+        if (parsedProf && parsedProf.code) openDashboard(parsedProf);
+      }
+    } catch (e) {}
 
     document.getElementById('brpSwitchProfileBtn').addEventListener('click', function() {
+      try { window.sessionStorage.removeItem(SESSION_STORAGE_KEY); } catch (e) {}
       document.getElementById('brpDashboardView').style.display = 'none';
       document.getElementById('brpPickerView').style.display = 'block';
+      switchAuthTab('login');
     });
 
     document.getElementById('brpSellerModeToggle').addEventListener('click', function() {
@@ -650,17 +791,14 @@
 
     document.getElementById('brpCalcAmount').addEventListener('input', updateCalc);
 
-    // Preselect seller if ?vendedor=CODE passed in URL
+    // Preselect login tab if ?vendedor=CODE or ?code=CODE passed in URL
     try {
       var qp = new URLSearchParams(window.location.search || '');
       var pre = (qp.get('vendedor') || qp.get('code') || '').trim().toUpperCase();
       if (pre) {
-        var found = PROFILES.find(function(x) { return x.code === pre; });
-        if (found) {
-          var idx = PROFILES.indexOf(found);
-          var tile = document.querySelectorAll('.brp-profile-tile')[idx];
-          if (tile) tile.click();
-        }
+        switchAuthTab('login');
+        var loginInp = document.getElementById('brpLoginId');
+        if (loginInp) loginInp.value = pre;
       }
     } catch (e) {}
   });
@@ -1219,8 +1357,46 @@
     opacity: 1;
     transform: translateY(0);
   }
+  .brp-auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #E8E3D5;
+    padding-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .brp-auth-tab {
+    flex: 1;
+    min-width: 190px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #E2DCCB;
+    background: #FAF9F6;
+    color: #08195B;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .brp-auth-tab.is-active {
+    background: #08195B;
+    color: #FFFFFF;
+    border-color: #08195B;
+    box-shadow: 0 6px 18px rgba(8, 25, 91, 0.16);
+  }
+  .brp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .brp-auth-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
   @media (max-width: 860px) {
-    .brp-grid-2 {
+    .brp-grid-2, .brp-form-grid {
       grid-template-columns: 1fr;
     }
     .brp-card { padding: 18px; }
