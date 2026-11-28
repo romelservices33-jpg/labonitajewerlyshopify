@@ -306,11 +306,31 @@
         {%- for opt in product.options_with_values -%}
           {%- assign opt_name = opt.name | downcase -%}
           {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-            {%- assign product_size = opt.values.first -%}
+            {%- assign opt_val_clean = opt.values.first | strip -%}
+            {%- assign opt_val_low = opt_val_clean | downcase -%}
+            {%- unless opt_val_low == 'default title' or opt_val_low == 'talla estándar' or opt_val_low == 'talla estandar' or opt_val_low == 'estándar' or opt_val_low == 'estandar' -%}
+              {%- assign product_size = opt_val_clean -%}
+            {%- endunless -%}
           {%- endif -%}
         {%- endfor -%}
         {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-          {%- assign product_size = product.variants.first.title -%}
+          {%- assign v_title_clean = product.variants.first.title | strip -%}
+          {%- assign v_title_low = v_title_clean | downcase -%}
+          {%- unless v_title_low == 'talla estándar' or v_title_low == 'talla estandar' or v_title_low == 'estándar' or v_title_low == 'estandar' -%}
+            {%- assign product_size = v_title_clean -%}
+          {%- endunless -%}
+        {%- endif -%}
+        {%- if product_size == blank -%}
+          {%- assign product_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+        {%- endif -%}
+        {%- if product_size == blank -%}
+          {%- for t in product.tags -%}
+            {%- assign t_low = t | downcase -%}
+            {%- if t_low contains 'pulgada' or t contains '"' -%}
+              {%- assign product_size = t | strip -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
         {%- endif -%}
         <div class="product-shop-card cutout-product-card" data-category="{{ cat_tag }}" data-karat="{{ karat_tag }}" data-price="{{ product.price | divided_by: 100.0 }}" data-weight="{{ product_weight }}" data-size="{{ product_size | escape }}" data-default-order="{{ forloop.index }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}" data-url="{{ product.url }}" data-search="{{ product.title | escape }} {{ product.type | escape }} {{ product.tags | join: ' ' | escape }} {{ product.variants.first.sku | escape }} {{ product.description | strip_html | strip_newlines | truncate: 500 | escape }}" data-images="{%- for img in product.images -%}{{ img | image_url: width: 1200 }}{%- unless forloop.last -%}|{%- endunless -%}{%- endfor -%}" onclick="openProductModalFromCard(this)">
           <div class="cutout-card-media">

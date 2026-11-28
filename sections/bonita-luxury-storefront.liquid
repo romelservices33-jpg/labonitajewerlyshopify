@@ -775,11 +775,31 @@
   {%- for opt in product.options_with_values -%}
   {%- assign opt_name = opt.name | downcase -%}
   {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-  {%- assign product_size = opt.values.first -%}
+  {%- assign opt_val_clean = opt.values.first | strip -%}
+  {%- assign opt_val_low = opt_val_clean | downcase -%}
+  {%- unless opt_val_low == 'default title' or opt_val_low == 'talla estándar' or opt_val_low == 'talla estandar' or opt_val_low == 'estándar' or opt_val_low == 'estandar' -%}
+  {%- assign product_size = opt_val_clean -%}
+  {%- endunless -%}
   {%- endif -%}
   {%- endfor -%}
   {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-  {%- assign product_size = product.variants.first.title -%}
+  {%- assign v_title_clean = product.variants.first.title | strip -%}
+  {%- assign v_title_low = v_title_clean | downcase -%}
+  {%- unless v_title_low == 'talla estándar' or v_title_low == 'talla estandar' or v_title_low == 'estándar' or v_title_low == 'estandar' -%}
+  {%- assign product_size = v_title_clean -%}
+  {%- endunless -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- assign product_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- for t in product.tags -%}
+  {%- assign t_low = t | downcase -%}
+  {%- if t_low contains 'pulgada' or t contains '"' -%}
+  {%- assign product_size = t | strip -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
   {%- endif -%}
   <div class="product-shop-card cutout-product-card" 
   data-category="{{ cat_tag }}" 
@@ -1067,11 +1087,31 @@
   {%- for opt in product.options_with_values -%}
   {%- assign opt_name = opt.name | downcase -%}
   {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-  {%- assign product_size = opt.values.first -%}
+  {%- assign opt_val_clean = opt.values.first | strip -%}
+  {%- assign opt_val_low = opt_val_clean | downcase -%}
+  {%- unless opt_val_low == 'default title' or opt_val_low == 'talla estándar' or opt_val_low == 'talla estandar' or opt_val_low == 'estándar' or opt_val_low == 'estandar' -%}
+  {%- assign product_size = opt_val_clean -%}
+  {%- endunless -%}
   {%- endif -%}
   {%- endfor -%}
   {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-  {%- assign product_size = product.variants.first.title -%}
+  {%- assign v_title_clean = product.variants.first.title | strip -%}
+  {%- assign v_title_low = v_title_clean | downcase -%}
+  {%- unless v_title_low == 'talla estándar' or v_title_low == 'talla estandar' or v_title_low == 'estándar' or v_title_low == 'estandar' -%}
+  {%- assign product_size = v_title_clean -%}
+  {%- endunless -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- assign product_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- for t in product.tags -%}
+  {%- assign t_low = t | downcase -%}
+  {%- if t_low contains 'pulgada' or t contains '"' -%}
+  {%- assign product_size = t | strip -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
   {%- endif -%}
   <div class="product-shop-card cutout-product-card" 
   data-category="{{ cat_tag }}" 
@@ -1591,11 +1631,31 @@
   {%- for opt in product.options_with_values -%}
   {%- assign opt_name = opt.name | downcase -%}
   {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-  {%- assign product_size = opt.values.first -%}
+  {%- assign opt_val_clean = opt.values.first | strip -%}
+  {%- assign opt_val_low = opt_val_clean | downcase -%}
+  {%- unless opt_val_low == 'default title' or opt_val_low == 'talla estándar' or opt_val_low == 'talla estandar' or opt_val_low == 'estándar' or opt_val_low == 'estandar' -%}
+  {%- assign product_size = opt_val_clean -%}
+  {%- endunless -%}
   {%- endif -%}
   {%- endfor -%}
   {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-  {%- assign product_size = product.variants.first.title -%}
+  {%- assign v_title_clean = product.variants.first.title | strip -%}
+  {%- assign v_title_low = v_title_clean | downcase -%}
+  {%- unless v_title_low == 'talla estándar' or v_title_low == 'talla estandar' or v_title_low == 'estándar' or v_title_low == 'estandar' -%}
+  {%- assign product_size = v_title_clean -%}
+  {%- endunless -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- assign product_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- for t in product.tags -%}
+  {%- assign t_low = t | downcase -%}
+  {%- if t_low contains 'pulgada' or t contains '"' -%}
+  {%- assign product_size = t | strip -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
   {%- endif -%}
   {%- assign default_order_score = forloop.index | times: 10 | plus: forloop.parentloop.index -%}
   <div class="product-shop-card cutout-product-card" 
@@ -1765,11 +1825,31 @@
   {%- for opt in product.options_with_values -%}
   {%- assign opt_name = opt.name | downcase -%}
   {%- if opt_name contains 'talla' or opt_name contains 'size' or opt_name contains 'medida' or opt_name contains 'largo' or opt_name contains 'longitud' -%}
-  {%- assign product_size = opt.values.first -%}
+  {%- assign opt_val_clean = opt.values.first | strip -%}
+  {%- assign opt_val_low = opt_val_clean | downcase -%}
+  {%- unless opt_val_low == 'default title' or opt_val_low == 'talla estándar' or opt_val_low == 'talla estandar' or opt_val_low == 'estándar' or opt_val_low == 'estandar' -%}
+  {%- assign product_size = opt_val_clean -%}
+  {%- endunless -%}
   {%- endif -%}
   {%- endfor -%}
   {%- if product_size == blank and product.variants.first.title != 'Default Title' -%}
-  {%- assign product_size = product.variants.first.title -%}
+  {%- assign v_title_clean = product.variants.first.title | strip -%}
+  {%- assign v_title_low = v_title_clean | downcase -%}
+  {%- unless v_title_low == 'talla estándar' or v_title_low == 'talla estandar' or v_title_low == 'estándar' or v_title_low == 'estandar' -%}
+  {%- assign product_size = v_title_clean -%}
+  {%- endunless -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- assign product_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+  {%- endif -%}
+  {%- if product_size == blank -%}
+  {%- for t in product.tags -%}
+  {%- assign t_low = t | downcase -%}
+  {%- if t_low contains 'pulgada' or t contains '"' -%}
+  {%- assign product_size = t | strip -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
   {%- endif -%}
   {%- assign fallback_order_score = card_order_idx | plus: 2000 -%}
   <div class="product-shop-card cutout-product-card" 
@@ -2945,7 +3025,33 @@
   var combined = (size + ' ' + title).toLowerCase();
   var numMatches = combined.match(/\d+(\.\d+)?/g) || [];
   var nums = numMatches.map(function(n) { return parseFloat(n); });
-  if (activeSizeFilter === 'short') {
+  if (activeSizeFilter === '20') {
+  if (!(cat.includes('cadena') || cat.includes('cuban') || title.includes('cadena') || title.includes('collar'))) return false;
+  if (!nums.some(function(n) { return n === 20; }) && !combined.includes('20"')) return false;
+  } else if (activeSizeFilter === '22') {
+  if (!(cat.includes('cadena') || cat.includes('cuban') || title.includes('cadena') || title.includes('collar'))) return false;
+  if (!nums.some(function(n) { return n === 22; }) && !combined.includes('22"')) return false;
+  } else if (activeSizeFilter === '24') {
+  if (!(cat.includes('cadena') || cat.includes('cuban') || title.includes('cadena') || title.includes('collar'))) return false;
+  if (!nums.some(function(n) { return n === 24; }) && !combined.includes('24"')) return false;
+  } else if (activeSizeFilter === '7.0') {
+  if (!(cat.includes('pulsera') || title.includes('pulsera') || title.includes('manilla') || title.includes('esclava'))) return false;
+  if (!nums.some(function(n) { return n >= 6.8 && n <= 7.7; })) return false;
+  } else if (activeSizeFilter === '8.0') {
+  if (!(cat.includes('pulsera') || title.includes('pulsera') || title.includes('manilla') || title.includes('esclava'))) return false;
+  if (!nums.some(function(n) { return n >= 7.8 && n <= 8.8; })) return false;
+  } else if (activeSizeFilter === 'talla-7' || activeSizeFilter === 'ring7') {
+  if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
+  var hasRing7 = nums.some(function(n) { return n >= 6.5 && n <= 7.5; });
+  if (!hasRing7) return false;
+  } else if (activeSizeFilter === 'talla-9') {
+  if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
+  if (!nums.some(function(n) { return n >= 8.5 && n <= 9.5; })) return false;
+  } else if (activeSizeFilter === 'talla-10' || activeSizeFilter === 'ring10') {
+  if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
+  var hasRing10 = nums.some(function(n) { return n >= 9.5 && n <= 13; });
+  if (!hasRing10) return false;
+  } else if (activeSizeFilter === 'short') {
   var hasShort = nums.some(function(n) { return n >= 6.5 && n <= 8.5; }) || combined.includes('7"') || combined.includes('7.5"') || combined.includes('8"') || combined.includes('16"') || combined.includes('18"') || combined.includes('pulsera') || combined.includes('manilla') || combined.includes('esclava');
   if (!hasShort) return false;
   } else if (activeSizeFilter === 'medium') {
@@ -2954,14 +3060,6 @@
   } else if (activeSizeFilter === 'long') {
   var hasLong = nums.some(function(n) { return n >= 23 && n <= 30; }) || combined.includes('24"') || combined.includes('26"') || combined.includes('28"');
   if (!hasLong) return false;
-  } else if (activeSizeFilter === 'ring7') {
-  if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
-  var hasRing7 = nums.some(function(n) { return n >= 5 && n <= 8.5; });
-  if (!hasRing7 && size !== '') return false;
-  } else if (activeSizeFilter === 'ring10') {
-  if (!(cat.includes('anillo') || title.includes('anillo') || title.includes('alianza'))) return false;
-  var hasRing10 = nums.some(function(n) { return n >= 9 && n <= 13; });
-  if (!hasRing10) return false;
   }
   }
 

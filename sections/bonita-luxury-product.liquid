@@ -811,7 +811,17 @@
                 </tr>
                 <tr>
                   <td class="spec-title">Medida / Dimensión</td>
-                  <td class="spec-data" id="pdpSpecSize">{{ selected_variant.title | replace: 'Default Title', 'Estándar' }}</td>
+                  {%- assign pdp_init_size = selected_variant.title | strip -%}
+                  {%- assign pdp_init_low = pdp_init_size | downcase -%}
+                  {%- if pdp_init_size == blank or pdp_init_low == 'default title' or pdp_init_low == 'talla estándar' or pdp_init_low == 'talla estandar' or pdp_init_low == 'estándar' or pdp_init_low == 'estandar' -%}
+                    {%- assign pdp_meta_size = product.metafields.custom.size.value | default: product.metafields.custom.largo.value | default: product.metafields.custom.medida.value | default: product.metafields.custom.talla.value | strip -%}
+                    {%- if pdp_meta_size != blank -%}
+                      {%- assign pdp_init_size = pdp_meta_size -%}
+                    {%- else -%}
+                      {%- assign pdp_init_size = 'Estándar' -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                  <td class="spec-data" id="pdpSpecSize">{{ pdp_init_size }}</td>
                 </tr>
                 {%- if pdp_tags_str contains 'grabado gratis' or pdp_title_low contains 'manilla id' or pdp_title_low contains 'placa lisa' -%}
                 <tr>
@@ -1138,16 +1148,28 @@
 
 <script>
   (function() {
-    // Parse specs from title
+    // Parse specs from title & tags
     var title = {{ product.title | json }} || '';
     var type = {{ product.type | json }} || '';
+    var tags = ({{ product.tags | json }} || []).join(' ');
     var rawWeight = {{ selected_variant.weight | default: 0 }};
     var weightEl = document.getElementById('pdpSpecWeight');
     var sizeEl = document.getElementById('pdpSpecSize');
     
+    var lowTitle = title.toLowerCase();
+    var lowType = type.toLowerCase();
+    var isRing = lowTitle.indexOf('anillo') !== -1 || lowType.indexOf('anillo') !== -1;
+    var isChain = !isRing && (/cadena|collar|cuban|gargantilla|rosario|cordon|cordón/i.test(lowTitle) || /cadena|collar|cuban/i.test(lowType));
+    var isBracelet = !isRing && /pulsera|esclava|brazalete|manilla|tobillera/i.test(lowTitle + ' ' + lowType);
+
     // Check if title has specs e.g. Anillo Hollow 10K 6.5 3.86
     var clean = title.replace(/\b10k\b|\b14k\b/gi, ' ');
-    var numMatches = clean.match(/\b\d+(?:\.\d+)?(?:g|gr|gramos)?\b/gi) || [];
+    var mmMatch = clean.match(/(?:^|[^\d.])(\d+(?:\.\d+)?)\s*mm\b/i);
+    var mmVal = mmMatch ? parseFloat(mmMatch[1]) : null;
+    var inchMatch = clean.match(/(?:^|[^\d.])(\d+(?:\.\d+)?)\s*(?:"|''|”|pulg(?:adas?)?|inch(?:es)?)/i);
+    var explicitInch = inchMatch ? parseFloat(inchMatch[1]) : null;
+    var cleanNoMm = clean.replace(/(^|[^\d.])\d+(?:\.\d+)?\s*mm\b/gi, '$1 ');
+    var numMatches = cleanNoMm.match(/\b\d+(?:\.\d+)?(?:g|gr|gramos)?\b/gi) || [];
     var weight = null;
     var size = null;
 
@@ -1162,7 +1184,6 @@
       if (!isNaN(n) && n !== weight) remaining.push(n);
     }
     
-    var isRing = title.toLowerCase().indexOf('anillo') !== -1 || type.toLowerCase().indexOf('anillo') !== -1;
     if (isRing && remaining.length >= 2) {
       if (remaining[0] >= 3.5 && remaining[0] <= 14) {
         size = 'Talla ' + remaining[0];
@@ -1170,6 +1191,49 @@
       } else {
         weight = weight || remaining[0];
         size = 'Talla ' + remaining[1];
+      }
+    } else if (isRing && remaining.length === 1) {
+      if (remaining[0] >= 3.5 && remaining[0] <= 14) {
+        size = 'Talla ' + remaining[0];
+      } else {
+        weight = weight || remaining[0];
+      }
+    } else if (isChain) {
+      var validChainLengths = [14, 15, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36];
+      var len = explicitInch;
+      if (!len) {
+        for (var k = 0; k < remaining.length; k++) {
+          if (validChainLengths.indexOf(Math.round(remaining[k])) !== -1) {
+            len = remaining[k];
+            break;
+          }
+        }
+      }
+      if (!len && tags) {
+        var tagInch = tags.match(/\b(\d{2}(?:\.\d+)?)\s*(?:"|pulgadas?)\b/i);
+        if (tagInch) len = parseFloat(tagInch[1]);
+      }
+      if (len) {
+        size = len + '" (' + Math.round(len * 2.54) + ' cm)' + (mmVal ? ' · ' + mmVal + 'mm' : '');
+        for (var l = 0; l < remaining.length; l++) {
+          if (remaining[l] !== len) weight = weight || remaining[l];
+        }
+      } else {
+        if (mmVal) size = mmVal + 'mm';
+        if (remaining.length >= 1) weight = weight || remaining[remaining.length - 1];
+      }
+    } else if (isBracelet) {
+      if (explicitInch) {
+        size = explicitInch + '"';
+        for (var b = 0; b < remaining.length; b++) {
+          if (remaining[b] !== explicitInch) weight = weight || remaining[b];
+        }
+      } else if (remaining.length >= 2) {
+        size = remaining[0] + '"';
+        weight = weight || remaining[1];
+      } else if (remaining.length === 1) {
+        if (remaining[0] >= 5 && remaining[0] <= 10.5) size = remaining[0] + '"';
+        else weight = weight || remaining[0];
       }
     } else if (remaining.length >= 2) {
       size = remaining[0] + '"';
@@ -1185,8 +1249,15 @@
       weightEl.textContent = weight + ' g';
     }
 
-    if (size && sizeEl && (sizeEl.textContent.indexOf('Default') !== -1 || sizeEl.textContent.trim() === 'Estándar')) {
-      sizeEl.textContent = size;
+    if (size && sizeEl) {
+      var curSize = sizeEl.textContent.trim();
+      var isCurPlaceholder = curSize === '' || /default|estándar|estandar/i.test(curSize);
+      var isCurOnlyMm = /^\d+(?:\.\d+)?\s*mm$/i.test(curSize);
+      if (isCurPlaceholder) {
+        sizeEl.textContent = size;
+      } else if (isCurOnlyMm && size.indexOf('"') !== -1) {
+        sizeEl.textContent = size.indexOf('mm') !== -1 ? size : (size + ' · ' + curSize);
+      }
     }
   })();
 </script>
